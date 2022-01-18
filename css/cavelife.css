@@ -1,0 +1,98 @@
+/* 동굴생활글쓰기 전체 */
+#cavelife {
+    width: 360px;
+    height: 640px;
+    border: 1px solid gray;
+    margin: 0 0;
+    padding: 0 0;
+}
+.cavelife-menu {
+    display: flex;
+    border-bottom: 1px solid gray;
+    padding-left: 10px;
+}
+.cavelife-menu h2 {
+    margin-top: 15px;
+    margin-left: 25px;
+}
+.cavelife-menu img {
+    width: 40px;
+    height: 40px;
+    margin-top: 12px;
+    padding-right: 10px;
+}
+
+/* 동굴생활 content*/
+.cavelife-content {
+    border: 1px solid black;
+}
+.cavelife-content h3 {
+    border: 1px solid gray;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 250px;
+    padding: 0 20px;
+    text-align: center;
+}
+.cavelife-content textarea {
+    margin: 10px 20px;
+    width: 300px;
+    height: 80px;
+}
+.cavelife-content button {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: rgba(251, 209, 147, 0.96);
+    padding-bottom: 10px;
+}
+.cavelife-content img {
+    width: 40px;
+    height: 30px;
+}
+
+/* 동굴생활 글쓰기버튼 */
+.cavelife-write button {
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(251, 209, 147, 0.96);
+    margin-left: 300px;
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+}
+.cavelife-write img {
+    width: 40px;
+    height: 40px;
+}
+
+/* 동굴생활글쓰기 header   */
+.cavelife-menu button {
+    height: 35px;
+    margin-top: 14px;
+    margin-left: 40px;
+    border: none;
+    background-color: white;
+}
+
+/* 동굴생활글쓰기 content */
+.cavewrite-content textarea {
+    width: 355px;
+    height: 555px;
+}
+
+/* 동굴생활글쓰기 imgfile */
+.cavewrite-imgfile {
+    background-color: rgba(251, 209, 147, 0.96);
+    height: 25px;
+    background-image: ur;
+}
+.cavewrite-imgfile button {
+    margin-left: 10px;
+    background-color: rgba(251, 209, 147, 0.96);
+    border: none;
+}
+.cavewrite-imgfile button img {
+    width: 20px;
+    
+}
