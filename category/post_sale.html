@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js"></script>
+    <title>판매글</title>
+    <style>
+        main#post-sale {
+            background-color: gainsboro;
+            width: 330px;
+            height: 550px;
+            padding: 15px;
+        }
+
+        .post-sale-title {
+            background-color: #af713c;
+            text-align: center;
+            font-size: 17px;
+            color: white;
+            line-height: 40px;
+            width: 330px;
+            margin: 10px auto;
+        }
+
+        #sale-post>.sale-common {
+            display: block;
+            width: 100%;
+            height: 40px;
+            border: 1px solid #d5d5d5;
+            border-radius: 20px;
+            margin: 5px auto 10px auto;
+        }
+
+        #sale-post>#sale-title::placeholder {
+            text-indent: 10px;
+        }
+
+        #sale-post>#sale-category {
+            text-indent: 10px;
+            background-color: white;
+            padding: .8em .5em;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        #sale-post > #sale-category::-ms-expand{ 
+            display:none /* 화살표 없애기 for IE10, 11*/ 
+        }
+
+        #sale-post > #sale-textarea {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #d5d5d5;
+            resize: none;  /* 사용자가 사이즈 변경불가 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="fas fa-bars head-icon"></div>
+        <h1 class="head-logo"><img src="./img/logo.png" alt="단군마켓로고"></h1>
+        <div class="fas fa-user head-icon"></div>
+    </header>
+
+    <main id="post-sale">
+        <h2 class="post-sale-title">판매글 등록하기</h2>
+        <form id="sale-post" action="post" enctype="multipart/form-data">
+            <input type="text" id="sale-title" class="sale-common" placeholder="제목을 입력해주세요">
+            <select name="category" id="sale-category" class="sale-common">
+                <option value="none" disabled selected hidden>카테고리</option>
+                <option value="gajun">가전</option>
+                <option value="life">생활</option>
+                <option value="sports">스포츠</option>
+                <option value="book">도서</option>
+                <option value="beauti">뷰티</option>
+                <option value="acc">잡화</option>
+                <option value="cloth">의류</option>
+                <option value="plant">식품</option>
+                <option value="etc">기타</option>
+            </select>
+
+            <input type="file" id="sale-img">
+            
+            <textarea name="write-post" id="sale-textarea" cols="30" rows="10"></textarea>
+
+            <button id="post-sale-btn" type="submit" class="sale-common">글쓰기 완료</button>
+        </form>
+    </main>
+
+    <div class="post-sale-notice">
+        <p>정상적으로 등록이 완료되었습니다</p>
+        <button type="button">확인</button>
+    </div>
+</body>
+
+</html>

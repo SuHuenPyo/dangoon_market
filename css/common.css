@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width: 360px;
+    height: 640px;  
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
