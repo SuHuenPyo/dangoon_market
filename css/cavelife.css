@@ -1,98 +1,100 @@
-/* 동굴생활글쓰기 전체 */
-#cavelife {
-    width: 360px;
-    height: 640px;
-    border: 1px solid gray;
-    margin: 0 0;
-    padding: 0 0;
-}
-.cavelife-menu {
-    display: flex;
-    border-bottom: 1px solid gray;
-    padding-left: 10px;
-}
-.cavelife-menu h2 {
-    margin-top: 15px;
-    margin-left: 25px;
-}
-.cavelife-menu img {
-    width: 40px;
-    height: 40px;
-    margin-top: 12px;
-    padding-right: 10px;
-}
+        /* main - 홈 영역*/
+        #cavelife {
+            width: 330px;
+            height: 550px;
+            padding: 15px;
+            position: relative;
+            overflow: auto;
+            scrollbar-width: none;
+            /* Firefox */
+        }
 
-/* 동굴생활 content*/
-.cavelife-content {
-    border: 1px solid black;
-}
-.cavelife-content h3 {
-    border: 1px solid gray;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 250px;
-    padding: 0 20px;
-    text-align: center;
-}
-.cavelife-content textarea {
-    margin: 10px 20px;
-    width: 300px;
-    height: 80px;
-}
-.cavelife-content button {
-    margin-left: 20px;
-    margin-bottom: 10px;
-    border: none;
-    background-color: rgba(251, 209, 147, 0.96);
-    padding-bottom: 10px;
-}
-.cavelife-content img {
-    width: 40px;
-    height: 30px;
-}
+        /* 스크롤바 제거 */
+        #cavelife::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera*/
+        }
 
-/* 동굴생활 글쓰기버튼 */
-.cavelife-write button {
-    border: none;
-    border-radius: 50%;
-    background-color: rgba(251, 209, 147, 0.96);
-    margin-left: 300px;
-    margin-top: 20px;
-    width: 50px;
-    height: 50px;
-}
-.cavelife-write img {
-    width: 40px;
-    height: 40px;
-}
+        /* 게시글 리스트  */
+        #cavelife-list {
+            display: flex;
+            flex-flow: column;
+            width: 100%;
+            height: 100%;
+        }
 
-/* 동굴생활글쓰기 header   */
-.cavelife-menu button {
-    height: 35px;
-    margin-top: 14px;
-    margin-left: 40px;
-    border: none;
-    background-color: white;
-}
+        /* 게시글  */
+        .cavelife-item {
+            display: block;
+            flex-basis: 110px;
+            height: 170px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
 
-/* 동굴생활글쓰기 content */
-.cavewrite-content textarea {
-    width: 355px;
-    height: 555px;
-}
+        /* 게시글 제목, 판매날짜 등 */
+        .cavelife-item>.cavelife-content {
+            height: 100%;
+            margin: 0px 5px;
+            text-align: left;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d5d5d5;
+        }
+        /* 게시글 제목 */
+        .cavelife-item>.cavelife-content>.cavelife-title {
+            font-size: 16px;
+            line-height: 25px;
+            margin: 20px 0 0 0;
+        }
 
-/* 동굴생활글쓰기 imgfile */
-.cavewrite-imgfile {
-    background-color: rgba(251, 209, 147, 0.96);
-    height: 25px;
-    background-image: ur;
-}
-.cavewrite-imgfile button {
-    margin-left: 10px;
-    background-color: rgba(251, 209, 147, 0.96);
-    border: none;
-}
-.cavewrite-imgfile button img {
-    width: 20px;
-    
-}
+        /* 게시글 내용 */
+        .cavelife-item>.cavelife-content>.cavelife-info {
+            font-size: 15px;
+            line-height: 20px;
+            color: black;
+            padding: 20px 0;
+        }
+
+        /* 좋아요, 답변하기 */
+        .cavelife-good img {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            
+        }
+        .cavelife-comment img {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+        }
+        .cavelife-content button {
+            background-color: white;
+            border: none;
+        }
+
+        /* 동굴생활글쓰기 버튼 */
+        #write-sale-btn {
+            display: block;
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 60px;
+            background-color: #ff9500;
+            border-radius: 30px;
+            position: fixed;
+            left: 280px;
+            top: 570px;
+            z-index: 1;
+        }
+
+        #write-sale-btn:active {
+            transform: scale(0.7);
+            transition: transform 0.1s ease-in-out;
+        }
+
+        #write-sale-btn>.far {
+            margin: 0 0 0 3px;
+            color: white;
+        }

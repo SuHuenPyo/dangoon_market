@@ -1,0 +1,34 @@
+header h1 {
+    font-size: 20px;
+}
+
+/* 동굴생활글쓰기 header   */
+.cavewrite-button {
+    height: 35px;
+    margin-top: 12px;
+    border: none;
+    background-color: white;
+    margin-right: 15px;
+}
+
+/* 동굴생활글쓰기 content */
+.cavewrite-content textarea {
+    width: 355px;
+    height: 555px;
+}
+
+/* 동굴생활글쓰기 imgfile */
+.cavewrite-imgfile {
+    background-color: #f99d1b;
+    height: 25px;
+    background-image: ur;
+}
+.cavewrite-imgfile button {
+    margin-left: 10px;
+    background-color: #f99d1b;
+    border: none;
+}
+.cavewrite-imgfile button img {
+    width: 20px;
+    
+}

@@ -1,0 +1,43 @@
+/* main - 홈 영역*/
+#cavelife {
+    width: 330px;
+    height: 550px;
+    padding: 15px;
+    position: relative;
+    overflow: auto;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* 스크롤바 제거 */
+#cavelife::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera*/
+}
+
+/* 게시글 리스트  */
+#cavelife-list {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* 좋아요, 답변하기 */
+.cavelife-good img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    
+}
+.cavelife-comment img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+.cavelife-content button {
+    background-color: white;
+    border: none;
+}
