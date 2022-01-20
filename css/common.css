@@ -5,10 +5,21 @@
 html,body{
     width: 360px;
     height: 640px;
+    position: relative;
 }
+
+/*
+ *참고용*
+main{
+width: 330px;
+height: 550px;
+padding: 15px;
+}
+*/
 
 a{
     text-decoration: none;
+    color: #333;
 }
 
 li{

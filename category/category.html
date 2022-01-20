@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header_no_logo.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js"></script>
+    <style>
+        main#category{
+            width: 330px;
+            height: 550px;
+            padding: 15px;
+        }
+
+        #category > .category-search {
+            width: 300px;
+            height: 40px;
+            margin: 5px auto 30px auto;
+        }
+
+        .category-search > #category-input {
+            height: 100%;
+            width: 240px;
+            text-indent: 10px;
+            border-radius: 10px 0 0 10px;
+            border: 1px solid #ddd;
+            border-right: 0;
+            box-sizing: border-box;
+        }
+
+        .category-search > #category-btn {
+            height: 40px;
+            width: 60px;
+            border-radius: 0 5px 5px 0;
+            border: 1px solid #ddd;
+            border-left:0;  
+            box-sizing: border-box;
+        }
+
+        #category > .category-list {
+            width: 300px;
+            min-height: 300px;
+            height: auto;
+            margin: auto;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-list > .category-item{
+            flex-basis: 90px;
+            height: 90px;
+            background-color:#f99d1b;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .category-list > .category-item > a{
+            display: block;
+            width: 90px;
+            height: 90px;
+            font-size: 15px;
+            border-radius: 15px;
+        }
+
+        .category-item > a > .category-icon {
+           margin: 25px auto 8px auto;
+           font-size: 20px;
+        }
+
+        .category-item > a > .category-title {
+            color: white;
+            font-weight: bold;
+        }
+
+        .fa-home {
+            color: moccasin;
+        }
+
+        
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="fas fa-bars head-icon"></div>
+        <h1 class="head-title">
+            카테고리
+        </h1>
+    </header>
+    <main id="category">
+        <div class="category-search">
+            <input id="category-input" type="search" placeholder="검색어를 입력해주세요."><!--
+            --><button id='category-btn' class='fas fa-search' type="submit"></button>
+        </div>
+
+        <ul class="category-list">
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-tv"></span>
+                    <p class="category-title">가전</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-home"></span>
+                    <p class="category-title">생활</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-biking"></span>
+                    <p class="category-title">스포츠</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-book"></span>
+                    <p class="category-title">도서</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-air-freshener"></span>
+                    <p class="category-title">뷰티</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-shopping-bag"></span>
+                    <p class="category-title">잡화</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-tshirt"></span>
+                    <p class="category-title">의류</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-seedling"></span>
+                    <p class="category-title">식물</p>
+                </a>
+            </li>
+            <li class="category-item">
+                <a href="#">
+                    <span class="category-icon fas fa-heart"></span>
+                    <p class="category-title">기타</p>
+                </a>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>

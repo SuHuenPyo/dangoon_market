@@ -1,9 +1,88 @@
 #menu {
-    width: 100%;
+    width: 360px;
     height: 100%;
     background-color: rgba(252, 198, 123,0.95);
+    position: absolute;
+    top: 0;
+    left: -360px;
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
 }
 
-#menu .menu-logo img {
+#menu > .menu-logo {
+    width: 100%;
+    height: 70px;
+    padding: 40px 0;
+    line-height: 100px;
+    text-align: center;
+}
+
+#menu > .menu-logo > img {
     width: 200px;
+}
+
+#menu > .menu-list {
+    margin: 10px auto;
+    width: 300px;
+    height: 270px;
+    text-align: center;
+}
+
+#menu > .menu-list > .menu-item {
+    width: 100%;
+    height: 45px;
+    margin: 20px auto;
+    background-color:#f99d1b;
+    border-radius: 18px;
+}
+
+#menu > .menu-list > .menu-item:hover > a {
+    background-color: white;
+    color: #f99d1b;
+}
+
+.menu-list > .menu-item > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    line-height: 45px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 18px;
+} 
+
+.menu-contact {
+    width: 250px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.menu-contact > .menu-contact-item {
+    width: 50px;
+    height: 50px;
+    background-color: #f99d1b;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.menu-contact > .menu-contact-item:hover > a {
+     background-color: white;
+     color: #f99d1b;
+}
+
+.menu-contact > .menu-contact-item > a {
+    display: block;
+    font-size: 12px;
+    line-height: 50px;
+    color: white;
+    border-radius: 30px;
+}
+
+
+.menu-contact > .menu-contact-item:nth-child(2) > a {
+    font-size: 18px;
 }

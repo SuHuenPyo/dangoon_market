@@ -46,12 +46,13 @@ main#post-sale-page {
 
 #sale-post>#sale-textarea {
     display: block;
-    width: 100%;
-    height: 250px;
+    width: 310px;
+    height: 230px;
     margin: 5px auto 10px auto;
     border-radius: 10px;
     border: 1px solid #ddd;
     resize: none; /* 사용자가 사이즈 변경불가 */
+    padding: 10px;
 }
 
 #sale-post> .sale-upload {
