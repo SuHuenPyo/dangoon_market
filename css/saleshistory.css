@@ -1,20 +1,29 @@
         /* main - 홈 영역*/
-        #notice {
+        #sales {
             width: 330px;
             height: 500px;
             padding: 15px;
             position: relative;
+            overflow: auto;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        /* 스크롤바 제거 */
+        #sales::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera*/
         }
 
         /* 공지사항 제목 */
-        #notice h3 {
+        #sales h3 {
             font-size: 29px;
             padding-bottom: 10px;
             border-bottom: 1px solid #d5d5d5;
         }
 
         /* 게시글 리스트  */
-        #notice-list {
+        #sales-list {
             display: flex;
             flex-flow: column;
             width: 100%;
@@ -22,7 +31,7 @@
         }
 
         /* 게시글  */
-        .notice-item {
+        .sales-item {
             display: block;
             flex-basis: 110px;
             height: 110px;
@@ -33,21 +42,21 @@
         }
 
         /* 게시글 이미지 영역 */
-        .notice-item>.notice-img {
+        .sales-item>.sales-img {
             flex-basis: 95px;
             height: 95px;
             text-align: center;
             padding: 7.5px;
         }
 
-        .notice-item>.notice-img>img {
+        .sales-item>.sales-img>img {
             height: 95px;
             width: 95px;
             border-radius: 10px;
         }
 
         /* 게시글 제목, 판매날짜 등 */
-        .notice-item>.notice-content {
+        .sales-item>.sales-content {
             flex-basis: 200px;
             height: 100%;
             margin: 0 5px;
@@ -55,26 +64,34 @@
         }
 
         /* 게시글 제목 */
-        .notice-item>.notice-content>.notice-title {
+        .sales-item>.sales-content>.sales-title {
             font-size: 16px;
             line-height: 25px;
             margin: 15px 0 0 0;
         }
 
         /* 게시글 지역,업데이트 시간(날짜) */
-        .notice-item>.notice-content>.notice-info {
+        .sales-item>.sales-content>.sales-info {
             font-size: 12px;
             line-height: 20px;
             color: #d5d5d5;
         }
 
+        /* 게시글 가격 */
+        .sales-item>.sales-content>.sales-price {
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 20px;
+            margin: 10px 0 0 0;
+        }
+
         /* 게시글 내용 */
-        .notice-item>.notice-content>.notice-contents {
+        .sales-item>.sales-content>.sales-contents {
             font-size: 10px;
             line-height: 15px;
             color: #d5d5d5;
         }
 
-        .notice-button {
+        .sales-button {
             margin: 20px 125px;
         }

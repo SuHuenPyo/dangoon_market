@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 보기</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js" ></script>
+</head>
+<body>
+    <header>
+        <div class="fas fa-bars head-icon"></div>
+        <h1 class="head-logo"><img src="../img/logo.png" alt="단군마켓로고"></h1>
+        <div class="fas fa-user head-icon"></div>
+    </header>
+    <div class="profile-image"></div>
+    <div class="profile-list">
+        <h3 class="profile-title">
+            <label for="name">이름</label>
+        </h3>
+        <input type="text" id="name" class="int" maxlength="10" placeholder="김철수" disabled>
+        <span class="profile-error"></span>
+    </div>
+    <div class="profile-list">
+        <h3 class="profile-tel">
+            <label for="tel">전화번호</label>
+        </h3>
+        <input type="text" id="tel" class="int" maxlength="13" placeholder="010-2222-3333">
+        <span class="profile-error"></span>
+    </div>
+    <div class="profile-list">
+        <h3 class="profile-kakaoid">
+            <label for="id">kakao ID</label>
+        </h3>
+        <input type="text" id="id" class="int" maxlength="20" placeholder="ykhn">
+        <span class="profile-error"></span>
+    </div>
+    <div class="profile-list">
+        <h3 class="profile-email">
+            <label for="email">email</label>
+        </h3>
+        <input type="email" id="email" class="int" maxlength="50" placeholder="KCS6047@gmail.com">
+        <span class="profile-error"></span>
+    </div>
+    <div class="profile-save">
+        <button>저장하기</button>
+    </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* main - 홈 영역*/
-#cavelife {
+#cavecomment {
     width: 330px;
     height: 550px;
     padding: 15px;
@@ -10,34 +10,78 @@
 }
 
 /* 스크롤바 제거 */
-#cavelife::-webkit-scrollbar {
+#cavecomment::-webkit-scrollbar {
     display: none;
     /* Chrome, Safari, Opera*/
 }
 
 /* 게시글 리스트  */
-#cavelife-list {
+#cavecomment-list {
     display: flex;
     flex-flow: column;
     width: 100%;
     height: 100%;
+    list-style: none;
 }
 
+/* 프로필 부분 */
+.cavecomment-content {
+    border-bottom: 1px solid #d5d5d5;
+}
 
+.cavecomment-profile {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    float: left;
+}
+
+.cavecomment-name {
+    padding-top: 10px;
+    margin-left: 60px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* 신고 부분 */
+.cavecomment-report img {
+    width: 15px;
+    height: auto;
+}
+
+.cavecomment-report {
+    font-size: 13px;
+    border-bottom: 1px solid #d5d5d5;
+    text-decoration: underline;
+}
+
+.cavecomment-report a:link {
+    color: black;
+}
+
+/* 내용부분 */
+.cavecomment-contents {
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.cavecomment-con {
+    font-size: 15px;
+}
 
 /* 좋아요, 답변하기 */
-.cavelife-good img {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-    
-}
-.cavelife-comment img {
+.cavecomment-good img {
     width: 40px;
     height: 40px;
     vertical-align: middle;
 }
-.cavelife-content button {
+.cavecomment-comment img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.cavecomment-contents button {
     background-color: white;
     border: none;
 }

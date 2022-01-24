@@ -13,8 +13,9 @@ header h1 {
 
 /* 동굴생활글쓰기 content */
 .cavewrite-content textarea {
-    width: 355px;
-    height: 555px;
+    width: 340px;
+    height: 550px;
+    margin-left: 10px;
 }
 
 /* 동굴생활글쓰기 imgfile */
