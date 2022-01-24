@@ -1,0 +1,136 @@
+       main#buy-list-page {
+           position: relative;
+           overflow: auto;
+           scrollbar-width: none;
+       }
+
+       /* 스크롤바 제거 */
+       main#buy-list-page::-webkit-scrollbar {
+           display: none;
+           /* Chrome, Safari, Opera*/
+       }
+
+       /* 구매목록 */
+       .buy-list {
+           width: 100%;
+           height: 100%;
+       }
+
+       /* 구매목록 아이템 */
+       .buy-list>.buy-item {
+           display: block;
+           width: 100%;
+           min-height: 110px;
+           margin: 0 0 10px 0;
+       }
+
+       .post-link {
+           display: block;
+           width: 100%;
+           height: 100%;
+       }
+
+       /* 구매목록 중 구매요청한 글 */
+      .buy-item> .post-link > .buy-post {
+           width: 100%;
+           height: 110px;
+           display: flex;
+           flex-direction: row;
+       }
+
+       /* 구매요청한 글의 이미지 */
+       .buy-post>.post-img {
+           flex-basis: 95px;
+           height: 95px;
+           padding: 7.5px;
+           text-align: center;
+           line-height: 95px;
+           overflow: hidden;
+       }
+       .buy-post>.post-img > a {
+           display: block;
+           width: 100%;
+           height: 100%;
+       }
+
+       .buy-post>.post-img img {
+           border-radius: 10px;
+           width: 95px;
+           height: 95px;
+       }
+
+       /* 구매요청한 글의 내용 */
+       .buy-post>.post-cont {
+           width: 210px;
+           height: 100px;
+           margin: 5px;
+       }
+
+       /* 구매요청한 글의 제목 */
+       .buy-post>.post-cont>.post-title {
+           font-size: 16px;
+           line-height: 25px;
+           margin: 20px 0 0 0;
+           overflow: hidden;
+           white-space: nowrap;
+           text-overflow: ellipsis;
+       }
+
+       /* 구매요청한 글의 올린시간, 위치 */
+       .buy-post>.post-cont>.post-info {
+           font-size: 12px;
+           line-height: 20px;
+           color: #d5d5d5;
+       }
+
+       /* 구매요청한 글의 가격 */
+       .buy-post>.post-cont>.post-price {
+           font-size: 15px;
+           font-weight: bold;
+           line-height: 20px;
+           margin: 10px 0 0 0;
+       }
+
+       /* 구매요청 상황 */
+       .buy-item>  .buy-status {
+           width: 100%;
+           height: 40px;
+           text-align: center;
+           line-height: 40px;
+           border: 1px solid #e5e5e5;
+           font-size: 14px;
+       }
+
+       .accepted {
+           background-color: rgba(252, 198, 123, 0.95);
+       }
+
+       .buy-item> .seller-contact {
+           width: 100%;
+           height: 0px;
+           text-align: center;
+           line-height: 40px;
+           border: 1px solid #e5e5e5;
+           border-top: 0;
+           font-size: 14px;
+           display: none;
+       }
+
+      .seller-contact>.contact-type {
+           display: inline-block;
+           width: 110px;
+           height: 100%;
+       }
+
+       .seller-contact>.seller-info {
+           display: inline-block;
+           text-align: left;
+           width: 220px;
+           font-weight: bold;
+           height: 100%;
+       }
+
+        .seller-contact.show {
+           display: block;
+           height: 40px;
+       }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단군마켓</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/buy_list.css">
+    <link rel="stylesheet" href="../css/header_no_logo.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="fas fa-bars head-icon"></div>
+        <h1 class="head-title">
+            구매내역
+        </h1>
+    </header>
+    <main id="buy-list-page">
+        <ul class='buy-list'>
+            <li class="buy-item">
+                    <a class='post-link' href="#">
+                    <div class="buy-post">
+                        <div class="post-img">
+                            <img src="http://placekitten.com/95/95" alt="게시물사진">
+                        </div>
+                        <div class="post-cont">
+                            <h2 class="post-title">아이패드</h2>
+                            <p class="post-info">
+                                <span class="post-loc">동네이름</span>
+                                &middot;
+                                <span class="post-time">올린시간</span>
+                            </p>
+                            <p class="post-price">
+                                6,000원
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                    <div class="buy-status accepted">판매자 연락처 보기</div>
+                    <div class="seller-contact">
+                        <p class='contact-type'>카카오톡 ID</p><!--
+                        --><p class="seller-info">dangun1234</p>
+                    </div>
+            </li>
+        </ul>
+    </main>
+
+    <script>
+        const buy_status = document.querySelectorAll('.buy-status');
+
+
+        buy_status.forEach((v, i) => {
+            if (v.classList.contains('accepted')) {
+                const seller_contact = v.parentElement.querySelector('.seller-contact');
+                v.addEventListener('click', e => {
+                    seller_contact.classList.toggle('show');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

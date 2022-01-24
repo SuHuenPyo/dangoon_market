@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/post_sale.css">
+    <link rel="stylesheet" href="../css/post_product.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
-    <title>판매글</title>
+    <title>판매글 등록하기</title>
 </head>
 
 <body>
@@ -21,11 +21,11 @@
         <div class="fas fa-user head-icon"></div>
     </header>
 
-    <main id="post-sale-page">
-        <h2 class="post-sale-title">판매글 등록하기</h2>
-        <form id="sale-post" action="post" enctype="multipart/form-data">
-            <input type="text" id="sale-title" class="sale-common" placeholder="제목을 입력해주세요">
-            <select name="category" id="sale-category" class="sale-common">
+    <main id="post-product-page">
+        <h2 class="page-title">판매글 등록하기</h2>
+        <form id="product-post" action="post" enctype="multipart/form-data">
+            <input type="text" id="post-title" class="product-common" placeholder="제목을 입력해주세요">
+            <select name="category" id="product-category" class="product-common">
                 <option value="none" disabled selected hidden>카테고리</option>
                 <option value="gajun">가전</option>
                 <option value="life">생활</option>
@@ -39,32 +39,37 @@
             </select>
 
             <!-- 이미지 업로드시, div#sale-upload-btn 앞에 썸네일 이미지 등록 -->
-            <div class="sale-upload">
+            <div class="product-img-upload">
                 <!-- 예시 이미지 썸네일이미지 들어올 자리 사이즈 75px-->
                 <img src="https://via.placeholder.com/75" alt="">
-                <div id="sale-upload-btn">
-                    <label for="sale-img" class="fas fa-plus"></label>
-                    <input type="file" id="sale-img">
+                <div id="product-upload-btn">
+                    <label for="product-img" class="fas fa-plus"></label>
+                    <input type="file" id="product-img">
                 </div>
             </div>
 
-            <textarea name="write-post" id="sale-textarea" cols="30" rows="10"></textarea>
+            <textarea name="product-info" id="product-textarea" cols="30" rows="10"></textarea>
 
-            <button id="sale-post-btn" type="button" class="sale-common">글쓰기 완료</button>
+            <button id="product-post-btn" type="button" class="product-common">글쓰기 완료</button>
         </form>
     </main>
 
-    <div class="post-sale-notice">
-        <p>정상적으로 등록이 완료되었습니다</p>
-        <button type="button">확인</button>
+    <div class="post-notice">
+        <h2>정상적으로 등록이 완료되었습니다</h2>
+        <button class='notice-comfirm' type="button">확인</button>
     </div>
 
     <!-- test javascript -->
     <script>
-        document.querySelector('#sale-post-btn').addEventListener('click',e=>{
+        document.querySelector('#product-post-btn').addEventListener('click',e=>{
             e.preventDefault;
-            document.querySelector('.post-sale-notice').style.height = '360px';
-            document.querySelector('.post-sale-notice').style.opacity = 1;
+            document.querySelector('.post-notice').style.height = '360px';
+            document.querySelector('.post-notice').style.opacity = 1;
+
+            document.querySelector('.notice-comfirm').addEventListener('click',e=>{
+                document.querySelector('.post-notice').style.height = '0px';
+            document.querySelector('.post-notice').style.opacity = 0;
+            })
         })
     </script>
 </body>

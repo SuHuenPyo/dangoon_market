@@ -31,27 +31,33 @@
             flex-basis: 110px;
             height: 110px;
             width: 100%;
-            display: flex;
-            flex-direction: row;
             border-bottom: 1px solid #d5d5d5;
         }
 
+        .post-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
         /* 게시글 이미지 영역 */
-        .sale-item>.sale-img {
+        .sale-item> .post-link >.sale-img {
             flex-basis: 95px;
             height: 95px;
             text-align: center;
             padding: 7.5px;
         }
 
-        .sale-item>.sale-img>img {
+        .sale-item> .post-link >.sale-img > img {
             height: 95px;
             width: 95px;
             border-radius: 10px;
         }
 
         /* 게시글 제목, 판매날짜 등 */
-        .sale-item>.sale-content {
+        .sale-item> .post-link >.sale-content {
             flex-basis: 200px;
             height: 100%;
             margin: 0 5px;
@@ -59,21 +65,21 @@
         }
 
         /* 게시글 제목 */
-        .sale-item>.sale-content>.sale-title {
+        .sale-item> .post-link >.sale-content>.sale-title {
             font-size: 16px;
             line-height: 25px;
             margin: 20px 0 0 0;
         }
 
         /* 게시글 지역,업데이트 시간(날짜) */
-        .sale-item>.sale-content>.sale-info {
+        .sale-item> .post-link >.sale-content>.sale-info {
             font-size: 12px;
             line-height: 20px;
             color: #d5d5d5;
         }
 
         /* 게시글 가격 */
-        .sale-item>.sale-content>.sale-price {
+        .sale-item> .post-link >.sale-content>.sale-price {
             font-size: 15px;
             font-weight: bold;
             line-height: 20px;
@@ -90,11 +96,13 @@
             line-height: 60px;
             background-color: #ff9500;
             border-radius: 30px;
-            position: fixed;
-            left: 280px;
-            top: 570px;
+            position:fixed;
+            top: 565px;
+            left: 290px;
             z-index: 1;
         }
+
+
 
         #write-sale-btn:active {
             transform: scale(0.7);

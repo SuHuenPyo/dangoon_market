@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/product_detail.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js"></script>
+    <title>단군마켓</title>
+</head>
+
+<body>
+    <header>
+        <div id="menu-btn" class="fas fa-bars head-icon"></div>
+        <h1 class="head-logo">
+            <img src="../img/logo-color.png" alt="단군마켓로고">
+        </h1>
+        <div class="fas fa-user head-icon"></div>
+    </header>
+    <main id="product-detail">
+        <div class="product-detail-img">
+            <img src="#" alt="상품예시사진">
+            <img src="#" alt="상품예시사진">
+            <img src="#" alt="상품예시사진">
+            <img src="#" alt="상품예시사진">
+        </div>
+        <div class="seller-info">
+            <div class="seller-profile">
+                <!-- 판매자 프로필로 연결 -->
+                <a href="#">
+                    <img class='far fa-user' src="" alt="">
+                </a>
+            </div>
+            <!-- 판매자 프로필로 연결 -->
+            <a href='#' class="seller-name">판매자 이름</a>
+            <button id="buying-btn" type="button">구매하기</button>
+            <!-- fas 다 채운별 -->
+            <button type='button' class="far fa-star" id="like-btn"></button>
+        </div>
+        <div id="product-detail-cont">
+            <h2 class="detail-title">상품 판매글 제목</h2>
+            <button type="button" class="fas fa-exclamation-circle" id="report-btn"></button>
+            <div class="detail-cont">
+                Ad esse exercitation ullamco aute commodo eiusmod velit velit aliquip do consequat quis
+                consectetur.Incididunt ullamco esse et adipisicing sit cillum do mollit sint laborum officia dolore
+                exercitation duis.Incididunt ex reprehenderit minim ipsum Lorem ex do veniam dolore ullamco eu ut
+            </div>
+        </div>
+    </main>
+
+    <div class="buy-request-notice">
+        <h2>구매요청이 완료되었습니다.</h2>
+        <p> 판매자가 구매를 수락한 경우 판매자의 연락처를 안내드립니다. </p>
+        <button type="button">확인</button>
+    </div>
+
+    <script>
+        const like_btn = document.querySelector('#like-btn');
+        const notice = document.querySelector('.buy-request-notice');
+        const buying_btn = document.querySelector('#buying-btn');
+
+        like_btn.addEventListener('click', e => {
+            like_btn.classList.toggle('fas');
+        })
+
+        buying_btn.addEventListener('click',e=>{
+            e.preventDefault;
+            notice.style.height = '360px';
+            notice.style.opacity = 1;
+        })
+    </script>
+</body>
+
+</html>

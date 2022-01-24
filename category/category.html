@@ -8,82 +8,9 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/header_no_logo.css">
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="../css/category.css">
     <script href="../font-awesome/js/all.min.js"></script>
     <style>
-        main#category{
-            width: 330px;
-            height: 550px;
-            padding: 15px;
-        }
-
-        #category > .category-search {
-            width: 300px;
-            height: 40px;
-            margin: 5px auto 30px auto;
-        }
-
-        .category-search > #category-input {
-            height: 100%;
-            width: 240px;
-            text-indent: 10px;
-            border-radius: 10px 0 0 10px;
-            border: 1px solid #ddd;
-            border-right: 0;
-            box-sizing: border-box;
-        }
-
-        .category-search > #category-btn {
-            height: 40px;
-            width: 60px;
-            border-radius: 0 5px 5px 0;
-            border: 1px solid #ddd;
-            border-left:0;  
-            box-sizing: border-box;
-        }
-
-        #category > .category-list {
-            width: 300px;
-            min-height: 300px;
-            height: auto;
-            margin: auto;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .category-list > .category-item{
-            flex-basis: 90px;
-            height: 90px;
-            background-color:#f99d1b;
-            text-align: center;
-            border-radius: 15px;
-        }
-
-        .category-list > .category-item > a{
-            display: block;
-            width: 90px;
-            height: 90px;
-            font-size: 15px;
-            border-radius: 15px;
-        }
-
-        .category-item > a > .category-icon {
-           margin: 25px auto 8px auto;
-           font-size: 20px;
-        }
-
-        .category-item > a > .category-title {
-            color: white;
-            font-weight: bold;
-        }
-
-        .fa-home {
-            color: moccasin;
-        }
-
-        
-
 
     </style>
 </head>
@@ -95,10 +22,9 @@
         </h1>
     </header>
     <main id="category">
-        <div class="category-search">
-            <input id="category-input" type="search" placeholder="검색어를 입력해주세요."><!--
-            --><button id='category-btn' class='fas fa-search' type="submit"></button>
-        </div>
+        <form action="#" id="category-search" method="get">
+                <input id="category-input" type="search" placeholder="검색어를 입력해주세요.">
+        </form>
 
         <ul class="category-list">
             <li class="category-item">

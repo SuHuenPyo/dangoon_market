@@ -1,13 +1,7 @@
 body {
     position: relative;
 }
-main#post-sale-page {
-    width: 330px;
-    height: 550px;
-    padding: 15px;
-}
-
-.post-sale-title {
+.page-title {
     background-color: #af713c;
     text-align: center;
     font-size: 17px;
@@ -17,7 +11,7 @@ main#post-sale-page {
     margin: 10px auto;
 }
 
-#sale-post>.sale-common {
+#product-post>.product-common {
     display: block;
     width: 100%;
     height: 40px;
@@ -27,24 +21,25 @@ main#post-sale-page {
     text-indent: 10px;
 }
 
-#sale-post>#sale-title::placeholder {
+#product-post>.post-title::placeholder {
     text-indent: 10px;
 }
 
-#sale-post>#sale-category {
+#product-post>#product-category {
     text-indent: 10px;
     background-color: white;
     padding: .8em .5em;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    color: #333;
 }
 
-#sale-post > #sale-category::-ms-expand {
+#product-post > #product-category::-ms-expand {
     display: none /* 화살표 없애기 for IE10, 11*/
 }
 
-#sale-post>#sale-textarea {
+#product-post>#product-textarea {
     display: block;
     width: 310px;
     height: 230px;
@@ -55,7 +50,7 @@ main#post-sale-page {
     padding: 10px;
 }
 
-#sale-post> .sale-upload {
+#product-post> .product-img-upload {
     width: 100%;
     height: 75px;
     margin: 5px auto 10px 5px;
@@ -65,20 +60,20 @@ main#post-sale-page {
     justify-content: flex-start;
 }
 
-#sale-post > .sale-upload > img{
+#product-post > .product-img-upload > img{
     flex-basis: 75px;
     height: 75px;
     margin: 0 5px 0 0;
     display: block;
 }
 
-#sale-post > .sale-upload #sale-upload-btn {
+#product-post > .product-img-upload #product-upload-btn {
     position: relative;
     width: 75px;
     height: 75px;
 }
 
-#sale-post> .sale-upload  label[for='sale-img'] {
+#product-post> .product-img-upload  label[for='product-img'] {
     display: block;
     background-color: whitesmoke;
     width: 75px;
@@ -89,7 +84,7 @@ main#post-sale-page {
     color: white;
 }
 
-#sale-post> .sale-upload #sale-img {
+#product-post> .product-img-upload #product-img {
     display: block;
     width: 75px;
     height: 75px;
@@ -99,7 +94,7 @@ main#post-sale-page {
     z-index: -1;
 }
 
-#sale-post > #sale-post-btn {
+#product-post > #product-post-btn {
      background-color: #f99d1b;
      color: white;
      font-weight: 600;
@@ -107,7 +102,7 @@ main#post-sale-page {
      text-indent: 0;
 }
 
-.post-sale-notice {
+.post-notice {
     background-color:rgba(252, 198, 123,0.95);
     width: 360px;
     height: 0px;
@@ -120,7 +115,7 @@ main#post-sale-page {
     opacity: 0;
 }
 
-.post-sale-notice > p {
+.post-notice > h2 {
     font-size: 18px;
     font-weight: bold;
     color: white;
@@ -128,7 +123,7 @@ main#post-sale-page {
     margin: 60px 0 0 0;
 }
 
-.post-sale-notice > button {
+.post-notice > button {
     background-color: #f99d1b;
     color: white;
     width: 260px;
@@ -136,3 +131,4 @@ main#post-sale-page {
     border: 0;
     border-radius: 20px;
 }
+
