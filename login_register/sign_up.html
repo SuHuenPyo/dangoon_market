@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/register.css">
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js"></script>
+    <title>회원가입</title>
+</head>
+
+<body>
+    <header>
+        <div class="fas fa-bars head-icon"></div>
+        <h1 class="head-logo"><img src="../img/logo-color.png" alt="단군마켓로고"></h1>
+        <div class="fas fa-user head-icon"></div>
+    </header>
+
+    <main id="sign-up">
+        <div class="sign-up-step">Step 1</div>
+        <div class="sign-up-step">Step 2</div>
+
+        ------------------------step1---------------------------------
+        <form id="sign-up" action="post" enctype="multipart/form-data"></form>
+        <input type="text" class="sign-up-input-text" value="example.@gmail.com">
+        <button class="sign-up-btn">인증메일 발송</button>
+        <input type="text" class="sign-up-input-text" value="인증번호">
+        <button class="sign-up-btn">인증번호 확인</button>
+
+        -------------------------step2------------------------------------
+        <div id="sign-up-profile-pic">대충 프로필 사진 들어가는곳</div>
+
+        <input type="text" class="sign-up-input-text" value="이름">
+        <input type="text" class="sign-up-input-text" value="아이디">
+        <div class="sign-up-condition">영어 소문자, 숫자를 조합하여 8자리 이상</div>
+        <input type="text" class="sign-up-input-text" value="패스워드">
+        <div class="sign-up-condition">영어 소문자, 숫자, 특수문자 조합하여 8자리 이상</div>
+        <input type="text" class="sign-up-input-text" value="패스워드 확인">
+        <input type="text" class="sign-up-input-text" value="핸드폰번호">
+        <input type="text" class="sign-up-input-text" value="거래할 연락처(Kakao ID)">
+       
+        ------------------------complete-----------------------------------
+        <p id="sign-up-complete-message">회원가입이 완료되었습니다!</p>
+        <p id="sign-up-complete-welcome">단군마켓 회원이 되신걸 환영합니다.</p>
+        <div class="fas fa-check sign-up-check"></div>
+
+    </main>
+
+
+</body>
+
+</html>
