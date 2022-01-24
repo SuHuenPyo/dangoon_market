@@ -1,0 +1,76 @@
+
+#login-content{
+    width: 360px;
+    height: 640px;
+
+    padding-left: 15px;
+    padding-right: 15px;
+}
+#login-content > #login-main > .login-anounce{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: white;
+
+    background-color: rgb(138, 82, 36);
+}
+#login-content > #login-main > .login-anounce p{
+    padding-top: 8px;
+}
+#login-content > #login-main > #login-id-form{
+    width: 100%;
+    height: auto;
+
+}
+#login-content > #login-main > #login-form-area > #login-form{
+    height: auto;
+    width: 100%;
+    margin-top: 20px;
+}
+#login-content > #login-main > #login-form-area > #login-form input{
+    width: 98%;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+#login-content > #login-main > #login-form-area > #login-form .login-form-class {
+    border: none;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: gray;
+    
+    
+}
+#login-content > #login-main > #login-form-area > #login-form > #login-btn-submit{
+    width:100%;
+    background-color: orange;
+    color: white;
+    margin-top: 20px;
+    border:0;
+    outline:0;
+}
+#login-content > #login-main > .login-register{
+    height: auto;
+    width: 100%;
+
+    color: gray;
+    padding-top: 50px;
+    text-align: center;
+
+    font-size: 7px;
+    
+    
+}
+#login-content > #login-main > .login-register h2 a:link{
+    color: gray;
+    
+}
+#login-content > #login-main > .login-register h2 a:visited{
+    color: gray;
+}
+#login-content > #login-main > .login-register h2 a:hover{
+    color: gray;
+}
+#login-content > #login-main > .login-register h2 a:active{
+    color: gray;
+}
