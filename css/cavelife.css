@@ -57,20 +57,33 @@
         }
 
         /* 좋아요, 답변하기 */
-        .cavelife-good img {
-            width: 40px;
-            height: 40px;
-            vertical-align: middle;
-            
+        .cavecomment-button>.fas.fa-thumbs-up.good-btn {
+            color: 	blue;
         }
-        .cavelife-comment img {
-            width: 40px;
-            height: 40px;
-            vertical-align: middle;
+
+        .good-btn {
+            padding-right: 20px;
         }
-        .cavelife-content button {
+        
+        .cavecomment-button button {
             background-color: white;
             border: none;
+        }
+
+        .cavecomment-button a:link {
+            color: black;
+        }
+        
+        .cavecomment-button a:visited {
+            color: black;
+        }
+        
+        .cavecomment-button a:hover {
+            color: red;
+        }
+        
+        .cavecomment-button a:active {
+            color: green;
         }
 
         /* 동굴생활글쓰기 버튼 */

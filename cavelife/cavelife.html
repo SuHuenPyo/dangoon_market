@@ -46,12 +46,10 @@
                     <p class="cavelife-info">
                         <span class="cavelife-contents"> 저 호랑이랑 같은 동굴에서 살고있는데요. 좋은 마늘 가게 추천부탁드립니다.</span>
                     </p>
-                    <button class="cavelife-good">
-                        <img src="../img/good.png" alt="좋아요">좋아요
-                    </button>
-                    <button class="cavelife-comment">
-                        <img src="../img/comment.png" alt="답변하기">답변하기
-                    </button>
+                    <div class="cavecomment-button">
+                        <button class="far fa-thumbs-up good-btn"> 좋아요</button>
+                        <button class="far fa-comment-dots comment-btn"><a href="cavecomment.html">답변하기</a></button>
+                    </div>
                 </div>
             </li>
             <li class="cavelife-item">
@@ -60,12 +58,10 @@
                     <p class="cavelife-info">
                         <span class="cavelife-contents"> 저 호랑이랑 같은 동굴에서 살고있는데요. 좋은 마늘 가게 추천부탁드립니다.</span>
                     </p>
-                    <button class="cavelife-good">
-                        <img src="../img/good.png" alt="좋아요">좋아요
-                    </button>
-                    <button class="cavelife-comment">
-                        <img src="../img/comment.png" alt="답변하기">답변하기
-                    </button>
+                    <div class="cavecomment-button">
+                        <button class="far fa-thumbs-up good-btn"> 좋아요</button>
+                        <button class="far fa-comment-dots comment-btn"><a href="cavecomment.html">답변하기</a></button>
+                    </div>
                 </div>
             </li>
             <li class="cavelife-item">
@@ -74,12 +70,10 @@
                     <p class="cavelife-info">
                         <span class="cavelife-contents"> 저 호랑이랑 같은 동굴에서 살고있는데요. 좋은 마늘 가게 추천부탁드립니다.</span>
                     </p>
-                    <button class="cavelife-good">
-                        <img src="../img/good.png" alt="좋아요">좋아요
-                    </button>
-                    <button class="cavelife-comment">
-                        <img src="../img/comment.png" alt="답변하기">답변하기
-                    </button>
+                    <div class="cavecomment-button">
+                        <button class="far fa-thumbs-up good-btn"> 좋아요</button>
+                        <button class="far fa-comment-dots comment-btn"><a href="cavecomment.html">답변하기</a></button>
+                    </div>
                 </div>
             </li>
             <li class="cavelife-item">
@@ -88,12 +82,10 @@
                     <p class="cavelife-info">
                         <span class="cavelife-contents"> 저 호랑이랑 같은 동굴에서 살고있는데요. 좋은 마늘 가게 추천부탁드립니다.</span>
                     </p>
-                    <button class="cavelife-good">
-                        <img src="../img/good.png" alt="좋아요">좋아요
-                    </button>
-                    <button class="cavelife-comment">
-                        <img src="../img/comment.png" alt="답변하기">답변하기
-                    </button>
+                    <div class="cavecomment-button">
+                        <button class="far fa-thumbs-up good-btn"> 좋아요</button>
+                        <button class="far fa-comment-dots comment-btn"><a href="cavecomment.html">답변하기</a></button>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -103,6 +95,16 @@
             <span class="far fa-edit"></span>
         </a>
     </div>
+
+    <script>
+        const good_btn = document.querySelectorAll('.good-btn');
+
+        good_btn.forEach((v, i) => {
+            v.addEventListener('click', e => {
+                v.classList.toggle('fas');
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -1,54 +1,58 @@
         /* main - 홈 영역*/
-        #sales {
+        #mycavelife {
             width: 330px;
             height: 500px;
             padding: 15px;
             position: relative;
-            overflow: auto;
-            scrollbar-width: none;
-            /* Firefox */
-        }
-
-        /* 스크롤바 제거 */
-        #sales::-webkit-scrollbar {
-            display: none;
-            /* Chrome, Safari, Opera*/
         }
 
         /* 게시글 리스트  */
-        #sales-list {
+        #mycavelife-list {
             display: flex;
             flex-flow: column;
             width: 100%;
             height: 100%;
         }
 
+        /* 내 게시글, 내 댓글 버튼 */
+        .mycavelife-pc button {
+            border: 1px solid #d5d5d5;
+            float: left;
+            width: 160px;
+            height: 40px;
+            background-color: white;
+        }
+
+        .mycavelife-post {
+            margin-left: 20px;
+        }
         /* 게시글  */
-        .sales-item {
+        .mycavelife-item {
             display: block;
             flex-basis: 110px;
             height: 110px;
             width: 100%;
             display: flex;
             flex-direction: row;
+            border-bottom: 1px solid #d5d5d5;
         }
 
         /* 게시글 이미지 영역 */
-        .sales-item>.sales-img {
+        .mycavelife-item>.mycavelife-img {
             flex-basis: 95px;
             height: 95px;
             text-align: center;
             padding: 7.5px;
         }
 
-        .sales-item>.sales-img>img {
+        .mycavelife-item>.mycavelife-img>img {
             height: 95px;
             width: 95px;
             border-radius: 10px;
         }
 
         /* 게시글 제목, 판매날짜 등 */
-        .sales-item>.sales-content {
+        .mycavelife-item>.mycavelife-content {
             flex-basis: 200px;
             height: 100%;
             margin: 0 5px;
@@ -56,42 +60,26 @@
         }
 
         /* 게시글 제목 */
-        .sales-item>.sales-content>.sales-title {
+        .mycavelife-item>.mycavelife-content>.mycavelife-title {
             font-size: 16px;
             line-height: 25px;
-            margin: 25px 0 0 0;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            margin: 15px 0 0 0;
         }
 
         /* 게시글 지역,업데이트 시간(날짜) */
-        .sales-item>.sales-content>.sales-info {
+        .mycavelife-item>.mycavelife-content>.mycavelife-info {
             font-size: 12px;
             line-height: 20px;
             color: #d5d5d5;
         }
 
-        /* 게시글 가격 */
-        .sales-item>.sales-content>.sales-price {
-            font-size: 15px;
-            font-weight: bold;
-            line-height: 20px;
-            margin: 10px 0 0 0;
-        }
-
         /* 게시글 내용 */
-        .sales-item>.sales-content>.sales-contents {
+        .mycavelife-item>.mycavelife-content>.mycavelife-contents {
             font-size: 10px;
             line-height: 15px;
             color: #d5d5d5;
         }
 
-        /* 거래요청, 거래완료 */
-        .sales-button button {
-            border: 1px solid #d5d5d5;
-            float: left;
-            width: 160px;
-            height: 40px;
-            background-color: white;
+        .mycavelife-button {
+            margin: 20px 125px;
         }

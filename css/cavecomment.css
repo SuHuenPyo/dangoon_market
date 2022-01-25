@@ -15,21 +15,12 @@
     /* Chrome, Safari, Opera*/
 }
 
-/* 게시글 리스트  */
-#cavecomment-list {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-    height: 100%;
-    list-style: none;
-}
-
 /* 프로필 부분 */
 .cavecomment-content {
     border-bottom: 1px solid #d5d5d5;
 }
 
-.cavecomment-profile {
+.cavecomment-profile1 {
     width: 40px;
     height: 40px;
     border: 1px solid black;
@@ -37,51 +28,129 @@
     float: left;
 }
 
-.cavecomment-name {
+.cavecomment-name1 {
     padding-top: 10px;
     margin-left: 60px;
     margin-bottom: 20px;
     font-weight: bold;
 }
 
+/* 내용부분 */
+.cavecomment-contents {
+    border-bottom: 1px solid #d5d5d5;
+    height: 180px;
+}
+
+.cavecomment-info {
+    padding-bottom: 110px;
+}
+
+.cavecomment-con {
+    font-size: 14px;
+}
+
 /* 신고 부분 */
 .cavecomment-report img {
     width: 15px;
-    height: auto;
 }
 
 .cavecomment-report {
     font-size: 13px;
-    border-bottom: 1px solid #d5d5d5;
     text-decoration: underline;
+    padding-bottom: 10px;
 }
 
 .cavecomment-report a:link {
-    color: black;
+    color: #d5d5d5;
 }
 
-/* 내용부분 */
-.cavecomment-contents {
-    border-bottom: 1px solid #d5d5d5;
+.cavecomment-report a:visited {
+    color: #d5d5d5;
 }
 
-.cavecomment-con {
-    font-size: 15px;
+.cavecomment-report a:hover {
+    color: red;
+}
+
+.cavecomment-report a:active {
+    color: green;
 }
 
 /* 좋아요, 답변하기 */
-.cavecomment-good img {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-}
-.cavecomment-comment img {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
+.cavecomment-button {
+    height: 30px;
+    margin-top: 5px;
+    padding-left: 8px;
 }
 
-.cavecomment-contents button {
+.cavecomment-button>.fas.fa-thumbs-up.good-btn {
+    color: 	#ff9500;
+}
+
+.good-btn {
+    padding-right: 20px;
+}
+
+.cavecomment-button button {
     background-color: white;
     border: none;
+}
+
+/* 댓글 내용 */
+.cavecomment-profile2 {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    float: left;
+    margin-top: 20px;
+}
+
+.cavecomment-name2 {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 40px;
+    margin-left: 55px;
+}
+
+.cavecomment-info2 {
+    font-size: 13px;
+    margin-top: 5px;
+    margin-left: 55px;
+}
+
+/* 댓글 신고 부분 */
+.cavecomment-report2 img {
+    width: 15px;
+}
+
+.cavecomment-report2 {
+    font-size: 13px;
+    text-decoration: underline;
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+.cavecomment-report2 a:link {
+    color: #d5d5d5;
+}
+
+.cavecomment-report2 a:visited {
+    color: #d5d5d5;
+}
+
+.cavecomment-report2 a:hover {
+    color: red;
+}
+
+.cavecomment-report2 a:active {
+    color: green;
+}
+
+/* 댓글 버튼 */
+.cavecomment-write input {
+    width: 290px;
+    height: 20px;
+    border-radius: 20px;
+    padding-left: 10px;
 }
