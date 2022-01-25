@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>단군마켓 관리자 로그인</title>
+    <link rel="stylesheet" href="./../css/admin_common.css">
+    <link rel="stylesheet" href="./../css/admin_login.css">
 </head>
 <body>
+    <main>
+        <div class="admin-common-content">
+            <div class="admin-common-header">단군마켓 관리자</div>
+            <div id="admin-login-main">
+                <div id="admin-login-form-area">
+                    <form id="admin-login-form" action="">
+                        <input type="text" class="admin-login-form-class" id="admin-login-form-id">
+                        빨간색으로 아이디를 입력해주세요.
+                        <input type="text" class="admin-login-form-class" id="admin-login-form-pwd">
+                        빨간색으로 패스워드를 입력해주세요.
+                        <input id="admin-login-btn-submit"type="submit" value="로그인">
+                    </form>
+                </div>
+            </div>
+            <div class="admin-login-failed">
+                <h1>로그인에 실패하였습니다.</h1>
+                <h2>아이디와 비밀번호를 확인 해주세요</h2>
+    
+            </div>
+    
+            <div class="admin-common-footer"></div>
+        </div>
+    </main>
     
 </body>
 </html>

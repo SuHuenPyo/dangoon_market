@@ -1,3 +1,78 @@
-html{
- height:1px;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+html,body {
+    width: 100%;
+    min-height: 600px;
+    position: relative;
+    color: #333;
+    margin: 0 auto;
+}
+
+
+
+main {
+    min-width: 460px;
+    width: 100%;
+    min-height: 550px;
+    margin : 0 auto;
+}
+
+.admin-common-content{
+    width: 360px;
+    height: 640px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+
+.admin-common-header{
+    margin-top: 50px;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-size:x-large;
+    font-weight: bolder;
+}
+.admin-common-footer{
+    margin-top: 50px;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: rgb(121, 121, 121);
+    font-size:14px;
+    line-height:25px;
+}
+
+.admin-common-nav-area{
+    margin-top: 50px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color:ghostwhite;
+    font-size:13px;
+    font-weight: bolder;
+    background-color: dodgerblue;
+    display: flex;
+}
+.admin-common-nav{
+    border: solid rgb(182, 181, 181) 0.1px;
+    flex:1;
+    padding-top: 12px;
+    cursor:pointer;
+}
+.admin-common-nav:hover{
+    background-color: gray;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+li {
+    list-style: none;
 }
