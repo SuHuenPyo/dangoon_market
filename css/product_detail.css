@@ -203,6 +203,7 @@ main {
     display: none;
     width: 230px;
     height: 30px;
+    text-indent: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
     margin: 10px auto 20px auto;
