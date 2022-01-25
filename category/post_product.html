@@ -61,14 +61,17 @@
 
     <!-- test javascript -->
     <script>
-        document.querySelector('#product-post-btn').addEventListener('click',e=>{
-            e.preventDefault;
-            document.querySelector('.post-notice').style.height = '360px';
-            document.querySelector('.post-notice').style.opacity = 1;
+        const btn = document.querySelector('#product-post-btn');
+        const notice = document.querySelector('.post-notice');
+        const noticeBtn = document.querySelector('.notice-comfirm');
 
-            document.querySelector('.notice-comfirm').addEventListener('click',e=>{
-                document.querySelector('.post-notice').style.height = '0px';
-            document.querySelector('.post-notice').style.opacity = 0;
+        btn.addEventListener('click', e => {
+            notice.style.height = '360px';
+            notice.style.opacity = 1;
+
+            noticeBtn.addEventListener('click', (e) => {
+                notice.style.height = '0px';
+                notice.style.opacity = 0;
             })
         })
     </script>

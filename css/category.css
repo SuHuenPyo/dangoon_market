@@ -2,7 +2,7 @@
 
 #category-search {
     width: 300px;
-    height: 40px;
+    height: 50px;
     margin: 5px 15px 30px 15px;
 }
 
@@ -13,6 +13,7 @@
     text-indent: 10px;
     border-radius: 10px;
     border: 1px solid #ddd;
+    background-color: white;
     box-sizing: border-box;
     padding: 0 5px;
 }
@@ -31,9 +32,17 @@
 .category-list > .category-item{
     flex-basis: 90px;
     height: 90px;
-    background-color:#f99d1b;
+    background-color:white;
     text-align: center;
     border-radius: 15px;
+}
+
+
+.category-list > .category-item:hover > a{
+    background-color: white;
+    color: #f99d1b;
+    border: 2px solid #f99d1b;
+    box-sizing: border-box;
 }
 
 .category-list > .category-item > a{
@@ -42,16 +51,18 @@
     height: 90px;
     font-size: 15px;
     border-radius: 15px;
+    background-color:#f99d1b;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: border-box;
 }
 
 .category-item > a > .category-icon {
    margin: 25px auto 8px auto;
    font-size: 20px;
-   color: white;
 }
 
 .category-item > a > .category-title {
-    color: white;
     font-weight: bold;
 }
 

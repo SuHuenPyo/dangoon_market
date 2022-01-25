@@ -52,26 +52,74 @@
         </div>
     </main>
 
-    <div class="buy-request-notice">
+    <div class="info-buy-request">
         <h2>구매요청이 완료되었습니다.</h2>
-        <p> 판매자가 구매를 수락한 경우 판매자의 연락처를 안내드립니다. </p>
-        <button type="button">확인</button>
+        <button class='buy-request-comfirm' type="button">확인</button>
+    </div>
+
+    <div class="info-report">
+        <h2>신고사유를 말씀해주세요.</h2>
+        <select name="report" id="report-type">
+            <option value="bannedItem">판매 금지 상품이예요.</option>
+            <option value="scamArticle">사기 글이예요.</option>
+            <option value="notUsedItem">중고거래 게시글이 아니예요.</option>
+            <option value="ect">기타사유</option>
+        </select>
+         <input type="text">
+        <button class='report-comfirm' type="button">확인</button>
     </div>
 
     <script>
         const like_btn = document.querySelector('#like-btn');
-        const notice = document.querySelector('.buy-request-notice');
+        const notice = document.querySelector('.info-buy-request');
+        const noticeBtn = document.querySelector('.buy-request-comfirm');
         const buying_btn = document.querySelector('#buying-btn');
+
+        // 신고하기
+        const reportBtn = document.querySelector('#report-btn');
+        const reportInfo = document.querySelector('.info-report');
+        const reportComfirm = document.querySelector('.report-comfirm');
 
         like_btn.addEventListener('click', e => {
             like_btn.classList.toggle('fas');
-        })
-
-        buying_btn.addEventListener('click',e=>{
-            e.preventDefault;
+        });
+        buying_btn.addEventListener('click', e => {
             notice.style.height = '360px';
             notice.style.opacity = 1;
-        })
+
+            noticeBtn.addEventListener('click', (e) => {
+                notice.style.height = '0px';
+                notice.style.opacity = 0;
+            });
+        });
+
+        reportBtn.addEventListener('click', e => {
+            reportInfo.style.height = '360px';
+            reportInfo.style.opacity = 1;
+
+            const report_type = reportInfo.querySelector('#report-type');
+            const report_input = reportInfo.querySelector('input');
+
+            report_type.addEventListener('change', e => {
+                console.log(report_type.value);
+
+                if(report_type.value == 'ect'){
+                    report_type.style.margin = '20px auto 10px auto'
+    
+                    report_input.style.display = 'block';
+                } else {
+                    report_type.style.margin = '20px auto 50px auto';
+                    report_input.style.display = 'none';
+
+                }
+            })
+
+
+            reportComfirm.addEventListener('click', (e) => {
+                reportInfo.style.height = '0px';
+                reportInfo.style.opacity = 0;
+            });
+        });
     </script>
 </body>
 
