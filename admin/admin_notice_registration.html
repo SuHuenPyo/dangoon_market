@@ -4,9 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>관리자 공지사항 등록</title>
+    <link rel="stylesheet" href="./../css/admin_common.css">
+    <link rel="stylesheet" href="./../css/admin_notice_registration.css">
 </head>
 <body>
+    <main>
+        <div class="admin-common-header">단군마켓 관리자</div>
+        <div class="admin-common-content">
+            <div class="admin-common-nav-area">
+                <nav class="admin-common-nav">고객관리</nav>
+                <nav class="admin-common-nav">게시판관리</nav>
+                <nav class="admin-common-nav">공지사항 등록</nav>
+                <nav class="admin-common-nav">관리자</nav>
+            </div>
+            <div class="admin-page-title">공지사항 등록</div>
+
+            <form id="admin-notice-registration-post" action="post" enctype="multipart/form-data">
+            <div class="admin-notice-registration-textbox">
+                <label for="title">제목</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="admin-notice-registration-textbox">
+                <label for="date"></label>
+                <input type="date" name="date" id="date">
+            </div>
+            <div class="admin-notice-registration-textbox">
+                <textarea name="content" id="content" cols="30" rows="10">
+                </textarea>
+            </div>
+
+            </form>
+
+            <div class="admin-common-popup-frame">
+                
+                <div class="admin-common-popup-content">등록이 완료되었습니다.</div>
+                <div class="admin-common-btn-frame">
+                    <button class="admin-common-popup-button" id="admin-popup-button-confirm">확인</button>
+                </div>
+                
+            </div>
+        </div>
+        <div class="admin-common-footer">
+            <p>중고를 널리 이롭게 하리라.</p>
+            <p>단군마켓</p>
+        </div>
+    </main>
     
 </body>
 </html>

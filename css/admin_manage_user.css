@@ -1,3 +1,8 @@
 .admin-common-nav:first-child{
     background-color: gray;
 }
+#admin-manage-user-popup-title{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 20px;
+}
