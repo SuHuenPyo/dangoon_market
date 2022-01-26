@@ -191,8 +191,10 @@ main {
 .info-report > select {
     display: block;
     width: 230px;
-    height: 30px;
+    height: 40px;
     border: 1px solid #ddd;
+    background-color: white;
+    color: #333;
     border-radius: 10px;
     text-indent: 10px;
     margin: 20px auto 50px auto;
@@ -202,9 +204,10 @@ main {
 .info-report > input {
     display: none;
     width: 230px;
-    height: 30px;
+    height: 40px;
     text-indent: 10px;
     border: 1px solid #ddd;
+    background-color: white;
     border-radius: 10px;
     margin: 10px auto 20px auto;
 }
