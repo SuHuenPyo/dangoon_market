@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>단군마켓 관리자 로그인</title>
+    <title>단군마켓 판매 신고게시판</title>
     <link rel="stylesheet" href="./../css/admin_common.css">
-    <link rel="stylesheet" href="./../css/admin_manage_user.css">
+    <link rel="stylesheet" href="./../css/admin_manage_board_sell.css">
 </head>
 <body>
     <main>
@@ -18,37 +18,54 @@
                 <nav class="admin-common-nav">공지사항 등록</nav>
                 <nav class="admin-common-nav">관리자</nav>
             </div>
-            <div id="admin-manage-user-title">고객관리</div>
+            <div id="admin-manage-user-title">판매 게시판</div>
             <div class="admin-common-search-container">
                 <div class="admin-common-search-form">돋보기, input</div>
                 <div class="admin-common-filter-item">필터링 할 아이템 드롭다운</div>
             </div>
             <table class="admin-common-table" border='1'>
-                <th>회원번호</th>
-                <th>이름/아이디</th>
-                <th>가입일자</th>
-                <th>이메일</th>
+                <th>No.</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일자</th>
                 <th>처리</th>
                 <tr>
-                    <td>001</td>
-                    <td>곰곰/gomgom</td>
-                    <td>22.1.1</td>
-                    <td>gg.gmail.com</td>
-                    <td>유지</td>
+                    <td>1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
                 </tr>
             </table>
             ----------------------------------------------
             페이지 넘버 들어갈자리 
 
             <div class="admin-common-popup-frame">
+                <div class="admin-common-popup-content">삭제처리 되었습니다.</div>
                 
-                <div id="admin-manage-user-popup-title">신고사유 : 욕설 및 적절하지 않은 언어사용</div>
-                <div class="admin-common-popup-content">신고자 : kima123</div>
-                <div class="admin-common-popup-content">게시글 번호 : 123</div>
                 <div class="admin-common-btn-frame">
-                    <button class="admin-common-popup-button" id="admin-popup-button-confirm">탈퇴처리</button>
-                    <button class="admin-common-popup-button" id="admin-popup-button-pass">미처리</button>  
-                    
+                    <button class="admin-common-popup-button" id="admin-manage-board-confirm">확인</button>
                 </div>
                 
             </div>

@@ -1,0 +1,8 @@
+.admin-common-nav:nth-child(2){
+    background-color: gray;
+}
+#admin-manage-board-categories-area{
+    padding-top: 30px;
+    height: auto;
+    width: 100%;
+}

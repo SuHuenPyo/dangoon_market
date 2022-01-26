@@ -68,6 +68,64 @@ main {
 .admin-common-nav:hover{
     background-color: gray;
 }
+.admin-page-title{
+    margin: 12px 0;
+    font-size: 17px;
+    font-weight: bold;
+}
+.admin-common-popup-frame{
+    background-color : #ebebeb;
+    border: solid gray 0.1px;
+    color:rgb(121, 121, 121);
+    height: auto;
+}
+.admin-common-popup-content{
+    text-align: center;
+    color:black;
+    font-size: 14px;
+    padding-top : 30px;
+    line-height: 0px;
+}
+.admin-common-btn-frame{
+    margin : 20px 0;
+    height: 30px;
+    width: 100%;
+    
+    
+    display:flex;
+    justify-content: space-around;
+    /* justify-content: space-around; */
+    
+    
+}
+button.admin-common-popup-button{
+    background-color: dodgerblue;
+    flex: 0.3;
+    color:rgb(255, 255, 255);
+    outline-color: none;
+    border: none;
+}
+button.admin-common-popup-button:hover{
+    background-color: gray;
+}
+.admin-common-button{
+    width: 85%;
+    height: 100px;
+    margin: 20px auto;
+    display:block;
+    border-radius: 12px;
+    background-color:rgb(74, 165, 255) ;
+    color: white;
+    border:none;
+    font-size: 20px;
+    text-align: center;
+}
+
+.admin-common-button:hover{
+    background-color: gray;
+}
+
+
 a {
     text-decoration: none;
     color: #333;
