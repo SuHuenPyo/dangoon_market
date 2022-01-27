@@ -13,22 +13,6 @@
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            width: 360px;
-            height: 640px;
-            color: #333;
-            overflow: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
     </style>
 </head>
 
@@ -39,68 +23,52 @@
             나의 동굴생활
         </h1>
     </header>
-    <div class="mycavelife-pc">
-        <button class="mycavelife-post">내 게시글</button>
-        <button class="mycavelife-comment">내 댓글</button>
-    </div>
-    <div id="mycavelife">
-        <ul id="mycavelife-list">
-            <li class="mycavelife-item">
-                <div class="mycavelife-img">
-                    <img src="https://via.placeholder.com/95/af713c?text=" alt="">
+    <main id="sales-list-page">
+        <div class="sales-status accepted">내 게시글</div>
+        <div class="complete-status accepted">내 댓글</div>
+        <ul class='sales-list'>
+            <li class="sales-item">
+                <div class="sales-contact">
+                    <a class='sales-link' href="#">
+                        <div class="sales-img">
+                            <img src="http://placekitten.com/95/95" alt="게시물사진">
+                        </div>
+                        <div class="sales-cont">
+                            <h2 class="sales-title">신논현 맛집 추천</h2>
+                            <p class="sales-info">
+                                <span class="sales-loc">동네이름</span>
+                                &middot;
+                                <span class="sales-time">올린시간</span>
+                            </p>
+                            <p class="sales-content">
+                                안녕하세요. 신논현역에서 제일 맛있는 커피집을 찾습니다.
+                            </p>
+                        </div>
+                    </a>
                 </div>
-                <div class="mycavelife-content">
-                    <h2 class="mycavelife-title">공지사항</h2>
-                    <p class="mycavelife-info">
-                        <span class="mycavelife-name">관리자</span> &middot;
-                        <span class="mycavelife-date">2022-01-19</span>
-                    </p>
-                    <p class="mycavelife-contents">안녕하세요. 항상 저희 단군마켓을 이용해주시는 단군님들께 감사드리며 이번 새해를 맞아..</p>
-                </div>
-            </li>
-            <li class="mycavelife-item">
-                <div class="mycavelife-img">
-                    <img src="https://via.placeholder.com/95/af713c?text=" alt="">
-                </div>
-                <div class="mycavelife-content">
-                    <h2 class="mycavelife-title">공지사항</h2>
-                    <p class="mycavelife-info">
-                        <span class="mycavelife-name">관리자</span> &middot;
-                        <span class="mycavelife-date">2022-01-19</span>
-                    </p>
-                    <p class="mycavelife-contents">안녕하세요. 항상 저희 단군마켓을 이용해주시는 단군님들께 감사드리며 이번 새해를 맞아..</p>
-                </div>
-            </li>
-            <li class="mycavelife-item">
-                <div class="mycavelife-img">
-                    <img src="https://via.placeholder.com/95/af713c?text=" alt="">
-                </div>
-                <div class="mycavelife-content">
-                    <h2 class="mycavelife-title">공지사항</h2>
-                    <p class="mycavelife-info">
-                        <span class="mycavelife-name">관리자</span> &middot;
-                        <span class="mycavelife-date">2022-01-19</span>
-                    </p>
-                    <p class="mycavelife-contents">안녕하세요. 항상 저희 단군마켓을 이용해주시는 단군님들께 감사드리며 이번 새해를 맞아..</p>
-                </div>
-            </li>
-            <li class="mycavelife-item">
-                <div class="mycavelife-img">
-                    <img src="https://via.placeholder.com/95/af713c?text=" alt="">
-                </div>
-                <div class="mycavelife-content">
-                    <h2 class="mycavelife-title">공지사항</h2>
-                    <p class="mycavelife-info">
-                        <span class="mycavelife-name">관리자</span> &middot;
-                        <span class="mycavelife-date">2022-01-19</span>
-                    </p>
-                    <p class="mycavelife-contents">안녕하세요. 항상 저희 단군마켓을 이용해주시는 단군님들께 감사드리며 이번 새해를 맞아..</p>
+                <div class="complete-contact">
+                    <a class='sales-link' href="#">
+                        <div class="sales-img">
+                            <img src="http://placekitten.com/95/95" alt="게시물사진">
+                        </div>
+                            <div class="sales-cont">
+                            <h2 class="sales-title">신논현 맛집 추천</h2>
+                            <p class="sales-info">
+                                <span class="sales-loc">동네이름</span>
+                                &middot;
+                                <span class="sales-time">올린시간</span>
+                            </p>
+                            <p class="sales-content">
+                                내 댓글: 신논현역 달리는 커피집 맛있어요!
+                            </p>
+                        </div>
+                    </a>
                 </div>
             </li>
         </ul>
-    </div>
+    </main>
 
-    <div class="mycavelife-button">
+    <div class="notice-button">
         <button>&lt;</button>
         <input type="radio" name="button" value="button" checked>
         <input type="radio" name="button" value="button">
@@ -108,4 +76,31 @@
         <input type="radio" name="button" value="button">  
         <button>&gt;</button>
     </div>
+    
+    <script>
+        // 거래수락
+        const sales_status = document.querySelectorAll('.sales-status');
+
+        sales_status.forEach((v, i) => {
+            if (v.classList.contains('accepted')) {
+                const sales_contact = v.parentElement.querySelector('.sales-contact');
+                v.addEventListener('click', e => {
+                    sales_contact.classList.toggle('show');
+                });
+            }
+        });
+
+        // 거래완료
+        const complete_status = document.querySelectorAll('.complete-status');
+
+        complete_status.forEach((v, i) => {
+            if (v.classList.contains('accepted')) {
+                const complete_contact = v.parentElement.querySelector('.complete-contact');
+                v.addEventListener('click', e => {
+                    complete_contact.classList.toggle('shows');
+                });
+            }
+        });
+    </script>
 </body>
+</html>

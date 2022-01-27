@@ -8,26 +8,12 @@
     <title>단군마켓 판매내역</title>
     <link rel="stylesheet" href="../css/header_no_logo.css">
     <link rel="stylesheet" href="../css/saleshistory.css">
+    <link rel="stylesheet" href="../css/common.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
 
-        html,
-        body {
-            width: 360px;
-            height: 640px;
-            color: #333;
-            overflow: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
     </style>
 </head>
 
@@ -38,27 +24,105 @@
             판매내역
         </h1>
     </header>
-    <div id="sales">
-        <ul id="sales-list">
+    <main id="sales-list-page">
+        <ul class='sales-list'>
             <li class="sales-item">
-                <div class="sales-img">
-                    <img src="http://placekitten.com/95/95" alt="게시물사진">
-                </div>
-                <div class="sales-content">
-                    <h2 class="sales-title">아이패드</h2>
-                    <p class="sales-info">
-                        <span class="sales-name">동네이름</span> &middot;
-                        <span class="sales-date">한시간전</span>
-                    </p>
-                    <p class="sales-price">6,000<span class="won">원</span></p>
-                </div>
+                    <a class='sales-link' href="#">
+                    <div class="sales-post">
+                        <div class="sales-img">
+                            <img src="http://placekitten.com/95/95" alt="게시물사진">
+                        </div>
+                        <div class="sales-cont">
+                            <h2 class="sales-title">아이패드</h2>
+                            <p class="sales-info">
+                                <span class="sales-loc">동네이름</span>
+                                &middot;
+                                <span class="sales-time">올린시간</span>
+                            </p>
+                            <p class="sales-price">
+                                6,000원
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                    <div class="sales-status accepted">거래요청</div>
+                    <div class="complete-status accepted">거래완료</div>
+                    <div class="sales-contact">
+                        <p class='contact-type'>인간곰 님의  거래요청</p>
+                        <button id="product-sales-btn" type="button" class="sales-accept">거래수락</button>
+                    </div>
+                    <div class="complete-contact">
+                        <p class='contact-types'>인간곰 님과</p>
+                        <button id="product-complete-btn" type="button" class="complete-accept">거래완료</button>
+                    </div>
             </li>
-            <div class="sales-button">
-                <button class="sales-tr">거래요청</button>
-                <button class="sales-tc">거래완료</button>
-            </div>
         </ul>
+    </main>
+
+    <div class="sales-notice">
+        <h2>거래수락이 완료되었습니다.</h2>
+        <p>고객님의 연락처가 요청자에게 전송되었습니다.</p>
+        <button class='notice-comfirm' type="button">확인</button>
     </div>
+
+    <div class="complete-notice">
+        <h2>감사합니다. 거래가 완료 되었습니다.</h2>
+        <button class='complete-comfirm' type="button">확인</button>
+    </div>
+
+    <script>
+        // 거래수락
+        const sales_status = document.querySelectorAll('.sales-status');
+
+        sales_status.forEach((v, i) => {
+            if (v.classList.contains('accepted')) {
+                const sales_contact = v.parentElement.querySelector('.sales-contact');
+                v.addEventListener('click', e => {
+                    sales_contact.classList.toggle('show');
+                });
+            }
+        });
+
+        const btn = document.querySelector('#product-sales-btn');
+        const notice = document.querySelector('.sales-notice');
+        const noticeBtn = document.querySelector('.notice-comfirm');
+
+        btn.addEventListener('click', e => {
+            notice.style.height = '360px';
+            notice.style.opacity = 1;
+
+            noticeBtn.addEventListener('click', (e) => {
+                notice.style.height = '0px';
+                notice.style.opacity = 0;
+            })
+        })
+
+        // 거래완료
+        const complete_status = document.querySelectorAll('.complete-status');
+
+        complete_status.forEach((v, i) => {
+            if (v.classList.contains('accepted')) {
+                const complete_contact = v.parentElement.querySelector('.complete-contact');
+                v.addEventListener('click', e => {
+                    complete_contact.classList.toggle('shows');
+                });
+            }
+        });
+
+        const btns = document.querySelector('#product-complete-btn');
+        const notices = document.querySelector('.complete-notice');
+        const noticeBtns = document.querySelector('.complete-comfirm');
+
+        btns.addEventListener('click', e => {
+            notices.style.height = '360px';
+            notices.style.opacity = 1;
+
+            noticeBtns.addEventListener('click', (e) => {
+                notices.style.height = '0px';
+                notices.style.opacity = 0;
+            })
+        })
+    </script>
 </body>
 
 </html>
