@@ -1,3 +1,7 @@
+body {
+    position: relative;
+}
+
 #sign-up-page{
     overflow: auto;
     -ms-overflow-style: none; /* IE and Edge */
@@ -90,7 +94,7 @@
 
 }
 
-#sign-up > .validation-btn {
+#sign-up > #validation-btn {
     width: 30%;
     height: 40px;
     margin: 10px auto;
@@ -140,3 +144,66 @@
     box-sizing: content-box;
     transition: all 1s ease-in-out;
 }
+
+.notice-sign-up , .notice-validation{
+    background-color: rgba(252, 198, 123, 0.95);
+    width: 360px;
+    height: 0px; /*360px*/
+    border-radius: 100px 100px 0 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    transition: all 0.3s ease-in;
+    opacity: 0; /* 1 */
+}
+
+.notice-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    line-height: 20px;
+    margin: 100px 0 10px 0;
+}
+
+.notice-comment {
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    line-height: 20px;
+    margin: 0 0 60px 0;
+}
+
+.notice-btn {
+    display: block;
+    background-color: #f99d1b;
+    color: white;
+    width: 260px;
+    height: 40px;
+    line-height: 40px;
+    border: 0;
+    border-radius: 20px;
+    margin: 0 auto 10px auto;
+}
+
+.notice-btn:hover > a{
+  box-sizing: border-box;
+  border: 1px solid white;
+}
+
+.notice-btn > a {
+    display: block;
+    background-color: #f99d1b;
+    color: white;
+    font-weight: 500;
+    width: 260px;
+    height: 40px;
+    border: 0;
+    border-radius: 20px;
+}
+
+.notice-validation .notice-btn:hover {
+    box-sizing: border-box;
+    border: 1px solid white;
+}
+
