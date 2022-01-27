@@ -51,21 +51,22 @@ main {
     width: 100%;
     height: 50px;
     text-align: center;
-    color:ghostwhite;
     font-size:13px;
     font-weight: bolder;
-    background-color: dodgerblue;
+    
     display: flex;
 }
-.admin-common-nav{
+.admin-common-nav-btn{
+    background-color: dodgerblue;
     border: solid rgb(182, 181, 181) 0.1px;
+    color:ghostwhite;
     flex:1;
-    padding-top: 12px;
     cursor:pointer;
 }
-.admin-common-nav:hover{
+.admin-common-nav-btn:hover{
     background-color: gray;
 }
+/*컨텐트 페이지의 제목*/
 .admin-page-title{
     margin: 12px 0;
     font-size: 17px;
@@ -76,6 +77,9 @@ main {
     border: solid gray 0.1px;
     color:rgb(121, 121, 121);
     height: auto;
+    
+    /*임시코드*/
+    margin-top:50px;
 }
 .admin-common-popup-content{
     text-align: center;
@@ -122,6 +126,138 @@ button.admin-common-popup-button:hover{
 .admin-common-button:hover{
     background-color: gray;
 }
+table.admin-common-table {
+    border-collapse: collapse;
+    text-align: left;
+    border: 1px solid #ccc;
+    font-size: 3px;
+}
+table.admin-common-table thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: dodgerblue;
+}
+table.admin-common-table thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+}
+/*공통 테이블 영역을 정의합니다.*/
+table.admin-common-table tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fcf1f4;
+}
+table.admin-common-table td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+/*----테이블 영역 끝 --*/
+
+/*공통 검색기능 부분*/
+
+.admin-common-search-container{
+    padding-top: 20px;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+input.admin-common-search-form:-ms-input-placeholder{ color:dodgerblue ;}
+input.admin-common-search-form::-webkit-input-placeholder{ color:dodgerblue ;}
+input.admin-common-search-form:-moz-placeholder{ color:dodgerblue ;}
+
+.admin-common-search-input-container{
+    height: 20px;
+    width: 70%;
+    border: 1px solid dodgerblue;
+    background:white;
+    float:left;
+}
+.admin-common-filter-item{
+    height:20px;
+    width: 25%;
+    float:right;
+    border: 1px solid dodgerblue;
+    background:white;
+}
+input.admin-common-search-form{
+    font-size: 8px;
+    width:80%;
+    height: 100%;
+    border: 0;
+    outline: none;
+    float:left;
+    text-indent: 5px;
+    
+
+}
+button.admin-common-search-button{
+    width: 20%;
+    height: 100%;
+    border: 0;
+    background: dodgerblue;
+    outline: none;
+    float:right;
+    color: white;
+}
+/*공통 검색 기능부분 끝*/
+
+/*페이징 부분 스타일 시트*/
+.admin-common-page-wrap {
+    padding-top : 30px;
+	text-align:center;
+	font-size:0;
+ }
+.admin-common-page-nation {
+	display:inline-block;
+}
+.admin-common-page-nation .none {
+	display:none;
+}
+.admin-common-page-nation a {
+	display:block;
+	margin:0 3px;
+	float:left;
+	border:1px solid dodgerblue;
+	width:28px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	background-color:rgb(255, 255, 255);
+	font-size:13px;
+	color:dodgerblue;
+	text-decoration:none;
+}
+.admin-common-page-nation .arrow {
+	border:1px solid dodgerblue;
+}
+.admin-common-page-nation .pprev {
+	background:white url('./../img/admin/page_pprev.png') no-repeat center center;
+	margin-left:0;
+}
+.admin-common-page-nation .prev {
+	background:white url('./../img/admin/page_prev.png') no-repeat center center;
+	margin-right:7px;
+}
+.admin-common-page-nation .next {
+	background:white url('./../img/admin/page_next.png') no-repeat center center;
+	margin-left:7px;
+}
+.admin-common-page-nation .nnext {
+	background:white url('./../img/admin/page_nnext.png') no-repeat center center;
+	margin-right:0;
+}
+.admin-common-page-nation a:hover {
+	border:1px solid rgb(194, 4, 162);
+}
+/*페이징 부분 종료*/
+
 
 
 a {

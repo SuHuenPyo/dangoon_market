@@ -1,3 +1,26 @@
-.temp{
+.admin-home-content{
     
+    border-radius: 2%;
+    border: solid 1px dodgerblue;
+    margin-top: 30px ;
+    margin-bottom: 40px;
+    padding-top: 20px;
+    height: 150px;
+    width: 100%;
+}
+.admin-home-content-element{
+    padding: 5px;
+    display:flex;
+    font-size: 14px;
+}
+.admin-home-content-title{
+    height: 90%;
+    width: 90%;
+    text-indent: 10px;
+    flex: 3;
+}
+.admin-home-content-title-date{
+    height: 90%;
+    width: 90%;
+    flex:1;
 }

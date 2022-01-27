@@ -6,61 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>단군마켓 관리자 로그인</title>
     <link rel="stylesheet" href="./../css/admin_common.css">
-    <link rel="stylesheet" href="./../css/admin_login.css">
+    <link rel="stylesheet" href="./../css/admin_home.css">
 </head>
 <body>
     <main>
         <div class="admin-common-header">단군마켓 관리자</div>
         <div class="admin-common-content">
             <div class="admin-common-nav-area">
-                <nav class="admin-common-nav">고객관리</nav>
-                <nav class="admin-common-nav">게시판관리</nav>
-                <nav class="admin-common-nav">공지사항 등록</nav>
-                <nav class="admin-common-nav">관리자</nav>
+                <button class="admin-common-nav-btn" value="admin_manage_user">고객관리</button>
+                <button class="admin-common-nav-btn" value="admin_manage_board">게시판관리</button>
+                <button class="admin-common-nav-btn" value="admin_notice_registration">공지사항 등록</button>
+                <button class="admin-common-nav-btn" value="admin_mypage">관리자</button>
             </div>
-            <div class="admin-content-name"><p>공지사항</p></div>
-            <div class="admin-content">
+            <div class="admin-page-title"><p>공지사항</p></div>
+            <div class="admin-home-content" id="admin-home-content-notice">
                 <ul>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
-                    </li>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
-                    </li>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
-                    </li>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
+                    <li class="admin-home-content-element">
+                        <div class="admin-home-content-title">[공지사항] 공지사항 내용입니다.</div>
+                        <div class="admin-home-content-title-date">2022-01-27</div>
                     </li>
                 </ul>
             </div>
 
-            <div class="admin-content-name"><p>게시판 신고건</p></div>
-            <div class="admin-content">
+            <div class="admin-page-title"><p>게시판 신고건</p></div>
+            <div class="admin-home-content" id="admin-home-content-report">
                 <ul>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
-                    </li>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
-                    </li>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
-                    </li>
-                    <li>
-                        <div class="admin-content-title">대충 공지내용</div>
-                        <div class="admin-content-title-date">대충 날짜</div>
+                    <li class="admin-home-content-element">
+                        <div class="admin-home-content-title">[판매글] 바카라, 카지노 5%충전</div>
+                        <div class="admin-home-content-title-date">2021-01-22</div>
                     </li>
                 </ul>
             </div>
+
+
         </div>
         <div class="admin-common-footer">
             <p>중고를 널리 이롭게 하리라.</p>
@@ -68,5 +46,6 @@
         </div>
     </main>
     
+    <script src="./../js/admin_common.js"></script>
 </body>
 </html>

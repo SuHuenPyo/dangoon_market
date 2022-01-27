@@ -7,59 +7,110 @@
     <title>단군마켓 판매 신고게시판</title>
     <link rel="stylesheet" href="./../css/admin_common.css">
     <link rel="stylesheet" href="./../css/admin_manage_board_sell.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
 </head>
 <body>
     <main>
         <div class="admin-common-header">단군마켓 관리자</div>
         <div class="admin-common-content">
             <div class="admin-common-nav-area">
-                <nav class="admin-common-nav">고객관리</nav>
-                <nav class="admin-common-nav">게시판관리</nav>
-                <nav class="admin-common-nav">공지사항 등록</nav>
-                <nav class="admin-common-nav">관리자</nav>
+                <button class="admin-common-nav-btn" value="admin_manage_user">고객관리</button>
+                <button class="admin-common-nav-btn" value="admin_manage_board">게시판관리</button>
+                <button class="admin-common-nav-btn" value="admin_notice_registration">공지사항 등록</button>
+                <button class="admin-common-nav-btn" value="admin_mypage">관리자</button>
             </div>
             <div id="admin-manage-user-title">판매 게시판</div>
             <div class="admin-common-search-container">
-                <div class="admin-common-search-form">돋보기, input</div>
-                <div class="admin-common-filter-item">필터링 할 아이템 드롭다운</div>
+                <div class="admin-common-search-input-container">
+                    <input class="admin-common-search-form" type="text" placeholder="검색어 입력"></input>
+                    <button class="admin-common-search-button"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <select name="admin-common-filter-item" class="admin-common-filter-item">
+                    <option value="none" >이름</option>
+                    <option value="none" >아이디</option>
+                    <option value="none" >이메일</option>
+                </select>
+                
             </div>
-            <table class="admin-common-table" border='1'>
-                <th>No.</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일자</th>
-                <th>처리</th>
+
+            <table class="admin-common-table">
+                <thead>
                 <tr>
-                    <td>1</td>
+                  <th scope="cols">No</th>
+                  <th scope="cols">제목</th>
+                  <th scope="cols">작성자</th>
+                  <th scope="cols">작성일자</th>
+                  <th scope="cols">처리</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="rows">1</td>
                     <td>[판매글] 에어팟 111 판매</td>
                     <td>gomm</td>
                     <td>22.01.01</td>
                     <td>삭제</td>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <td scope="rows">1</td>
                     <td>[판매글] 에어팟 111 판매</td>
                     <td>gomm</td>
                     <td>22.01.01</td>
                     <td>삭제</td>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <td scope="rows">1</td>
                     <td>[판매글] 에어팟 111 판매</td>
                     <td>gomm</td>
                     <td>22.01.01</td>
                     <td>삭제</td>
                 </tr>
                 <tr>
-                    <td>1</td>
+                    <td scope="rows">1</td>
                     <td>[판매글] 에어팟 111 판매</td>
                     <td>gomm</td>
                     <td>22.01.01</td>
                     <td>삭제</td>
                 </tr>
-            </table>
-            ----------------------------------------------
-            페이지 넘버 들어갈자리 
+                <tr>
+                    <td scope="rows">1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
+                </tr>
+                <tr>
+                    <td scope="rows">1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
+                </tr>
+                <tr>
+                    <td scope="rows">1</td>
+                    <td>[판매글] 에어팟 111 판매</td>
+                    <td>gomm</td>
+                    <td>22.01.01</td>
+                    <td>삭제</td>
+                </tr>
+                </tbody>
+              </table>
+
+        
+              <div class="admin-common-page-wrap">
+                <div class="admin-common-page-nation">
+                   <a class="arrow pprev" href="#"></a>
+                   <a class="arrow prev" href="#"></a>
+                   <a href="#" class="admin-common-page-active">1</a>
+                   <a href="#">2</a>
+                   <a href="#">3</a>
+                   <a href="#">4</a>
+                   <a href="#">5</a>
+                   <a class="arrow next" href="#"></a>
+                   <a class="arrow nnext" href="#"></a>
+                </div>
+             </div>
 
             <div class="admin-common-popup-frame">
                 <div class="admin-common-popup-content">삭제처리 되었습니다.</div>
@@ -75,6 +126,6 @@
             <p>단군마켓</p>
         </div>
     </main>
-    
+    <script src="./../js/admin_common.js"></script>
 </body>
 </html>
