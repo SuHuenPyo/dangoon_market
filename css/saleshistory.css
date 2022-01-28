@@ -115,6 +115,13 @@ main#sales-list-page::-webkit-scrollbar {
     box-sizing: border-box;
 }
 
+.complete-status:after {
+    content:'';
+    display: block;
+    float: none;
+    clear: both;
+}
+
 .accepted {
     background-color: rgba(252, 198, 123, 0.95);
 }
