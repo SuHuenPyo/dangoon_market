@@ -164,7 +164,7 @@ main#sales-list-page::-webkit-scrollbar {
     height: 40px;
 }
 
-/* 거래완료 */
+/* 거래수락 */
 .sales-notice {
     background-color:rgba(252, 198, 123,0.95);
     width: 360px;

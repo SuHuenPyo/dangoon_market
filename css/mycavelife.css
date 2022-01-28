@@ -31,15 +31,20 @@ main#sales-list-page::-webkit-scrollbar {
     height: 100%;
 }
 
-.sales-contact {
-    float: left;
+/* 구매목록 중 구매요청한 글 */
+.sales-item> .sales-link > .sales-contact {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    flex-direction: row;
 }
 
 /* 구매요청한 글의 이미지 */
-.sales-contact >.sales-img {
+.sales-contact>.sales-img {
+    flex-basis: 95px;
     height: 95px;
     padding: 7.5px;
-    text-align: left;
+    text-align: center;
     line-height: 95px;
     overflow: hidden;
 }
@@ -95,13 +100,33 @@ main#sales-list-page::-webkit-scrollbar {
 
 /* 구매요청 상황 */
 .sales-status {
+    display: inline-block;
     width: 50%;
     height: 40px;
     text-align: center;
     line-height: 40px;
     border: 1px solid #e5e5e5;
     font-size: 14px;
-    float:right;
+    box-sizing: border-box;
+}
+
+.complete-status {
+    display: inline-block;
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    box-sizing: border-box;
+    float: right;
+}
+
+.complete-status:after {
+    content:'';
+    display: block;
+    float: none;
+    clear: both;
 }
 
 .accepted {
@@ -124,7 +149,6 @@ main#sales-list-page::-webkit-scrollbar {
     height: 140px;
 }
 
-/* 내댓글 */
 .complete-contact {
     float: left;
 }
@@ -136,48 +160,6 @@ main#sales-list-page::-webkit-scrollbar {
     text-align: left;
     line-height: 95px;
     overflow: hidden;
-}
-
-.complete-status {
-    width: 50%;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    border: 1px solid #e5e5e5;
-    font-size: 14px;
-}
-
-.sales-item> .complete-contact {
-    width: 100%;
-    height: 0px;
-    text-align: center;
-    line-height: 40px;
-    border: 1px solid black;
-    border-top: 0;
-    font-size: 14px;
-    display: none;
-}
-
-.complete-contact>.contact-types {
-    display: inline-block;
-    width: 150px;
-    height: 100%;
-    margin-right: 80px;
-}
-
-.complete-contact>.complete-accept {
-    display: inline-block;
-    width: 70px;
-    font-weight: bold;
-    color: white;
-    height: 38px;
-    background-color: #f99d1b;
-}
-
-.complete-accept {
-    border: 1px solid #d5d5d5;
-    margin-left: 20px;
-    border-radius: 10px;
 }
 
 .sales-item> .complete-contact {
