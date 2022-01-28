@@ -93,22 +93,26 @@ main#sales-list-page::-webkit-scrollbar {
 
 /* 구매요청 상황 */
 .sales-status {
+    display: inline-block;
     width: 50%;
     height: 40px;
     text-align: center;
     line-height: 40px;
     border: 1px solid #e5e5e5;
     font-size: 14px;
-    float:right;
+    box-sizing: border-box;
 }
 
 .complete-status {
+    display: inline-block;
     width: 50%;
     height: 40px;
     text-align: center;
     line-height: 40px;
     border: 1px solid #e5e5e5;
     font-size: 14px;
+    float: right;
+    box-sizing: border-box;
 }
 
 .accepted {
@@ -119,32 +123,32 @@ main#sales-list-page::-webkit-scrollbar {
     width: 100%;
     height: 0px;
     text-align: center;
-    line-height: 40px;
     border: 1px solid #e5e5e5;
     border-top: 0;
     font-size: 14px;
     display: none;
 }
 
-.sales-contact>.contact-type {
+.sales-contact >.contact-type {
     display: inline-block;
     width: 150px;
     height: 100%;
+    line-height: 40px;
     margin-right: 80px;
 }
 
-.sales-contact>.sales-accept {
+.sales-contact >.sales-accept {
     display: inline-block;
     width: 70px;
     font-weight: bold;
     color: white;
-    height: 38px;
+    height: 35px;
     background-color: #f99d1b;
+    line-height: 35px;
 }
 
 .sales-accept {
     border: 1px solid #d5d5d5;
-    margin-left: 20px;
     border-radius: 10px;
 }
 
@@ -205,7 +209,6 @@ main#sales-list-page::-webkit-scrollbar {
     width: 100%;
     height: 0px;
     text-align: center;
-    line-height: 40px;
     border: 1px solid #e5e5e5;
     border-top: 0;
     font-size: 14px;
@@ -214,9 +217,10 @@ main#sales-list-page::-webkit-scrollbar {
 
 .complete-contact>.contact-types {
     display: inline-block;
-    width: 150px;
+    width: 110px;
     height: 100%;
-    margin-right: 80px;
+    line-height: 40px;
+    margin-right: 100px;
 }
 
 .complete-contact>.complete-accept {
@@ -224,7 +228,8 @@ main#sales-list-page::-webkit-scrollbar {
     width: 70px;
     font-weight: bold;
     color: white;
-    height: 38px;
+    height: 35px;
+    line-height: 35px;
     background-color: #f99d1b;
 }
 
