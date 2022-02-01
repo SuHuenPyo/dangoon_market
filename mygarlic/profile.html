@@ -47,7 +47,28 @@
         <span class="profile-error"></span>
     </div>
     <div class="profile-save">
-        <button>저장하기</button>
+        <button id="product-post-btn" type="button" class="product-common">저장하기</button>
     </div>
+    
+    <div class="post-notice">
+        <h2>정상적으로 저장되었습니다</h2>
+        <button class='notice-comfirm' type="button">확인</button>
+    </div>
+
+    <script>
+        const btn = document.querySelector('#product-post-btn');
+        const notice = document.querySelector('.post-notice');
+        const noticeBtn = document.querySelector('.notice-comfirm');
+
+        btn.addEventListener('click', e => {
+            notice.style.height = '360px';
+            notice.style.opacity = 1;
+
+            noticeBtn.addEventListener('click', (e) => {
+                notice.style.height = '0px';
+                notice.style.opacity = 0;
+            })
+        })
+    </script>
 </body>
 </html>

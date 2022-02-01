@@ -6,29 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>동굴생활</title>
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/header_no_logo.css">
     <link rel="stylesheet" href="../css/cavecomment.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            width: 360px;
-            height: 640px;
-            color: #333;
-            overflow: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -66,13 +49,18 @@
             <p class="cavecomment-report2">
                 <a href="#">
                 <img src="../img/warning.png">
-                부적절한 게시글이라면 단군마켓에 알려주세요.</a>
+                부적절한 댓글이라면 단군마켓에 알려주세요.</a>
             </p>
         </div>
         <div class="cavecomment-write">
             <button class="far fa-images"></button>
             <input type="text" name="cavecomment-com" id="cavecomment-com" placeholder="댓글을 입력해주세요.">
         </div>
+    </div>
+
+    <div class="cavecomment-notice">
+        <h2>신고가 완료되었습니다.</h2>
+        <button class="cavecomment-comfirm" type="button">확인</button>
     </div>
     
     <script>
@@ -81,6 +69,34 @@
         good_btn.forEach((v, i) => {
             v.addEventListener('click', e => {
                 v.classList.toggle('fas');
+            })
+        })
+
+        const btn = document.querySelector('.cavecomment-report');
+        const notice = document.querySelector('.cavecomment-notice');
+        const noticeBtn = document.querySelector('.cavecomment-comfirm');
+
+        btn.addEventListener('click', e => {
+            notice.style.height = '360px';
+            notice.style.opacity = 1;
+
+            noticeBtn.addEventListener('click', (e) => {
+                notice.style.height = '0px';
+                notice.style.opacity = 0;
+            })
+        })
+
+        const btn1 = document.querySelector('.cavecomment-report2');
+        const notice1 = document.querySelector('.cavecomment-notice');
+        const noticeBtn1 = document.querySelector('.cavecomment-comfirm');
+
+        btn1.addEventListener('click', e => {
+            notice1.style.height = '360px';
+            notice1.style.opacity = 1;
+
+            noticeBtn1.addEventListener('click', (e) => {
+                notice1.style.height = '0px';
+                notice1.style.opacity = 0;
             })
         })
     </script>
