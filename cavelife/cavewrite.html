@@ -7,33 +7,16 @@
     <title>동굴생활글쓰기</title>
     <link rel="stylesheet" href="../css/cavewrite.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/common.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            width: 360px;
-            height: 640px;
-            color: #333;
-            overflow: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
-    </style>
 </head>
 <body>
     <header>
         <div href="#" class="fas fa-bars head-icon"></div>
         <h1 class="head-logo">동굴생활 글쓰기</h1>
-        <button class="cavewrite-button">완료</button>
+        <button id="product-cavewrite-btn" type="button" class="product-cavewrite"">완료</button>
     </header>
         <div id="cavewrite-main">
             <div class="cavewrite-content">
@@ -44,5 +27,26 @@
             </div>
         </div>
     </div>
+
+    <div class="cavewrite-notice">
+        <h2>정상적으로 저장되었습니다</h2>
+        <button class='cavewrite-comfirm' type="button">확인</button>
+    </div>
+
+    <script>
+        const btn = document.querySelector('#product-cavewrite-btn');
+        const notice = document.querySelector('.cavewrite-notice');
+        const noticeBtn = document.querySelector('.cavewrite-comfirm');
+
+        btn.addEventListener('click', e => {
+            notice.style.height = '360px';
+            notice.style.opacity = 1;
+
+            noticeBtn.addEventListener('click', (e) => {
+                notice.style.height = '0px';
+                notice.style.opacity = 0;
+            })
+        })
+    </script>
 </body>
 </html>
