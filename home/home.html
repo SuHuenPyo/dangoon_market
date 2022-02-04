@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>단군마켓 홈</title>
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="stylesheet" href="./css/menu.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/menu.css">
     <!-- font-awesome -->
-    <link rel="stylesheet" href="./font-awesome/css/all.min.css">
-    <script href="./font-awesome/js/all.min.js"></script>
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
+    <script href="../font-awesome/js/all.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -30,19 +30,16 @@
         a {
             text-decoration: none;
         }
+
     </style>
 </head>
 
 <body>
-    <header>
-        <div id="menu-btn" class="fas fa-bars head-icon"></div>
-        <h1 class="head-logo"><img src="./img/logo-color.png" alt="단군마켓로고"></h1>
-        <div class="fas fa-user head-icon"></div>
-    </header>
+    <div data-header="../inc/html/header.html"></div>
     <main id="home">
         <ul id="sale-list">
             <li class="sale-item">
-                <a class='post-link' href="./category/product_detail.html">
+                <a class='post-link' href="../category/product_detail.html">
                     <div class="sale-img">
                         <img src="https://via.placeholder.com/95/af713c?text=" alt="">
                     </div>
@@ -104,6 +101,7 @@
                     </div>
                 </a>
             </li>
+            
             <li class="sale-item">
                 <a class='post-link' href="#">
                     <div class="sale-img">
@@ -137,56 +135,11 @@
         </ul>
 
 
-        <a href="./category/post_product.html" id="write-sale-btn">
+        <a href="../category/post_product.html" id="write-sale-btn">
             <span class="far fa-edit"></span>
         </a>
     </main>
-
-    <!-- 매뉴 -->
-    <div id="menu">
-        <h2 class="menu-logo">
-            <img src="./img/logo-white.png" alt="단군마켓로고">
-        </h2>   
-
-        <ul class="menu-list">
-            <li class="menu-item">
-                <a href="./home.html">홈</a>
-            </li>
-            <li class="menu-item">
-                <a href="./cavelife/cavelife.html">동굴생활</a>
-            </li>
-            <li class="menu-item">
-                <a href="./category/category.html">상품별 카테고리</a>
-            </li>
-            <li class="menu-item">
-                <a href="./mygarlic/mygarlic.html">나의 마늘</a>
-            </li>
-        </ul>
-
-        <ul class="menu-contact">
-            <li class="menu-contact-item">
-                <a href="./mygarlic/notice.html">공지사항</a>
-            </li>
-            <li class="menu-contact-item">
-                <a href="#" class='fab fa-github'></a>
-            </li>
-            <li class="menu-contact-item">
-                <a href="#">email</a>
-            </li>
-        </ul>
-    </div>
-
-
-    <!-- test javascript -->
-    <script>
-        document.querySelector('#menu-btn').addEventListener('click', e => {
-            const menu = document.querySelector('#menu')
-            menu.style.left = '0px';
-            menu.addEventListener('click', e => {
-                menu.style.left = '-360px';
-            })
-        })
-    </script>
+    <script src='../Inc/js/inculde.js'></script>
 </body>
 
 </html>
