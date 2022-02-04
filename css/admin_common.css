@@ -10,6 +10,11 @@ html,body {
     position: relative;
     color: #333;
     margin: 0 auto;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+
+    
 }
 
 main {
@@ -127,17 +132,20 @@ button.admin-common-popup-button:hover{
     background-color: gray;
 }
 table.admin-common-table {
+    font-size: 0.5rem;
     border-collapse: collapse;
     text-align: left;
     border: 1px solid #ccc;
     font-size: 3px;
 }
 table.admin-common-table thead {
+    font-size: 0.5rem;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
     background: dodgerblue;
 }
 table.admin-common-table thead th {
+    
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -153,6 +161,7 @@ table.admin-common-table tbody th {
     background: #fcf1f4;
 }
 table.admin-common-table td {
+    font-size: 0.5rem;
     width: 350px;
     padding: 10px;
     vertical-align: top;
