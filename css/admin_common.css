@@ -86,7 +86,8 @@ main {
     border: solid gray 0.1px;
     color:rgb(121, 121, 121);
     height: auto;
-    
+    max-width: 500px;
+    margin: 0 auto;
     /*임시코드*/
     margin-top:50px;
 }
