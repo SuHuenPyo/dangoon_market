@@ -13,19 +13,22 @@ html,body {
     -webkit-text-size-adjust: none;
     -moz-text-size-adjust: none;
     -ms-text-size-adjust: none;
+    font-size: 100%;
 
     
 }
 
 main {
-    min-width: 460px;
+    /*min-width: 360px;*/
+    min-width: 550px;
     width: 100%;
     min-height: 550px;
     margin : 0 auto;
 }
 
 .admin-common-content{
-    width: 360px;
+    /* width: 360px; */
+    width: 95%;
     height: 640px;
     padding-left: 15px;
     padding-right: 15px;
@@ -131,15 +134,22 @@ button.admin-common-popup-button:hover{
 .admin-common-button:hover{
     background-color: gray;
 }
+/*공통 테이블 영역을 정의합니다.*/
+
+.admin-common-table-area{
+    width: auto;
+    height: auto;
+    overflow-x: auto;
+}
 table.admin-common-table {
-    font-size: 0.5rem;
+    min-width: 1000px;
     border-collapse: collapse;
     text-align: left;
     border: 1px solid #ccc;
-    font-size: 3px;
+    
 }
 table.admin-common-table thead {
-    font-size: 0.5rem;
+    font-size: 1rem;
     border-right: 1px solid #ccc;
     border-left: 1px solid #ccc;
     background: dodgerblue;
@@ -151,7 +161,7 @@ table.admin-common-table thead th {
     vertical-align: top;
     color: #fff;
 }
-/*공통 테이블 영역을 정의합니다.*/
+
 table.admin-common-table tbody th {
     width: 150px;
     padding: 10px;
@@ -161,11 +171,12 @@ table.admin-common-table tbody th {
     background: #fcf1f4;
 }
 table.admin-common-table td {
-    font-size: 0.5rem;
     width: 350px;
     padding: 10px;
     vertical-align: top;
     border-bottom: 1px solid #ccc;
+    overflow: hidden;
+    font-size: 0.8rem;
 }
 /*----테이블 영역 끝 --*/
 
