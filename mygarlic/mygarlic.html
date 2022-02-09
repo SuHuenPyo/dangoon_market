@@ -1,77 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>나의마늘</title>
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/mygarlic.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            width: 360px;
-            height: 640px;
-            color: #333;
-            overflow: hidden;
-        }
-
-        a {
-            text-decoration: none;
-        }
     </style>
 </head>
-
 <body>
-    <header>
-        <div href="#" class="fas fa-bars head-icon"></div>
-        <h1 class="head-logo"><img src="../img/logo.png" alt="단군마켓로고"></h1>
-        <div href="#" class="fas fa-user head-icon"></div>
-    </header>
-    <div id="mygarlic">
-        <div class="mygarlic-profile">
-            <div class="mygarlic-img"></div>
-            <p class="mygarlic-name">인간곰</p>
-            <p class="mygarlic-kakao">kakao ID : ykhn</p>
-        </div>
-        <div class="mygarlic-content">
-            <a href="./profile.html" id="mygarlic-prosee">프로필 보기</a>
-        </div>
-        <div class="mygarlic-content">
-            <ul class="mygarlic-list">
-                <li>
-                    <a href="./saleshistory.html" id="mygarlic-sale">판매내역</a>
-                </li>
-                <li>
-                    <a href="./buy-list.html" id="mygarlic-sale">구매내역</a>
-                </li>
-                <li>
-                    <a href="./like_list.html" id="mygarlic-sale">관심목록</a>
-                </li>
-            </ul>
-        <div class="mygarlic-homelist">
-            <ul>
-                <li>
-                    <a href="./notice.html" id="mygarlic-notice">공지사항</a>
-                </li>
-                <li>
-                    <a href="./mycavelife.html" id="mygarlic-hlist">나의 동굴생활</a>
-                </li>
-                <li>
-                    <a href="../login_register/sign_up.html" id="mygarlic-hlist">탈퇴하기 / 가입하기</a>
-                </li>
-                <li>
-                    <a href="../login_register/login.html" id="mygarlic-hlist">로그인 / 로그아웃</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+       <div data-header="../inc/html/header.html"></div>
+
+        <main id="mygarlic">
+            <div class="mygarlic-profile">
+                <div class="mygarlic-img"></div>
+                <p>
+                 <span class="mygarlic-name">인간곰</span>
+                 <br>
+                 <span class="mygarlic-kakao">kakaoId</span>
+                </p>
+            </div>
+                <a href="./profile.html" id="mygarlic-prosee">프로필 보기</a>
+            <div class="mygarlic-content">
+                <ul class="mygarlic-list">
+                    <li class="mygarlic-list-item">
+                        <a href="./saleshistory.html">
+                            <div class="fas fa-receipt"></div>
+                            <p>판매내역</p>
+                        </a>
+                    </li>
+                    <li class="mygarlic-list-item">
+                        <a href="./buy-list.html">
+                            <div class="fas fa-shopping-basket"></div>
+                            <p>구매내역</p>
+                        </a>
+                    </li>
+                    <li class="mygarlic-list-item">
+                        <a href="./like_list.html">
+                            <div class="fas fa-star"></div>
+                            <p>관심목록</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mygarlic-homelist">
+                <ul>
+                    <li class="mygarlic-homelist-item">
+                        <a href="./notice.html"><span class="fas fa-microphone"></span>공지사항</a>
+                    </li>
+                    <li class="mygarlic-homelist-item">
+                        <a href="./mycavelife.html"><span class="far fa-comments"></span>나의 동굴생활</a>
+                    </li>
+                    <li class="mygarlic-homelist-item">
+                        <a href="../login_register/sign_up.html"><span class="far fa-grin-tears"></span>탈퇴하기</a>
+                    </li>
+                    <li class="mygarlic-homelist-item">
+                        <a href="../login_register/login.html"><span class="fas fa-sign-out-alt"></span>로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </main>
+        <script src='../Inc/js/inculde.js'></script>
+</body>
+</html>

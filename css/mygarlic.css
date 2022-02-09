@@ -1,101 +1,117 @@
-/* 나의마늘 전체 */
-#mygarlic {
-    margin-left: 10px;
-}
-
 /* 나의마늘 프로필 */
-.mygarlic-img {
-    width: 80px;
-    height: 80px;
-    float: left;
-    border: 1px solid black;
-    border-radius: 50%;
-    margin-top: 20px;
+.mygarlic-profile {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
 }
-.mygarlic-img p {
-    float: left;
+.mygarlic-profile > .mygarlic-img {
+    display: block;
+    flex-basis: 80px;
+    height: 80px;
+    border: 1px solid #d5d5d5;
+    border-radius: 50%;
+    margin : 0 0 0 10px;
 }
 
+.mygarlic-profile > p {
+    width: 200px;
+    margin: 0 0 0 20px;
+}
 .mygarlic-name {
-    padding-top: 40px;
-    padding-left: 100px;
+   font-size: 17px;
+   font-weight: bold;
 }
 .mygarlic-kakao {
-    padding-left: 100px;
-    color: #d5d5d5;
+   font-size: 14px;
+   color: #aaa;
+}
+
+/* 프로필 보기 */
+#mygarlic-prosee {
+    display: block;
+    width: 100%;
+    height: 45px;
+    margin: 5px 0 0 0;
+    border-radius: 5px;
+    text-align: center;
+    line-height:39px;
+    font-size: 14px;
+    font-weight:bold;
+    color: white;
+    background-color: #f99d1b;
+    box-sizing: border-box;
 }
 
 .mygarlic-content {
-    clear: both;
+    width: 100%;
+    height: 100px;
 }
-
 .mygarlic-list {
+    width: 100%;
+    height: 100%;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
     list-style: none;
 }
 
-.mygarlic-list li {
-    float: left;
-    margin-right: 14px;
+.mygarlic-list > .mygarlic-list-item {
+    flex-basis:100px;
+    height: 100px;
+    text-align: center;
+    border: 2px solid #f99d1b;
+    border-radius:10px;
+    box-sizing: border-box;
 }
 
-/* 프로필보기 버튼 */
-#mygarlic-prosee {
+.mygarlic-list > .mygarlic-list-item > a {
     display: block;
-    width: 330px;
-    height: 20px;
-    margin-top: 40px;
-    border: 1px solid black;
-    text-align: center;
-    padding: 15px 0;
-    background-color: #ff9500;
-    border-radius: 5px;
+    width: 100%;
+    padding: 21px 0;
+    color: #f99d1b;
+    font-size: 14px;
+    font-weight:500;
 }
 
-/* 판매내역, 구매내역, 관심목록 버튼 */
-#mygarlic-sale {
-    display: block;
-    width: 100px;
-    height: 30px;
-    border: 1px solid black;
-    background-color: #ff9500;
-    margin: 20px 0;
-    text-align: center;
-    padding: 30px 0;
-    border-radius: 20px;
+.mygarlic-list-item > a > div {
+    font-size: 20px;
+    line-height:30px;
 }
+
 
 /* 나의 마늘 홈리스트 */
 .mygarlic-homelist {
-    clear: both;
+    width: 100%;
+    height: auto;
+    margin: 20px 0 0 0;
 }
-#mygarlic-notice {
+
+.mygarlic-homelist > ul {
+    width: 100%;
+    height: 100%;
+}
+
+.mygarlic-homelist > ul > .mygarlic-homelist-item {
+    text-indent: 5px;
+    height: 40px;
+}
+
+.mygarlic-homelist-item > a {
     display: block;
-    margin-top: 20px;
-    border-top: 1px solid #d5d5d5;
-    border-bottom: 1px solid #d5d5d5;
-    padding: 20px 0;
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
 }
 
-#mygarlic-hlist {
-    display: block;
-    margin-top: 5px;
-    border-bottom: 1px solid #d5d5d5;
-    padding: 20px 0;
+.mygarlic-homelist-item > a > span {
+    margin: 0 10px 0 0;
+    width: 30px;
+    text-align: center;
 }
 
-/* 하이퍼링크 글자색 바꾸기 */
-.mygarlic-homelist a:link {
-    color : black;
-}
 
-.mygarlic-homelist a:visited {
-    color : black;
-}
 
-.mygarlic-homelist a:hover {
-    color : red;
-}
-
-.mygarlic-homelist a:active {
-    color : green;
-}
