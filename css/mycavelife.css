@@ -10,175 +10,72 @@ main#sales-list-page::-webkit-scrollbar {
     /* Chrome, Safari, Opera*/
 }
 
-/* 구매목록 */
-.sales-list {
-    width: 100%;
-    height: 100%;
-    margin-left: 15px;
+/* 내 게시글, 내댓글 버튼 */
+#sales-list-page {
+    margin: 0 15px;
 }
 
-/* 구매목록 아이템 */
-.sales-list>.sales-item {
-    display: block;
-    width: 100%;
-    min-height: 110px;
-    margin: 0 0 10px 0;
-}
-
-.sales-link {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-/* 구매목록 중 구매요청한 글 */
-.sales-item> .sales-link > .sales-contact {
-    width: 100%;
-    height: 110px;
-    display: flex;
-    flex-direction: row;
-}
-
-/* 구매요청한 글의 이미지 */
-.sales-contact>.sales-img {
-    flex-basis: 95px;
-    height: 95px;
-    padding: 7.5px;
-    text-align: center;
-    line-height: 95px;
-    overflow: hidden;
-}
-.sales-img > a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.sales-img img {
-    border-radius: 10px;
-    width: 95px;
-    height: 95px;
+.mycavelife-status {
+    border: 1px solid white;
+    width: 170px;
+    height: 30px;
     float: left;
-    margin-left: 5px;
-    margin-top: 10px;
-}
-
-/* 구매요청한 글의 내용 */
-.sales-cont {
-    width: 330px;
-    height: 0;
-}
-
-/* 구매요청한 글의 제목 */
-.sales-cont>.sales-title {
-    font-size: 16px;
-    line-height: 25px;
-    margin: 20px 0 0 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    padding-left: 20px;
+    text-align: center;
     padding-top: 10px;
 }
 
-/* 구매요청한 글의 올린시간, 위치 */
-.sales-cont>.sales-info {
-    font-size: 13px;
-    line-height: 20px;
-    color: #d5d5d5;
-    margin-left: 120px;
-    margin-bottom: 10px;
-}
-
-/* 구매요청한 글의 가격 */
-.sales-cont>.sales-content {
-    font-size: 13px;
-    line-height: 15px;
-    color: #d5d5d5;
-    margin-left: 120px;
-}
-
-/* 구매요청 상황 */
-.sales-status {
-    display: inline-block;
-    width: 50%;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    border: 1px solid #e5e5e5;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
 .complete-status {
-    display: inline-block;
-    width: 50%;
-    height: 40px;
+    border: 1px solid white;
+    height: 30px;
     text-align: center;
-    line-height: 40px;
-    border: 1px solid #e5e5e5;
-    font-size: 14px;
-    box-sizing: border-box;
-    float: right;
-}
-
-.complete-status:after {
-    content:'';
-    display: block;
-    float: none;
-    clear: both;
+    padding-top: 10px;
 }
 
 .accepted {
     background-color: rgba(252, 198, 123, 0.95);
 }
 
-.sales-item> .sales-contact {
-    width: 100%;
-    height: 0;
-    text-align: left;
-    border: 1px solid #d5d5d5;
-    border-top: 0;
-    border-left: 0;
-    font-size: 14px;
+/* 내 게시글 리스트 */
+.mycavelife-list {
+    margin-top: 10px;
     display: none;
 }
-
-.sales-contact.show {
-    display: block;
-    height: 140px;
+.mycavelife-item {
+    border-bottom: 1px solid #e3dcd9;
+    padding-bottom: 20px;
+    margin-top: 10px;
 }
-
-.complete-contact {
+.mycavelife-img {
     float: left;
 }
 
-/* 구매요청한 글의 이미지 */
-.complete-contact >.sales-img {
-    height: 95px;
-    padding: 7.5px;
-    text-align: left;
-    line-height: 95px;
-    overflow: hidden;
+.mycavelife-cont {
+    padding-top: 5px;
+    padding-left: 100px;
+    line-height: 25px;
 }
 
-.sales-item> .complete-contact {
-    width: 100%;
-    height: 0;
-    text-align: left;
-    border: 1px solid #d5d5d5;
-    border-top: 0;
-    border-left: 0;
+.mycavelife-title {
+    font-size: 18px;
+}
+
+.mycavelife-info {
     font-size: 14px;
-    display: none;
+    color: #e3dcd9;
 }
 
-.complete-contact.shows {
+.mycavelife-content {
+    font-size: 14px;
+    color: #e3dcd9;
+    line-height: 17px;
+}
+
+.mycavelife-contact.show {
     display: block;
-    height: 140px;
+    height: 550px;
 }
 
 /* 맨 밑에 버튼 */
 .notice-button {
-    margin: 20px 125px;
+    margin: 20px 110px;
 }
