@@ -7,6 +7,7 @@
     <title>관리자 나의 정보</title>
     <link rel="stylesheet" href="./../css/admin_common.css">
     <link rel="stylesheet" href="./../css/admin_mypage.css">
+    <link rel="stylesheet" href="../font-awesome/css/all.min.css">
 </head>
 <body>
     <main>
@@ -19,7 +20,13 @@
                 <button class="admin-common-nav-btn" value="admin_mypage">관리자</button>
             </div>
             <div class="admin-mypage-profile-frame">
-                <div class="admin-mypage-profile-pic"></div>
+                <div class="admin-mypage-profile-pic">
+                    <div class="inner">
+                        <input class="inputfile" type="file" name="pic" accept="image/*">
+                        <label><i class="fas fa-camera"></i></label>
+                    </div>
+                </div>
+            
                 <div class="admin-mypage-profile-name">Admin Rang</div>
             </div>
             

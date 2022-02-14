@@ -35,6 +35,11 @@ main {
     padding-right: 15px;
     margin: 0 auto;
 }
+@media screen and (max-width: 600px) {
+    .admin-common-content { 
+        padding: 0;
+    }
+ }
 
 .admin-common-header{
     margin-top: 50px;
@@ -148,8 +153,9 @@ button.admin-common-popup-button:hover{
 table.admin-common-table {
     min-width: 1000px;
     border-collapse: collapse;
-    text-align: left;
+    text-align:left;
     border: 1px solid #ccc;
+    
     
 }
 table.admin-common-table thead {

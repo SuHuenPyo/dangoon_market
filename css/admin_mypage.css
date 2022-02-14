@@ -16,6 +16,7 @@
     border-radius: 50%;
     background-color: gray;
     margin : 0 auto;
+    position: relative;
     
 }
 .admin-mypage-profile-name{
@@ -28,4 +29,31 @@
     width: 80%;
     height: 60px;
     
+}
+.inner {
+    background-color: rgb(248, 82, 82);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+  
+.inner:hover {
+    background-color: #d8d8d8;
+}
+.inputfile {
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+}
+.fa-camera{
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+    margin-left: 0.7rem;
+    color: black;
 }
