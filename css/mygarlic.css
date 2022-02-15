@@ -5,6 +5,7 @@
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    position: relative;
 }
 .mygarlic-profile > .mygarlic-img {
     display: block;
@@ -30,17 +31,14 @@
 
 .mygarlic-inner {
     background-color: #f99d1b;
-    margin-top: 30px;
-    margin-left: -30px;
-    width: 2.5rem;
-    height: 2.5rem;
+    position:absolute;
+    top: 55px;
+    left: 64px;
+    width: 2.2rem;
+    height: 2.2rem;
+    line-height:2.1rem;
+    text-align: center;
     border-radius: 100%;
-    bottom: 0;
-    right: 0;
-}
-
-.mygarlic-inner:hover {
-    background-color: #d8d8d8;
 }
 
 .mygarlic-inputfile {
@@ -53,10 +51,8 @@
 }
 
 .fa-camera{
-    font-size: 1.25rem;
-    margin-top: 0.5rem;
-    margin-left: 0.7rem;
-    color: black;
+    font-size: 1.05rem;
+    color: white;
 }
 
 /* 프로필 보기 */
