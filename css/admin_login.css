@@ -21,29 +21,23 @@
     border: none;
     outline-style: solid;
     outline-width: 1px;
+    padding-left : 10px;
     outline-color: gray;
 
 }
-#admin-login-btn-submit{
-    width:100%;
-    background-color:dodgerblue;
-    color: white;
-    margin-top: 20px;
-    border:0;
-    outline:0;
-}
-.admin-login-register{
-    height: auto;
+.admin-login-btn-submit{
     width: 100%;
-
-    color: gray;
-    padding-top: 50px;
+    height: 40px;
+    margin: 20px auto;
+    display:block;
+    border-radius: 12px;
+    background-color:rgb(74, 165, 255) ;
+    color: white;
+    border:none;
+    font-size: 20px;
     text-align: center;
-
-    font-size: 7px;
-    
-    
 }
+
 .admin-login-register h2 a:link{
     color: gray;
     
