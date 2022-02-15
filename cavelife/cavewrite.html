@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>동굴생활글쓰기</title>
-    <link rel="stylesheet" href="../css/cavewrite.css">
-    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/cavewrite.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
+    <title>판매글 등록하기</title>
 </head>
+
 <body>
-    <header>
-        <div href="#" class="fas fa-bars head-icon"></div>
-        <h1 class="head-logo">동굴생활 글쓰기</h1>
-        <button id="product-cavewrite-btn" type="button" class="product-cavewrite"">완료</button>
-    </header>
-        <div id="cavewrite-main">
-            <div class="cavewrite-content">
-                <textarea placeholder="근처의 이웃에게 질문하거나 이야기를 해보세요."></textarea>
+    <div data-header="../inc/html/header.html"></div>
+
+    <main id="post-cavewrite-page">
+        <h2 class="pg-title">동굴생활 글쓰기</h2>
+        <form id="cavewrite-post" action="post" enctype="multipart/form-data">
+            <input type="text" id="ps-title" class="cavewrite-common" placeholder="제목을 입력해주세요">
+
+            <!-- 이미지 업로드시, div#sale-upload-btn 앞에 썸네일 이미지 등록 -->
+            <div class="cavewrite-img-upload">
+                <!-- 예시 이미지 썸네일이미지 들어올 자리 사이즈 75px-->
+                <img src="https://via.placeholder.com/75" alt="">
+                <div id="cavewrite-upload-btn">
+                    <label for="cavewrite-img" class="fas fa-plus"></label>
+                    <input type="file" id="cavewrite-img">
+                </div>
             </div>
-            <div class="cavewrite-imgfile">
-                <label class="input-file-button" for="input-file"><i class="far fa-images"></i></label>
-                <input type="file" id="input-file" /> 
-                <!-- <label for="product-img" class="far fa-images"></label> -->
-                <!-- <input type="file" id="input-file"/> -->
-            </div>
 
+            <textarea name="cavewrite-info" id="cavewrite-textarea" cols="30" rows="10"></textarea>
 
-
-
-        </div>
-    </div>
+            <button id="cavewrite-post-btn" type="button" class="cavewrite-common">글쓰기 완료</button>
+        </form>
+    </main>
 
     <div class="cavewrite-notice">
-        <h2>정상적으로 저장되었습니다</h2>
+        <h2>정상적으로 등록이 완료되었습니다</h2>
         <button class='cavewrite-comfirm' type="button">확인</button>
     </div>
 
+    <!-- test javascript -->
     <script>
-        const btn = document.querySelector('#product-cavewrite-btn');
+        const btn = document.querySelector('#cavewrite-post-btn');
         const notice = document.querySelector('.cavewrite-notice');
         const noticeBtn = document.querySelector('.cavewrite-comfirm');
 
@@ -55,7 +59,7 @@
             })
         })
     </script>
-
-    
+        <script src='../Inc/js/inculde.js'></script>
 </body>
+
 </html>
