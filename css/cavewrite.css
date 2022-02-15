@@ -13,25 +13,17 @@ header button {
 
 /* 동굴생활글쓰기 content */
 .cavewrite-content textarea {
-    width: 340px;
+    width: 100%;
     height: 550px;
-    margin-left: 10px;
+    margin-left: 3%;
 }
 
 /* 동굴생활글쓰기 imgfile */
 .cavewrite-imgfile {
-    background-color: #f99d1b;
+    background-color: #ffa425;
     height: 25px;
+    margin: 0 3%;
     background-image: ur;
-}
-.cavewrite-imgfile button {
-    margin-left: 10px;
-    background-color: #f99d1b;
-    border: none;
-}
-.cavewrite-imgfile button img {
-    width: 20px;
-    
 }
 
 .cavewrite-notice {
@@ -62,4 +54,17 @@ header button {
     height: 40px;
     border: 0;
     border-radius: 20px;
+
+}
+.input-file-button{
+    margin-left : 3%;
+    cursor: pointer;
+}
+
+fa-images{
+    font-size: 16px;
+}
+
+#input-file{
+    display:none;
 }
