@@ -58,7 +58,7 @@
 
         /* 좋아요, 답변하기 */
         .cavecomment-button>.fas.fa-thumbs-up.good-btn {
-            color: 	blue;
+            color: 	#ff9500;
         }
 
         .good-btn {

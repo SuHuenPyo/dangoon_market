@@ -8,6 +8,8 @@
     <title>단군마켓 공지사항</title>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/notice.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/pagination.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
@@ -32,11 +34,7 @@
 </head>
 
 <body>
-    <header>
-        <div href="#" class="fas fa-bars head-icon"></div>
-        <h1 class="head-logo"><img src="../img/logo.png" alt="단군마켓로고"></h1>
-        <div href="#" class="fas fa-user head-icon"></div>
-    </header>
+    <div data-header="../inc/html/header.html"></div>
     <div id="notice">
         <h3>공지사항</h3>
         <ul id="notice-list">
@@ -95,14 +93,18 @@
         </ul>
     </div>
 
-    <div class="notice-button">
-        <button>&lt;</button>
-        <input type="radio" name="button" value="button" checked>
-        <input type="radio" name="button" value="button">
-        <input type="radio" name="button" value="button">
-        <input type="radio" name="button" value="button">  
-        <button>&gt;</button>
+    <!-- pagination elements -->
+    <div class="pagination_section">
+        <a href="#">&lt;</a>
+        <a href="#" title="Algorithm" class="active">1</a>
+        <a href="#" title="DataStructure">2</a>
+        <a href="#" title="Languages">3</a>
+        <a href="#" title="Interview" >4</a>
+        <a href="#" title="practice">5</a>
+        <a href="#">&gt;</a>
     </div>
+
+    <script src='../Inc/js/inculde.js'></script>
 </body>
 
 </html>

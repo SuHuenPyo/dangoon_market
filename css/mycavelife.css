@@ -38,7 +38,6 @@ main#sales-list-page::-webkit-scrollbar {
 /* 내 게시글 리스트 */
 .mycavelife-list {
     margin-top: 10px;
-    display: none;
 }
 .mycavelife-item {
     border-bottom: 1px solid #e3dcd9;
@@ -77,5 +76,5 @@ main#sales-list-page::-webkit-scrollbar {
 
 /* 맨 밑에 버튼 */
 .notice-button {
-    margin: 20px 110px;
+    margin: 20px 125px;
 }

@@ -1,0 +1,32 @@
+ /* pagination position styling */
+ .pagination_section {
+    position: absolute;
+    top: 600px;
+}
+ 
+/* pagination styling */
+.pagination_section a {
+    color: black;
+    padding: 0 18px;
+    text-decoration: none;
+}
+ 
+/* pagination hover effect on non-active */
+.pagination_section a:hover:not(.active) {
+    background-color: #031F3B;
+    color: white;
+}
+ 
+/* pagination hover effect on active*/
+a:nth-child(2) {
+    background-color: #f99d1b;
+    color: white;
+}
+      
+a:nth-child(1) {
+    font-weight: bold;
+}
+      
+a:nth-child(7) {
+    font-weight: bold;
+}

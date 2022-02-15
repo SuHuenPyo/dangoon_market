@@ -18,12 +18,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="fas fa-bars head-icon"></div>
-        <h1 class="head-title">
-            판매내역
-        </h1>
-    </header>
+    <div data-header="../inc/html/header_no_logo.html" data-title='판매내역'></div>
     <main id="sales-list-page">
         <ul class='sales-list'>
             <li class="sales-item">
@@ -70,6 +65,7 @@
         <button class='complete-comfirm' type="button">확인</button>
     </div>
 
+    <script src='../Inc/js/inculde.js'></script>
     <script>
         // 거래수락
         const sales_status = document.querySelectorAll('.sales-status');
@@ -120,8 +116,9 @@
             noticeBtns.addEventListener('click', (e) => {
                 notices.style.height = '0px';
                 notices.style.opacity = 0;
-            })
-        })
+            });
+        });
+       
     </script>
 </body>
 

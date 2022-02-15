@@ -8,19 +8,15 @@
     <link rel="stylesheet" href="../css/header_no_logo.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/mycavelife.css">
+    <link rel="stylesheet" href="../css/pagination.css">
     <!-- font-awesome -->
     <link rel="stylesheet" href="../font-awesome/css/all.min.css">
     <script href="../font-awesome/js/all.min.js"></script>
 </head>
 <body>
-    <header>
-        <div class="fas fa-bars head-icon"></div>
-        <h1 class="head-title">
-            나의 동굴생활
-        </h1>
-    </header>
+    <div data-header="../inc/html/header_no_logo.html" data-title='나의 동굴생활'></div>
     <main id="sales-list-page">
-        <div class="mycavelife-status accepted">내 게시글</div>
+        <div class="mycavelife-status ">내 게시글</div>
         <div class="complete-status accepted">내 댓글</div>
         <div class="mycavelife-contact">
             <ul class="mycavelife-list">
@@ -100,28 +96,18 @@
         </div>
     </main>
 
-        <div class="notice-button">
-            <button>&lt;</button>
-            <input type="radio" name="button" value="button" checked>
-            <input type="radio" name="button" value="button">
-            <input type="radio" name="button" value="button">
-            <input type="radio" name="button" value="button">  
-            <button>&gt;</button>
-        </div>
+        <!-- pagination elements -->
+    <div class="pagination_section">
+        <a href="#">&lt;</a>
+        <a href="#" title="Algorithm" class="active">1</a>
+        <a href="#" title="DataStructure">2</a>
+        <a href="#" title="Languages">3</a>
+        <a href="#" title="Interview" >4</a>
+        <a href="#" title="practice">5</a>
+        <a href="#">&gt;</a>
+    </div>
 
-        <script>
-            // 내 게시글
-            const sales_status = document.querySelectorAll('.mycavelife-status');
+    <script src='../Inc/js/inculde.js'></script>
     
-            sales_status.forEach((v, i) => {
-                if (v.classList.contains('accepted')) {
-                    const sales_contact = v.parentElement.querySelector('.mycavelife-contact');
-                    v.addEventListener('click', e => {
-                        sales_contact.classList.toggle('show');
-                    });
-                }
-            });
-    
-        </script>
 </body>
 </html>

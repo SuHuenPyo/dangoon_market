@@ -33,7 +33,7 @@
     border-radius: 10px;
 }
 
-.post-notice {
+.profile-notice {
     background-color:rgba(252, 198, 123,0.95);
     width: 360px;
     height: 0px;
@@ -46,7 +46,7 @@
     opacity: 0;
 }
 
-.post-notice > h2 {
+.profile-notice > h2 {
     font-size: 18px;
     font-weight: bold;
     color: white;
@@ -54,7 +54,7 @@
     margin: 60px 0 0 0;
 }
 
-.post-notice > button {
+.profile-notice > button {
     background-color: #f99d1b;
     color: white;
     width: 260px;

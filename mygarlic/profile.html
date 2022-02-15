@@ -12,11 +12,7 @@
     <script href="../font-awesome/js/all.min.js" ></script>
 </head>
 <body>
-    <header>
-        <div class="fas fa-bars head-icon"></div>
-        <h1 class="head-logo"><img src="../img/logo.png" alt="단군마켓로고"></h1>
-        <div class="fas fa-user head-icon"></div>
-    </header>
+    <div data-header="../inc/html/header.html"></div>
     <div class="profile-image"></div>
     <div class="profile-list">
         <h3 class="profile-title">
@@ -47,18 +43,19 @@
         <span class="profile-error"></span>
     </div>
     <div class="profile-save">
-        <button id="product-post-btn" type="button" class="product-common">저장하기</button>
+        <button id="product-profile-btn" type="button" class="product-common">저장하기</button>
     </div>
     
-    <div class="post-notice">
-        <h2>정상적으로 저장되었습니다</h2>
-        <button class='notice-comfirm' type="button">확인</button>
+    <div class="profile-notice">
+        <h2>정상적으로 저장 되었습니다</h2>
+        <button class='profile-comfirm' type="button">확인</button>
     </div>
 
+    <script src='../Inc/js/inculde.js'></script>
     <script>
-        const btn = document.querySelector('#product-post-btn');
-        const notice = document.querySelector('.post-notice');
-        const noticeBtn = document.querySelector('.notice-comfirm');
+        const btn = document.querySelector('#product-profile-btn');
+        const notice = document.querySelector('.profile-notice');
+        const noticeBtn = document.querySelector('.profile-comfirm');
 
         btn.addEventListener('click', e => {
             notice.style.height = '360px';
