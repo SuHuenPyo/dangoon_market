@@ -2,10 +2,15 @@
 #login-content{
     width: 360px;
     height: 640px;
-   
+   margin-top: 30px;
     padding-left: 15px;
     padding-right: 15px;
 }
+
+input {
+    text-indent: 10px;
+}
+
 #login-content > #login-main > .login-anounce{
     width: 100%;
     height: 40px;
@@ -38,9 +43,8 @@
     outline-style: solid;
     outline-width: 1px;
     outline-color: gray;
-    
-    
 }
+
 #login-content > #login-main > #login-form-area > #login-form > #login-btn-submit{
     width:100%;
     background-color: orange;
