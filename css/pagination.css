@@ -7,7 +7,7 @@
 /* pagination styling */
 .pagination_section a {
     color: black;
-    padding: 0 18px;
+    padding: 0 11px;
     text-decoration: none;
 }
  
@@ -18,7 +18,7 @@
 }
  
 /* pagination hover effect on active*/
-a:nth-child(2) {
+a:nth-child(3) {
     background-color: #f99d1b;
     color: white;
 }
@@ -27,6 +27,6 @@ a:nth-child(1) {
     font-weight: bold;
 }
       
-a:nth-child(7) {
+a:nth-child(9) {
     font-weight: bold;
 }

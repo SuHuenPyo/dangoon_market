@@ -17,22 +17,24 @@ main#sales-list-page::-webkit-scrollbar {
 
 .mycavelife-status {
     border: 1px solid white;
-    width: 170px;
+    width: 50%;
     height: 30px;
-    float: left;
     text-align: center;
+    float: left;
     padding-top: 10px;
 }
 
 .complete-status {
     border: 1px solid white;
+    width: auto;
     height: 30px;
     text-align: center;
     padding-top: 10px;
 }
 
 .accepted {
-    background-color: rgba(252, 198, 123, 0.95);
+    background-color: #ffa425;
+    color: white;
 }
 
 /* 내 게시글 리스트 */
@@ -48,10 +50,13 @@ main#sales-list-page::-webkit-scrollbar {
     float: left;
 }
 
+.mycavelife-img img {
+    border-radius: 20px;
+}
+
 .mycavelife-cont {
     padding-top: 5px;
-    padding-left: 100px;
-    line-height: 25px;
+    padding-left: 115px;
 }
 
 .mycavelife-title {
@@ -59,12 +64,12 @@ main#sales-list-page::-webkit-scrollbar {
 }
 
 .mycavelife-info {
-    font-size: 14px;
+    font-size: 12px;
     color: #e3dcd9;
 }
 
 .mycavelife-content {
-    font-size: 14px;
+    font-size: 12px;
     color: #e3dcd9;
     line-height: 17px;
 }
