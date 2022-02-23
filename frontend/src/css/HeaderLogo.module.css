@@ -1,0 +1,52 @@
+
+/* header */
+.header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* header user,hambuger icon  */
+
+.headIcon {
+    display: block;
+    flex-basis: 80px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    color: #7a4f2a;
+}
+
+
+/* 단군마켓 로고 */
+.headLogo {
+    flex-basis: 250px;
+    width: 220px;
+    height: 60px;
+    display: block;
+}
+
+.headLogo > h1 {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.headLogo img {
+    width: 180px;
+}
+
+.userIcon {
+    width: 30px;
+    height: 30px;
+}
+
+
+.menuIcon {
+    width: 30px;
+    height: 30px;
+}
+
