@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
     
     //Web Server Port 
-    SERVER_PORT : 3000,
+    SERVER_PORT : 28019,
 
     //public dir 
     PUBLIC_PATH: path.join(__dirname, "../public"),
