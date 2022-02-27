@@ -1,5 +1,9 @@
+//API 명세처리 
+const {swaggerUi, specs} = require('./swagger');
+
+
 //helper
-const config = require("./helper/_config");
+const config = require("./config/_config");
 
 //Router
 const ROUTER_HOME               = require('./router/home');
@@ -26,7 +30,9 @@ const static = require("serve-static"); //특정 폴더의 파일을 URL로 노�
 const favicon = require("serve-favicon");
 const logger = require('morgan'); // 로거 
 
-
+//swagger path 등록 
+// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, {explorer: true}));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
 
 //app.use -> 미들웨어 장착 
 /**
