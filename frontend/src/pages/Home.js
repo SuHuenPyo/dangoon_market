@@ -7,7 +7,7 @@ import SaleListItem from '../components/SaleListItem';
 const Main = styled.main`
   width: calc{100% - 50px}
   min-height: 375px;
-  padding: 5px 25px;
+  padding: 5px 20px;
 `
 const List = styled.ul`
     width: 100%;
@@ -20,7 +20,6 @@ const Home = () => {
         <HeaderLogo/>
         <Main>
             <List>
-                <SaleListItem/>
                 <SaleListItem/>
                 <SaleListItem/>
                 <SaleListItem/>
