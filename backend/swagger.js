@@ -4,9 +4,9 @@ const swaggereJsdoc = require('swagger-jsdoc');
 const options = {
      swaggerDefinition: { 
          info: { 
-            title: 'Test API',
-            version: '1.0.0',
-            description: 'Test API with express',
+            title: 'Dangoon Market API',
+            version: '1.0.1',
+            description: 'API For DG-Market',
         },
         host: 'localhost:3300',
         basePath: '/'

@@ -48,9 +48,21 @@ app.use(favicon(config.FAVICON_PATH));//favicon
 
 app.use(logger('dev'))
 
-//Router
-app.use('/home', ROUTER_HOME);
 
+//Router
+app.use('/', ROUTER_HOME);
+app.use('/home', ROUTER_HOME);
+app.use('/category',ROUTER_CATEGORY);
+app.use('/mygarlic',ROUTER_MYGARLIC);
+app.use('/registerforsale',ROUTER_REGISTER_FOR_SALE);
+app.use('/notice',ROUTER_NOTICE);
+app.use('/cavelife',ROUTER_CAVE_LIFE);
+app.use('/login',ROUTER_LOGIN);
+app.use('/signup',ROUTER_SIGN_UP);
+app.use('/salehistory',ROUTER_SALE_HISTORY);
+app.use('/purchaseditem',ROUTER_PURCHASED_ITEM);
+app.use('/watchlist',ROUTER_WATCH_LIST);
+app.use('/productdetails',ROUTER_PRODUCT_DETAILS);
 
 //에러처리 
 app.use((err, req, res, next)=>{

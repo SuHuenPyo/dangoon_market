@@ -7,7 +7,7 @@ router.use((req,res,next)=>{
 });
 /**
  * @swagger
- * /posts:
+ * /home:
  *   get:
  *     description: 게시글 조회
  *     tags: [Post]
