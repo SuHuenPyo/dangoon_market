@@ -20,12 +20,12 @@ const Poster = styled(Link)`
   margin: 0 0 3px 0;
   div {
     flex-basis: 60px;
-    height: 45px;
-    line-height: 45px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     img {
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       border-radius: 30px;
     }
   }
@@ -42,7 +42,7 @@ const Content = styled(Link)`
   padding: 0 5px;
 
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 2.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,13 +68,14 @@ const ContentImg = styled.div`
     max-height:80px;
     padding: 5px 5px 10px 5px;
     display: flex;
-    justify-content:space-between;
+    justify-content:flex-start;
     align-items: center;
     border-bottom: 1px solid #eee;
 
     img {
         width: 80px;
         height: 80px;
+        margin: 0 7px 0 0;
     }
 `;
 const BtnLine = styled.div`
@@ -91,6 +92,7 @@ const BtnLine = styled.div`
         background-color:transparent;
         position:relative;
         text-align:left;
+        color: #333;
 
         svg{
             font-size: 17px;
@@ -105,8 +107,8 @@ const BtnLine = styled.div`
         }
     }
 
-    button:first-child{
-        color:${(props)=>props.like}
+     & button:first-child{
+        color:${(props)=>props.like};
     }
 `;
 
@@ -122,7 +124,7 @@ const CavePostVeiw = () => {
     const [click, setClick] = React.useState(false);
   return (
     <PostVeiw>
-      <Poster to="/home">
+      <Poster to="/profile">
         <div>
           <img src="http://placekitten.com/45/45" alt="" />
         </div>
@@ -136,9 +138,12 @@ const CavePostVeiw = () => {
         </div>
       </Content>
       <ContentImg>
+        <img src="http://placekitten.com/g/45/45" alt="" />
+        <img src="http://placekitten.com/g/45/45" alt="" />
+        <img src="http://placekitten.com/g/45/45" alt="" />
       </ContentImg>
-      <BtnLine like={click ? '#f99d1b' : 'inherit'}>
-        <button onClick={(e)=>{setClick(true)}}>
+      <BtnLine className='likeBtn' like={click ? '#f99d1b' : 'inherit'}>
+        <button onClick={(e)=>{ click ? setClick(false) :setClick(true)}}>
          { click ? <AiFillLike/> : <AiOutlineLike />  }  <span>좋아요</span>
         </button>
         <button>

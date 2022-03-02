@@ -1,9 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 
 import HeaderTitle from "../components/HeaderTitle";
 import CavePostVeiw from "../components/CavePostVeiw";
-
 
 const CaveLife = () => {
   return (

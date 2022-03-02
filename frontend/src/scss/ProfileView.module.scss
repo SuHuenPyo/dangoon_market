@@ -1,0 +1,112 @@
+$view-width: 80%;
+$view-height: 40%;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+$mobile-breakpoint: 335px;
+$tablet-breakpoint: 508px;
+
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(221, 221, 221, 0.2);
+  @include flex-center();
+
+  .view {
+    width: $view-width;
+    min-height: $view-height;
+    height: auto;
+    padding: 10px;
+    background-color: #fefefe;
+    border-radius: 16px;
+    flex-flow: column nowrap;
+    @include flex-center();
+    justify-content: flex-start;
+    position: relative;
+    text-align: center;
+
+    .image {
+      position: absolute;
+      top: -($view-height/2.4);
+      border-radius: 55px;
+      overflow: hidden;
+      width: 100px;
+      height: 100px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    h3,
+    p {
+      @include ellipsis;
+    }
+
+    .name {
+      width: 80%;
+      flex-basis: 35px;
+      font-size: 1.25rem;
+      line-height: 2.3rem;
+      margin: 52px 0 0 0;
+      font-weight: normal;
+    }
+
+    .desc {
+      width: 80%;
+      flex-basis: 30px;
+      font-size: 0.9rem;
+      line-height: 1.5rem;
+      margin: 0 0 10px 0;
+      color: #b2b2b2;
+      font-weight: lighter;
+    }
+
+    .totalCnt {
+      flex-basis: auto;
+      width: 80%;
+      height: auto;
+      min-height: 150px;
+      display: flex;
+
+      .counter {
+        flex-basis: 50%;
+        flex-flow: column nowrap;
+        @include flex-center();
+
+        .icons {
+          flex-basis: 23px;
+          font-size: 1.2rem;
+          font-weight: lighter;
+          margin: 5px 0;
+        }
+
+        .cntTitl {
+          flex-basis: 23px;
+          font-size: 1rem;
+          font-weight: lighter;
+          margin: 0 0 5px 0;
+        }
+        $round-size: 70px;
+        .cnt {
+          width: $round-size;
+          height: $round-size;
+          line-height: $round-size;
+          background-color: rgba(252, 198, 123, 0.6);
+          border-radius: 50%;
+          color: #444;
+        }
+      }
+    }
+  }
+}

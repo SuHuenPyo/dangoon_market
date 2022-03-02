@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import NewProduct from './pages/NewProduct'
 import ResponsiveView from './components/ResponsiveVeiw';
 import CaveLife from './pages/CaveLife';
+import ProfileView from './components/ProfileView';
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/categori" element="" />
         <Route path="/cavelife" element={<CaveLife/>} />
         <Route path="/mygralic" element="" />
+        <Route path="/profile" element={<ProfileView/>} />
         <Route path="/" element=""/>
       </Routes>
     </ResponsiveView>

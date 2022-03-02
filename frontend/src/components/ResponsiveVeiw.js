@@ -1,8 +1,8 @@
-import '../scss/ResponsiveVeiw.scss'
+import style from '../scss/ResponsiveVeiw.module.scss'
 
 const ResponsiveView = ({children}) => {
     return (
-        <div className='view'>
+        <div className={style.view}>
            {children}
         </div>
     )
