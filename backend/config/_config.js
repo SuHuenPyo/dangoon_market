@@ -28,14 +28,18 @@ module.exports = {
         dir: path.join(__dirname, "../_files/thumb")
     },
 
-    //DB Config
-    DATABASE_CONFIG : {
-        host: '127.0.0.1',
-        port: 3306,
-        user: 'root',
-        password: '1234',
-        database: 'dangoon',
+    database_config : {
+        host: '127.0.0.1', //mysql 서버 주소(다른 PC인 경우 IP주소)
+        port: 3306 ,//MySQL 설치시 기본값 3306
+        user: 'root', //접근 권한 아이디(root=관리자)
+        password: '1234', //설치시 입력한 비밀번호
+        database: 'dangoon', //사용할 데이터베이스 이름
     },
+
+    mailer_config:{
+        user: 'dg.market.whitebear@gmail.com',
+        password: 'dangoon#@pa1'
+    }
 
 
 

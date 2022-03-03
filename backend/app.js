@@ -18,6 +18,7 @@ const ROUTER_SALE_HISTORY       = require('./router/salehistory');
 const ROUTER_PURCHASED_ITEM     = require('./router/purchaseditem');
 const ROUTER_WATCH_LIST         = require('./router/watchlist');
 const ROUTER_PRODUCT_DETAILS    = require('./router/productdetails');
+const ROUTER_MAIL               = require('./router/mail');
 
 
 const url = require("url");
@@ -29,6 +30,21 @@ const app = require('express')();
 const static = require("serve-static"); //특정 폴더의 파일을 URL로 노출
 const favicon = require("serve-favicon");
 const logger = require('morgan'); // 로거 
+const bodyParser = require("body-parser");
+const cors = require('cors');
+
+
+/**
+ * POST 파라미터 수신모듈 설정
+ * 추가 모듈들 중 UserAgent를 제외하고 가장 먼저 설정되어야함
+ * body-parser를 이용해 application/x-www-form-urlencoded 파싱
+ * extended: true --> 계속 사용 
+ * extended: false --> 한번 사용 
+ * */ 
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
+app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
+
 
 //swagger path 등록 
 // app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, {explorer: true}));
@@ -50,19 +66,18 @@ app.use(logger('dev'))
 
 
 //Router
-app.use('/', ROUTER_HOME);
-app.use('/home', ROUTER_HOME);
-app.use('/category',ROUTER_CATEGORY);
-app.use('/mygarlic',ROUTER_MYGARLIC);
-app.use('/registerforsale',ROUTER_REGISTER_FOR_SALE);
-app.use('/notice',ROUTER_NOTICE);
-app.use('/cavelife',ROUTER_CAVE_LIFE);
-app.use('/login',ROUTER_LOGIN);
-app.use('/signup',ROUTER_SIGN_UP);
-app.use('/salehistory',ROUTER_SALE_HISTORY);
-app.use('/purchaseditem',ROUTER_PURCHASED_ITEM);
-app.use('/watchlist',ROUTER_WATCH_LIST);
-app.use('/productdetails',ROUTER_PRODUCT_DETAILS);
+app.use(ROUTER_HOME(app));
+app.use(ROUTER_CATEGORY(app));
+app.use(ROUTER_REGISTER_FOR_SALE(app));
+app.use(ROUTER_NOTICE(app));
+app.use(ROUTER_CAVE_LIFE(app));
+app.use(ROUTER_LOGIN(app));
+app.use(ROUTER_SIGN_UP(app));
+app.use(ROUTER_SALE_HISTORY(app));
+app.use(ROUTER_PURCHASED_ITEM(app));
+app.use(ROUTER_WATCH_LIST(app));
+app.use(ROUTER_PRODUCT_DETAILS(app));
+app.use(ROUTER_MAIL(app));
 
 //에러처리 
 app.use((err, req, res, next)=>{
