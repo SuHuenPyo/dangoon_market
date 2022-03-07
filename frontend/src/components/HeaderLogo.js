@@ -10,11 +10,11 @@ import Logo from "../img/logo-color.png";
 const HeaderLogo = () => {
   const menu = React.useRef();
 
- const [menuLeft, setMenuLeft] = React.useState("-100%");
+const [menuLeft, setMenuLeft] = React.useState("-100%");
 
- const isMenuLeft = React.useCallback(()=>{
+const isMenuLeft = React.useCallback(()=>{
       return setMenuLeft(menuLeft === '-100%' ? '0px' : '-100%');
- },[menuLeft]);
+},[menuLeft]);
 
   return (
     <>
