@@ -20,7 +20,7 @@ const StyledNotice = styled.div`
   transition: all 0.4s ease-in-out;
 
    & h2 {
-    font-size: 1.2rem;
+    font-size:  ${props=>props.show ? '1.2rem' : 0};;
     font-weight: bold;
     color: white;
     line-height: 50px;
@@ -57,4 +57,4 @@ const Notice = (props) => {
   );
 };
 
-export default React.memo(Notice);
+export default Notice;
