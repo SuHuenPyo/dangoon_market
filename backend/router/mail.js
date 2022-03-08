@@ -27,7 +27,7 @@ module.exports = (app) => {
      * /mail:
      *   post:
      *     description: 인증용 메일 발송
-     *     tags: [Post]
+     *     tags: [Post (Not Work)]
      *     produces:
      *     - "application/json"
      *     parameters:
