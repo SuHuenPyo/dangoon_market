@@ -36,3 +36,24 @@ insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY
 insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다12', '싸게 팝니다.', 'ETC');
 insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다13', '싸게 팝니다.', 'ETC');
 
+insert into dangoon.admin(A_USER_ID, A_NAME, A_PW) VALUES('admin-shun', 'shun', '1234');
+insert into dangoon.admin(A_USER_ID, A_NAME, A_PW) VALUES('admin-ej', 'ej', '1234');
+insert into dangoon.admin(A_USER_ID, A_NAME, A_PW) VALUES('admin-dong', 'dong', '1234');
+
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('1','admin-shun', 'shun', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('1','admin-shun', 'shun', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('2','admin-ej', 'ej', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('2','admin-ej', 'ej', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('2','admin-ej', 'ej', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('2','admin-ej', 'ej', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('2','admin-ej', 'ej', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+insert into dangoon.announcement(A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_HITS) VALUES('3','admin-dong', 'dong', '사기위험 공지안내', 100);
+
+
