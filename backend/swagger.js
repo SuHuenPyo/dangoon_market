@@ -4,11 +4,11 @@ const swaggereJsdoc = require('swagger-jsdoc');
 const options = {
      swaggerDefinition: { 
          info: { 
-            title: 'Dangoon Market API',
+            title: 'DG-Market REST API DOCUMENT',
             version: '1.0.1',
-            description: 'API For DG-Market',
+            description: 'REST API DOC For DG-Market',
         },
-        host: 'localhost:3300',
+        host: 'dg-market.iptime.org:28019',
         basePath: '/'
     },
     apis: ['./router/*.js', './swagger/*'] 

@@ -10,7 +10,7 @@ module.exports = (app) => {
      * /salehistory:
      *   get:
      *     description: 게시글 조회
-     *     tags: [Post]
+     *     tags: [Post (Not Work)]
      *     produces:
      *     - "application/json"
      *     parameters:
