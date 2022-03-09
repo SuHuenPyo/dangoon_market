@@ -2,18 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 import HeaderLogo from '../components/HeaderLogo';
-import Cavewrite from "../components/CaveWrite";
+import Salewrite from "../components/SaleWrite";
 
 
-const CaveWrite = () => {
+const SaleWrite = () => {
   return (
     <>
       <HeaderLogo/>
       <main>
-        <Cavewrite />
+        <Salewrite />
       </main>
     </>
   );
 };
 
-export default CaveWrite;
+export default SalewWrite;

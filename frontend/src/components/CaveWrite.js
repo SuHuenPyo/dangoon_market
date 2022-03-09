@@ -1,71 +1,28 @@
 import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import style from '../css/cavewrite.module.css';
+import { AiOutlinePlusSquare } from "react-icons/ai";
 
-const PostVeiw = styled.div`
-  width: 100%;
-  height: auto;
-  margin: 10px 0;
-  .Announcementtitle {
-    font-size: 1.7rem;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-  }
-`;
-
-const Poster = styled(Link)`
-width: 100%;
-height: 100%;
-display: flex;
-align-items: center;
-font-size: 16px;
-margin: 0 0 3px 0;
-padding-bottom: 10px;
-border-bottom: 1px solid #eee;
-div {
-    display: flex;
-    flex-flow: column;
-    width: 110px;
-    height: 100%;
-    img {
-        width: 95px;
-        height: 95px;
-        margin-top: 10px;
-        border-radius: 10px;
-    }
-}
-.Announcementlist{
-    width: 100%;
-    padding-left: 10px;
-    h2 {
-        font-size: 1.2rem;
-    }
-    p {
-        font-size: 0.8rem;
-        color: #919191;
-    }
-  }
-`;
-
-const Announcement = () => {
+const CaveWrite = () => {
   return (
-    <PostVeiw>
-    <Poster to="/home">
-        <div>
-            <img src="https://via.placeholder.com/95/af713c?text=" alt="" />
-        </div>
-        <div className='Announcementlist'>
-            <h2>공지사항</h2>
-            <p>
-                <span>관리자</span> &middot; <span>2022-01-19</span>
-            </p>
-            <p>
-                안녕하세요. 항상 저희 단군마켓을 이용해주시는 단군님들께 감사드리며 이번 새해를 맞아..
-            </p>
-        </div>
-    </Poster>
-    </PostVeiw>
+    <div className={style.postcavewritepage}>
+        <h2 className={style.pgtitle}>동굴생활 글쓰기</h2>
+        <form className={style.cavewritepost} action="post" enctype="multipart/form-data">
+            <input type="text" id="ps-title" className={style.cavewritecommon} placeholder="제목을 입력해주세요" />
+
+            <div className={style.cavewriteimgupload}>
+                <img src="https://via.placeholder.com/75" alt="" />
+                <div className={style.cavewriteuploadbtn}>
+                    <label for="cavewrite-img"><AiOutlinePlusSquare /></label>
+                    <input type="file" className={style.cavewriteimg} />
+                </div>
+            </div>
+
+            <textarea name={style.cavewriteinfo} className={style.cavewritetextarea} cols="30" rows="10"></textarea>
+
+            <button id="cavewrite-post-btn" type="button" className={style.cavewritecommon}>글쓰기 완료</button>
+        </form>
+    </div>
   );
 };
 
-export default Announcement;
+export default CaveWrite;
