@@ -11,33 +11,27 @@ module.exports = (app) => {
     });
     /**
      * @swagger
-     * /productdetails:
-     *   get:
-     *     description: 게시글 조회
-     *     tags: [Post (Not Work)]
+     * /home:
+     *   productdetails:
+     *     description: 단군마켓 판매글을 조회합니다. 
+     *     tags: [Get (Working)]
      *     produces:
      *     - "application/json"
      *     parameters:
-     *     - name: "category"
+     *     - name: "board_id"
      *       in: "query"
-     *       description: "조회할 카테고리 id, 중첩 가능. ex) category=1&category=2&category=3"
-     *       type: "string"
-     *     - name: "query"
-     *       in: "query"
-     *       description: "검색어"
-     *       type: "string"
+     *       description: "상세보기 할 board_id를 입력합니다."
+     *       type: "number"
      *     responses:
      *       "200":
      *         description: "successful operation"
      *     
     */
-
     router.get('/productdetails', async(req,res, next)=>{
 
         //현재 페이지 번호 받기 (default 1)
-        const boardid = req.query.boardid;
+        const board_id = req.query.board_id;
 
-        if(boardid == null) return next(new Error("올바른 상품을 선택하세요."));
         
         try{
             //DB Connection
@@ -48,7 +42,7 @@ module.exports = (app) => {
             sql = "select M_ID, B_WRITER, B_TITLE, B_CONTENT, B_IMG, B_RDATE, B_HITS from dangoon.board where B_ID = ? LIMIT 0,1";
 
             let args = [];
-            args.push(req.query.boardid);
+            args.push(board_id);
 
             const [result] = await dbcon.query(sql, args);
 
