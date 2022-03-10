@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import HeaderTitle from "../components/HeaderTitle";
 import LikeComment from "../components/LikeComment";
@@ -8,7 +7,7 @@ import LikeComment from "../components/LikeComment";
 const CaveLife = () => {
   return (
     <>
-      <HeaderTitle title="구매내역" />
+      <HeaderTitle title="관심내역" />
       <main>
         <LikeComment />
       </main>
