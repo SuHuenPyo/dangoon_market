@@ -1,0 +1,103 @@
+.postcavewritepage {
+    position: relative;
+}
+.pgtitle {
+    background-color: #af713c;
+    text-align: center;
+    font-size: 17px;
+    color: white;
+    line-height: 40px;
+    width: 330px;
+    margin: 10px auto;
+}
+
+.cavewritepost>.cavewritecommon {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin: 5px auto 10px auto;
+    text-indent: 10px;
+}
+
+.cavewritepost>.pstitle::placeholder {
+    text-indent: 10px;
+}
+
+.cavewritepost>.cavewrite-category {
+    text-indent: 10px;
+    background-color: white;
+    padding: .8em .5em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: .333;
+}
+
+.cavewritepost > .cavewrite-category::-ms-expand {
+    display: none /* 화살표 없애기 for IE10, 11*/
+}
+
+.cavewritepost>.cavewritetextarea {
+    display: block;
+    width: 310px;
+    height: 230px;
+    margin: 5px auto 10px auto;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    resize: none; /* 사용자가 사이즈 변경불가 */
+    padding: 10px;
+}
+
+.cavewritepost> .cavewriteimgupload {
+    width: 100%;
+    height: 75px;
+    margin: 5px auto 10px 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.cavewritepost > .cavewriteimgupload > img{
+    flex-basis: 75px;
+    height: 75px;
+    margin: 0 5px 0 0;
+    display: block;
+}
+
+.cavewritepost > .cavewriteimgupload .cavewrite-upload-btn {
+    position: relative;
+    width: 75px;
+    height: 75px;
+}
+
+.cavewritepost> .cavewriteimgupload  label[for='cavewrite-img'] {
+    display: block;
+    background-color: whitesmoke;
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+
+.cavewritepost> .cavewriteimgupload .cavewriteimg {
+    display: block;
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.cavewritepost > #cavewrite-post-btn {
+     background-color: #f99d1b;
+     color: white;
+     font-weight: 600;
+     border-color: #ff9500;
+     text-indent: 0;
+}

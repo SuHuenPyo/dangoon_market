@@ -11,7 +11,7 @@ module.exports = (app) => {
 
     /**
      * @swagger
-     * /home:
+     * /notice:
      *   get:
      *     description: 단군마켓 공지를 조회합니다.
      *     tags: [Get (Working)]
