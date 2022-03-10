@@ -39,7 +39,7 @@ const PostForm = (props) => {
     const [show, setShow] = React.useState(false);
 
     const onCheck = React.useCallback(()=>{
-        window.location.href = '/home';
+        window.location.href = '/product';
     },[])
 
   return (
@@ -108,7 +108,7 @@ const PostForm = (props) => {
           글쓰기 완료
         </button>
       </form>
-      <Notice show={show} onClick={onCheck}/>
+      <Notice show={show} onClick={onCheck} title='정상적으로 등록이 완료되었습니다.'/>
     </>
   );
 };

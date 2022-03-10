@@ -7,7 +7,6 @@ import Menu from './Menu';
 import styles from '../css/HeaderTitle.module.css';
 
 
-
 const HeaderTitle = (props) => {
   const menu = React.useRef();
 
@@ -19,7 +18,7 @@ const HeaderTitle = (props) => {
 
   return (
     <>
-    <header className={styles.header}>
+    <header show={ menuLeft === '-100%' ? false : true }className={styles.header}>
      <RiMenuLine id="menu-btn" className={styles.headIcon} onClick={isMenuLeft}/>
      <NavLink to='/home' className={styles.link}>
        <h1 className={styles.headTitle}>{props.title}</h1>     

@@ -10,6 +10,7 @@ import ProfileView from './components/ProfileView';
 import Categori from "./pages/Categori";
 import CategoriList from "./pages/CategoriList";
 import ProductDetail from './pages/ProductDetail';
+import SignUp from './pages/Signup';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/mygralic" element="" />
         <Route path="/profile" element={<ProfileView/>} />
         <Route path="/product" element={<ProductDetail/>} />
+        <Route path='/signup' element={<SignUp/>}/>
       </Routes>
     </ResponsiveView>
   );

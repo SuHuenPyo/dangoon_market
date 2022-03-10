@@ -13,7 +13,7 @@
     background-color:#fff;
 }
 
-@media (min-width: 355px) and (max-width:507px){
+@media (min-width: 355px) and (max-width:500px){
     .header{
     width: 100%;
     height: 60px;

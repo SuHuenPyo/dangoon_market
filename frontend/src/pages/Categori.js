@@ -26,6 +26,11 @@ const List = styled.ul`
   margin: 10px auto 0 auto;
 `;
 
+const Form = styled.form`
+  width: 100%;
+  height: auto;
+`;
+
 const Item = styled.li`
   flex-basis: 30.5%;
   height: auto;
@@ -85,9 +90,9 @@ const Categori = () => {
     <>
     <HeaderTitle title='카테고리' />
       <Main>
-        <form action="">
+        <Form>
           <Search type="search" placeholder='검색어를 입력해주세요' />
-        </form>
+        </Form>
         <List>
           <Item>
             <Link to="/categori/gajun">

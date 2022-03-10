@@ -1,0 +1,100 @@
+form {
+  width: 100%;
+  height: auto;
+  position: relative;
+
+  .UploadImg {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 7px auto;
+
+    .uploader {
+      display: block;
+      width: 35px;
+      height: 35px;
+      background-color: #f99d1b;
+      position: absolute;
+      bottom: 0px;
+      right: -10px;
+      z-index: 98;
+      font-size: 20px;
+      text-align: center;
+      line-height: 41px;
+      border-radius: 50%;
+      color: #fff;
+
+      svg {
+        margin: 2px 0 0 1px;
+      }
+    }
+
+    .imgView {
+      width: 100%;
+      height: 100%;
+      background-color: #ddd;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      line-height: 113px;
+      text-align: center;
+      font-size: 45px;
+      color: #aaa;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+
+  .inputArea {
+    width: 84%;
+    height: auto;
+    margin: 10px auto;
+
+    p {
+      font-size: 0.8rem;
+      margin: 6px 0 0 4px;
+    }
+
+    .info {
+      color: #888;
+      font-weight: lighter;
+    }
+  }
+
+  .validation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      flex-basis: 60%;
+      margin: 0;
+    }
+
+    button {
+      flex-basis: 37%;
+      height: 50px;
+      border-radius: 10px;
+    }
+  }
+
+  .signupBtn {
+    width: 100%;
+    height: 60px;
+    margin: 10px auto 0 auto;
+    position:absolute;
+    bottom: -10px;
+    left:0px;
+    right:0px;
+    display: none;
+  }
+}

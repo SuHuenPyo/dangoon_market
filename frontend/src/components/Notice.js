@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledNotice = styled.div`
-  background-color: rgba(252, 198, 123, 0.95);
+  background-color: rgba(252, 198, 123,0.97);
   min-width: 360px;
   width: calc(100%);
   height: ${props=>props.show ? '60%' : 0};
-  display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
@@ -16,6 +15,7 @@ const StyledNotice = styled.div`
   position: absolute;
   bottom: 0px;
   right:0px;
+  display: ${props => props.show ? 'flex' : 'none'};
   opacity: ${props=> props.show ? 1: 0};
   transition: all 0.4s ease-in-out;
 
@@ -45,11 +45,11 @@ const StyledNotice = styled.div`
 `;
 
 const Notice = (props) => {
-
+  // props.title은 제목, props.subTitle은 부제목
   return (
     <StyledNotice show={props.show} >
-      <h2>정상적으로 등록이 완료되었습니다.</h2>
-      <p>{props.children}</p>
+      <h2>{props.title}</h2>
+      <p>{props.subTitle}</p>
       <button type="button" onClick={props.onClick}>
         확인
       </button>
@@ -57,4 +57,9 @@ const Notice = (props) => {
   );
 };
 
-export default Notice;
+Notice.defaultProps = { 
+  title: '요청하신 부분이 정상적으로 처리되었습니다.',
+  subTitle: null
+}
+
+export default React.memo(Notice);
