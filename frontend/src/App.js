@@ -7,8 +7,9 @@ import NewProduct from './pages/NewProduct'
 import ResponsiveView from './components/ResponsiveVeiw';
 import CaveLife from './pages/CaveLife';
 import ProfileView from './components/ProfileView';
-
-
+import Categori from "./pages/Categori";
+import CategoriList from "./pages/CategoriList";
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -17,11 +18,12 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/home" element={<Home/>} />
         <Route path="/newproduct" element={<NewProduct/>}/>
-        <Route path="/categori" element="" />
+        <Route path="/categori" element={<Categori/>} />
+        <Route path="/categori/:categori" element={<CategoriList/>} />
         <Route path="/cavelife" element={<CaveLife/>} />
         <Route path="/mygralic" element="" />
         <Route path="/profile" element={<ProfileView/>} />
-        <Route path="/" element=""/>
+        <Route path="/product" element={<ProductDetail/>} />
       </Routes>
     </ResponsiveView>
   );

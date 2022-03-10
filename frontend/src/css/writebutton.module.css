@@ -1,0 +1,26 @@
+ /* 동굴생활글쓰기 버튼 */
+.writesalebtn {
+    display: block;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+    background-color: #ff9500;
+    border: 1px solid #ff9500;
+    border-radius: 30px;
+    position: fixed;
+    left: 80%;
+    top: 80%;
+    z-index: 1;
+}
+
+.writesalebtn:active {
+    transform: scale(0.7);
+    transition: transform 0.1s ease-in-out;
+}
+
+.writesalebtn>.far {
+    margin: 0 0 0 3px;
+    color: white;
+}

@@ -1,5 +1,5 @@
 $mobile-breakpoint : 335px;
-$tablet-breakpoint: 508px;
+$tablet-breakpoint: 500px;
 
 .view {
     @media (min-width: $mobile-breakpoint) and (max-width:($tablet-breakpoint - 1px)){
@@ -8,7 +8,7 @@ $tablet-breakpoint: 508px;
     }
     
     width: 375px;
-    height: 100%;
+    height: 100vh;
     margin: 0 auto;
     position: relative;
     overflow-x:hidden;
@@ -17,8 +17,8 @@ $tablet-breakpoint: 508px;
     main {
         position:absolute;
         top:60px;
-        width: calc(100% - 50px);
-        height:fit-content;
+        width: calc(100% - 40px);
+        height:auto;
         padding: 5px 20px;
         overflow-y: scroll;
         scrollbar-width: 0px;

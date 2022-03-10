@@ -66,7 +66,7 @@ const SaleCont = styled.div`
 const SaleListItem = () => {
   return (
     <List>
-      <Linked to='' className="post-link">
+      <Linked to='/product/' className="post-link">
         <SaleImg className="sale-img">
           <img src="http://placekitten.com/85/85" alt=""/>
         </SaleImg>

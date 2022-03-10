@@ -6,7 +6,6 @@ const StyledNotice = styled.div`
   min-width: 360px;
   width: calc(100%);
   height: ${props=>props.show ? '60%' : 0};
-  height: 60%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -15,7 +14,7 @@ const StyledNotice = styled.div`
   font-size: 14px;
   text-align: center;
   position: absolute;
-  bottom: 0px;
+  bottom: ${props=>props.show ? 0 : '-100px'};
   right:0px;
   opacity: ${props=> props.show ? 1: 0};
   transition: all 0.4s ease-in-out;

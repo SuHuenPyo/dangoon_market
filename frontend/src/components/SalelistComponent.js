@@ -138,6 +138,7 @@ const SaleButton = styled.div`
     //     font-size: 14px;
     //     display: none;
     // }
+
     .complete-contact> .contact-types {
         display: inline-block;
         width: 280px;
@@ -145,6 +146,7 @@ const SaleButton = styled.div`
         line-height: 40px;
         margin-right: 80px;
     }
+
     .complete-contact> .complete-accept {
         display: inline-block;
         width: 70px;
@@ -154,6 +156,7 @@ const SaleButton = styled.div`
         line-height: 35px;
         background-color: #f99d1b;
     }
+    
     .complete-accept {
         border: 1px solid #d5d5d5;
         border-radius: 10px;
