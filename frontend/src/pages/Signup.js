@@ -106,7 +106,7 @@ const Signup = () => {
         <Notice
           show={validShow}
           title="인증메일 발송이 완료되었습니다."
-          subTitle={`${userEmail.current.value} 의 메일함을 확인해주세요.`}
+          subTitle={`작성하신 이메일의 메일함을 확인해주세요.`}
           onClick={onToggleShow}
         />
     </>

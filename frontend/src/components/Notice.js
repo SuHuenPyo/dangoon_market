@@ -23,7 +23,7 @@ const StyledNotice = styled.div`
     font-size:  ${props=>props.show ? '1.2rem' : 0};;
     font-weight: bold;
     color: white;
-    line-height: 50px;
+    line-height: 40px;
   }
 
   & button {
@@ -39,8 +39,9 @@ const StyledNotice = styled.div`
 
   &  p {
     font-size: 1.1em;
-     line-height: 40px;
+     line-height: 20px;
      color: white;
+     width: 80%;
   }
 `;
 
