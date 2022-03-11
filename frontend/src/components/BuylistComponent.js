@@ -15,7 +15,7 @@ const BuylistComponent = () => {
                         <div className={style.postcont}>
                             <h2 className={style.posttitle}>아이패드</h2>
                             <p className={style.postinfo}>
-                                <span className={style.postloc}>동네이름</span>
+                                <span className={style.postloc}>카테고리</span>
                                 &middot;
                                 <span className={style.posttime}>올린시간</span>
                             </p>
@@ -42,7 +42,7 @@ const BuylistComponent = () => {
                         <div className={style.postcont}>
                             <h2 className={style.posttitle}>아이패드</h2>
                             <p className={style.postinfo}>
-                            <span className={style.postloc}>동네이름</span>
+                            <span className={style.postloc}>카테고리</span>
                                     &middot;
                             <span className={style.posttime}>올린시간</span>
                             </p>

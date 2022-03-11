@@ -1,7 +1,7 @@
  /* pagination position styling */
 .paginationsection {
     position: absolute;
-    top: 600px;
+    top: 520px;
 }
  
 /* pagination styling */
@@ -18,10 +18,6 @@
 }
  
 /* pagination hover effect on active*/
-a:nth-child(3) {
-    background-color: #f99d1b;
-    color: white;
-}
       
 a:nth-child(1) {
     font-weight: bold;

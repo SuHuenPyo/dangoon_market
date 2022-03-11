@@ -2,7 +2,7 @@ import React from "react";
 import style from "../css/pagination.module.css";
 import { Link } from "react-router-dom";
 
-const Announcement = () => {
+const Announcementbutton = () => {
   return (
       <div className={style.paginationsection}>
         <Link to='#' >&lt;&lt;</Link>
@@ -18,4 +18,4 @@ const Announcement = () => {
   );
 };
 
-export default Announcement;
+export default Announcementbutton;

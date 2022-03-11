@@ -19,7 +19,7 @@ const Announcement = () => {
                             아이패드 미니 판매 합니다.
                         </h2>
                         <p className={style.postinfo}>
-                            <span className={style.salearea}>동네이름</span> &middot;
+                            <span className={style.salearea}>카테고리</span> &middot;
                             <span className={style.saletime}>한시간전</span>
                         </p>
                         <p className={style.postprice}>530,000

@@ -5,7 +5,7 @@ import HeaderTitle from "../components/HeaderTitle";
 import BuylistComponent from "../components/BuylistComponent";
 
 
-const CaveLife = () => {
+const Buylist = () => {
   return (
     <>
       <HeaderTitle title="구매내역" />
@@ -16,4 +16,4 @@ const CaveLife = () => {
   );
 };
 
-export default CaveLife;
+export default Buylist;
