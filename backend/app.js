@@ -1,38 +1,43 @@
 //API 명세처리 
-const {swaggerUi, specs} = require('./swagger');
+import {swaggerUi, specs} from "./swagger.js";
 
 
 //helper
-const config = require("./config/_config");
+import _config from "./config/_config.js";
 
 //Router
-const ROUTER_HOME               = require('./router/home');
-const ROUTER_CATEGORY           = require('./router/category');
-const ROUTER_MYGARLIC           = require('./router/mygarlic');
-const ROUTER_REGISTER_FOR_SALE  = require('./router/registerforsale');
-const ROUTER_NOTICE             = require('./router/notice');
-const ROUTER_CAVE_LIFE          = require('./router/cavelife');
-const ROUTER_LOGIN              = require('./router/login');
-const ROUTER_SIGN_UP            = require('./router/signup');
-const ROUTER_SALE_HISTORY       = require('./router/salehistory');
-const ROUTER_PURCHASED_ITEM     = require('./router/purchaseditem');
-const ROUTER_WATCH_LIST         = require('./router/watchlist');
-const ROUTER_PRODUCT_DETAILS    = require('./router/productdetails');
-const ROUTER_MAIL               = require('./router/mail');
+import Home             from "./router/home.js";
+import caveLife         from './router/cavelife.js';
+import Category         from './router/category.js';
+import myGarlic         from './router/mygarlic.js';
+import registerForSale  from './router/registerforsale.js';
+import Notice           from './router/notice.js';
+import Login            from './router/login.js';
+import signUp           from './router/signup.js';
+import saleHistory      from './router/salehistory.js';
+import purchasedItem    from './router/purchaseditem.js';
+import watchList        from './router/watchlist.js';
+import productDetails   from './router/productdetails.js';
+import Mail             from './router/mail.js';
 
 
-const url = require("url");
-const path = require("path");
+import * as url from "url";
+import path from "path";
 
 
 //need to install 
-const app = require('express')();
-const static = require("serve-static"); //특정 폴더의 파일을 URL로 노출
-const favicon = require("serve-favicon");
-const logger = require('morgan'); // 로거 
-const bodyParser = require("body-parser");
-const cors = require('cors');
+import express from 'express';
+const app = express();
+import serveStatic from "serve-static"; //특정 폴더의 파일을 URL로 노출
+import serveFavicon from "serve-favicon";
+import morgan from "morgan"; 
+import * as cors from "cors";
+import bodyParser from "body-parser";
 
+
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * POST 파라미터 수신모듈 설정
@@ -41,10 +46,10 @@ const cors = require('cors');
  * extended: true --> 계속 사용 
  * extended: false --> 한번 사용 
  * */ 
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
 app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
-
 
 //swagger path 등록 
 // app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, {explorer: true}));
@@ -57,27 +62,27 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
  */
 
 //static 모듈 경로셋팅 (보안적이점) https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=pjok1122&logNo=221545195520
-app.use("/", static(config.PUBLIC_PATH));
-app.use("/upload", static(config.UPLOAD_CONFIG.dir)); //upload파일 저장위치
-app.use("/thumb", static(config.THUMBNAIL.dir));      //썸네일 저장위치
-app.use(favicon(config.FAVICON_PATH));//favicon
+app.use("/", serveStatic(_config.PUBLIC_PATH));
+app.use("/upload", serveStatic(_config.UPLOAD_CONFIG.dir)); //upload파일 저장위치
+app.use("/thumb", serveStatic(_config.THUMBNAIL.dir));      //썸네일 저장위치
+app.use(serveFavicon(_config.FAVICON_PATH));//favicon
 
-app.use(logger('dev'))
+app.use(morgan('dev'))
 
 
 //Router
-app.use(ROUTER_HOME(app));
-app.use(ROUTER_CATEGORY(app));
-app.use(ROUTER_REGISTER_FOR_SALE(app));
-app.use(ROUTER_NOTICE(app));
-app.use(ROUTER_CAVE_LIFE(app));
-app.use(ROUTER_LOGIN(app));
-app.use(ROUTER_SIGN_UP(app));
-app.use(ROUTER_SALE_HISTORY(app));
-app.use(ROUTER_PURCHASED_ITEM(app));
-app.use(ROUTER_WATCH_LIST(app));
-app.use(ROUTER_PRODUCT_DETAILS(app));
-app.use(ROUTER_MAIL(app));
+app.use("/home",            Home);
+app.use("/category",        Category);
+app.use("/registerforsale", registerForSale);
+app.use("/notice",          Notice);
+app.use("/cavelife",        caveLife);
+app.use("/login",           Login);
+app.use("/signup",          signUp);
+app.use("/salehistory",     saleHistory);
+app.use("/purchaseditem",   purchasedItem);
+app.use("/watchlist",       watchList);
+app.use("/productdetails",  productDetails);
+app.use("/mail",            Mail);
 
 //에러처리 
 app.use((err, req, res, next)=>{
@@ -87,7 +92,7 @@ app.use((err, req, res, next)=>{
 
 
 
-app.listen(config.SERVER_PORT, ()=>{
+app.listen(_config.SERVER_PORT, ()=>{
     console.log("Start Server");
 });
 

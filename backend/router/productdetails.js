@@ -1,64 +1,86 @@
-const config = require('../config/_config')
-const rand = require('../helper/RandomHelper')
-const pagenationHelper = require('../helper/PagenationHelper');
-const router = require('express').Router();
-const mysql2 = require('mysql2/promise');
+import express from "express";
+import _config from "../config/_config.js";
+import  * as randomHelper from '../helper/RandomHelper.js';
+import { pagenation } from "../helper/PagenationHelper.js";
+import mysql from "mysql2/promise";
 
-module.exports = (app) => {
-    router.use((req,res,next)=>{
-        console.log('Time: ' , Date.now());
-        next();
-    });
-    /**
-     * @swagger
-     * /home:
-     *   productdetails:
-     *     description: 단군마켓 판매글을 조회합니다. 
-     *     tags: [Get (Working)]
-     *     produces:
-     *     - "application/json"
-     *     parameters:
-     *     - name: "board_id"
-     *       in: "query"
-     *       description: "상세보기 할 board_id를 입력합니다."
-     *       type: "number"
-     *     responses:
-     *       "200":
-     *         description: "successful operation"
-     *     
-    */
-    router.get('/productdetails', async(req,res, next)=>{
+const productDetails = express.Router();
 
-        //현재 페이지 번호 받기 (default 1)
-        const board_id = req.query.board_id;
+/**
+ * @swagger
+ * /cavelife:
+ *   get:
+ *     description: 동굴생활 전체 글을 조회합니다.. 
+ *     tags: [Get (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "page"
+ *       in: "query"
+ *       description: "검색 할 페이지 번호를 설정합니다. default = 1"
+ *       type: "number"
+ *     - name: "rows"
+ *       in: "query"
+ *       description: "페이지당 표시 개수를 설정합니다. default = 5"
+ *       type: "number"
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
+productDetails.get('/', async(req, res, next)=>{
+    let dbcon = null;
 
+
+
+    //현재 페이지 번호 받기 (default 1)
+    const page = req.query.page || 1;
+    
+    //페이지당 요청 글 개수 (default 10)
+    const rows = req.query.rows || 5;
+    
+    try{
+        //DB Connection
+        dbcon = await mysql.createConnection(config.database_config);
+        await dbcon.connect();
+
+        //전체 데이터 수 조회
+        let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='C'";
         
-        try{
-            //DB Connection
-            dbcon = await mysql2.createConnection(config.database_config);
-            await dbcon.connect();
+        const [result1] = await dbcon.query(sql);
+        console.log(result1);
 
-            //데이터 조회 
-            sql = "select M_ID, B_WRITER, B_TITLE, B_CONTENT, B_IMG, B_RDATE, B_HITS from dangoon.board where B_ID = ? LIMIT 0,1";
+        const totalCount = result1[0].cnt;
 
-            let args = [];
-            args.push(board_id);
+        pagenation = pagenationHelper.pagenation(totalCount, page, rows);
 
-            const [result] = await dbcon.query(sql, args);
+        console.log(JSON.stringify(pagenation));
 
-            json = result;
+        let args = [];
 
-            console.log(result);
-            
-        }catch(e){
-            return next(e);
-        }finally{
-            //dbEnd 반드시 마지막에 DB 핸들풀고 
-            dbcon.end();
-        }
-        //저장한 값 여기서 전송해주고 
-        res.send({'item': json});
-    });
+        //데이터 조회 
+        sql = "SELECT b_id, m_id , b_writer, b_title, b_content, b_img, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.board WHERE b_type='C' LIMIT ?,?";
 
+        args.push(pagenation.offset);
+        args.push(pagenation.listCount);
+
+        const [result2] = await dbcon.query(sql, args);
+
+        json = result2;
+
+        console.log(result2);
+        
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+    res.send({'item': json});
+
+    
     return router;
-}
+});
+
+export default productDetails;

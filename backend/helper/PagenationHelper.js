@@ -16,7 +16,7 @@
  *                  - nextGroupFirstPage : 다음 그룹의 시작 페이지
  *                  - offset : SQL의 LIMIT 절에서 사용할 데이터 시작 위치
  */
-module.exports.pagenation = (totalCount=0, nowPage=1, listCount=10, groupCount=5) => {
+export const pagenation = (totalCount=0, nowPage=1, listCount=10, groupCount=5) => {
 
     //파라미터 정수 변환
     totalCount = isNaN(totalCount) ? totalCount : parseInt(totalCount);

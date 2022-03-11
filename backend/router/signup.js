@@ -1,10 +1,11 @@
-const router = require('express').Router();
+import express from "express";
+import _config from "../config/_config.js";
+import  * as randomHelper from '../helper/RandomHelper.js';
+import { pagenation } from "../helper/PagenationHelper.js";
+import mysql from "mysql2/promise";
 
-module.exports = (app) => {
-    router.use((req,res,next)=>{
-        console.log('Time: ' , Date.now());
-        next();
-    });
+const signUp = express.Router();
+
     /**
      * @swagger
      * /signup:
@@ -27,17 +28,18 @@ module.exports = (app) => {
      *         description: "successful operation"
      *     
     */
-    router.get('/', (req,res, next)=>{
-        try{
-            //대충 DB 연동하고 결과 저장 
-        }catch(e){
-            return next(err);
-        }finally{
-            //dbEnd 반드시 마지막에 DB 핸들풀고 
-        }
-        //저장한 값 여기서 전송해주고 
-        res.send("signup입니다.");
-    });
-    
+signUp.get('/', (req,res,next)=>{
+
+    try{
+        //대충 DB 연동하고 결과 저장 
+    }catch(e){
+        return next(err);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+    }
+    //저장한 값 여기서 전송해주고 
+    res.send("signup입니다.");
     return router;
-}
+});
+
+export default signUp;
