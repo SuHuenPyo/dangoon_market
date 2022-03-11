@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledNotice = styled.div`
-  background-color: rgba(252, 198, 123, 0.95);
+const StyledReport = styled.div`
+  background-color: rgba(252, 198, 123,0.97);
   min-width: 360px;
   width: calc(100%);
   height: ${props=>props.show ? '60%' : 0};
-  display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
@@ -14,7 +13,8 @@ const StyledNotice = styled.div`
   font-size: 14px;
   text-align: center;
   position: absolute;
-  bottom: ${props=>props.show ? 0 : '-100px'};
+  bottom: 0;
+  display:${props=>props.show ? 'flex' : 'none'};
   right:0px;
   opacity: ${props=> props.show ? 1: 0};
   transition: all 0.4s ease-in-out;
@@ -26,6 +26,15 @@ const StyledNotice = styled.div`
     line-height: 50px;
   }
 
+  form {
+    width: 100%;
+    height: auto;
+  }
+
+  #reportBtn{
+    margin-top:${props => props.ect ? '25px' : '50px'};
+  }
+
   button {
     background-color: #f99d1b;
     font-size: 0.85rem;
@@ -34,7 +43,7 @@ const StyledNotice = styled.div`
     height: 50px;
     border: 0;
     border-radius: 40px;
-    margin: 30px; 0 0 0;
+    margin: 10px 0 0 0;
   }
 
   p {
@@ -59,12 +68,14 @@ const StyledNotice = styled.div`
     border: 1px solid #eee;
     border-radius: 20px;
     margin: 3px auto;
-    display: ${(props)=> props.ect};
+    display: ${(props)=> props.ect ? 'block' : 'none'};
     text-indent: 10px;
+    background-color: #fff;
+    box-shadow:0;
   }
 `;
 
-const Notice = (props) => {
+const Report = (props) => {
 
   const [isEct , setIsEct ] = React.useState(false);
 
@@ -77,7 +88,7 @@ const Notice = (props) => {
   }
 
   return (
-    <StyledNotice show={props.show} ect={isEct ? 'block' : 'none'} >  
+    <StyledReport show={props.show} ect={isEct}>  
         <h2>신고사유를 말씀해주세요.</h2>
         <form action="">
           <select name="report" id="report-type" onChange={onSelectValue}>
@@ -87,10 +98,11 @@ const Notice = (props) => {
               <option value="ect">기타사유</option>
           </select>
            <input type="text"/>
-          <button type="button" onClick={(e)=>{ window.location.href = '/home'}}>확인</button>
+          <button id='reportBtn'type="button" onClick={(e)=>{ window.location.href = '/home'}}>확인</button>
+          <button type="button" onClick={props.onClick}>취소</button>
         </form>
-    </StyledNotice>
+    </StyledReport>
   );
 };
 
-export default React.memo(Notice);
+export default React.memo(Report);

@@ -1,0 +1,88 @@
+/* main - 홈 영역*/
+.cavecomment {
+    position: relative;
+    overflow: auto;
+    scrollbar-width: none;
+    font-size: 14px;
+    /* Firefox */
+}
+
+/* 스크롤바 제거 */
+.cavecomment::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera*/
+}
+
+/* 임시 */
+img {
+    width: 15px;
+}
+
+/* 프로필 부분 */
+.cavecommentpost {
+   width: 100%;
+   min-height: 180px;
+   height: auto;
+   position: relative;
+}
+
+.cavepostprofile {
+  width: 100%;
+  height: 40px;
+  line-height:40px;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+
+.cavepostprofile > img{
+    width: 40px;
+    height:40px;
+    border-radius: 30px;
+}
+.cavepostprofile > p  {
+   margin: 0 0 0 10px;   
+}
+
+/* 내용부분 */
+.cavepostcont { 
+    width: auto;
+    min-height:80px;
+    margin: 10px 0 10px 5px;
+}
+
+/* 신고 부분 */
+.postreport {
+    width: 100%;
+    text-align: left;
+    background-color:#fff;
+    border: 0;
+    color: #ccc;
+    font-size: 12px;
+    position: absolute;
+    bottom: 5px;
+}
+.postreport img {
+    width: 15px;
+}
+
+.postreport:hover {
+    color: #aaa;
+}
+
+/* 좋아요, 답변하기 */
+.cavecommentbutton {
+    width: 100%;
+    height: 40px;
+    margin: 5px 0px 5px 5px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.cavecommentbutton button {
+    background-color: white;
+    border: none;
+    margin: 0 10px 0 0
+}
