@@ -1,4 +1,4 @@
-.postproductpage {
+body {
     position: relative;
 }
 .pagetitle {
@@ -21,11 +21,14 @@
     text-indent: 10px;
 }
 
-.productpost > #post-title::placeholder {
+.productpost>.productcategory {
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin: 5px auto 10px auto;
     text-indent: 10px;
-}
-
-.productpost  >#product-category {
     text-indent: 10px;
     background-color: white;
     padding: .8em .5em;
@@ -35,7 +38,7 @@
     color: #333;
 }
 
-.productpost > #product-category::-ms-expand {
+.productpost > .productcategory::-ms-expand {
     display: none /* 화살표 없애기 for IE10, 11*/
 }
 
@@ -73,7 +76,7 @@
     height: 75px;
 }
 
-.productpost> .productimgupload  label[for='product-img'] {
+.productpost> .productimgupload label[for='product-img'] {
     display: block;
     background-color: whitesmoke;
     width: 75px;
@@ -94,10 +97,18 @@
     z-index: -1;
 }
 
-.productpost > #product-post-btn {
+.productpost > .productpostbtn {
      background-color: #f99d1b;
      color: white;
      font-weight: 600;
      border-color: #ff9500;
      text-indent: 0;
+     display: block;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin: 5px auto 10px auto;
+    text-indent: 10px;
 }
+

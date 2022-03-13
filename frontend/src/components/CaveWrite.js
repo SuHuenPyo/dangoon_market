@@ -1,6 +1,6 @@
 import React from "react";
 import style from '../css/cavewrite.module.css';
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import { BsPlusLg } from "react-icons/bs";
 
 const CaveWrite2 = () => {
   return (
@@ -12,14 +12,14 @@ const CaveWrite2 = () => {
             <div className={style.cavewriteimgupload}>
                 <img src="https://via.placeholder.com/75" alt="" />
                 <div className={style.cavewriteuploadbtn}>
-                    <label for="cavewrite-img"><AiOutlinePlusSquare /></label>
-                    <input type="file" className={style.cavewriteimg} />
+                    <label for="cavewrite-img"><BsPlusLg /></label>
+                    <input type="file" id="cavewrite-img" className={style.cavewriteimg} />
                 </div>
             </div>
 
-            <textarea name={style.cavewriteinfo} className={style.cavewritetextarea} cols="30" rows="10"></textarea>
+            <textarea name="cavewrite-info" className={style.cavewritetextarea} cols="30" rows="10"></textarea>
 
-            <button type="button" className={style.cavewritecommon}>글쓰기 완료</button>
+            <button type="button" className={style.cavewritepostbtn}>글쓰기 완료</button>
         </form>
     </div>
   );

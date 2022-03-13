@@ -20,7 +20,7 @@ const CaveCommentDown = () => {
 
       <form className={style.cavecommentwrite} enctype='multipart/form-data'>
         <label for="comment-input-img" className={style.faimages}><FaRegImages /></label>
-        <input type="file" className={style.commentinputimg} />
+        <input type="file" id="comment-input-img" className={style.commentinputimg} />
         <input type="text" name="cavecomment-com" placeholder="댓글을 입력해주세요." className={style.commentwriteinput} />
       </form>
     </div>

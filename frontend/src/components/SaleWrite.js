@@ -1,14 +1,14 @@
 import React from "react";
-import style from '../css/post_product.module.css';
-import { AiOutlinePlusSquare } from "react-icons/ai";
+import style from '../css/salewrite.module.css';
+import { BsPlusLg } from "react-icons/bs";
 
 const SaleWrite = () => {
     return (
     <div classNameName={style.postproductpage}>
         <h2 className={style.pagetitle}>판매글 등록하기</h2>
         <form className={style.productpost} action="post" enctype="multipart/form-data">
-            <input type="text" id="post-title" className={style.productcommon} placeholder="제목을 입력해주세요" />
-            <select name="category" id="product-category" className={style.productcommon}>
+            <input type="text" className={style.productcommon} placeholder="제목을 입력해주세요" />
+            <select name="category" className={style.productcategory}>
                 <option value="none" disabled selected hidden>카테고리</option>
                 <option value="gajun">가전</option>
                 <option value="life">생활</option>
@@ -24,14 +24,14 @@ const SaleWrite = () => {
             <div className={style.productimgupload}>
                 <img src="https://via.placeholder.com/75" alt="" />
                 <div className={style.productuploadbtn}>
-                    <label for="product-img"><AiOutlinePlusSquare /></label>
-                    <input type="file" className={style.productimg} />
+                    <label for="product-img"><BsPlusLg /></label>
+                    <input type="file" id="product-img" className={style.productimg} />
                 </div>
             </div>
 
             <textarea name="product-info" className={style.producttextarea} cols="30" rows="10"></textarea>
 
-            <button id="product-post-btn" type="button" className={style.productcommon}>글쓰기 완료</button>
+            <button id="product-post-btn" type="button" className={style.productpostbtn}>글쓰기 완료</button>
         </form>
     </div>
   );
