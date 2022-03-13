@@ -12,7 +12,7 @@ const PostVeiw = styled.div`
   }
 `;
 
-const Announcement = () => {
+const Announcementtitle = () => {
   return (
     <PostVeiw>
         <h2 className='Announcementtitle'>공지사항</h2>
@@ -20,4 +20,4 @@ const Announcement = () => {
   );
 };
 
-export default Announcement;
+export default Announcementtitle;

@@ -4,7 +4,7 @@ import style from "../css/Likelist.module.css";
 
 import { AiFillStar, AiOutlineStar} from "react-icons/ai";
 
-const Announcement = () => {
+const LikeComment = () => {
     const [click, setClick] = React.useState(false);
     return (
         <div className={style.likelistpage}>
@@ -34,4 +34,4 @@ const Announcement = () => {
     );
 };
 
-export default Announcement;
+export default LikeComment;
