@@ -1,4 +1,4 @@
-.postcavewritepage {
+body {
     position: relative;
 }
 .pgtitle {
@@ -19,24 +19,6 @@
     border-radius: 15px;
     margin: 5px auto 10px auto;
     text-indent: 10px;
-}
-
-.cavewritepost>.pstitle::placeholder {
-    text-indent: 10px;
-}
-
-.cavewritepost>.cavewrite-category {
-    text-indent: 10px;
-    background-color: white;
-    padding: .8em .5em;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    color: .333;
-}
-
-.cavewritepost > .cavewrite-category::-ms-expand {
-    display: none /* 화살표 없애기 for IE10, 11*/
 }
 
 .cavewritepost>.cavewritetextarea {
@@ -67,7 +49,7 @@
     display: block;
 }
 
-.cavewritepost > .cavewriteimgupload .cavewrite-upload-btn {
+.cavewritepost > .cavewriteimgupload .cavewriteuploadbtn {
     position: relative;
     width: 75px;
     height: 75px;
@@ -94,10 +76,17 @@
     z-index: -1;
 }
 
-.cavewritepost > #cavewrite-post-btn {
-     background-color: #f99d1b;
-     color: white;
-     font-weight: 600;
-     border-color: #ff9500;
-     text-indent: 0;
+.cavewritepost > .cavewritepostbtn {
+    background-color: #f99d1b;
+    color: white;
+    font-weight: 600;
+    border-color: #ff9500;
+    text-indent: 0;
+    display: block;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    margin: 5px auto 10px auto;
+    text-indent: 10px;
 }

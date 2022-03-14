@@ -21,7 +21,7 @@ body {
     text-indent: 10px;
 }
 
-#product-post>.post-title::placeholder {
+#product-post>#post-title::placeholder {
     text-indent: 10px;
 }
 

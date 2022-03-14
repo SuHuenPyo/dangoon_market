@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import HeaderLogo from '../components/HeaderLogo';
 import Announcement from "../components/Announcement";
@@ -13,10 +12,6 @@ const CaveLife = () => {
       <HeaderLogo/>
       <main>
         <Announcetitle />
-        <Announcement />
-        <Announcement />
-        <Announcement />
-        <Announcement />
         <Announcement />
         <Announcement />
         <Announcement />

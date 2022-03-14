@@ -1,0 +1,82 @@
+/* 댓글 내용 */
+
+.cavecomment {
+    width:100%;
+    min-height: 180px;
+    margin: 15px 0 0 0;
+    position: relative;
+}
+
+.comment {
+    width: 100%;
+    min-height: 60px;
+}
+
+.commenterprofile {
+    width: 100%;
+    height: 50px;
+    line-height:100%;
+    margin: 0 0 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.commenterprofile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+}
+
+.commenterprofile p {
+    margin: 0 0 0 10px;
+}
+
+.commentcont {
+    width: auto;
+    min-height: 30px;
+    margin: 0 0 0 2px;
+}
+
+/* 댓글 신고 부분 */
+.commentreport img {
+    width: 15px;
+    position:absolute;
+    right: 10px;
+    top: 16px;
+    opacity: 0.5;
+}
+
+.commentreport:hover img {
+    opacity: 0.8;
+}
+
+/* 댓글 버튼 */
+.cavecommentwrite{
+    width: 330px;
+    height: 50px;
+    line-height:50px;
+    position: fixed;
+    top: 565px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #eee;
+}
+
+.cavecommentwrite > label[for='comment-input-img'] {
+    font-size: 25px;
+    width: 40px;
+    text-align:center;
+    margin: 0 5px 0 0;
+}
+
+.cavecommentwrite > .commentinputimg {
+    display: none;
+}
+
+.cavecommentwrite > .commentwriteinput {
+    width: 270px;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    text-indent: 10px;
+}

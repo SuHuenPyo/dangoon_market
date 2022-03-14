@@ -1,16 +1,16 @@
-const config = require('../config/_config')
-const rand = require('../helper/RandomHelper')
-const pagenationHelper = require('../helper/PagenationHelper');
-const router = require('express').Router();
-const mysql2 = require('mysql2/promise');
+import express from "express";
+import _config from "../config/_config.js";
+import  * as randomHelper from '../helper/RandomHelper.js';
+import { pagenation } from "../helper/PagenationHelper.js";
+import mysql from "mysql2/promise";
+
+const Home = express.Router();
 
 
-module.exports = (app) => {
+let dbcon = null;
+let json = null;
 
-    rand.getRandomChar()
-    let dbcon = null;
-
-    /**
+  /**
      * @swagger
      * /home:
      *   get:
@@ -32,55 +32,60 @@ module.exports = (app) => {
      *         description: "successful operation"
      *     
     */
-    router.get('/home', async(req,res, next)=>{
+Home.get('/', async(req, res, next)=>{
 
-        //현재 페이지 번호 받기 (default 1)
-        const page = req.query.page || 1;
+    console.log("home");
+    //현재 페이지 번호 받기 (default 1)
+    const page = req.query.page || 1;
         
-        //페이지당 요청 글 개수 (default 10)
-        const rows = req.query.rows || 10;
-        
-        try{
-            //DB Connection
-            dbcon = await mysql2.createConnection(config.database_config);
-            await dbcon.connect();
+    //페이지당 요청 글 개수 (default 10)
+    const rows = req.query.rows || 10;
 
-            //전체 데이터 수 조회
-            let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'";
-            
-            const [result1] = await dbcon.query(sql);
-            console.log(result1);
-
-            const totalCount = result1[0].cnt;
-
-            pagenation = pagenationHelper.pagenation(totalCount, page, rows);
-
-            console.log(JSON.stringify(pagenation));
-
-            let args = [];
-
-            //데이터 조회 
-            sql = "SELECT b_id, b_writer, b_title, b_content, b_rdate, b_category FROM dangoon.board WHERE b_type='S' LIMIT ?,?";
-
-
-            args.push(pagenation.offset);
-            args.push(pagenation.listCount);
-
-            const [result2] = await dbcon.query(sql, args);
-
-            json = result2;
-
-            console.log(result2);
-            
-        }catch(e){
-            return next(e);
-        }finally{
-            //dbEnd 반드시 마지막에 DB 핸들풀고 
-            dbcon.end();
-        }
-        //저장한 값 여기서 전송해주고 
-        res.send({'item': json});
-    });
     
+    
+    try{
+        //DB Connection
+        dbcon = await mysql.createConnection(_config.database_config);
+        await dbcon.connect();
+
+        //전체 데이터 수 조회
+        let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'";
+        
+        const [result1] = await dbcon.query(sql);
+        console.log(result1);
+
+        const totalCount = result1[0].cnt;
+
+        let pagenationResult = pagenation(totalCount, page, rows);
+
+        console.log(JSON.stringify(pagenationResult));
+
+        let args = [];
+
+        //데이터 조회 
+        sql = "SELECT b_id, b_writer, b_title, b_content, b_rdate, b_category FROM dangoon.board WHERE b_type='S' LIMIT ?,?";
+
+
+        args.push(pagenationResult.offset);
+        args.push(pagenationResult.listCount);
+
+        const [result2] = await dbcon.query(sql, args);
+
+        json = result2;
+
+        console.log(result2);
+        
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+    res.send({'item': json});
     return router;
-}
+});
+
+export default Home;
+
+
