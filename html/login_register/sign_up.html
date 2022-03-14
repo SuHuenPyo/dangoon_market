@@ -22,7 +22,7 @@
             <div id="sign-up-profile">
                 <div class="sign-up-profile-pic">
                     <!-- img 자리 -->
-                    <img src="http://placekitten.com/100/100" alt="테스트 사진">
+                    <img id='profileImg' src="http://placekitten.com/100/100" alt="테스트 사진">
                 </div>
                 <div class="sign-up-profile-btn">
                     <label for="sign-up-file" class='fas fa-camera'></label>
@@ -82,10 +82,27 @@
         document.querySelector('.notice-validation > .notice-btn').addEventListener('click', e => {
             document.querySelector('.notice-validation').style.height = '0px';
             document.querySelector('.notice-validation').style.opacity = '0';
+        });
+
+        const test = document.querySelector('#sign-up-file')
+        
+        test.addEventListener('change',e => {
+          const reader = new FileReader();
+          
+          reader.onload = (e)=>{
+              console.log(e.target);
+              document.querySelector('#profileImg').setAttribute('src',e.target.result);
+          };
+
+          reader.readAsDataURL(e.currentTarget.files[0]);
+
         })
+
+
     </script>
 
     <script src='../Inc/js/inculde.js'></script>
+
 
 </body>
 

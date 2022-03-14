@@ -11,6 +11,9 @@ import Categori from "./pages/Categori";
 import CategoriList from "./pages/CategoriList";
 import ProductDetail from './pages/ProductDetail';
 import SignUp from './pages/Signup';
+import Login from './pages/Login';
+import Mygralic from './pages/Mygralic';
+import MyProfile from './pages/MyProfile';
 
 function App() {
   return (
@@ -22,10 +25,12 @@ function App() {
         <Route path="/categori" element={<Categori/>} />
         <Route path="/categori/:categori" element={<CategoriList/>} />
         <Route path="/cavelife" element={<CaveLife/>} />
-        <Route path="/mygralic" element="" />
+        <Route path="/mygralic" element={<Mygralic/>} />
         <Route path="/profile" element={<ProfileView/>} />
+        <Route path='/myprofile' element={<MyProfile/>}/>
         <Route path="/product" element={<ProductDetail/>} />
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </ResponsiveView>
   );

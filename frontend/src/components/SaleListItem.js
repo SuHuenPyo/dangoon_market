@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { AiOutlineStar, AiOutlineEye } from "react-icons/ai"
 
 // styled Component
 const List = styled.li`
@@ -40,7 +41,7 @@ const SaleCont = styled.div`
     font-size: 14px; 
     position: relative;
     
-    & h2{
+    h2{
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -49,18 +50,33 @@ const SaleCont = styled.div`
         font-weight: normal;
     }
 
-    & .saleInfo{
+    .saleInfo{
         color: #bcbcbc;
         font-size: 13px;
         line-height: 22px;
         word-spacing: 4px;
     }
 
-    & .salePrice {
+    .salePrice {
         font-size: 18px;
         font-weight: bold;
         line-height: 35px;
         letter-spacing: 0.05em;
+    }
+
+    .likeView {
+      width: 60px;
+      color: #bcbcbc;
+      position:absolute;
+      bottom: 9px;
+      right: 5px;
+      svg {
+        position:relative;
+        top: 2px;
+      }
+      span {
+        margin: 0 3px;
+      }
     }
 `
 const SaleListItem = () => {
@@ -78,6 +94,10 @@ const SaleListItem = () => {
           </p>
           <p className="salePrice">
             530,000<span className="won">원</span>
+          </p>
+          <p className="likeView">
+            <AiOutlineStar/><span>0</span>
+            <AiOutlineEye/><span>0</span>
           </p>
         </SaleCont>
       </Linked>

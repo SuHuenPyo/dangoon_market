@@ -114,18 +114,12 @@ const Signup = () => {
           </div>
           <div className={styles.inputArea}>
             <Input type="text" placeholder="아이디" name="userId" />
-            <p className={styles.info}>
-              영어 소문자, 숫자를 조합하여 8자리 이상
-            </p>
             <ErrText>
               아이디는 영어 소문자, 숫자를 조합하여 8~45자로 작성해주세요.
             </ErrText>
           </div>
           <div className={styles.inputArea}>
             <Input type="password" placeholder="패스워드" name="password" />
-            <p className={styles.info}>
-              영어 소문자, 숫자, 특수문자를 조합하여 8자리 이상
-            </p>
             <ErrText></ErrText>
           </div>
           <div className={styles.inputArea}>

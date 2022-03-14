@@ -38,6 +38,11 @@
     border-radius: 40px;
 }
 
+.active > a {
+    background-color: white;
+    color: #f99d1b;
+}
+
 .menu > .menuList > .menuItem:hover > a {
     background-color: white;
     color: #f99d1b;
@@ -53,6 +58,7 @@
     font-weight: 600;
     letter-spacing: 1px;
     border-radius: 40px;
+    transition: all 0.1s ease-in-out;
 } 
 
 .menuContact {
@@ -84,6 +90,7 @@
     line-height: 56px;
     color: white;
     border-radius: 30px;
+    transition: all 0.3s ease-in-out;
 }
 
 .menuContact > .menuContactItem:first-child > a > svg{
