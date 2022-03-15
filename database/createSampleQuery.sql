@@ -17,24 +17,24 @@ insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test6', '�
 
 
 
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(2, 'S', 'test1', '아이팟 팝니다.', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(3, 'S', 'test2', '에어팟 팝니다', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(4, 'S', 'test3', '컴퓨터 팝니다.', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다.', '싸게 팝니다.', 'ETC');
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(2, 'S', 'test1', '아이팟 팝니다.', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(3, 'S', 'test2', '에어팟 팝니다', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(4, 'S', 'test3', '컴퓨터 팝니다.', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다.', '싸게 팝니다.', 'ETC', 10000);
 
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다2', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다3', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다4', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다5', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다6', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다7', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다8', '싸게 팝니다.', 'ETC');
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다2', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다3', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다4', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다5', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다6', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다7', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다8', '싸게 팝니다.', 'ETC', 10000);
 
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다9', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다10', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다11', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다12', '싸게 팝니다.', 'ETC');
-insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'S', 'test4', '전자 기타 팝니다13', '싸게 팝니다.', 'ETC');
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다9', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다10', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다11', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다12', '싸게 팝니다.', 'ETC', 10000);
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(5, 'S', 'test4', '전자 기타 팝니다13', '싸게 팝니다.', 'ETC', 10000);
 
 insert into dangoon.admin(A_USER_ID, A_NAME, A_PW) VALUES('admin-shun', 'shun', '1234');
 insert into dangoon.admin(A_USER_ID, A_NAME, A_PW) VALUES('admin-ej', 'ej', '1234');
