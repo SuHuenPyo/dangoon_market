@@ -12,6 +12,7 @@ $tablet-breakpoint: 500px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    overflow-y: scroll;
     &::-webkit-scrollbar { display: none; }
     
     main {

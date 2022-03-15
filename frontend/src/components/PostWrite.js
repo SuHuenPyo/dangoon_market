@@ -2,7 +2,7 @@ import React from "react";
 import style from '../css/salewrite.module.css';
 import { BsPlusLg } from "react-icons/bs";
 
-const SaleWrite = () => {
+const PostWrite = () => {
     return (
     <div classNameName={style.postproductpage}>
         <h2 className={style.pagetitle}>판매글 등록하기</h2>
@@ -37,4 +37,4 @@ const SaleWrite = () => {
   );
 };
 
-export default SaleWrite;
+export default PostWrite;

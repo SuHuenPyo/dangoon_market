@@ -41,9 +41,9 @@ const Menu = React.forwardRef((props,ref) => {
                 </a>
             </li>
             <li className={styles.menuContactItem}>
-                <NavLink to='/' className={styles.email}>
+                <a href='mailto:dg.market.blackbear@gmail.com' className={styles.email}>
                     <RiMailLine/>
-                </NavLink>
+                </a>
             </li>
         </ul>
     </div>

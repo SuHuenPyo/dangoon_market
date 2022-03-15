@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 
 import HeaderLogo from '../components/HeaderLogo';
-import Salewrite from "../components/SaleWrite";
+import Postwrite from "../components/PostWrite";
 
 
 const SaleWrite = () => {
@@ -10,7 +9,7 @@ const SaleWrite = () => {
     <>
       <HeaderLogo/>
       <main>
-        <Salewrite />
+        <Postwrite />
       </main>
     </>
   );

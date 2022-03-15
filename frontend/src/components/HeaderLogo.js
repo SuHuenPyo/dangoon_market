@@ -30,7 +30,7 @@ const isMenuLeft = React.useCallback(()=>{
             <img src={Logo} alt="단군마켓로고" />
           </h1>
         </NavLink>
-        <NavLink to="mygralic" className={styles.headIcon}>
+        <NavLink to="/mygralic" className={styles.headIcon}>
           <RiUserLine className={styles.userIcon} />
         </NavLink>
       </header>

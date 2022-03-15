@@ -112,7 +112,6 @@ const BtnLine = styled.div`
     }
 `;
 
-
 const Gap = styled.div`
     width: 100%;
     height: 10px;
@@ -120,27 +119,28 @@ const Gap = styled.div`
     opacity: 0.1;
 `
 
-const CavePostVeiw = () => {
+const CavePostVeiw = ({data}) => {
     const [click, setClick] = React.useState(false);
+    
   return (
-    <PostVeiw>
+     <>
+     {data.map((v,i)=>{
+       return (
+      <PostVeiw>
       <Poster to="/profile">
         <div>
           <img src="http://placekitten.com/45/45" alt="" />
         </div>
-        <p>poster name</p>
+        <p>{v.b_writer}</p>
       </Poster>
       <Content to="/home">
-        <h2>테스트 제목입니다.</h2>
+        <h2>{v.b_title}</h2>
         <div>
-          글이 있다. 글이 있어 여기 글이 있는데 보기 어떤가 어떻게 해야하지
-          어쩌지.글이 있어 여기 글이 있는데 보기 어떤가 어떻게 해야하지 어쩌지 .
+          {v.b_content}
         </div>
       </Content>
       <ContentImg>
-        <img src="http://placekitten.com/g/45/45" alt="" />
-        <img src="http://placekitten.com/g/45/45" alt="" />
-        <img src="http://placekitten.com/g/45/45" alt="" />
+        { v.b_img ? <img src={v.b_img} alt="" /> : null}
       </ContentImg>
       <BtnLine className='likeBtn' like={click ? '#f99d1b' : 'inherit'}>
         <button onClick={(e)=>{ click ? setClick(false) :setClick(true)}}>
@@ -152,7 +152,14 @@ const CavePostVeiw = () => {
       </BtnLine>
       <Gap/>
     </PostVeiw>
-  );
+       )
+     })}
+     </>
+  )
 };
+
+CavePostVeiw.defaultProps = {
+  data: [],
+}
 
 export default CavePostVeiw;
