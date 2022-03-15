@@ -62,3 +62,6 @@ insert into dangoon.announcement(AA_ID, A_ID, AA_WRITER, AA_TITLE, AA_CONTENT, A
  insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'C', 'test4', '신사역 맛집이 어디인가요 ', '다음주 신사역 출장가는데 점심으로 먹을만한 맛집좀 알려주세요', 'ETC');
  insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'C', 'test4', '옥수역 맛집이 어디인가요 ', '다음주 옥수역 출장가는데 점심으로 먹을만한 맛집좀 알려주세요', 'ETC');
  insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY) VALUES(5, 'C', 'test4', '신길역 맛집이 어디인가요 ', '다음주 신길역 출장가는데 점심으로 먹을만한 맛집좀 알려주세요', 'ETC');
+
+
+insert into dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(1355, 'S', 'test4', '전자 기타 팝니다.', '싸게 팝니다.', 'ETC', 10000);

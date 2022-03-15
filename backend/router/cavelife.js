@@ -3,6 +3,11 @@ import _config from "../config/_config.js";
 import  * as randomHelper from '../helper/RandomHelper.js';
 import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
+import { DG_DB } from "../helper/dbHelper.js";
+
+
+import ImportManager from "../common/IM.js";
+
 
 const caveLife = express.Router();
 
@@ -30,7 +35,7 @@ const caveLife = express.Router();
 */
 caveLife.get('/', async(req, res, next)=>{
     let dbcon = null;
-
+    let json = null;
 
 
     //현재 페이지 번호 받기 (default 1)
@@ -41,34 +46,32 @@ caveLife.get('/', async(req, res, next)=>{
     
     try{
         //DB Connection
-        dbcon = await mysql.createConnection(config.database_config);
+        dbcon = await mysql.createConnection(_config.database_config);
         await dbcon.connect();
 
         //전체 데이터 수 조회
         let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='C'";
         
         const [result1] = await dbcon.query(sql);
-        console.log(result1);
+        //console.log(result1);
 
         const totalCount = result1[0].cnt;
 
-        pagenation = pagenationHelper.pagenation(totalCount, page, rows);
+        let pagenationResult = pagenation(totalCount, page, rows);
 
-        console.log(JSON.stringify(pagenation));
+        //console.log(JSON.stringify(pagenationResult));
 
         let args = [];
 
         //데이터 조회 
         sql = "SELECT b_id, m_id , b_writer, b_title, b_content, b_img, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.board WHERE b_type='C' LIMIT ?,?";
 
-        args.push(pagenation.offset);
-        args.push(pagenation.listCount);
+        args.push(pagenationResult.offset);
+        args.push(pagenationResult.listCount);
 
         const [result2] = await dbcon.query(sql, args);
 
         json = result2;
-
-        console.log(result2);
         
     }catch(e){
         return next(e);
@@ -76,11 +79,20 @@ caveLife.get('/', async(req, res, next)=>{
         //dbEnd 반드시 마지막에 DB 핸들풀고 
         dbcon.end();
     }
+
+    /**
+     * 테스트
+     */
+
+    // let ddd = await new DG_DB();
+    // await ddd.connection();
+    // let result22 = ddd.sendQuery("select * from dangoon.board");
+    // console.log(result22);
+    //-----------------
+
     //저장한 값 여기서 전송해주고 
     res.send({'item': json});
 
-    
-    return router;
 });
 
 export default caveLife

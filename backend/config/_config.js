@@ -18,13 +18,6 @@ export default {
     // localhost 인경우 공백, 도메인이 aa.aa.aa 일경우 .을 붙여서 명시 -> .aa.aa.aa
     COOKIE_DOMAIN: "",
 
-    //upload 파일 경로
-    UPLOAD_CONFIG: {
-        path: '/upload',
-        dir: path.join(__dirname, '../_files/upload'),
-        max_size: 1024 * 1024 * 20,
-        max_count: 10
-    },
 
     THUMBNAIL : {
         sizes: [480, 750, 1020],
