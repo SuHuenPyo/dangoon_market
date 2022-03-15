@@ -28,7 +28,7 @@ function App() {
         <Route path="/mygralic" element={<Mygralic/>} />
         <Route path="/profile" element={<ProfileView/>} />
         <Route path='/myprofile' element={<MyProfile/>}/>
-        <Route path="/product" element={<ProductDetail/>} />
+        <Route path="/product/:b_id" element={<ProductDetail/>} />
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>

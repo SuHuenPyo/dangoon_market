@@ -3,7 +3,7 @@ import HeaderLogo from "../components/HeaderLogo";
 import styles from "../scss/ProductDetail.module.scss";
 import { AiOutlineStar, AiOutlineEye, AiFillStar } from "react-icons/ai";
 import ReportIcon from "../img/warning.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Report from "../components/Report";
 import Notice from "../components/Notice";
@@ -26,6 +26,7 @@ const ProductDetail = () => {
     setClickStar(clickStar ? false : true);
   }, [clickStar]);
 
+  const { b_id } =  useParams();
   return (
     <>
       <HeaderLogo />

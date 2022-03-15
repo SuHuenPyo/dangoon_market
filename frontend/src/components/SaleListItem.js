@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AiOutlineStar, AiOutlineEye } from "react-icons/ai"
+import dayjs  from "dayjs";
+import relativeTime   from "dayjs/plugin/relativeTime";
+
+import 'dayjs/locale/ko';
 
 // styled Component
 const List = styled.li`
@@ -79,21 +83,30 @@ const SaleCont = styled.div`
       }
     }
 `
-const SaleListItem = () => {
+
+
+const SaleListItem = ({data}) => {
+  dayjs.extend(relativeTime);
+  dayjs.locale('ko');
+
+
   return (
+    <ul>
+      { data.map((v,i)=>{
+        return (
     <List>
-      <Linked to='/product/' className="post-link">
+      <Linked to={`/product/${v.b_id}`} className="post-link">
         <SaleImg className="sale-img">
           <img src="http://placekitten.com/85/85" alt=""/>
         </SaleImg>
         <SaleCont className="sale-content">
-          <h2 className="sale-title">판매글 예시입니다. 판매글 예시입니다. 판매글 예시입니다.판매글예시입니다.</h2>
+          <h2 className="sale-title">{v.b_title}</h2>
           <p className="saleInfo">
-            <span className="postCategori">동네이름</span> &middot;
-            <span className="postTime">한시간전</span>
+            <span className="postCategori">{v.b_category}</span> &middot;
+            <span className="postTime">{dayjs(v.b_rdate).fromNow(true)}</span>
           </p>
           <p className="salePrice">
-            530,000<span className="won">원</span>
+            {v.b_price}<span className="won">원</span>
           </p>
           <p className="likeView">
             <AiOutlineStar/><span>0</span>
@@ -102,7 +115,14 @@ const SaleListItem = () => {
         </SaleCont>
       </Linked>
     </List>
+        )
+      })}
+    </ul>
   );
 };
+
+SaleListItem.defaultProps = {
+  data: []
+}
 
 export default SaleListItem;

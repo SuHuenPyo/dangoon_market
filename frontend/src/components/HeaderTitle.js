@@ -12,7 +12,7 @@ const HeaderTitle = (props) => {
 
   const [menuLeft, setMenuLeft] = React.useState("-100%");
  
-  const isMenuLeft = React.useCallback(()=>{
+  const isMenuLeft = React.useCallback((e)=>{
        return setMenuLeft(menuLeft === '-100%' ? '0px' : '-100%');
   },[menuLeft]);
 

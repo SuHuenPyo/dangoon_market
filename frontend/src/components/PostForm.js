@@ -57,11 +57,17 @@ const PostForm = (props) => {
             placeholder="제목을 입력해주세요"
           />
           {props.title === "판매" ? (
+            <>
+             <input
+               type="text"
+               className={styles.productCommon}
+               placeholder="가격을 입력해주세요."
+               />
             <select
               defaultValue="none"
               name="category"
               className={`${styles.productCommon} ${styles.productCategory}`}
-            >
+              >
               <option value="none" disabled hidden>
                 카테고리
               </option>
@@ -75,6 +81,7 @@ const PostForm = (props) => {
               <option value="plant">식품</option>
               <option value="etc">기타</option>
             </select>
+              </>
           ) : (
             <></>
           )}

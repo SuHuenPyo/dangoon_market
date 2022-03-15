@@ -9,7 +9,7 @@ import styles from '../css/Menu.module.css';
 const Menu = React.forwardRef((props,ref) => {
     
     return (
-        <div ref={ref} className={styles.menu} style={{left:props.left, visibility: props.left === '-100%' ? 'hidden' : 'visible'}} onClick={()=>{props.onClick()}}>
+        <div ref={ref} className={styles.menu} style={{left:props.left, visibility: props.left === '-100%' ? 'hidden' : 'visible'}} onClick={props.onClick}>
         <h2 className={styles.menuLogo}>
             <img src={Logo} alt="단군마켓로고"/>
         </h2>
