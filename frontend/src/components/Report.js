@@ -14,6 +14,7 @@ const StyledReport = styled.div`
   text-align: center;
   position: absolute;
   bottom: 0;
+  z-index: 97;
   display:${props=>props.show ? 'flex' : 'none'};
   right:0px;
   opacity: ${props=> props.show ? 1: 0};
