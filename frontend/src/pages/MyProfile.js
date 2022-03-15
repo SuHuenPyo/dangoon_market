@@ -1,11 +1,13 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
 import styled from "styled-components";
-import styles from "../scss/Signup.module.scss";
+import styles from "../scss/SignupForm.module.scss";
 import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
 import axios from 'axios';
 
+
+// styled-components
 const Input = styled.input`
   display: block;
   width: 100%;
@@ -36,10 +38,8 @@ const Signup = () => {
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
 
-
   const onToggleShow = React.useCallback(() => {
     setValidShow(validShow ? false : true);
-    console.log(validShow);
   }, [validShow]);
 
 
@@ -75,7 +75,6 @@ const Signup = () => {
       e.currentTarget.innerText = "인증번호 확인";
       return onToggleShow();
     }
-
   }
 
   // 프로필 미리보기 이미지관련 함수
@@ -113,28 +112,18 @@ const Signup = () => {
             <ErrText>이름은 30자 이하로 작성해주세요.</ErrText>
           </div>
           <div className={styles.inputArea}>
-            <Input type="text" placeholder="아이디" name="userId" />
-            <ErrText>
-              아이디는 영어 소문자, 숫자를 조합하여 8~45자로 작성해주세요.
-            </ErrText>
+            <Input type="text" placeholder="아이디" name="userId" readOnly />
           </div>
           <div className={styles.inputArea}>
-            <Input type="password" placeholder="패스워드" name="password" />
-            <ErrText></ErrText>
-          </div>
-          <div className={styles.inputArea}>
-            <Input type="password" placeholder="패스워드 확인" />
-            <ErrText></ErrText>
-          </div>
-          <div className={styles.inputArea}>
-            <Input type="email" placeholder="이메일" ref={userEmail} />
+            <Input type="email" placeholder="이메일" ref={userEmail}/>
             <ErrText></ErrText>
           </div>
           <div className={`${styles.inputArea} ${styles.validation}`}>
-            <Input type="text" placeholder="인증번호" name="validationNum" />
+            <Input type="text" placeholder="인증번호" name="validationNum" readOnly />
             <Button
               type="button"
               onClick={sendValidNum}
+              disabled
             >
               인증번호 전송
             </Button>
@@ -142,8 +131,8 @@ const Signup = () => {
           <div className={styles.inputArea}>
             <Input type="text" placeholder="kakao ID" />
           </div>
-          <Button type="submit" className={styles.signupBtn}>
-            가입하기
+          <Button type="submit" className={styles.saveBtn}>
+            저장하기
           </Button>
         </form>
       </main>

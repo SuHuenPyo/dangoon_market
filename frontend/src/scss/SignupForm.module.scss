@@ -1,3 +1,4 @@
+
 form {
   width: 100%;
   height: auto;
@@ -68,6 +69,15 @@ form {
       color: #888;
       font-weight: lighter;
     }
+
+
+    input[readOnly]{
+      background-color:#e5e5e5;
+    }
+
+    button:disabled {
+      background-color: #e5e5e5;
+    }
   }
 
   .validation {
@@ -87,14 +97,11 @@ form {
     }
   }
 
-  .signupBtn {
-    width: 100%;
-    height: 60px;
+  .saveBtn {
+    width: 85%;
+    height: 50px;
     margin: 10px auto 0 auto;
-    position:absolute;
-    bottom: -10px;
-    left:0px;
-    right:0px;
-    display: none;
+    display: block;
+    border-radius: 10px;
   }
 }
