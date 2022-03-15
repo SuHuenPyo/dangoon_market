@@ -40,8 +40,6 @@ Home.get('/', async(req, res, next)=>{
         
     //페이지당 요청 글 개수 (default 10)
     const rows = req.query.rows || 10;
-
-    
     
     try{
         //DB Connection
@@ -63,7 +61,7 @@ Home.get('/', async(req, res, next)=>{
         let args = [];
 
         //데이터 조회 
-        sql = "SELECT b_id, b_writer, b_title, b_content, b_rdate, b_category FROM dangoon.board WHERE b_type='S' LIMIT ?,?";
+        sql = "SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE b_type='S' LIMIT ?,?";
 
 
         args.push(pagenationResult.offset);
@@ -73,7 +71,12 @@ Home.get('/', async(req, res, next)=>{
 
         json = result2;
 
-        console.log(result2);
+        //console.log(result2);
+        let regexp = /\B(?=(\d{3})+(?!\d))/g;
+
+        result2.forEach(element => {
+            element.b_price = element.b_price.toString().replace(regexp, ',');
+        });
         
     }catch(e){
         return next(e);
@@ -83,9 +86,38 @@ Home.get('/', async(req, res, next)=>{
     }
     //저장한 값 여기서 전송해주고 
     res.send({'item': json});
-    return router;
 });
-
+/**
+ * @swagger
+ * /home/write:
+ *   post:
+ *     description: 거래를 등록 합니다.
+ *     tags: [Post (Not Work)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "content"
+ *       in: "body"
+ *       description: "상품정보가 담긴 스키마"
+ *       schema:
+ *         type: object
+ *         required:
+ *              - Info
+ *         properties:
+ *              userId:
+ *                  type: string
+ *              firstName:
+ *                  type: string
+ *              lastName:
+ *                  type: string
+ *         
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
+Home.post('/write', async(req, res, next)=>{
+});
 export default Home;
 
 
