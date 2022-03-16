@@ -2,8 +2,17 @@ import React from "react";
 import style from '../css/cavewrite.module.css';
 import { BsPlusLg } from "react-icons/bs";
 
+import Notice from './Notice';
+
 const CaveWrite2 = () => {
+  const [show, setShow] = React.useState(false);
+
+  const onCheck = React.useCallback(()=>{
+  window.location.href = '/home';
+  },[])
+
   return (
+    <>
     <div className={style.postcavewritepage}>
         <h2 className={style.pgtitle}>동굴생활 글쓰기</h2>
         <form className={style.cavewritepost} action="post" enctype="multipart/form-data">
@@ -19,9 +28,12 @@ const CaveWrite2 = () => {
 
             <textarea name="cavewrite-info" className={style.cavewritetextarea} cols="30" rows="10"></textarea>
 
-            <button type="button" className={style.cavewritepostbtn}>글쓰기 완료</button>
+            {console.log(show)}
+            <button type="button" className={style.cavewritepostbtn} onClick={()=>{setShow(true)}}>글쓰기 완료</button>
         </form>
     </div>
+    <Notice show={show} onClick={onCheck}/>
+    </>
   );
 };
 

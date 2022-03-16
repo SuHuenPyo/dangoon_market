@@ -19,6 +19,7 @@ import purchasedItem    from './router/purchaseditem.js';
 import watchList        from './router/watchlist.js';
 import productDetails   from './router/productdetails.js';
 import Mail             from './router/mail.js';
+import Development      from './router/development.js';
 
 
 import * as url from "url";
@@ -31,7 +32,7 @@ const app = express();
 import serveStatic from "serve-static"; //특정 폴더의 파일을 URL로 노출
 import serveFavicon from "serve-favicon";
 import morgan from "morgan"; 
-import * as cors from "cors";
+import cors from 'cors';
 import bodyParser from "body-parser";
 
 
@@ -47,6 +48,7 @@ const __dirname = path.dirname(__filename);
  * extended: false --> 한번 사용 
  * */ 
 
+app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
 app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
@@ -63,7 +65,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {explorer: true}));
 
 //static 모듈 경로셋팅 (보안적이점) https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=pjok1122&logNo=221545195520
 app.use("/", serveStatic(_config.PUBLIC_PATH));
-app.use("/upload", serveStatic(_config.UPLOAD_CONFIG.dir)); //upload파일 저장위치
+//app.use("/upload", serveStatic(_config.UPLOAD_CONFIG.dir)); //upload파일 저장위치
 app.use("/thumb", serveStatic(_config.THUMBNAIL.dir));      //썸네일 저장위치
 app.use(serveFavicon(_config.FAVICON_PATH));//favicon
 
@@ -83,11 +85,12 @@ app.use("/purchaseditem",   purchasedItem);
 app.use("/watchlist",       watchList);
 app.use("/productdetails",  productDetails);
 app.use("/mail",            Mail);
+app.use("/development",     Development);
 
 //에러처리 
 app.use((err, req, res, next)=>{
     console.error(err.stack);
-    res.status(500).send("Something Wrong");
+    res.status(500).send("Something Wrong , 무언가 실수가 있네요 ! ");
 });
 
 
