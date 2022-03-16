@@ -43,11 +43,11 @@ const CaveSlice = createSlice({
                 loading:true
             }
         },
-        [getCaveList.rejected]: (state,{payload})=>{
+        [getCaveList.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
-                rt: payload.status,
-                rtmsg: payload.statusText,
+                rt: payload?.status || error.name,
+                rtmsg: payload?.statusText || error.message,
                 loading: false
             }
         }

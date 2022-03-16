@@ -1,31 +1,55 @@
-import React from 'react';
-import styled from "styled-components";
-
-import HeaderLogo from '../components/HeaderLogo';
-import SaleListItem from '../components/SaleListItem';
+import React from "react";
+import HeaderLogo from "../components/HeaderLogo";
+import SaleListItem from "../components/SaleListItem";
+import ReactLoading from "react-loading";
+import { useInView } from "react-intersection-observer";
 
 // Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { getHomeList } from '../Slices/HomeSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { getHomeList } from "../Slices/HomeSlice";
 
 const Home = () => {
-    const { rt, rtmsg, item, loading} = useSelector((state)=>state.home);
+  const [page, setPage] = React.useState(1);
 
-    const dispatch = useDispatch();
+  const { rt, rtmsg, item, loading } = useSelector((state) => state.home);
 
-    React.useEffect(()=>{
-        dispatch(getHomeList());
-    },[dispatch]);
-    
-    return (
+  const [ref, inView] = useInView();
+
+  const dispatch = useDispatch();
+  console.log(page);
+  
+  React.useEffect(() => {
+    dispatch(getHomeList({ page: page }));
+  }, [dispatch, page]);
+
+  React.useEffect(() => {
+    if (inView && !loading) {
+      setPage(page+1);
+    }
+  }, [inView]);
+
+  return (
+    <>
+      {/* 로딩 */}
+      {loading && <ReactLoading type="bubbles" color="#f99d1b" />}
+      {/* 에러발생 */}
+      {rt !== 200 && (
+        <div className="error">
+          <h2>Error!</h2>
+          <p>{rtmsg}</p>
+        </div>
+      )}
+      {/* 정상작동 */}
+      {rt === 200 && (
         <>
-        <HeaderLogo/>
-        <main>
-                {rt === 200 &&
-                <SaleListItem data={item.item}/>}
-        </main>
+          <HeaderLogo />
+          <main>
+            <SaleListItem data={item.item} inview={ref} />
+          </main>
         </>
-    )
-}
+      )}
+    </>
+  );
+};
 
 export default Home;

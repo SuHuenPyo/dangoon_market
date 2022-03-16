@@ -85,7 +85,7 @@ const SaleCont = styled.div`
 `
 
 
-const SaleListItem = ({data}) => {
+const SaleListItem = ({data,inview}) => {
   dayjs.extend(relativeTime);
   dayjs.locale('ko');
 
@@ -94,7 +94,7 @@ const SaleListItem = ({data}) => {
     <ul>
       { data.map((v,i)=>{
         return (
-    <List key={i}>
+    <List key={i} {...(data.length-1 === i ? {ref: inview} : {})}>
       <Linked to={`/product/${v.b_id}`} className="post-link">
         <SaleImg className="sale-img">
           <img src="http://placekitten.com/85/85" alt=""/>

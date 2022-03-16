@@ -5,12 +5,12 @@ export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejec
     let result = null;
 
     try {
-
         result = axios.get("http://dg-market.iptime.org:28019/home",{
-        page:1,
-        rows: 10
+        params : {page:payload.page,
+        rows: 10}
         })
 
+        
     } catch (err){
         result = rejectedWithValue(err.response);
     }
@@ -34,20 +34,25 @@ const HomeSlice = createSlice({
                 loading: true
             }
         },
-        [getHomeList.fulfilled]: (state,{payload})=>{
+        [getHomeList.fulfilled]: (state,{meta,payload})=>{
+            console.log(payload.data.item);
+            if(meta.arg.page > 1){
+                payload.data.item = state.item.item.concat(payload.data.item);
+            }
+
             return {
                 ...state,
                 rt: payload.status,
                 rtmsg: payload.statusText,
                 item: payload.data,
-                loading:true
+                loading:false
             }
         },
-        [getHomeList.rejected]: (state,{payload})=>{
+        [getHomeList.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
-                rt: payload.status,
-                rtmsg: payload.statusText,
+                rt: payload?.status || error.name,
+                rtmsg: payload?.statusText || error.message,
                 loading: false
             }
         }
