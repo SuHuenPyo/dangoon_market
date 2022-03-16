@@ -8,16 +8,6 @@ import SaleListItem from '../components/SaleListItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHomeList } from '../Slices/HomeSlice';
 
-const Main = styled.main`
-  width: calc{100% - 50px}
-  min-height: 375px;
-  padding: 5px 20px;
-`
-const List = styled.ul`
-    width: 100%;
-    height: 100%;
-`
-
 const Home = () => {
     const { rt, rtmsg, item, loading} = useSelector((state)=>state.home);
 
@@ -30,10 +20,10 @@ const Home = () => {
     return (
         <>
         <HeaderLogo/>
-        <Main>
+        <main>
                 {rt === 200 &&
                 <SaleListItem data={item.item}/>}
-        </Main>
+        </main>
         </>
     )
 }

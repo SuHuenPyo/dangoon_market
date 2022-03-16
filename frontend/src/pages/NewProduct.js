@@ -10,7 +10,9 @@ const NewProduct = () => {
   return (
     <>
       <HeaderLogo />
+      <main>
         <PostForm title="판매" />
+      </main>
     </>
   );
 };

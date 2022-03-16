@@ -67,11 +67,6 @@ const Item = styled.li`
   }
 `;
 
-const Main = styled.main`
-  width: calc{100% - 50px};
-  min-height: 375px;
-  padding: 5px 20px;
-`;
 
 const Search = styled.input`
   display: block;
@@ -89,7 +84,7 @@ const Categori = () => {
   return (
     <>
     <HeaderTitle title='카테고리' />
-      <Main>
+      <main>
         <Form>
           <Search type="search" placeholder='검색어를 입력해주세요' />
         </Form>
@@ -148,7 +143,7 @@ const Categori = () => {
             </Link>
           </Item>
         </List>
-      </Main>
+      </main>
     </>
   );
 };

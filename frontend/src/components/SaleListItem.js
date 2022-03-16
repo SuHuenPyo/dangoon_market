@@ -94,7 +94,7 @@ const SaleListItem = ({data}) => {
     <ul>
       { data.map((v,i)=>{
         return (
-    <List>
+    <List key={i}>
       <Linked to={`/product/${v.b_id}`} className="post-link">
         <SaleImg className="sale-img">
           <img src="http://placekitten.com/85/85" alt=""/>

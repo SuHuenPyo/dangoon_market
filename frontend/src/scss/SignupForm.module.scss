@@ -97,6 +97,19 @@ form {
     }
   }
 
+  .signupBtn {
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    bottom:-90;
+    display: block;
+    opacity: 0.5;
+  }
+
+  .signupBtn:hover {
+    opacity: 1;
+  }
+
   .saveBtn {
     width: 85%;
     height: 50px;

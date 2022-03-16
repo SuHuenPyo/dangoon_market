@@ -27,6 +27,7 @@ const ProductDetail = () => {
   }, [clickStar]);
 
   const { b_id } =  useParams();
+  
   return (
     <>
       <HeaderLogo />

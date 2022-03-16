@@ -126,7 +126,7 @@ const CavePostVeiw = ({data}) => {
      <>
      {data.map((v,i)=>{
        return (
-      <PostVeiw>
+      <PostVeiw key={i}>
       <Poster to="/profile">
         <div>
           <img src="http://placekitten.com/45/45" alt="" />

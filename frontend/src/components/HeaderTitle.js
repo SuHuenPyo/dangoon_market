@@ -12,14 +12,18 @@ const HeaderTitle = (props) => {
 
   const [menuLeft, setMenuLeft] = React.useState("-100%");
  
-  const isMenuLeft = React.useCallback((e)=>{
-       return setMenuLeft(menuLeft === '-100%' ? '0px' : '-100%');
+  const isMenuLeft = React.useCallback(()=>{
+    document.querySelector('main').scrollIntoView({
+      block: 'start',
+      behavior: 'smooth'
+    });
+    return setMenuLeft(menuLeft === '-100%' ? '0px' : '-100%');
   },[menuLeft]);
 
   return (
     <>
-    <header show={ menuLeft === '-100%' ? false : true }className={styles.header}>
-     <RiMenuLine id="menu-btn" className={styles.headIcon} onClick={isMenuLeft}/>
+    <header className={styles.header}>
+     <RiMenuLine id="menu-btn" className={styles.headIcon} onClick={()=>{isMenuLeft()}}/>
      <NavLink to='/home' className={styles.link}>
        <h1 className={styles.headTitle}>{props.title}</h1>     
     </NavLink> 

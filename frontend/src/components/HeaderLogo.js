@@ -12,7 +12,12 @@ const HeaderLogo = () => {
 
 const [menuLeft, setMenuLeft] = React.useState("-100%");
 
+console.dir(window.scrollY);
 const isMenuLeft = React.useCallback(()=>{
+      document.querySelector('main').scrollIntoView({
+        block: 'start',
+        behavior: 'smooth'
+      });
       return setMenuLeft(menuLeft === '-100%' ? '0px' : '-100%');
 },[menuLeft]);
 
