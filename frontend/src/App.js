@@ -1,10 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./css/common.css";
+import "./scss/common.scss";
 
 import Home from './pages/Home';
 import NewProduct from './pages/NewProduct'
-import ResponsiveView from './components/ResponsiveVeiw';
 import CaveLife from './pages/CaveLife';
 import ProfileView from './components/ProfileView';
 import Categori from "./pages/Categori";
@@ -17,7 +16,6 @@ import MyProfile from './pages/MyProfile';
 
 function App() {
   return (
-    <ResponsiveView>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/home" element={<Home/>} />
@@ -32,7 +30,6 @@ function App() {
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
       </Routes>
-    </ResponsiveView>
   );
 }
 
