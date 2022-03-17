@@ -16,14 +16,13 @@ const Home = () => {
   const [ref, inView] = useInView();
 
   const dispatch = useDispatch();
-  console.log(page);
   
   React.useEffect(() => {
     dispatch(getHomeList({ page: page }));
   }, [dispatch, page]);
 
   React.useEffect(() => {
-    if (inView && !loading) {
+    if (inView && !loading && item.pageEnd > page) {
       setPage(page+1);
     }
   }, [inView]);
@@ -31,16 +30,16 @@ const Home = () => {
   return (
     <>
       {/* 로딩 */}
-      {loading && <ReactLoading type="bubbles" color="#f99d1b" />}
+      {loading && <div className="loading"><ReactLoading type="bubbles" color="#f99d1b" /></div>}
       {/* 에러발생 */}
-      {rt !== 200 && (
+      {!loading && rt !== 200 && (
         <div className="error">
           <h2>Error!</h2>
           <p>{rtmsg}</p>
         </div>
       )}
       {/* 정상작동 */}
-      {rt === 200 && (
+      {!loading && rt === 200 && (
         <>
           <HeaderLogo />
           <main>

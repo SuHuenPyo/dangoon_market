@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
 import styled from "styled-components";
-import styles from "../scss/SignupForm.module.scss";
+import styles from "../asset/scss/SignupForm.module.scss";
 import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
 import axios from 'axios';

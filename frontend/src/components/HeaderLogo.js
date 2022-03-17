@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "../css/HeaderLogo.module.css";
+import styles from "../asset/css/HeaderLogo.module.css";
 import { RiMenuLine, RiUserLine } from "react-icons/ri";
 import Menu from "./Menu";
 
 // logo
-import Logo from "../img/logo-color.png";
+import Logo from "../asset/img/logo-color.png";
 
 const HeaderLogo = () => {
   const menu = React.useRef();

@@ -55,7 +55,7 @@
 html,body {
     color: #333;
     width: 100%;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0;
     padding:0;
     overflow-y: auto;
@@ -78,11 +78,11 @@ $tablet-breakpoint: 500px;
 body {
     @media (min-width: $mobile-breakpoint) and (max-width:($tablet-breakpoint - 1px)){
         width: 100%;
-        height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
     }
     
     width: 375px;
-    height:100vh;
+    height: calc(var(--vh, 1vh) * 100);
     margin: 0 auto;
     position: relative;
     overflow-x:hidden;
@@ -96,9 +96,10 @@ body {
         position:relative;
         top:0px;
         width: calc(100% - 40px);
-        height:100vh;
+        height: calc(var(--vh, 1vh) * 100);
         padding: 5px 20px;
         padding-top: 60px;
+        -webkit-overflow-scrolling: touch;
         // &::-webkit-scrollbar {
         //     display: none;
         // }
@@ -122,6 +123,8 @@ body {
     }
 
     .loading{
+        width: calc(100% - 40px);
+        height:100vh;
         @include flex-center();
     }
 }

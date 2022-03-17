@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../css/Buylist.module.css";
+import style from "../asset/css/Buylist.module.css";
 import { Link } from "react-router-dom";
 
 const BuylistComponent = () => {

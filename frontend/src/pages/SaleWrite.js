@@ -15,4 +15,4 @@ const SaleWrite = () => {
   );
 };
 
-export default SalewWrite;
+export default SaleWrite;

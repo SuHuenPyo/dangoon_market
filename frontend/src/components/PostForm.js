@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../scss/PostForm.module.scss";
+import styles from "../asset/scss/PostForm.module.scss";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import styled from "styled-components";
 

@@ -1,8 +1,8 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
-import styles from "../scss/ProductDetail.module.scss";
+import styles from "../asset/scss/ProductDetail.module.scss";
 import { AiOutlineStar, AiOutlineEye, AiFillStar } from "react-icons/ai";
-import ReportIcon from "../img/warning.png";
+import ReportIcon from "../asset/img/warning.png";
 import { Link, useParams } from "react-router-dom";
 
 import Report from "../components/Report";

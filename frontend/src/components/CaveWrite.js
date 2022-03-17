@@ -1,5 +1,5 @@
 import React from "react";
-import style from '../css/cavewrite.module.css';
+import style from '../asset/css/cavewrite.module.css';
 import { BsPlusLg } from "react-icons/bs";
 
 import Notice from './Notice';

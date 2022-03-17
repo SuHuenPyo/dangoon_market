@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../scss/ProfileView.module.scss";
+import styles from "../asset/scss/ProfileView.module.scss";
 import { BsReceiptCutoff, BsCart2 } from "react-icons/bs";
 
 const ProfileView = () => {

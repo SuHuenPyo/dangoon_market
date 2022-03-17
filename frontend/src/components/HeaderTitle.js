@@ -4,7 +4,7 @@ import { RiMenuLine } from "react-icons/ri";
 import Menu from './Menu';
 
 //css
-import styles from '../css/HeaderTitle.module.css';
+import styles from '../asset/css/HeaderTitle.module.css';
 
 
 const HeaderTitle = (props) => {

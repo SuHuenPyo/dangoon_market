@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../css/pagination.module.css";
+import style from "../asset/css/pagination.module.css";
 import { Link } from "react-router-dom";
 
 const Announcementbutton = () => {

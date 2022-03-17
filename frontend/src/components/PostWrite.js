@@ -1,5 +1,5 @@
 import React from "react";
-import style from '../css/salewrite.module.css';
+import style from '../asset/css/salewrite.module.css';
 import { BsPlusLg } from "react-icons/bs";
 
 const PostWrite = () => {

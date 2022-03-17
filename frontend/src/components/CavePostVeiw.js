@@ -119,14 +119,15 @@ const Gap = styled.div`
     opacity: 0.1;
 `
 
-const CavePostVeiw = ({data}) => {
+const CavePostVeiw = ({data,inview}) => {
     const [click, setClick] = React.useState(false);
     
   return (
      <>
      {data.map((v,i)=>{
        return (
-      <PostVeiw key={i}>
+        
+      <PostVeiw key={i} {...(data.length-1 === i ? {ref : inview} : {})} >
       <Poster to="/profile">
         <div>
           <img src="http://placekitten.com/45/45" alt="" />

@@ -78,7 +78,6 @@ const SignupLink = styled.div`
     
 `
 
-
 const Login = () => {
     return (
         <>

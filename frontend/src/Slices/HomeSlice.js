@@ -6,13 +6,12 @@ export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejec
 
     try {
         result = axios.get("http://dg-market.iptime.org:28019/home",{
-        params : {page:payload.page,
+        params : {page: payload.page,
         rows: 10}
         })
 
-        
     } catch (err){
-        result = rejectedWithValue(err.response);
+     return rejectedWithValue(err.response);
     }
 
     return result;

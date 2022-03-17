@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
-import styles from "../scss/Mygralic.module.scss";
+import styles from "../asset/scss/Mygralic.module.scss";
 import { Link } from "react-router-dom";
 import Notice from "../components/Notice";
 

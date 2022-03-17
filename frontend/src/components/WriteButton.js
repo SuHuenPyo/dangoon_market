@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../css/writebutton.module.css"
+import style from "../asset/css/writebutton.module.css"
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi"
 

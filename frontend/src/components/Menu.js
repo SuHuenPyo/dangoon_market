@@ -3,8 +3,8 @@ import { NavLink} from 'react-router-dom';
 import { RiGithubLine, RiMailLine } from 'react-icons/ri'
 import { AiOutlineNotification } from 'react-icons/ai'
 
-import Logo from '../img/logo-white.png';
-import styles from '../css/Menu.module.css';
+import Logo from '../asset/img/logo-white.png';
+import styles from '../asset/css/Menu.module.css';
 
 const Menu = React.forwardRef((props,ref) => {
     

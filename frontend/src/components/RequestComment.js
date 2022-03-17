@@ -1,6 +1,5 @@
 import React from "react";
-import style from "../css/request.module.css";
-import styled from "styled-components";
+import style from "../asset/css/request.module.css";
 
 const RequestComment = () => {
     const sales_status = document.querySelectorAll('.salesstatus');

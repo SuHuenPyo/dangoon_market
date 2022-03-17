@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../css/salelistcomponent.module.css";
+import style from "../asset/css/salelistcomponent.module.css";
 import { Link } from "react-router-dom";
 import Request from "../components/RequestComment";
 

@@ -103,7 +103,7 @@ const SaleListItem = ({data,inview}) => {
           <h2 className="sale-title">{v.b_title}</h2>
           <p className="saleInfo">
             <span className="postCategori">{v.b_category}</span> &middot;
-            <span className="postTime">{dayjs(v.b_rdate).fromNow(true)}</span>
+            <span className="postTime">{dayjs(v.b_rdate).fromNow(true)}전</span>
           </p>
           <p className="salePrice">
             {v.b_price}<span className="won">원</span>

@@ -1,4 +1,4 @@
-import style from '../scss/ResponsiveVeiw.module.scss'
+import style from '../asset/scss/ResponsiveVeiw.module.scss'
 
 const ResponsiveView = ({children}) => {
     return (
