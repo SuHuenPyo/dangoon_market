@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import HeaderLogo from '../components/HeaderLogo';
 import Notice from '../components/Notice';
 
+import RegexHelper from '../utils/RegexHelper';
+import styles from '../asset/scss/SignupForm.module.scss';
+
 const Title = styled('div')`
     width:84%;
     margin: 30px auto 15px auto;
@@ -79,6 +82,21 @@ const SignupLink = styled.div`
 `
 
 const Login = () => {
+    const login = (e) => {
+        document.querySelectorAll(`.${styles.errMsg}`).forEach((v,i)=>{
+            v.remove();
+          })
+
+        e.preventDefault();
+
+        const regex = new RegexHelper();
+
+        // 아이디
+        regex.value('userId','아이디를 입력해주세요.');
+        //패스워드
+        regex.value('password','패스워드를 입력해주세요.');
+        
+    }
     return (
         <>
         <HeaderLogo/>
@@ -87,9 +105,9 @@ const Login = () => {
                 <h2>LOGIN</h2>
                 <p>안녕하세요. 단군마켓을 통해 중고거래를 시작해보세요.</p>
                 </Title>
-            <Form action="" method='post'>
-                <input type="text" placeholder='아이디' />
-                <input type="password" placeholder='패스워드' />
+            <Form action="" method='post' onSubmit={login}>
+                <input id="userId" type="text" placeholder='아이디' />
+                <input id="password" type="password" placeholder='패스워드' />
                 <button type='submit'>로그인하기</button>
             </Form>
             <SignupLink>

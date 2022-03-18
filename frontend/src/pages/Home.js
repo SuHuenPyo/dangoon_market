@@ -16,37 +16,39 @@ const Home = () => {
   const [ref, inView] = useInView();
 
   const dispatch = useDispatch();
-  
+
   React.useEffect(() => {
     dispatch(getHomeList({ page: page }));
   }, [dispatch, page]);
 
   React.useEffect(() => {
     if (inView && !loading && item.pageEnd > page) {
-      setPage(page+1);
+      setPage(page + 1);
     }
   }, [inView]);
 
   return (
     <>
-      {/* 로딩 */}
-      {loading && <div className="loading"><ReactLoading type="bubbles" color="#f99d1b" /></div>}
-      {/* 에러발생 */}
-      {!loading && rt !== 200 && (
-        <div className="error">
-          <h2>Error!</h2>
-          <p>{rtmsg}</p>
-        </div>
-      )}
-      {/* 정상작동 */}
-      {!loading && rt === 200 && (
-        <>
-          <HeaderLogo />
-          <main>
-            <SaleListItem data={item.item} inview={ref} />
-          </main>
-        </>
-      )}
+      <HeaderLogo />
+      <main>
+        {/* 로딩 */}
+        {loading && (
+          <div className="loading">
+            <ReactLoading type="bubbles" color="#f99d1b" />
+          </div>
+        )}
+        {/* 에러발생 */}
+        {!loading && rt !== 200 && (
+          <div className="error">
+            <h2>Error!</h2>
+            <p>{rtmsg}</p>
+          </div>
+        )}
+        {/* 정상작동 */}
+        {!loading && rt === 200 && (
+          <SaleListItem data={item.item} inview={ref} />
+        )}
+      </main>
     </>
   );
 };

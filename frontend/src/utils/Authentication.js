@@ -20,11 +20,6 @@ class Authentication {
     const email = this._email;
     let url = "http://dg-market.iptime.org:28019/mail";
 
-    if (!email) {
-      alert("인증번호를 발송할 이메일을 입력해주세요.");
-      return;
-    }
-
     try {
       const response = await axios.post(url, {
         user_email: email,
@@ -34,6 +29,7 @@ class Authentication {
     } catch (err) {
       alert("에러가 발생했습니다. 관리자에게 문의해주세요.");
       result = err.response;
+      console.log(err.response);
     }
 
     return result;

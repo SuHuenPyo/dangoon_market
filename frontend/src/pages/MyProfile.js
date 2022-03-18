@@ -4,8 +4,6 @@ import styled from "styled-components";
 import styles from "../asset/scss/SignupForm.module.scss";
 import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
-import axios from 'axios';
-
 
 // styled-components
 const Input = styled.input`
@@ -43,39 +41,6 @@ const Signup = () => {
   }, [validShow]);
 
 
-  // 인증메일 발송하기 
-  const sendValidNum = async (e) => {
-    let result = null;
-    const emailAddr = userEmail.current.value;
-
-    if(!emailAddr){
-      alert('인증번호를 발송할 이메일을 입력해주세요.');
-      return;
-    }
-
-    try {
-        const response = await axios.post("http://dg-market.iptime.org:28019/mail",{
-            'user_email' : emailAddr,
-        });
-
-        result = response;
-
-    } catch(err) {
-       console.log(err.reponse);
-       alert('에러가 발생했습니다. 관리자에게 문의해주세요.');
-       return;
-    }
-
-    console.log(result.status === 200);
-    console.dir(result);
-    console.dir(result.status);
-    
-    if(result.status === 200){
-      console.log(e.currentTarget);
-      e.currentTarget.innerText = "인증번호 확인";
-      return onToggleShow();
-    }
-  }
 
   // 프로필 미리보기 이미지관련 함수
   const onImgUpload = () => {
@@ -122,7 +87,6 @@ const Signup = () => {
             <Input type="text" placeholder="인증번호" name="validationNum" readOnly />
             <Button
               type="button"
-              onClick={sendValidNum}
               disabled
             >
               인증번호 전송
