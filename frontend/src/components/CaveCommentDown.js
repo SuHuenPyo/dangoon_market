@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../asset/css/cavecommentdown.module.css";
+import style from "../css/cavecommentdown.module.css";
 import imgwarning from "../img/warning.png";
 import { Link } from "react-router-dom";
 import { FaRegImages } from "react-icons/fa";

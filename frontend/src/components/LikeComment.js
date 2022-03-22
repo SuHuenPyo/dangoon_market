@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "../asset/css/Likelist.module.css";
+import style from "../css/Likelist.module.css";
 
 import { AiFillStar, AiOutlineStar} from "react-icons/ai";
 

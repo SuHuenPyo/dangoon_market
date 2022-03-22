@@ -1,6 +1,6 @@
 import React from "react";
-import style from "../asset/css/cavecommentup.module.css";
-import imgwarning from "../asset/img/warning.png";
+import style from "../css/cavecommentup.module.css";
+import imgwarning from "../img/warning.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
