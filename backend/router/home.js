@@ -14,7 +14,7 @@ let json = null;
      * @swagger
      * /home:
      *   get:
-     *     description: 단군마켓 판매글을 조회합니다. 
+     *     description: 단군마켓 판매글을 조회합니다. , item, 페이지의 마지막 번호를 리턴받습니다.
      *     tags: [Get (Working)]
      *     produces:
      *     - "application/json"
@@ -40,7 +40,7 @@ Home.get('/', async(req, res, next)=>{
         
     //페이지당 요청 글 개수 (default 10)
     const rows = req.query.rows || 10;
-    
+    let pagenationResult = null;
     try{
         //DB Connection
         dbcon = await mysql.createConnection(_config.database_config);
@@ -54,7 +54,7 @@ Home.get('/', async(req, res, next)=>{
 
         const totalCount = result1[0].cnt;
 
-        let pagenationResult = pagenation(totalCount, page, rows);
+        pagenationResult = pagenation(totalCount, page, rows);
 
         console.log(JSON.stringify(pagenationResult));
 
@@ -68,8 +68,8 @@ Home.get('/', async(req, res, next)=>{
         args.push(pagenationResult.listCount);
 
         const [result2] = await dbcon.query(sql, args);
-
         json = result2;
+    
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -85,7 +85,7 @@ Home.get('/', async(req, res, next)=>{
         dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
-    res.send({'item': json});
+    res.send({'item': json, 'pageEnd': pagenationResult.groupEnd});
 });
 /**
  * @swagger

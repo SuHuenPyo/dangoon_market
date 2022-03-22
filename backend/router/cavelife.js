@@ -43,7 +43,8 @@ caveLife.get('/', async(req, res, next)=>{
     
     //페이지당 요청 글 개수 (default 10)
     const rows = req.query.rows || 5;
-    
+
+    let pagenationResult = null;
     try{
         //DB Connection
         dbcon = await mysql.createConnection(_config.database_config);
@@ -57,7 +58,7 @@ caveLife.get('/', async(req, res, next)=>{
 
         const totalCount = result1[0].cnt;
 
-        let pagenationResult = pagenation(totalCount, page, rows);
+        pagenationResult = pagenation(totalCount, page, rows);
 
         //console.log(JSON.stringify(pagenationResult));
 
@@ -91,7 +92,7 @@ caveLife.get('/', async(req, res, next)=>{
     //-----------------
 
     //저장한 값 여기서 전송해주고 
-    res.send({'item': json});
+    res.send({'item': json, 'pageEnd': pagenationResult.groupEnd});
 
 });
 

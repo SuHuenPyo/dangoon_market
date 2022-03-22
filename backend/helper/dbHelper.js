@@ -65,6 +65,7 @@ export class DG_DB{
         }catch(e){
             throw new Error("쿼리 요청중 뭔가 문제가 생겼네요" + e);
         }
+        
     }
     /**
      * 파라미터로 YYYY-MM-DD hh:mm:ss 형식의 값을 입력받습니다. 
@@ -74,6 +75,6 @@ export class DG_DB{
      */
     checkElapsedTime = (targetTime)=> {return ImportManager.compareMinutes(targetTime)};
     
-
+    
     
 }

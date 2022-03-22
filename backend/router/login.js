@@ -28,10 +28,10 @@ const Login = express.Router();
  *         description: "successful operation"
  *     
 */
-Login.get('/', async(req, res, next)=>{
+Login.post('/', async(req, res, next)=>{
     let dbcon = null;
 
-
+    return res.status(500).json({text: 'interval error'});
 
     //현재 페이지 번호 받기 (default 1)
     const page = req.query.page || 1;

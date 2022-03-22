@@ -34,6 +34,9 @@ import serveFavicon from "serve-favicon";
 import morgan from "morgan"; 
 import cors from 'cors';
 import bodyParser from "body-parser";
+import expressValidator from "express-validator";
+import * as multer from "multer";
+
 
 
 
@@ -49,9 +52,13 @@ const __dirname = path.dirname(__filename);
  * */ 
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
 app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
+app.use(bodyParser.urlencoded({extended:true}));
+//parse form-data
+//app.use();
+
+
 
 //swagger path 등록 
 // app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, {explorer: true}));

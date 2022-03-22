@@ -16,23 +16,36 @@ const s3 = new AWS.S3({
         region : ImportManager.privateInfo.AWS_CONFIG.region,
     },
 });
+
+const multerFilter = (req, file, cb) => {
+    console.log("faeeeeeeeeeeeee");
+    console.log(file);
+    console.log(req.body.userName);
+    //cb(new AppError('Not an image! Please upload images only.', 400), false);
+    cb(null, true);
+
+};
+
 /**
  * 프로필 사진 업로드를 위한 셋팅
  */
-export let uploadProfile = multer({
+export let uploadSignUp = multer({
     storage : multerS3({
         s3: s3,
         bucket: ImportManager.privateInfo.AWS_CONFIG.bucket,
         key: function (req, file, cb) {
-             let extension = path.extname(file.originalname);
-             cb(null, 'profile/'+Date.now().toString() + extension)
+            let extension = path.extname(file.originalname);
+            cb(null, 'profile/'+Date.now().toString() + extension)
         },
         acl: 'public-read',
     }),
+    fileFilter: multerFilter,
+    
     limits: {
         fileSize: maxSize,
         files: maxProfileCount
-    }
+    },
+
 });
 /**
  * 수정 필요
@@ -41,6 +54,7 @@ export let uploadBoard = multer({
     storage : multerS3({
         s3: s3,
         bucket: ImportManager.privateInfo.AWS_CONFIG.bucket,
+
         key: function (req, file, cb) {
              let extension = path.extname(file.originalname);
              cb(null, file.fieldname+'/'+Date.now().toString() + extension)
@@ -54,5 +68,6 @@ export let uploadBoard = multer({
 });
 
 export let removeImage = async(fileKey)=>{
-    
+
 }
+

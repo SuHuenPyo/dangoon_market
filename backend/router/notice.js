@@ -31,6 +31,7 @@ const Notice = express.Router();
 */
 Notice.get('/', async(req, res, next)=>{
 
+    return res.status(500).json({text: 'interval error'});
     let dbcon = null;
 
     //현재 페이지 번호 받기 (default 1)

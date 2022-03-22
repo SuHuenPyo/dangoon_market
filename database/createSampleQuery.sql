@@ -8,12 +8,12 @@ Memo >>>>>>>>>>>>>>>>>>>>>>>>>>>
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 */
 
-insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test1', '테스트1', '1234', 'test1@gmail.com');
-insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test2', '테스트2', '1234', 'test2@gmail.com');
-insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test3', '테스트3', '1234', 'test3@gmail.com');
-insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test4', '테스트4', '1234', 'test4@gmail.com');
-insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test5', '테스트5', '1234', 'test5@gmail.com');
-insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL) VALUES('test6', '테스트6', '1234', 'test6@gmail.com');
+insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_KAKAO_ID) VALUES('test1', '테스트1', '1234', 'test1@gmail.com', 'asdas3d');
+insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_KAKAO_ID) VALUES('test2', '테스트2', '1234', 'test2@gmail.com', 'asda5sd');
+insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_KAKAO_ID) VALUES('test3', '테스트3', '1234', 'test3@gmail.com', 'asda6sd');
+insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_KAKAO_ID) VALUES('test4', '테스트4', '1234', 'test4@gmail.com', 'as1dasd');
+insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_KAKAO_ID) VALUES('test5', '테스트5', '1234', 'test5@gmail.com', 'asd8asd');
+insert into dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_KAKAO_ID) VALUES('test6', '테스트6', '1234', 'test6@gmail.com', 'asda46sd');
 
 
 
