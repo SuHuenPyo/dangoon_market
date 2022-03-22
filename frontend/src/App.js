@@ -5,6 +5,7 @@ import "./asset/scss/common.scss";
 import Home from './pages/Home';
 import NewProduct from './pages/NewProduct'
 import CaveLife from './pages/CaveLife';
+import CaveComment from './pages/CaveComment';
 import ProfileView from './components/ProfileView';
 import Categori from "./pages/Categori";
 import CategoriList from "./pages/CategoriList";
@@ -13,6 +14,10 @@ import SignUp from './pages/Signup';
 import Login from './pages/Login';
 import Mygralic from './pages/Mygralic';
 import MyProfile from './pages/MyProfile';
+import Likelist from './pages/Likelist';
+import Salelist from './pages/Salelist';
+import Buylist from './pages/Buylist';
+import Announce from './pages/Announce';
 
 
 
@@ -31,12 +36,17 @@ function App() {
         <Route path="/categori" element={<Categori/>} />
         <Route path="/categori/:categori" element={<CategoriList/>} />
         <Route path="/cavelife" element={<CaveLife/>} />
+        <Route path="/cavelife/:id" element={<CaveComment/>} />
         <Route path="/mygralic" element={<Mygralic/>} />
         <Route path="/profile" element={<ProfileView/>} />
         <Route path='/myprofile' element={<MyProfile/>}/>
         <Route path="/product/:b_id" element={<ProductDetail/>} />
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/likelist' element={<Likelist/>}/>
+        <Route path='/salelist' element={<Salelist/>}/>
+        <Route path='/buylist' element={<Buylist/>}/>
+        <Route path='/notice' element={<Announce/>}/>
       </Routes>
   );
 }

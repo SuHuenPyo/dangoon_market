@@ -4,6 +4,7 @@ import { BsReceiptCutoff, BsCart2 } from "react-icons/bs";
 
 const ProfileView = () => {
   return (
+    
     <div className={styles.container} onClick={(e)=>{window.history.back()}}>
       <div className={styles.view}>
         <div className={styles.image}>

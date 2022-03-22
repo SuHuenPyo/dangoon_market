@@ -1,0 +1,192 @@
+
+/* 스크롤바 제거 */
+.saleslistpage::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera*/
+}
+
+/* 구매목록 아이템 */
+.salesitem {
+    width: 100%;
+    height: 110px;
+}
+
+.saleslink {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 구매요청한 글의 이미지 */
+.salesimg {
+    flex-basis:100px;
+    width: 200px;
+    min-width:100px;
+    height: 85px;
+    text-align:center;
+    margin: 0 5px 0 0;
+    & img {
+        width: 85px;
+        height: 100%;
+        border-radius: 5px;
+    }
+    overflow: hidden;
+}
+
+/* 구매요청한 글의 내용 */
+.salescont {
+    flex-basis: auto;
+    min-width: 200px;
+    width: 100%;
+    height: 85px;   
+    font-size: 14px; 
+    position: relative;
+    
+    h2{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+        line-height:27px;
+        font-weight: normal;
+    }
+
+    .salesInfo{
+        color: #bcbcbc;
+        font-size: 13px;
+        line-height: 22px;
+        word-spacing: 4px;
+    }
+
+    .salesPrice {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 35px;
+        letter-spacing: 0.05em;
+    }
+}
+
+/* 구매요청 상황 */
+.salesstatus {
+    display: inline-block;
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    box-sizing: border-box;
+    
+}
+
+.completestatus {
+    display: inline-block;
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    float: right;
+    box-sizing: border-box;
+}
+
+.completestatus:after {
+    content:'';
+    display: block;
+    float: none;
+    clear: both;
+}
+
+.accepted {
+    background-color: rgba(252, 198, 123, 0.95);
+}
+
+.salescontact {
+    width: 100%;
+    height: 0px;
+    text-align: center;
+    border: 1px solid #e5e5e5;
+    border-top: 0;
+    font-size: 13px;
+    display: none;
+}
+
+.salescontact >.contacttype {
+    display: inline-block;
+    width: 150px;
+    height: 100%;
+    line-height: 50px;
+    margin-right: 80px;
+}
+
+.salescontact >.salesaccept {
+    display: inline-block;
+    width: 70px;
+    font-weight: 500;
+    color: white;
+    height: 35px;
+    background-color: #f99d1b;
+    line-height: 35px;
+}
+
+.salesaccept {
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+}
+
+.salescontact.show {
+    display: block;
+    height: 50px;
+}
+
+/* 거래완료 */
+.completestatus {
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+.completecontact {
+    width: 100%;
+    height: 0px;
+    text-align: center;
+    border: 1px solid #e5e5e5;
+    border-top: 0;
+    font-size: 13px;
+    display: none;
+}
+
+.completecontact>.contacttypes {
+    display: inline-block;
+    width: 110px;
+    height: 100%;
+    line-height: 50px;
+    margin-right: 100px;
+}
+
+.completecontact>.completeaccept {
+    display: inline-block;
+    width: 70px;
+    font-weight: 500;
+    color: white;
+    height: 35px;
+    line-height: 35px;
+    background-color: #f99d1b;
+}
+
+.completeaccept {
+    border: 1px solid #d5d5d5;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.completecontact.show {
+    display: block;
+    height: 50px;
+}

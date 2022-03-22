@@ -1,0 +1,113 @@
+
+/* 구매목록 아이템 */
+.buyitem {
+    width: 100%;
+    height: 110px;
+}
+
+/* 구매목록 중 구매요청한 글 */
+.buyitem> .postlink {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* 구매요청한 글의 이미지 */
+.postimg {
+    flex-basis:100px;
+    width: 200px;
+    min-width:100px;
+    height: 85px;
+    text-align:center;
+    margin: 0 5px 0 0;
+    & img {
+        width: 85px;
+        height: 100%;
+        border-radius: 5px;
+    }
+    overflow: hidden;
+}
+/* 구매요청한 글의 내용 */
+.postcont {
+    flex-basis: auto;
+    min-width: 200px;
+    width: 100%;
+    height: 85px;   
+    font-size: 14px; 
+    position: relative;
+    
+    h2{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+        line-height:27px;
+        font-weight: normal;
+    }
+
+    .postInfo{
+        color: #bcbcbc;
+        font-size: 13px;
+        line-height: 22px;
+        word-spacing: 4px;
+    }
+
+    .postPrice {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 35px;
+        letter-spacing: 0.05em;
+    }
+}
+
+/* 구매요청 상황 */
+.buyitem>  .buystatus {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+.accepted {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    font-size: 14px;
+    background-color: rgba(252, 198, 123, 0.95);
+}
+
+.buyitem> .sellercontact {
+    width: 100%;
+    height: 0px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #e5e5e5;
+    border-top: 0;
+    font-size: 14px;
+    display: none;
+}
+
+.sellercontact>.contacttype {
+    display: inline-block;
+    width: 110px;
+    height: 100%;
+}
+
+.sellercontact>.sellerinfo {
+    display: inline-block;
+    text-align: left;
+    width: 220px;
+    font-weight: bold;
+    height: 100%;
+}
+
+ .sellercontact.show {
+    display: block;
+    height: 40px;
+}

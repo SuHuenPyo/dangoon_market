@@ -1,0 +1,102 @@
+
+/* 게시글  */
+.likeitem {
+    width: 100%;
+    height: 110px;
+    position: relative;
+}
+
+.postlink {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.postimg {
+    flex-basis:100px;
+    width: 200px;
+    min-width:100px;
+    height: 85px;
+    text-align:center;
+    margin: 0 5px 0 0;
+
+    & img {
+        width: 85px;
+        height: 100%;
+        border-radius: 5px;
+    }
+    
+    overflow: hidden;
+
+}
+
+/* 게시글 제목, 판매날짜 등 */
+.postcontent {
+    flex-basis: auto;
+    min-width: 200px;
+    width: 100%;
+    height: 85px;   
+    font-size: 14px; 
+    position: relative;
+    
+    h2{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 16px;
+        line-height:27px;
+        font-weight: normal;
+    }
+
+    .postInfo{
+        color: #bcbcbc;
+        font-size: 13px;
+        line-height: 22px;
+        word-spacing: 4px;
+    }
+
+    .postPrice {
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 35px;
+        letter-spacing: 0.05em;
+    }
+}
+
+/* 게시글 제목 */
+.likeitem>.postlink>.postcontent>.posttitle {
+    font-size: 16px;
+    line-height: 25px;
+    margin: 20px 0 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* 게시글 지역,업데이트 시간(날짜) */
+.likeitem>.postlink>.postcontent>.postinfo {
+    font-size: 12px;
+    line-height: 20px;
+    color: #d5d5d5;
+}
+
+/* 게시글 가격 */
+.likeitem>.postlink>.postcontent>.postprice {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+    margin: 10px 0 0 0;
+}
+
+.likeitem>.likebtn {
+    position: absolute;
+    top: 60%;
+    right: 5%;
+    background-color: transparent;
+    border: 0;
+    font-size: 2.5rem;
+    color: #dbdbdb;
+}

@@ -94,6 +94,7 @@ const BtnLine = styled.div`
         text-align:left;
         color: #333;
 
+
         svg{
             font-size: 17px;
         }
@@ -126,15 +127,14 @@ const CavePostVeiw = ({data,inview}) => {
      <>
      {data.map((v,i)=>{
        return (
-        
-      <PostVeiw key={i} {...(data.length-1 === i ? {ref : inview} : {})} >
+      <PostVeiw key={v.b_id} {...(data.length-1 === i ? {ref : inview} : {})} >
       <Poster to="/profile">
         <div>
           <img src="http://placekitten.com/45/45" alt="" />
         </div>
         <p>{v.b_writer}</p>
       </Poster>
-      <Content to="/home">
+      <Content to={`/cavelife/:${v.b_id}}`}>
         <h2>{v.b_title}</h2>
         <div>
           {v.b_content}
@@ -148,7 +148,9 @@ const CavePostVeiw = ({data,inview}) => {
          { click ? <AiFillLike/> : <AiOutlineLike />  }  <span>좋아요</span>
         </button>
         <button>
+        <Link to={`/cavelife/:${v.b_id}}`}>
           <AiOutlineMessage /> <span>답변하기</span>
+        </Link>
         </button>
       </BtnLine>
       <Gap/>

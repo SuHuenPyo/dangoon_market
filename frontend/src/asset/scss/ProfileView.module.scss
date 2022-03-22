@@ -20,6 +20,10 @@ $tablet-breakpoint: 508px;
   height: 100%;
   background-color: rgba(221, 221, 221, 0.2);
   @include flex-center();
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
 
   .view {
     width: $view-width;

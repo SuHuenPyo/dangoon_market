@@ -3,7 +3,6 @@ import React from "react";
 import HeaderLogo from '../components/HeaderLogo';
 import Announcement from "../components/Announcement";
 import Announcetitle from "../components/Announcementtitle";
-import Announcementbutton from "../components/Announcementbutton";
 
 
 const CaveLife = () => {
@@ -16,7 +15,6 @@ const CaveLife = () => {
         <Announcement />
         <Announcement />
         <Announcement />
-        <Announcementbutton />
       </main>
     </>
   );

@@ -1,7 +1,6 @@
 import React from "react";
-import style from "../css/cavecommentup.module.css";
-import imgwarning from "../img/warning.png";
-import { Link } from "react-router-dom";
+import style from "../asset/css/cavecommentup.module.css";
+import imgwarning from "../asset/img/warning.png";
 import styled from "styled-components";
 
 import Report from "./Report";
@@ -37,10 +36,21 @@ const BtnLine = styled.div`
         }
     }
 
-     & button:first-child{
+    & button:first-child{
         color:${(props)=>props.like};
     }
+    & button:first-child:hover{
+      color:#f99d1b; 
+  }
 `;
+
+const Gap = styled.div`
+    width: 100%;
+    margin: 5px 0 0 0;
+    height: 10px;
+    background-color: #ccc;
+    opacity: 0.1;
+`
 
 const CaveCommentUp = () => {
   const [click, setClick] = React.useState(false);
@@ -48,8 +58,8 @@ const CaveCommentUp = () => {
   const [show, setShow] = React.useState(false);
 
   const onCheck = React.useCallback(()=>{
-  window.location.href = '/home';
-    },[])
+    setShow(false);
+    },[]);
 
   return (
     <>
@@ -60,9 +70,8 @@ const CaveCommentUp = () => {
           <p>작성자1</p>
         </div>
         <div className={style.cavepostcont}>작성글 예시입니다.</div>
-          {console.log(show)}
           <button className={style.postreport} onClick={()=>{setShow(true)}}>
-            <img src={imgwarning} />
+            <img src={imgwarning}/>&nbsp;
             부적절한 게시글이라면 단군마켓에 알려주세요.
           </button>
       </div>
@@ -76,7 +85,7 @@ const CaveCommentUp = () => {
         </button>
       </BtnLine>
     </div>
-    
+    <Gap/>
     <Report show={show} onClick={onCheck}/>
     </>
   );

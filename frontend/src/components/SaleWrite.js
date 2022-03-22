@@ -1,5 +1,5 @@
 import React from "react";
-import style from '../css/salewrite.module.css';
+import style from '../asset/css/salewrite.module.css';
 import { BsPlusLg } from "react-icons/bs";
 
 import Notice from './Notice';
@@ -39,8 +39,6 @@ const SaleWrite = () => {
             </div>
 
             <textarea name="product-info" className={style.producttextarea} cols="30" rows="10"></textarea>
-
-            {console.log(show)}
             <button id="product-post-btn" type="button" className={style.productpostbtn} onClick={()=>{setShow(true)}}>글쓰기 완료</button>
         </form>
     </div>

@@ -33,7 +33,7 @@ const Mygralic = () => {
                   판매내역
               </div>
           </Link>
-          <Link to="/purchaselist" className={styles.usagesItem}>
+          <Link to="/buylist" className={styles.usagesItem}>
             <div className={styles.purchase}>
                 <AiOutlineShoppingCart/><br/>
                 구매내역
