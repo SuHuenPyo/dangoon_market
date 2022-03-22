@@ -3,6 +3,7 @@ import _config from "../config/_config.js";
 import  * as randomHelper from '../helper/RandomHelper.js';
 import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
+import { DG_DB } from "../helper/dbHelper.js";
 
 const Login = express.Router();
 
@@ -29,58 +30,33 @@ const Login = express.Router();
  *     
 */
 Login.post('/', async(req, res, next)=>{
-    let dbcon = null;
-
-    return res.status(500).json({text: 'interval error'});
-
-    //현재 페이지 번호 받기 (default 1)
-    const page = req.query.page || 1;
     
-    //페이지당 요청 글 개수 (default 10)
-    const rows = req.query.rows || 5;
-    
+    let {user_id, user_pw} = req.body;
+
+    let dbcon = new DG_DB();
+    //return res.status(400).json({text: '임시 에러'});
+
+    console.log(user_id, user_pw);
+
     try{
-        //DB Connection
-        dbcon = await mysql.createConnection(config.database_config);
-        await dbcon.connect();
+        await dbcon.DbConnect();
 
-        //전체 데이터 수 조회
-        let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='C'";
+        //존재유무 체크
+        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.member WHERE (M_USER_ID=? AND M_PW=?)`, user_id, user_pw);
         
-        const [result1] = await dbcon.query(sql);
-        console.log(result1);
+        if(result[0].cnt < 1){
+            return res.status(400).json({text: '아이디와 패스워드를 다시 확인하세요'});
+        }
 
-        const totalCount = result1[0].cnt;
-
-        pagenation = pagenationHelper.pagenation(totalCount, page, rows);
-
-        console.log(JSON.stringify(pagenation));
-
-        let args = [];
-
-        //데이터 조회 
-        sql = "SELECT b_id, m_id , b_writer, b_title, b_content, b_img, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.board WHERE b_type='C' LIMIT ?,?";
-
-        args.push(pagenation.offset);
-        args.push(pagenation.listCount);
-
-        const [result2] = await dbcon.query(sql, args);
-
-        json = result2;
-
-        console.log(result2);
-        
     }catch(e){
         return next(e);
     }finally{
-        //dbEnd 반드시 마지막에 DB 핸들풀고 
-        dbcon.end();
+        await dbcon.end();
     }
-    //저장한 값 여기서 전송해주고 
-    res.send({'item': json});
 
+    return res.status(200).json({text: '로그인 성공입니다.'});
     
-    return router;
+   
 });
 
 export default Login

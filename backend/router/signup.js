@@ -23,7 +23,7 @@ let json = null;
  * /signup:
  *   post:
  *     description: 회원가입을 위한 폼을 전송합니다.
- *     tags: [Post (Not Work) 테스트x]
+ *     tags: [Post (Working)]
  *     produces:
  *     - "application/json"
  *     parameters:
