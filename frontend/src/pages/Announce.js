@@ -1,16 +1,13 @@
 import React from "react";
 
-import HeaderLogo from '../components/HeaderLogo';
+import HeaderTitle from "../components/HeaderTitle";
 import Announcement from "../components/Announcement";
-import Announcetitle from "../components/Announcementtitle";
-
 
 const CaveLife = () => {
   return (
     <>
-      <HeaderLogo/>
+      <HeaderTitle title="공지사항" />
       <main>
-        <Announcetitle />
         <Announcement />
         <Announcement />
         <Announcement />
