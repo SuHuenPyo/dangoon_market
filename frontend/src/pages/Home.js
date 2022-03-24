@@ -49,7 +49,7 @@ const Home = () => {
         {!loading && rt === 200 && (
           <>
           <SaleListItem data={item.item} inview={ref} />
-          <WriteButton/>
+          <WriteButton path='/newproduct'/>
           </>
         )}
       </main>

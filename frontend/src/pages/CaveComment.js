@@ -94,14 +94,14 @@ const CaveComment = () => {
       </BtnLine>
     </div>
     <Gap/>
-    <Report show={show} onClick={onCheck}/>
         <CaveCommentDown />
+      </main>
+    <Report show={show} onClick={onCheck}/>
       <form className={style.cavecommentwrite} enctype='multipart/form-data'>
         <label for="comment-input-img" className={style.icons}><BsCardImage /></label>
         <input type="file" id="comment-input-img" className={style.commentinputimg} />
         <input type="text" name="cavecomment-com" placeholder="댓글을 입력해주세요." className={style.commentwriteinput} ref={input} />
       </form>
-      </main>
     </>
   );
 };

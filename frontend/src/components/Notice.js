@@ -13,7 +13,7 @@ const StyledNotice = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  border-radius: 17% 17% 0 0;
+  border-radius: 20% 20% 0 0;
   font-size: 14px;
   text-align: center;
   position: fixed;

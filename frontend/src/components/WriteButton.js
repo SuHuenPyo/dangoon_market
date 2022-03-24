@@ -6,7 +6,7 @@ import { FiEdit } from "react-icons/fi"
 const WriteButton = (props) => {
   return (
     <button className={style.writesalebtn}>
-        <Link to="/newproduct" className={style.link}>
+        <Link to={props.path} className={style.link}>
             <FiEdit className={style.icon} />
         </Link>
         </button>

@@ -13,12 +13,12 @@ const StyledReport = styled.div`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  border-radius: 17% 17% 0 0;
+  border-radius: 20% 20% 0 0;
   font-size: 14px;
   text-align: center;
   position: fixed;
   bottom: 0px;
-  margin: auto;
+  margin: 0 auto;
   z-index: 97;
   display: ${(props) => (props.show ? "flex" : "none")};
   opacity: ${(props) => (props.show ? 1 : 0)};

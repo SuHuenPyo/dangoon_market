@@ -18,6 +18,7 @@ import Likelist from './pages/Likelist';
 import Salelist from './pages/Salelist';
 import Buylist from './pages/Buylist';
 import Announce from './pages/Announce';
+import NewCavelife from './pages/NewCavelife';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/home" element={<Home/>} />
         <Route path="/newproduct" element={<NewProduct/>}/>
+        <Route path="/newcavelife" element={<NewCavelife/>}/>
         <Route path="/categori" element={<Categori/>} />
         <Route path="/categori/:categori" element={<CategoriList/>} />
         <Route path="/cavelife" element={<CaveLife/>} />

@@ -6,6 +6,7 @@ import ReactLoading from "react-loading";
 
 import HeaderTitle from "../components/HeaderTitle";
 import CavePostVeiw from "../components/CavePostVeiw";
+import WriteButton from "../components/WriteButton";
 
 const CaveLife = () => {
   const { rt, rtmsg, item, loading } = useSelector((state) => state.cave);
@@ -42,7 +43,10 @@ const CaveLife = () => {
           </div>
         )}
         {!loading && rt === 200 && (
+          <>
           <CavePostVeiw data={item.item} inview={ref} />
+          <WriteButton path='/newcavelife'/>
+          </>
         )}
       </main>
     </>

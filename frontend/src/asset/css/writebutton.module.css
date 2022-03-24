@@ -9,10 +9,17 @@
     background-color: #ff9500;
     border: 1px solid #ff9500;
     border-radius: 30px;
-    position: sticky;
-    left: 70%;
-    top: 100px;
+    position: fixed;
+    left:57%;
+    bottom: 20px;
     z-index: 1;
+}
+
+@media (max-width: 500px){
+    .writesalebtn {
+        left: 78%;
+        bottom: 36px;
+    }
 }
 
 .writesalebtn:active {
@@ -29,4 +36,6 @@
 .writesalebtn .icon {
     margin: 0 0 0 3px;
     color: white;
+    position: relative;
+    top: 2px;
 }

@@ -6,6 +6,7 @@ import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
 import Authentication from "../utils/Authentication";
 import RegexHelper from "../utils/RegexHelper";
+import { onImgView } from '../utils/ImgPreview'
 
 const Input = styled.input`
   display: block;
@@ -111,17 +112,17 @@ const Signup = () => {
   );
 
   // 프로필 미리보기 이미지관련 함수
-  const onImgUpload = async (e) => {
-    if (imgInput.current.files[0]) {
-      const reader = new FileReader();
+  // const onImgUpload = (e) => {
+  //   if (imgInput.current.files[0]) {
+  //     const reader = new FileReader();
 
-      reader.onload = (event) => {
-        imgView.current.innerHTML = `<img src=${event.target.result} />`;
-      };
+  //     reader.onload = (event) => {
+  //       imgView.current.innerHTML = `<img src=${event.target.result} />`;
+  //     };
 
-      reader.readAsDataURL(imgInput.current.files[0]);
-    }
-  };
+  //     reader.readAsDataURL(imgInput.current.files[0]);
+  //   }
+  // };
 
   const validation = (e) => {
     e.preventDefault();
@@ -182,12 +183,12 @@ const Signup = () => {
               type="file"
               name="userImg"
               accept="image/*"
-              onChange={onImgUpload}
+              onChange={(event)=>{onImgView(event,'#profile')}}
             />
             <label className={styles.uploader} htmlFor="update_img">
               <AiOutlineCamera />
             </label>
-            <div ref={imgView} className={styles.imgView}>
+            <div id='profile' className={styles.imgView}>
               <AiOutlineUser />
             </div>
           </div>

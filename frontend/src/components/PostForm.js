@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../asset/scss/PostForm.module.scss";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import styled from "styled-components";
+import onImgUpload from "../utils/ImgPreview";
 
 import Notice from "./Notice";
 
@@ -23,15 +24,21 @@ const ImgUploadBtn = styled.label`
 `;
 
 const ImgSpace = styled.div`
-  width: calc(100% - 75px);
+  width: 100vh;
   height: 75px;
-  max-height: 75px;
   display: flex;
-  overflow: auto;
+  overflow-x: scroll;
+  position:relative;
   scrollbar-width: none; /* Firefox */
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  img {
+    display: block;
+    width: 75px;
+    height: 75px;
   }
 `;
 
@@ -49,7 +56,7 @@ const PostForm = (props) => {
         <form
           className={styles.productPost}
           action="post"
-          // enctype="multipart/form-data"
+          enctype="multipart/form-data"
         >
           <input
             type="text"
@@ -96,16 +103,12 @@ const PostForm = (props) => {
                 accept="image/*"
                 id="product-img"
                 className={styles.productImg}
+                onChange={(event)=>{onImgUpload(event,"#imgView")}}
               />
             </div>
 
-            <ImgSpace>
-              <img src="https://via.placeholder.com/75" alt="" />
-              <img src="https://via.placeholder.com/75" alt="" />
-              <img src="https://via.placeholder.com/75" alt="" />
-              <img src="https://via.placeholder.com/75" alt="" />
-              <img src="https://via.placeholder.com/75" alt="" />
-              <img src="https://via.placeholder.com/75" alt="" />
+            <ImgSpace id='imgView'>
+  
             </ImgSpace>
           </div>
 
