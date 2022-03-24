@@ -4,6 +4,7 @@ import styled from "styled-components";
 import styles from "../asset/scss/SignupForm.module.scss";
 import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
+import { onImgView } from '../utils/ImgPreview';
 
 // styled-components
 const Input = styled.input`
@@ -31,7 +32,6 @@ const Button = styled.button`
 const Signup = () => {
   const userEmail = React.useRef();
   const imgInput = React.useRef();
-  const imgView = React.useRef();
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
@@ -40,21 +40,6 @@ const Signup = () => {
     setValidShow(validShow ? false : true);
   }, [validShow]);
 
-
-
-  // 프로필 미리보기 이미지관련 함수
-  const onImgUpload = () => {
-    if(imgInput.current.files[0]){
-        const reader = new FileReader();
-
-        reader.onload = (event) => {
-          imgView.current.innerHTML = `<img src=${event.target.result} />`;
-        }
-
-        reader.readAsDataURL(imgInput.current.files[0]);
-    }
-  }
-
   return (
     <>
       <HeaderLogo />
@@ -62,11 +47,11 @@ const Signup = () => {
         <form action="" method="post" encType="multipart/form-data">
           {/* 이미지 업로드 영역 */}
           <div className={styles.UploadImg}>
-            <input ref={imgInput} id="update_img" type="file" name="userImg" accept='image/*' onChange={onImgUpload}/>
+            <input ref={imgInput} id="update_img" type="file" name="userImg" accept='image/*' onChange={(event)=>{onImgView(event,'#myprofile_img',"newprofile")}}/>
             <label className={styles.uploader} htmlFor="update_img">
               <AiOutlineCamera />
             </label>
-            <div ref={imgView} className={styles.imgView}>
+            <div id='myprofile_img'className={styles.imgView}>
               {/* 업로드된 이미지 영역 */}
               {/* 이미지 업로드 전 표시될 아이콘 */}
               <AiOutlineUser />

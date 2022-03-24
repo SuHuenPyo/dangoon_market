@@ -93,16 +93,11 @@ img {
     margin: 0 10px 0 0;    
 }
 
-@media (min-width: 355px) and (max-width:(500 - 1px)){
-    .cavecommentwrite {
-        width: 100%;
-    }
-}
 
 /* 댓글 버튼 */
 .cavecommentwrite{
     width: 375px;
-    height: 50px;
+    height: 60px;
     line-height:50px;
     position: fixed;
     bottom: 20px;
@@ -111,20 +106,26 @@ img {
     border-top: 1px solid #eee;
 }
 
+@media (max-width:500px){
+    .cavecommentwrite {
+        width: 100vw;
+    }
+}
+
 .cavecommentwrite > label[for='comment-input-img'] {
-    font-size: 25px;
+    font-size: 27px;
     width: 40px;
     text-align:center;
     margin: 5px 5px 0 0;
-}
+}   
 
 .cavecommentwrite > .commentinputimg {
     display: none;
 }
 
 .cavecommentwrite > .commentwriteinput {
-    width: 80%;
-    height: 30px;
+    width: 87%;
+    height: 35px;
     border-radius: 20px;
     border: 1px solid #ccc;
     text-indent: 10px;

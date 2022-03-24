@@ -56,16 +56,16 @@ const Gap = styled.div`
     opacity: 0.1;
 `
 
-const CaveComment = () => {
+const CaveComment = (props) => {
   const input = React.useRef();
 
   const [click, setClick] = React.useState(false);
 
   const [show, setShow] = React.useState(false);
 
-  const onCheck = React.useCallback(()=>{
-    setShow(false);
-    },[])
+  const onToggleReport = React.useCallback(()=>{
+    setShow(show ? false : true);
+  },[show])
 
   return (
     <>
@@ -78,7 +78,7 @@ const CaveComment = () => {
           <p>작성자1</p>
         </div>
         <div className={style.cavepostcont}>작성글 예시입니다.</div>
-          <button className={style.postreport} onClick={()=>{setShow(true)}}>
+          <button className={style.postreport} onClick={onToggleReport}>
             <img src={imgwarning}/> &nbsp;
             부적절한 게시글이라면 단군마켓에 알려주세요.
           </button>
@@ -94,11 +94,11 @@ const CaveComment = () => {
       </BtnLine>
     </div>
     <Gap/>
-        <CaveCommentDown />
+        <CaveCommentDown onClick={onToggleReport}/>
       </main>
-    <Report show={show} onClick={onCheck}/>
-      <form className={style.cavecommentwrite} enctype='multipart/form-data'>
-        <label for="comment-input-img" className={style.icons}><BsCardImage /></label>
+    <Report show={show} onClick={onToggleReport}/>
+      <form className={style.cavecommentwrite} encType='multipart/form-data'>
+        <label htmlFor="comment-input-img" className={style.icons}><BsCardImage /></label>
         <input type="file" id="comment-input-img" className={style.commentinputimg} />
         <input type="text" name="cavecomment-com" placeholder="댓글을 입력해주세요." className={style.commentwriteinput} ref={input} />
       </form>
