@@ -3,6 +3,7 @@ import HeaderLogo from "../components/HeaderLogo";
 import SaleListItem from "../components/SaleListItem";
 import ReactLoading from "react-loading";
 import { useInView } from "react-intersection-observer";
+import  WriteButton  from '../components/WriteButton';
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -46,7 +47,10 @@ const Home = () => {
         )}
         {/* 정상작동 */}
         {!loading && rt === 200 && (
+          <>
           <SaleListItem data={item.item} inview={ref} />
+          <WriteButton/>
+          </>
         )}
       </main>
     </>

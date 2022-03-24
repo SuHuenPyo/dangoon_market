@@ -3,13 +3,13 @@ import style from "../asset/css/writebutton.module.css"
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi"
 
-const WriteButton = () => {
+const WriteButton = (props) => {
   return (
-    <Link to="/home">
-        <button className={style.writesalebtn}>
-            <FiEdit className={style.far} />
+    <button className={style.writesalebtn}>
+        <Link to="/newproduct" className={style.link}>
+            <FiEdit className={style.icon} />
+        </Link>
         </button>
-    </Link>
   );
 };
 

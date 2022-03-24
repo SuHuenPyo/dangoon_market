@@ -87,8 +87,9 @@ const ProductDetail = () => {
       >
         거래요청
       </button>
-      <Report show={reportShow} onClick={onToggleReport} />
+      <Report bottom={"-70px"} show={reportShow} onClick={onToggleReport} />
       <Notice
+       bottom={"-70px"}
         show={noticeShow}
         onClick={onToggleNotice}
         title="정상적으로 거래요청이 완료되었습니다."

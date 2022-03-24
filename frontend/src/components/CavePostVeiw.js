@@ -108,9 +108,6 @@ const BtnLine = styled.div`
         }
     }
 
-     & button:first-child{
-        color:${(props)=>props.like};
-    }
 `;
 
 const Gap = styled.div`
@@ -143,8 +140,17 @@ const CavePostVeiw = ({data,inview}) => {
       <ContentImg>
         { v.b_img ? <img src={v.b_img} alt="" /> : null}
       </ContentImg>
-      <BtnLine className='likeBtn' like={click ? '#f99d1b' : 'inherit'}>
-        <button onClick={(e)=>{ click ? setClick(false) :setClick(true)}}>
+      <BtnLine className='likeBtn'>
+        <button onClick={(e)=>{ 
+          const current = e.currentTarget;
+          if(click){
+            current.style.color = null;
+            setClick(false)
+          } else {
+            current.style.color = "#f99d1b";
+            setClick(true)
+          }
+        }}>
          { click ? <AiFillLike/> : <AiOutlineLike />  }  <span>좋아요</span>
         </button>
         <button>
