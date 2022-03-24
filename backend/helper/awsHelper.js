@@ -17,12 +17,27 @@ const s3 = new AWS.S3({
     },
 });
 
-const multerFilter = (req, file, cb) => {
-    console.log("faeeeeeeeeeeeee");
-    console.log(file);
-    console.log(req.body.userName);
-    //cb(new AppError('Not an image! Please upload images only.', 400), false);
-    cb(null, true);
+//uploadSignUp을 위한 필터 구성
+const SignUpFilter = (req, file, cb) => {
+    let typeArray = file.mimetype.split('/');
+    let fileType = typeArray[1];
+    console.log(typeArray);
+    console.log(fileType);
+    if(fileType == 'jpg' || fileType == 'png' || fileType == 'jpeg'){
+        cb(null, true);    
+    }else{
+        cb(new AppError('허용되지 않는 이미지 파일입니다. jpg, png, jpeg 외엔 업로드가 불가능합니다.', 400), false);
+    }
+    
+
+
+
+    
+//    console.log("faeeeeeeeeeeeee");
+ //   console.log(file);
+  //  console.log(req.body.userName);
+    
+    
 
 };
 
@@ -39,7 +54,7 @@ export let uploadSignUp = multer({
         },
         acl: 'public-read',
     }),
-    fileFilter: multerFilter,
+    fileFilter: SignUpFilter,
     
     limits: {
         fileSize: maxSize,
@@ -47,6 +62,8 @@ export let uploadSignUp = multer({
     },
 
 });
+
+
 /**
  * 수정 필요
  */

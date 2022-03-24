@@ -16,8 +16,6 @@ import { DG_DB } from "../helper/dbHelper.js";
 
 const signUp = express.Router();
 
-let dbcon = null;
-let json = null;
 /**
  * @swagger
  * /signup:

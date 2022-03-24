@@ -9,21 +9,28 @@ const Login = express.Router();
 
 /**
  * @swagger
- * /cavelife:
- *   get:
- *     description: 동굴생활 전체 글을 조회합니다.. 
- *     tags: [Get (Working)]
+ * /home:
+ *   post:
+ *     description: 로그인을 위한 폼을 전송합니다..
+ *     tags: [Post (Working)]
  *     produces:
  *     - "application/json"
  *     parameters:
- *     - name: "page"
- *       in: "query"
- *       description: "검색 할 페이지 번호를 설정합니다. default = 1"
- *       type: "number"
- *     - name: "rows"
- *       in: "query"
- *       description: "페이지당 표시 개수를 설정합니다. default = 5"
- *       type: "number"
+ *     - name: "content"
+ *       in: "body"
+ *       description: "로그인을 위한 폼 전송"
+ *     content:
+ *      multipart/form-data:
+ *       schema:
+ *         type: object
+ *         required:
+ *              - Info
+ *         properties:
+ *              user_id:
+ *                  type: string
+ *              user_pw:
+ *                  type: string
+ *         
  *     responses:
  *       "200":
  *         description: "successful operation"
