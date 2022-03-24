@@ -74,7 +74,7 @@ const Signup = () => {
         title: "인증메일 발송이 완료되었습니다.",
         subTitle: `5분내로 인증해주세요.`,
       });
-
+      
       return onToggleShow();
     }
   };
