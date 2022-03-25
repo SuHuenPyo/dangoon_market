@@ -85,7 +85,7 @@ const ProductDetail = () => {
       >
         거래요청
       </button>
-      <Report bottom={"-70px"} show={reportShow} onClick={onToggleReport} />
+      <Report bottom={"-70px"} show={reportShow} onClick={onToggleReport} type='sale' />
       <Notice
        bottom={"-70px"}
         show={noticeShow}

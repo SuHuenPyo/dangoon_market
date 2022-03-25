@@ -2,10 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import style from "../asset/scss/Likelist.module.scss";
 
-import { AiFillStar, AiOutlineStar} from "react-icons/ai";
-
 const LikeComment = () => {
-    const [click, setClick] = React.useState(false);
+
     return (
             <li className={style.likeitem}>
                 <Link to="/home" className={style.postlink}>

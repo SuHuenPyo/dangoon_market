@@ -106,6 +106,10 @@ const BtnLine = styled.div`
         &:hover {
             color:#f99d1b;         
         }
+
+        &:hover > a {
+          color:#f99d1b;         
+      }
     }
 
 `;
