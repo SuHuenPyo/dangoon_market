@@ -6,7 +6,7 @@ const Announcement = () => {
   return (
     <ul className={style.noticeList}>
       <li>
-        <Link to='' className={style.noticeitem}>
+        <Link to='/notice/:id ' className={style.noticeitem}>
           <div className={style.noticeimg}>
             <img src="http://placekitten.com/85/85" alt="" />
           </div>
