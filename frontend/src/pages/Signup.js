@@ -6,7 +6,9 @@ import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
 import Authentication from "../utils/Authentication";
 import RegexHelper from "../utils/RegexHelper";
-import { onImgView } from '../utils/ImgPreview'
+import { onImgView } from '../utils/ImgPreview';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '../Slices/SignupSlice';
 
 const Input = styled.input`
   display: block;
@@ -34,9 +36,11 @@ const Signup = () => {
   const userEmail = React.useRef();
   const vaildCode = React.useRef();
   const imgInput = React.useRef();
-  const imgView = React.useRef();
-
   const [isAct, setisAct] = React.useState("받기");
+
+  const dispatch = useDispatch();
+
+  const { rt, rtmsg, item, loading } = useSelector((state)=>state.signup)
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
@@ -70,7 +74,7 @@ const Signup = () => {
         title: "인증메일 발송이 완료되었습니다.",
         subTitle: `5분내로 인증해주세요.`,
       });
-
+      
       return onToggleShow();
     }
   };
@@ -111,21 +115,9 @@ const Signup = () => {
     [isAct]
   );
 
-  // 프로필 미리보기 이미지관련 함수
-  // const onImgUpload = (e) => {
-  //   if (imgInput.current.files[0]) {
-  //     const reader = new FileReader();
-
-  //     reader.onload = (event) => {
-  //       imgView.current.innerHTML = `<img src=${event.target.result} />`;
-  //     };
-
-  //     reader.readAsDataURL(imgInput.current.files[0]);
-  //   }
-  // };
-
-  const validation = (e) => {
+  const validation = async(e) => {
     e.preventDefault();
+    const form = e.currentTarget;
 
     const regex = new RegexHelper();
 
@@ -161,13 +153,33 @@ const Signup = () => {
     if(!regex.maxLen("kakaoId",45,"45글자 이내로 입력가능합니다.")){return;}
 
     if(!vaildCode.current.readOnly){regex.throwErr(vaildCode.current.parentElement,'이메일 인증을 진행해주세요.'); return;}
+    const memberInfo = new FormData();
 
-    setNoticeTitle({
-      title: "단군마켓 가입이 완료되었습니다.",
-      subTitle: `감사합니다.`,
-    });
+    memberInfo.append('userName', form.userName.value);
+    memberInfo.append('userPassword',form.password.value);
+    memberInfo.append('userEmail', userEmail.current.value);
+    memberInfo.append('userId', form.userId.value);
+    memberInfo.append('kakaoId', form.kakaoId.value);
+    memberInfo.append('profile', form.userImg.files[0]);
 
-    onToggleShow();
+    await dispatch(signup(memberInfo));
+
+
+    if(rt === 200){
+      setNoticeTitle({
+        title: "단군마켓 가입이 완료되었습니다.",
+        subTitle: `감사합니다.`,
+      });
+  
+      onToggleShow();
+    } else if (rt !== 200){
+      setNoticeTitle({
+        title: "단군마켓 가입이 실패했습니다.",
+        subTitle: `다시 시도해주세요.`,
+      });
+  
+      onToggleShow();
+    }
   };
 
   return (
@@ -183,7 +195,7 @@ const Signup = () => {
               type="file"
               name="userImg"
               accept="image/*"
-              onChange={(event)=>{onImgView(event,'#profile')}}
+              onChange={(event)=>{onImgView(event,'#profile',"profileImg")}}
             />
             <label className={styles.uploader} htmlFor="update_img">
               <AiOutlineCamera />
@@ -247,7 +259,7 @@ const Signup = () => {
             </div>
           </div>
           <div className={styles.inputArea}>
-            <Input id="kakaoId" type="text" placeholder="kakao ID" />
+            <Input id="kakaoId" type="text" placeholder="kakao ID" name='kakaoId'/>
           </div>
           <Button type="submit" className={styles.signupBtn}>
             가입하기

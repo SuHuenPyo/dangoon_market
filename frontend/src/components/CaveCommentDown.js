@@ -5,12 +5,7 @@ import imgwarning from "../asset/img/warning.png";
 
 import Report from "./Report";
 
-const CaveCommentDown = () => {
-  const [show, setShow] = React.useState(false);
-
-  const onCheck = React.useCallback(()=>{
-  setShow(false);
-    },[])
+const CaveCommentDown = (props) => {
 
   return (
     <>
@@ -20,7 +15,7 @@ const CaveCommentDown = () => {
           <img src="http://placekitten.com/40/40" alt="댓글 작성자 프로필 이미지" />
           <p className={style.commentername}>인간곰</p>
         </div>
-          <button className={style.commentreport} onClick={()=>{setShow(true)}}>
+          <button className={style.commentreport} onClick={()=>{props.onClick()}}>
             <img src={imgwarning} />
           </button> 
         <p className={style.commentcont}>댓글 예시입니다.</p>
@@ -28,10 +23,10 @@ const CaveCommentDown = () => {
 
  
     </div>
-
-    <Report show={show} onClick={onCheck}/>
     </>
   );
 };
+
+
 
 export default CaveCommentDown;
