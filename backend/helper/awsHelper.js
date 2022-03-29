@@ -4,6 +4,9 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import path from "path";
 
+//AWS URL
+export const S3URL = "https://dg-market-bucket.s3.ap-northeast-2.amazonaws.com/";
+
 //limit content
 const maxSize = 2 * 1024 *1024; //2MB
 const maxBoardCount = 5; //게시판(거래, 커뮤니티) 사진 개수 제한
