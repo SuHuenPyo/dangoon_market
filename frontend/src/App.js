@@ -4,6 +4,7 @@ import "./asset/scss/common.scss";
 
 import Home from './pages/Home';
 import NewProduct from './pages/NewProduct'
+import NewCavelife from './pages/NewCavelife';
 import CaveLife from './pages/CaveLife';
 import CaveComment from './pages/CaveComment';
 import ProfileView from './components/ProfileView';
@@ -18,8 +19,7 @@ import Likelist from './pages/Likelist';
 import Salelist from './pages/Salelist';
 import Buylist from './pages/Buylist';
 import Announce from './pages/Announce';
-import NewCavelife from './pages/NewCavelife';
-
+import Announcepage from "./pages/Announcepage";
 
 
 function App() {
@@ -49,6 +49,7 @@ function App() {
         <Route path='/salelist' element={<Salelist/>}/>
         <Route path='/buylist' element={<Buylist/>}/>
         <Route path='/notice' element={<Announce/>}/>
+        <Route path='/notice/:id' element={<Announcepage/>}/>
       </Routes>
   );
 }

@@ -8,12 +8,13 @@
 /* 구매목록 아이템 */
 .salesitem {
     width: 100%;
-    height: 110px;
+    height: auto;
+    display:block;
 }
 
 .saleslink {
     width: 100%;
-    height: 100%;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

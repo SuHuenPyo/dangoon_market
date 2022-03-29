@@ -9,9 +9,6 @@ const CaveLife = () => {
       <HeaderTitle title="공지사항" />
       <main>
         <Announcement />
-        <Announcement />
-        <Announcement />
-        <Announcement />
       </main>
     </>
   );

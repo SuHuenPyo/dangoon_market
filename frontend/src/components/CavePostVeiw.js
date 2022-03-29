@@ -94,7 +94,6 @@ const BtnLine = styled.div`
         text-align:left;
         color: #333;
 
-
         svg{
             font-size: 17px;
         }
@@ -106,8 +105,15 @@ const BtnLine = styled.div`
         &:hover {
             color:#f99d1b;         
         }
-    }
 
+        &:hover > a {
+          color:#f99d1b;         
+      }
+
+      &.like {
+        color:#f99d1b;
+      }
+    }
 `;
 
 const Gap = styled.div`
@@ -118,8 +124,17 @@ const Gap = styled.div`
 `
 
 const CavePostVeiw = ({data,inview}) => {
-    const [click, setClick] = React.useState(false);
-    
+    const likeBtn = React.useRef([]);
+
+
+    const doLike = (event) => {
+        const target = event.currentTarget;
+        const classLists = target.classList;
+
+      classLists.toggle('like');
+               
+    }
+
   return (
      <>
      {data.map((v,i)=>{
@@ -141,17 +156,8 @@ const CavePostVeiw = ({data,inview}) => {
         { v.b_img ? <img src={v.b_img} alt="" /> : null}
       </ContentImg>
       <BtnLine className='likeBtn'>
-        <button onClick={(e)=>{ 
-          const current = e.currentTarget;
-          if(click){
-            current.style.color = null;
-            setClick(false)
-          } else {
-            current.style.color = "#f99d1b";
-            setClick(true)
-          }
-        }}>
-         { click ? <AiFillLike/> : <AiOutlineLike />  }  <span>좋아요</span>
+        <button ref={(element)=> likeBtn.current[i] = element} onClick={doLike}>
+         { likeBtn.current[i] ? <AiFillLike/> : <AiOutlineLike /> }  <span>좋아요</span>
         </button>
         <button>
         <Link to={`/cavelife/:${v.b_id}}`}>

@@ -4,8 +4,8 @@ import styled from "styled-components";
 const StyledReport = styled.div`
   @media only screen and (max-width: 500px) {
     width: 100%;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
   }
   background-color: rgba(252, 198, 123, 0.97);
   width: 375px;
@@ -65,7 +65,7 @@ const StyledReport = styled.div`
     border-radius: 20px;
     text-indent: 10px;
     background-color: #fff;
-    color:inherit;
+    color: inherit;
   }
 
   input {
@@ -96,12 +96,21 @@ const Report = (props) => {
     <StyledReport bottom={props.bottom} show={props.show} ect={isEct}>
       <h2>신고사유를 말씀해주세요.</h2>
       <form action="">
-        <select name="report" id="report-type" onChange={onSelectValue}>
-          <option value="bannedItem">판매 금지 상품이예요.</option>
-          <option value="scamArticle">사기 글이예요.</option>
-          <option value="notUsedItem">중고거래 게시글이 아니예요.</option>
-          <option value="ect">기타사유</option>
-        </select>
+        {props.type === "sale" ? (
+          <select name="report" id="report-type" onChange={onSelectValue}>
+            <option value="bannedItem">판매 금지 상품이예요.</option>
+            <option value="scamArticle">사기 글이예요.</option>
+            <option value="notUsedItem">중고거래 게시글이 아니예요.</option>
+            <option value="ect">기타사유</option>
+          </select>
+        ) : (
+          <select name="report" id="report-type" onChange={onSelectValue}>
+            <option value="bannedItem">광고/홍보 글이에요.</option>
+            <option value="scamArticle">중고거래 관련 글이에요.</option>
+            <option value="notUsedItem">부적절한 글이에요.</option>
+            <option value="ect">기타사유</option>
+          </select>
+        )}
         <input type="text" />
         <button
           id="reportBtn"
