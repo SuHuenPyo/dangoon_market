@@ -137,7 +137,6 @@ const CavePostVeiw = ({ data, inview }) => {
 
  const likeIcon = React.useCallback((element,index)=>{
        likeBtn.current[index] = element; 
-       console.dir(likeBtn.current[index]);
  },[])
 
   return (
@@ -166,7 +165,7 @@ const CavePostVeiw = ({ data, inview }) => {
                 ref={(element) => (likeIcon(element,i))}
                 onClick={doLike}
               >
-                <AiOutlineLike/>
+                <AiOutlineLike/>&nbsp;
                 <span>좋아요</span>
               </button>
               <button>

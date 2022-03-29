@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getCaveList = createAsyncThunk(
   "GET/CAVELIST",
-  async (payload, { rejectedWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     let result = null;
 
     try {
@@ -11,7 +11,7 @@ export const getCaveList = createAsyncThunk(
         params: {page: payload.page, rows: 5 }
       });
     } catch (err) {
-      result = rejectedWithValue(err.response);
+      result = rejectWithValue(err.response);
     }
 
     return result;
