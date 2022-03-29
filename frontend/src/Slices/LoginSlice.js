@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const signup = createAsyncThunk('POST/SIGNUP',async (payload,{rejectedWithValue})=>{
+export const login = createAsyncThunk('POST/SIGNUP',async (payload,{rejectedWithValue})=>{
     const result = null;
     try {  
-        result = await axios.post('http://dg-market.iptime.org:28019/signup',payload,{
+        result = await axios.post('http://dg-market.iptime.org:28019/home',payload,{
             header: {'content-type': 'multipart/form-data'}
         });
     } catch (err) {
@@ -14,8 +14,8 @@ export const signup = createAsyncThunk('POST/SIGNUP',async (payload,{rejectedWit
     return result;
 });
 
-const SignupSlice = createSlice({
-    name: 'signup',
+const LoginSlice = createSlice({
+    name: 'login',
     initialState: {
         rt: null,
         rtmsg: null,
@@ -24,13 +24,13 @@ const SignupSlice = createSlice({
     },
     reducers: {},
     extraReducers: {
-        [signup.pending]: (state,action)=>{
+        [login.pending]: (state,action)=>{
             return {
                 ...state,
                 loading: true
             }
         },
-        [signup.fulfilled]: (state,{meta,payload})=>{
+        [login.fulfilled]: (state,{meta,payload})=>{
             console.log(payload.data.item);
             if(meta.arg.page > 1){
                 payload.data.item = state.item.item.concat(payload.data.item);
@@ -44,7 +44,7 @@ const SignupSlice = createSlice({
                 loading:false
             }
         },
-        [signup.rejected]: (state,{error,payload})=>{
+        [login.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
                 rt: payload?.status || error.name,
@@ -55,4 +55,4 @@ const SignupSlice = createSlice({
     }
 });
 
-export default SignupSlice.reducer;
+export default LoginSlice.reducer;

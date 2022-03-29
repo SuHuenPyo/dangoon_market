@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { AiOutlineLike, AiFillLike , AiOutlineMessage} from "react-icons/ai";
+import { AiOutlineLike, AiFillLike, AiOutlineMessage } from "react-icons/ai";
 
 const PostVeiw = styled.div`
   width: 100%;
@@ -63,118 +63,128 @@ const Content = styled(Link)`
 `;
 
 const ContentImg = styled.div`
-    width: calc(100% - 10px);
-    height: auto;
-    max-height:80px;
-    padding: 5px 5px 10px 5px;
-    display: flex;
-    justify-content:flex-start;
-    align-items: center;
-    border-bottom: 1px solid #eee;
+  width: calc(100% - 10px);
+  height: auto;
+  max-height: 80px;
+  padding: 5px 5px 10px 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #eee;
 
-    img {
-        width: 80px;
-        height: 80px;
-        margin: 0 7px 0 0;
-    }
+  img {
+    width: 80px;
+    height: 80px;
+    margin: 0 7px 0 0;
+  }
 `;
 const BtnLine = styled.div`
-    width: calc(100% - 10px);
+  width: calc(100% - 10px);
+  height: 30px;
+  line-height: 30px;
+  padding: 5px;
+  font-size: 15px;
+
+  button {
+    border: 0px;
+    width: 80px;
     height: 30px;
-    line-height: 30px;
-    padding: 5px;
-    font-size: 15px;
+    background-color: transparent;
+    position: relative;
+    text-align: left;
+    color: #333;
 
-    button {
-        border: 0px;
-        width: 80px;
-        height: 30px;
-        background-color:transparent;
-        position:relative;
-        text-align:left;
-        color: #333;
-
-        svg{
-            font-size: 17px;
-        }
-        span{
-            position:relative;
-            top: -3px;
-        }
-
-        &:hover {
-            color:#f99d1b;         
-        }
-
-        &:hover > a {
-          color:#f99d1b;         
-      }
-
-      &.like {
-        color:#f99d1b;
-      }
+    svg {
+      font-size: 17px;
     }
+    span {
+      position: relative;
+      top: -3px;
+    }
+
+    &:hover {
+      color: #f99d1b;
+    }
+
+    &:hover > a {
+      color: #f99d1b;
+    }
+
+    &.like {
+      color: #f99d1b;
+    }
+  }
 `;
 
 const Gap = styled.div`
-    width: 100%;
-    height: 10px;
-    background-color: #ccc;
-    opacity: 0.1;
-`
+  width: 100%;
+  height: 10px;
+  background-color: #ccc;
+  opacity: 0.1;
+`;
 
-const CavePostVeiw = ({data,inview}) => {
-    const likeBtn = React.useRef([]);
+const CavePostVeiw = ({ data, inview }) => {
+  const likeBtn = React.useRef([]);
+
+  const doLike = (event) => {
+    console.log(event.target);
+    const target = event.currentTarget;
+    const classLists = target.classList;
+
+    classLists.toggle("like");
+  };
 
 
-    const doLike = (event) => {
-        const target = event.currentTarget;
-        const classLists = target.classList;
-
-      classLists.toggle('like');
-               
-    }
+ const likeIcon = React.useCallback((element,index)=>{
+       likeBtn.current[index] = element; 
+       console.dir(likeBtn.current[index]);
+ },[])
 
   return (
-     <>
-     {data.map((v,i)=>{
-       return (
-      <PostVeiw key={v.b_id} {...(data.length-1 === i ? {ref : inview} : {})} >
-      <Poster to="/profile">
-        <div>
-          <img src="http://placekitten.com/45/45" alt="" />
-        </div>
-        <p>{v.b_writer}</p>
-      </Poster>
-      <Content to={`/cavelife/:${v.b_id}}`}>
-        <h2>{v.b_title}</h2>
-        <div>
-          {v.b_content}
-        </div>
-      </Content>
-      <ContentImg>
-        { v.b_img ? <img src={v.b_img} alt="" /> : null}
-      </ContentImg>
-      <BtnLine className='likeBtn'>
-        <button ref={(element)=> likeBtn.current[i] = element} onClick={doLike}>
-         { likeBtn.current[i] ? <AiFillLike/> : <AiOutlineLike /> }  <span>좋아요</span>
-        </button>
-        <button>
-        <Link to={`/cavelife/:${v.b_id}}`}>
-          <AiOutlineMessage /> <span>답변하기</span>
-        </Link>
-        </button>
-      </BtnLine>
-      <Gap/>
-    </PostVeiw>
-       )
-     })}
-     </>
-  )
+    <>
+      {data.map((v, i) => {
+        return (
+          <PostVeiw
+            key={v.b_id}
+            {...(data.length - 1 === i ? { ref: inview } : {})}
+          >
+            <Poster to="/profile">
+              <div>
+                <img src="http://placekitten.com/45/45" alt="" />
+              </div>
+              <p>{v.b_writer}</p>
+            </Poster>
+            <Content to={`/cavelife/:${v.b_id}}`}>
+              <h2>{v.b_title}</h2>
+              <div>{v.b_content}</div>
+            </Content>
+            <ContentImg>
+              {v.b_img ? <img src={v.b_img} alt="" /> : null}
+            </ContentImg>
+            <BtnLine className="likeBtn">
+              <button
+                ref={(element) => (likeIcon(element,i))}
+                onClick={doLike}
+              >
+                <AiOutlineLike/>
+                <span>좋아요</span>
+              </button>
+              <button>
+                <Link to={`/cavelife/:${v.b_id}}`}>
+                  <AiOutlineMessage /> <span>답변하기</span>
+                </Link>
+              </button>
+            </BtnLine>
+            <Gap />
+          </PostVeiw>
+        );
+      })}
+    </>
+  );
 };
 
 CavePostVeiw.defaultProps = {
   data: [],
-}
+};
 
 export default CavePostVeiw;

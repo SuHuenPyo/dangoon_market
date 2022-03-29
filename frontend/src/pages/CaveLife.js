@@ -36,12 +36,14 @@ const CaveLife = () => {
             <ReactLoading type="bubbles" color="#f99d1b" />
           </div>
         )}
+        
         {!loading && rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>
           </div>
         )}
+
         {!loading && rt === 200 && (
           <>
           <CavePostVeiw data={item.item} inview={ref} />
