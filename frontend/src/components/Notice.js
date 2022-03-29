@@ -17,14 +17,16 @@ const StyledNotice = styled.div`
   font-size: 14px;
   text-align: center;
   position: fixed;
-  bottom: 0px;;
+  bottom: ${(props) => (props.show ? 0 : "-9999px")};;
   margin: 0 auto;
-  display: ${(props) => (props.show ? "flex" : "none")};
+  display: flex;
   opacity: ${(props) => (props.show ? 1 : 0)};
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in;
+
+  //${(props) => (props.show ? "flex" : "none")};
 
    & h2 {
-    font-size:  ${(props) => (props.show ? "1.2rem" : 0)};;
+    font-size: "1.2rem";
     font-weight: bold;
     color: white;
     line-height: 40px;

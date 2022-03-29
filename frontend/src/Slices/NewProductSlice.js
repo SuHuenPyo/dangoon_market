@@ -1,24 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const login = createAsyncThunk('POST/LOGIN',async (payload,{rejectWithValue})=>{
+export const postNewProduct = createAsyncThunk('POST/NEWPRODUCT',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('http://dg-market.iptime.org:28019/login',payload,{
+        result = await axios.post('http://dg-market.iptime.org:28019/home/write',payload,{
             header: {'content-type': 'multipart/form-data'}
         });
     } catch (err) {
         if(!err.response){
             throw err;
         }
+
         return await rejectWithValue(err.response);
     }  
     
     return await result;
 });
 
-const LoginSlice = createSlice({
-    name: 'login',
+const NewProductSlice = createSlice({
+    name: 'newproduct',
     initialState: {
         rt: null,
         rtmsg: null,
@@ -26,13 +27,13 @@ const LoginSlice = createSlice({
     },
     reducers: {},
     extraReducers: {
-        [login.pending]: (state,action)=>{
+        [postNewProduct.pending]: (state,action)=>{
             return {
                 ...state,
                 loading: true
             }
         },
-        [login.fulfilled]: (state,{meta,payload})=>{
+        [postNewProduct.fulfilled]: (state,{meta,payload})=>{
             return {
                 ...state,
                 rt: payload.status,
@@ -40,7 +41,7 @@ const LoginSlice = createSlice({
                 loading:false
             }
         },
-        [login.rejected]: (state,{error,payload})=>{
+        [postNewProduct.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
                 rt: payload?.status || error.name,
@@ -51,4 +52,4 @@ const LoginSlice = createSlice({
     }
 });
 
-export default LoginSlice.reducer;
+export default NewProductSlice.reducer;

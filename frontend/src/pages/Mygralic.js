@@ -6,10 +6,39 @@ import Notice from "../components/Notice";
 
 // icons
 import { RiKakaoTalkFill } from "react-icons/ri";
-import { AiOutlineNotification, AiOutlineComment, AiOutlineFrown, AiOutlineExport, AiOutlineShoppingCart, AiOutlineStar} from 'react-icons/ai';
-import { BsReceiptCutoff } from 'react-icons/bs';
+import {
+  AiOutlineNotification,
+  AiOutlineComment,
+  AiOutlineFrown,
+  AiOutlineExport,
+  AiOutlineShoppingCart,
+  AiOutlineStar,
+} from "react-icons/ai";
+import { BsReceiptCutoff } from "react-icons/bs";
 
 const Mygralic = () => {
+  const [notice, setNotice] = React.useState({ title: null, subTitle: null });
+  const [show, setShow] = React.useState(false);
+  const onClick = () => {
+    setShow(false);
+    window.location.href = "/login";
+  };
+
+  React.useEffect(() => {
+    const isLogin = window.sessionStorage.getItem("userId");
+
+    console.log(isLogin);
+
+    if (isLogin === null) {
+      setNotice({
+        title: "현재 로그인되어있지 않습니다.",
+        subTitle: "로그인해주세요.",
+      });
+
+      setShow(true);
+    }
+  }, []);
+
   return (
     <>
       <HeaderLogo />
@@ -20,7 +49,10 @@ const Mygralic = () => {
           </div>
           <div className={styles.userInfo}>
             <h2>김동아</h2>
-            <p> <RiKakaoTalkFill/> <span>kakaoid</span></p>
+            <p>
+              {" "}
+              <RiKakaoTalkFill /> <span>kakaoid</span>
+            </p>
           </div>
         </div>
         <Link to="/myprofile/" className={styles.toProfile}>
@@ -28,48 +60,60 @@ const Mygralic = () => {
         </Link>
         <div className={styles.usagesList}>
           <Link to="/salelist" className={styles.usagesItem}>
-              <div className={styles.sale}>
-                  <BsReceiptCutoff/><br/>
-                  판매내역
-              </div>
+            <div className={styles.sale}>
+              <BsReceiptCutoff />
+              <br />
+              판매내역
+            </div>
           </Link>
           <Link to="/buylist" className={styles.usagesItem}>
             <div className={styles.purchase}>
-                <AiOutlineShoppingCart/><br/>
-                구매내역
+              <AiOutlineShoppingCart />
+              <br />
+              구매내역
             </div>
           </Link>
           <Link to="/likelist" className={styles.usagesItem}>
             <div className={styles.like}>
-                <AiOutlineStar/><br/>
-                관심목록
+              <AiOutlineStar />
+              <br />
+              관심목록
             </div>
           </Link>
         </div>
         <ul className={styles.menuList}>
           <li className={styles.menuItem}>
             <Link to="/notice">
-                <AiOutlineNotification/>
-                공지사항</Link>
+              <AiOutlineNotification />
+              공지사항
+            </Link>
           </li>
           <li className={styles.menuItem}>
             <Link to="/cavelife">
-                <AiOutlineComment/>
-                나의 동굴생활</Link>
+              <AiOutlineComment />
+              나의 동굴생활
+            </Link>
           </li>
           <li className={styles.menuItem}>
             <Link to="/out">
-                <AiOutlineFrown/>
-                탈퇴하기</Link>
+              <AiOutlineFrown />
+              탈퇴하기
+            </Link>
           </li>
           <li className={styles.menuItem}>
-            <Link to="/logout">
-                <AiOutlineExport/>
-                로그아웃</Link>
+            <Link to='/' onClick={(e)=>{window.sessionStorage.removeItem('userId')}}>
+              <AiOutlineExport />
+              로그아웃
+            </Link>
           </li>
         </ul>
       </main>
-      <Notice/>
+      <Notice
+        show={show}
+        onClick={onClick}
+        title={notice.title}
+        subTitle={notice.subTitle}
+      />
     </>
   );
 };

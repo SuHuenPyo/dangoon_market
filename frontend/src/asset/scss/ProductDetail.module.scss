@@ -47,18 +47,18 @@ $tablet-breakpoint: 500px;
   .posterInfo {
     flex-basis: 70%;
     .name {
-      font-size: 1rem;
-      line-height: 1.8rem;
+      font-size: 0.8rem;
+      line-height: 1.3rem;
       width: 70%;
       @include ellipsis;
-      font-weight: 500;
+      font-weight: normal;
     }
 
     .desc {
-      font-size: 0.8rem;
-      line-height: 1.3rem;
-      color: #aaa;
-      font-weight: lighter;
+      font-size: 1rem;
+      line-height: 1.8rem;
+      color: #333;
+      font-weight: bold;
     }
   }
 

@@ -11,6 +11,19 @@ class RegexHelper {
     return true;
   }
 
+  selected(selector, msg) {
+    const field = document.getElementById(selector);
+    const value = field.value.trim();
+
+    console.log(value);
+
+    if (!value || value === 'none') {
+      return this.throwErr(field, msg);
+    }
+
+    return true;
+  }
+
   maxLen(selector, num, msg) {
     const field = document.getElementById(selector);
     const value = field.value.trim();

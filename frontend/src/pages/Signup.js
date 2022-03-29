@@ -164,7 +164,6 @@ const Signup = () => {
 
     await dispatch(signup(memberInfo));
 
-
     if(rt === 200){
       setNoticeTitle({
         title: "단군마켓 가입이 완료되었습니다.",

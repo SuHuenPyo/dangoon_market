@@ -3,8 +3,8 @@ import styles from "../asset/scss/PostForm.module.scss";
 import { BsPlusSquareDotted } from "react-icons/bs";
 import styled from "styled-components";
 import onImgUpload from "../utils/ImgPreview";
-
 import Notice from "./Notice";
+import { useNavigate } from 'react-router-dom';
 
 const ImgUploadBtn = styled.label`
   display: block;
@@ -42,12 +42,32 @@ const ImgSpace = styled.div`
   }
 `;
 
-const PostForm = (props) => {
+const PostForm = React.forwardRef((props,ref) => {
   const [show, setShow] = React.useState(false);
+  const navigate = useNavigate();
 
-  const onCheck = React.useCallback(() => {
-    window.location.href = "/home";
-  }, []);
+  
+  const onClick = () => {
+    setShow(false);
+    
+    if(props.noticeType === 'notAMember'){
+      return navigate('/');
+    }
+
+    if(props.noticeType === 'compelete'){
+      return navigate('/home');
+    }
+  }
+  
+  React.useEffect(() => {
+
+    if(props.noticeType !== null){
+      setShow(true);
+    } else {
+      return;
+    }
+
+  },[props.noticeType])
 
   return (
     <>
@@ -56,12 +76,16 @@ const PostForm = (props) => {
         <form
           className={styles.productPost}
           action="post"
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
+          ref={ref}
+          onSubmit={props.onSubmit}
         >
           <input
             type="text"
             className={styles.productCommon}
             placeholder="제목을 입력해주세요"
+            id='postTitle'
+            name='postTitle'
           />
           {props.title === "판매" ? (
             <>
@@ -69,11 +93,14 @@ const PostForm = (props) => {
                type="text"
                className={styles.productCommon}
                placeholder="가격을 입력해주세요."
+               id='productPrice'
+               name='productPrice'
                />
             <select
               defaultValue="none"
               name="category"
               className={`${styles.productCommon} ${styles.productCategory}`}
+              id='productCategory'
               >
               <option value="none" disabled hidden>
                 카테고리
@@ -95,15 +122,17 @@ const PostForm = (props) => {
 
           <div className={styles.productImgUpload}>
             <div className={styles.productUploadBtn}>
-              <ImgUploadBtn htmlFor="product-img">
+              <ImgUploadBtn htmlFor="postImg">
                 <BsPlusSquareDotted />
               </ImgUploadBtn>
               <input
                 type="file"
                 accept="image/*"
-                id="product-img"
+                id="postImg"
+                name="postImg"
                 className={styles.productImg}
                 onChange={(event)=>{onImgUpload(event,"#imgView")}}
+                multiple
               />
             </div>
 
@@ -113,19 +142,16 @@ const PostForm = (props) => {
           </div>
 
           <textarea
-            name="product-info"
+            name="postContent"
+            id='postContent'
             className={styles.productTextarea}
             cols="30"
             rows="10"
           ></textarea>
 
-          {console.log(show)}
           <button
-            type="button"
+            type="submit"
             className={`${styles.productCommon} ${styles.productPostBtn}`}
-            onClick={() => {
-              setShow(true);
-            }}
           >
             글쓰기 완료
           </button>
@@ -133,11 +159,20 @@ const PostForm = (props) => {
       </main>
       <Notice
         show={show}
-        onClick={onCheck}
-        title="정상적으로 등록이 완료되었습니다."
+        onClick={onClick}
+        title={props.noticeTitle}
+        subTitle={props.noticeSubTitle}
       />
     </>
   );
-};
+});
+
+PostForm.defaultProps = {
+  title: '판매',
+  noticeTitle: '정상처리되었습니다.',
+  noticeSubTitle: null,
+  noticeType: null,
+  onSubmit: () => { alert('Give me Function') },
+}
 
 export default PostForm;
