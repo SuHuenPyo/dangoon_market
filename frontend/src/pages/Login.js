@@ -19,7 +19,7 @@ const Title = styled('div')`
         font-size: 1.8rem;
         font-weight: bold;
         line-height: 40px;
-        color:#af713c
+        color:#af713c;
     }
 
     p { 
@@ -85,11 +85,18 @@ const SignupLink = styled.div`
 `
 
 const Login = () => {
-    const { rt, rtmsg, item, loading } = useSelector((state) => state.login);
 
+    const { rt, loading } = useSelector((state) => state.login);
     const dispatch = useDispatch();
-
-    const doLogin = (e) => {
+    
+    const [show, setShow] = React.useState(false);
+    const [notice, setNotice] = React.useState({title:null,subTitle:null});
+    
+    const onClick = React.useCallback(() => {setShow(false)},[])
+    
+    
+    
+    const doLogin = async(e) => {
         e.preventDefault();
 
         document.querySelectorAll(`.${styles.errMsg}`).forEach((v,i)=>{
@@ -104,11 +111,24 @@ const Login = () => {
         //패스워드
         if(!regex.value('password','패스워드를 입력해주세요.')){return;};
 
-        const userId = e.target.userId;
-        const password = e.target.password;
+        const userId = e.target.userId.value;
+        const password = e.target.password.value;
 
-        dispatch(login({userId: userId, userPassword: password}));
-        
+        await dispatch(login({user_id: userId, user_pw: password}));
+
+        if(!loading && rt === 200){
+            console.log(rt);
+            window.sessionStorage.setItem('user_id',userId);
+            window.history.back();
+        } 
+
+        if (!loading && rt !== 200){
+            console.log(rt);
+            setNotice({title:'로그인에 실패했습니다.',subTitle:'다시 한번 시도해주세요.'})
+            setShow(true);
+        }
+
+        console.log("통과");
     }
     return (
         <>
@@ -129,7 +149,7 @@ const Login = () => {
                 </p>
             </SignupLink>
         </main>
-        <Notice/>
+        <Notice show={show} title={notice.title} subTitle={notice.subTitle} onClick={onClick}/>
         </>
     );
 };

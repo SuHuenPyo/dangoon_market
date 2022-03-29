@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejectedWithValue})=>{
+export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejectWithValue})=>{
     let result = null;
 
     try {
@@ -11,7 +11,7 @@ export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejec
         })
 
     } catch (err){
-     return rejectedWithValue(err.response);
+     return rejectWithValue(err.response);
     }
 
     return result;

@@ -40,7 +40,7 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
-  const { rt, rtmsg, item, loading } = useSelector((state)=>state.signup)
+  const { rt } = useSelector((state)=>state.signup)
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);

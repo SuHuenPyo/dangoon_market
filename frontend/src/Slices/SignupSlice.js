@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const signup = createAsyncThunk('POST/SIGNUP',async (payload,{rejectedWithValue})=>{
-    const result = null;
+export const signup = createAsyncThunk('POST/SIGNUP',async (payload,{rejectWithValue})=>{
+    let result = null;
     try {  
-        result = await axios.post('http://dg-market.iptime.org:28019/signup',payload,{
-            header: {'content-type': 'multipart/form-data'}
-        });
+        result = await axios.post('http://dg-market.iptime.org:28019/signup',payload);
     } catch (err) {
-        return rejectedWithValue(err.response);
+        return rejectWithValue(err.response);
     }  
     
     return result;
@@ -31,11 +29,6 @@ const SignupSlice = createSlice({
             }
         },
         [signup.fulfilled]: (state,{meta,payload})=>{
-            console.log(payload.data.item);
-            if(meta.arg.page > 1){
-                payload.data.item = state.item.item.concat(payload.data.item);
-            }
-
             return {
                 ...state,
                 rt: payload.status,
