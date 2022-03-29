@@ -18,7 +18,6 @@ dotenv.config({path: path.join(__dirname, '/.env')});
 
 const Mail = express.Router();
 
-    
 /**
  * @swagger
  * /mail:
@@ -28,13 +27,18 @@ const Mail = express.Router();
  *     produces:
  *     - "application/json"
  *     parameters:
- *     - name: "user_email"
+ *     - name: "content"
  *       in: "body"
- *       description: "인증번호를 받을 email을 입력합니다."
- *       type: "string"
+ *       description: "x-www-form-urlencoded"
+ *       schema:
+ *          type: object
+ *          properties:
+ *              user_email:
+ *                  type: string
+ *         
  *     responses:
  *       "200":
- *         description: "successful send message"
+ *         description: "successful operation"
  *     
 */
 Mail.post('/', async(req,res,next) =>{

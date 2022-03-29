@@ -93,25 +93,30 @@ Home.get('/', async(req, res, next)=>{
  * @swagger
  * /home/write:
  *   post:
- *     description: 거래를 등록 합니다.
- *     tags: [Post (Not Work)]
+ *     description: 판매글을 쓰는 기능입니다.
+ *     tags: [Post (Working)]
  *     produces:
  *     - "application/json"
  *     parameters:
  *     - name: "content"
  *       in: "body"
- *       description: "상품정보가 담긴 스키마"
+ *       description: "multipart/form-data"
  *       schema:
- *         type: object
- *         required:
- *              - Info
- *         properties:
- *              userId:
+ *          type: object
+ *          properties:
+ *              memberId:
  *                  type: string
- *              firstName:
+ *              category:
  *                  type: string
- *              lastName:
+ *              title:
  *                  type: string
+ *              content:
+ *                  type: string
+ *              price:
+ *                  type: string
+ *              board: 
+ *                  type: Img
+ *                  description: "이미지파일"
  *         
  *     responses:
  *       "200":

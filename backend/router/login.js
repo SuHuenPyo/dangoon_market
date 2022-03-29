@@ -9,7 +9,7 @@ const Login = express.Router();
 
 /**
  * @swagger
- * /home:
+ * /login:
  *   post:
  *     description: 로그인을 위한 폼을 전송합니다..
  *     tags: [Post (Working)]
@@ -18,14 +18,10 @@ const Login = express.Router();
  *     parameters:
  *     - name: "content"
  *       in: "body"
- *       description: "로그인을 위한 폼 전송"
- *     content:
- *      multipart/form-data:
+ *       description: "x-www-form-urlencoded"
  *       schema:
- *         type: object
- *         required:
- *              - Info
- *         properties:
+ *          type: object
+ *          properties:
  *              user_id:
  *                  type: string
  *              user_pw:
