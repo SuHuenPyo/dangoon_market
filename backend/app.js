@@ -24,7 +24,10 @@ import Development      from './router/development.js';
 
 import * as url from "url";
 import path from "path";
+import session from "express-session"
+import MySQLStore from "express-mysql-session";
 
+const MySQLStorage = MySQLStore(session);
 
 //need to install 
 import express from 'express';
@@ -43,6 +46,16 @@ import * as multer from "multer";
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+let sessionOptions = {
+    host: 'localhost',
+    port: 28019,
+    user: '',
+    password: '',
+    database:''
+};
+let sessionStore = new MySQLStorage(sessionOptions);
+
 /**
  * POST 파라미터 수신모듈 설정
  * 추가 모듈들 중 UserAgent를 제외하고 가장 먼저 설정되어야함
@@ -50,7 +63,6 @@ const __dirname = path.dirname(__filename);
  * extended: true --> 계속 사용 
  * extended: false --> 한번 사용 
  * */ 
-
 app.use(cors());
 app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
 app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
@@ -58,6 +70,13 @@ app.use(bodyParser.urlencoded({extended:true}));
 //parse form-data
 //app.use();
 
+//session 미들웨어 등록 
+// app.use(session({
+//     secret: "gekuahrgkleg153",
+//     resave: false,
+//     saveUninitialized: true,
+//     store: sessionStore
+// }));
 
 
 //swagger path 등록 

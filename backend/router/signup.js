@@ -27,24 +27,28 @@ const signUp = express.Router();
  *     parameters:
  *     - name: "content"
  *       in: "body"
- *       description: "회원가입을 위한 내용을 전송"
- *     content:
- *      multipart/form-data:
+ *       description: "multipart/form-data"
  *       schema:
- *         type: object
- *         required:
- *              - Info
- *         properties:
- *              userId:
+ *          type: object
+ *          properties:
+ *              userName: 
  *                  type: string
- *              userName:
+ *                  description: "유저 이름"
+ *              userPassword: 
  *                  type: string
- *              userPassword:
+ *                  description: "유저 패스워드"
+ *              userEmail: 
  *                  type: string
- *              userEmail:
+ *                  description: "유저 이메일"
+ *              userId: 
  *                  type: string
- *              profile:
+ *                  description: "유저 로그인 아이디"
+ *              kakaoId: 
+ *                  type: string
+ *                  description: "카카오 ID"
+ *              profile: 
  *                  type: Img
+ *                  description: "이미지파일"
  *         
  *     responses:
  *       "200":
@@ -95,16 +99,20 @@ uploadSignUp.single('profile'),
     try{
         await dbcon.DbConnect();
 
-        
+        console.log(userName, userPassword, userEmail, userId, kakaoId);
         //먼저있는지 체크
 
         let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.member WHERE (M_EMAIL=? OR M_KAKAO_ID=? OR M_USER_ID=?)`, userEmail, kakaoId, userId);
-        
+        console.log(result[0].cnt);
         if(result[0].cnt >= 1){
             return res.status(400).json({text: '이미 존재하는 정보입니다. 다시확인해주세요.'});
         }
-
-
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt from dangoon.auth WHERE (AUTH_EMAIL=? AND AUTH_DONE=1)`, userEmail);
+        if(result[0].cnt >= 1){
+            await dbcon.sendQuery(`DELETE FROM dangoon.auth WHERE (AUTH_EMAIL=?)`, userEmail);
+        }else{
+            return res.status(400).json({text: '미인증 유저입니다. 인증먼저 진행세요'});
+        }
         [result] = await dbcon.sendQuery(`INSERT INTO dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_PIC, M_KAKAO_ID) VALUES(?, ?, ?, ?, ?, ?)`, userId, userName, userPassword, userEmail, file.key, kakaoId);
 
         console.log(result);

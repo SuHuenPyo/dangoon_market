@@ -66,4 +66,21 @@ Login.post('/', async(req, res, next)=>{
    
 });
 
+// app.get('/login', function(req,rsp){    
+//     var post = req.body;
+//     db.query('select member.id as id, password, author_id, name from member left join author on member.author_id = author.id where member.id=? and password=?',
+//     [post.id,post.password], function(err,result){
+//         if(err) throw err;
+//         if(result[0]!==undefined){
+//             req.session.uid = result[0].id;                            (1)
+//             req.session.author_id = result[0].author_id;
+//             req.session.isLogined = true;
+//             //세션 스토어가 이루어진 후 redirect를 해야함.
+//             req.session.save(function(){                               (2)
+//                 rsp.redirect('/');
+//             });
+//         }
+//     });
+// }
+
 export default Login

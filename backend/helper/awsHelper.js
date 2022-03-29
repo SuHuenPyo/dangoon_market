@@ -8,6 +8,7 @@ import path from "path";
 const maxSize = 2 * 1024 *1024; //2MB
 const maxBoardCount = 5; //게시판(거래, 커뮤니티) 사진 개수 제한
 const maxProfileCount = 1; //프로필사진 업로드 개수 제한
+const maxBoardFileCount = 10;
 
 const s3 = new AWS.S3({
     credentials:{
@@ -17,7 +18,7 @@ const s3 = new AWS.S3({
     },
 });
 
-//uploadSignUp을 위한 필터 구성
+//안전한 업로드를 위한 필터 구성
 const SignUpFilter = (req, file, cb) => {
     let typeArray = file.mimetype.split('/');
     let fileType = typeArray[1];
@@ -28,19 +29,8 @@ const SignUpFilter = (req, file, cb) => {
     }else{
         cb(new AppError('허용되지 않는 이미지 파일입니다. jpg, png, jpeg 외엔 업로드가 불가능합니다.', 400), false);
     }
-    
-
-
-
-    
-//    console.log("faeeeeeeeeeeeee");
- //   console.log(file);
-  //  console.log(req.body.userName);
-    
-    
 
 };
-
 /**
  * 프로필 사진 업로드를 위한 셋팅
  */
@@ -62,10 +52,8 @@ export let uploadSignUp = multer({
     },
 
 });
-
-
 /**
- * 수정 필요
+ * 게시판 글쓰기 전용 업로더
  */
 export let uploadBoard = multer({
     storage : multerS3({
@@ -74,13 +62,13 @@ export let uploadBoard = multer({
 
         key: function (req, file, cb) {
              let extension = path.extname(file.originalname);
-             cb(null, file.fieldname+'/'+Date.now().toString() + extension)
+             cb(null, 'board/'+Date.now().toString()+file.originalname + extension)
         },
         acl: 'public-read',
     }),
     limits: {
         fileSize: maxSize,
-        files: maxProfileCount
+        files: maxBoardFileCount
     }
 });
 
