@@ -4,8 +4,9 @@ import CaveSlice from './Slices/CaveSlice';
 import HomeSlice from './Slices/HomeSlice';
 import Signup from './Slices/SignupSlice';
 import Login from './Slices/LoginSlice';
-import NewProductSlice from './Slices/NewProductSlice'; 
-import ProductDetail from './Slices/ProductDetailSlice'
+import NewProductSlice from './Slices/ProductSlice'; 
+import NewCavelife from './Slices/CavelifeSlice'
+import ProductDetail from './Slices/ProductDetailSlice';
 
 const Store = configureStore({
     reducer: {
@@ -15,6 +16,7 @@ const Store = configureStore({
         login: Login,
         newproduct: NewProductSlice,
         productdetails: ProductDetail,
+        cavelife: NewCavelife,
     },
     middleware: [...getDefaultMiddleware({serializableCheck:false}),createLogger()],
     devTools: true

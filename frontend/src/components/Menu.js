@@ -36,12 +36,12 @@ const Menu = React.forwardRef((props,ref) => {
                 </NavLink>
             </li>
             <li className={styles.menuContactItem}>
-                <a href='https://github.com/SuHuenPyo/dangoon_market' className={styles.github}>
+                <a href='https://github.com/SuHuenPyo/dangoon_market' className={styles.github} target='_blank' rel="noreferrer">
                     <RiGithubLine/>
                 </a>
             </li>
             <li className={styles.menuContactItem}>
-                <a href='mailto:dg.market.blackbear@gmail.com' className={styles.email}>
+                <a href='mailto:dg.market.blackbear@gmail.com' className={styles.email} target='_blank' rel="noreferrer">
                     <RiMailLine/>
                 </a>
             </li>

@@ -101,7 +101,7 @@ const Mygralic = () => {
             </Link>
           </li>
           <li className={styles.menuItem}>
-            <Link to='/' onClick={(e)=>{window.sessionStorage.removeItem('userId')}}>
+            <Link to='/' onClick={(e)=>{window.sessionStorage.clear()}}>
               <AiOutlineExport />
               로그아웃
             </Link>

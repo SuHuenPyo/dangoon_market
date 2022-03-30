@@ -46,16 +46,16 @@ const ProductDetail = () => {
   return (
     <>
       {loading && (
-        <div className="loading">
+        <main className="loading">
           <ReactLoading type="bubbles" color="#f99d1b" />
-        </div>
+        </main>
       )}
 
       {!loading && rt !== 200 && (
-          <div className="error">
+          <main className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>
-          </div>
+          </main>
         )}
 
       {!loading && rt === 200 && (
@@ -103,8 +103,8 @@ const ProductDetail = () => {
                 {item.content}
               </div>
               <p className={styles.countView}>
-                <AiOutlineStar /> <span className={styles.count}>{item.hits}</span>{" "}
-                <AiOutlineEye /> <span className={styles.count}>5</span>
+                <AiOutlineStar /> <span className={styles.count}>0</span>{" "}
+                <AiOutlineEye /> <span className={styles.count}>{item.hits}</span>
               </p>
               <div className={styles.makeH}></div>
             </div>

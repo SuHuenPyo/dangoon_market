@@ -7,7 +7,6 @@ import NewProduct from './pages/NewProduct'
 import NewCavelife from './pages/NewCavelife';
 import CaveLife from './pages/CaveLife';
 import CaveComment from './pages/CaveComment';
-import ProfileView from './components/ProfileView';
 import Categori from "./pages/Categori";
 import CategoriList from "./pages/CategoriList";
 import ProductDetail from './pages/ProductDetail';
@@ -40,9 +39,8 @@ function App() {
         <Route path="/cavelife" element={<CaveLife/>} />
         <Route path="/cavelife/:id" element={<CaveComment/>} />
         <Route path="/mygralic" element={<Mygralic/>} />
-        <Route path="/profile" element={<ProfileView/>} />
+        <Route path="/product/:id" element={<ProductDetail/>} />
         <Route path='/myprofile' element={<MyProfile/>}/>
-        <Route path="/product/:b_id" element={<ProductDetail/>} />
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/likelist' element={<Likelist/>}/>

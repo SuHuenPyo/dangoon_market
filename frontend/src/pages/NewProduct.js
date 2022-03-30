@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
 import PostForm from "../components/PostForm";
-import {postNewProduct} from "../Slices/NewProductSlice";
+import {postNewProduct} from "../Slices/ProductSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import RegexHelper from "../utils/RegexHelper";
 import styles from '../asset/scss/SignupForm.module.scss';

@@ -21,7 +21,7 @@ const StyledNotice = styled.div`
   margin: 0 auto;
   display: flex;
   opacity: ${(props) => (props.show ? 1 : 0)};
-  transition: all 0.3s ease-in;
+  transition: height 0.2s ease-in;
 
   //${(props) => (props.show ? "flex" : "none")};
 

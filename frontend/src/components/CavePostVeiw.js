@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import ProfileView from "./ProfileView";
 
-import { AiOutlineLike, AiFillLike, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 
 const PostVeiw = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ const PostVeiw = styled.div`
   margin: 10px 0;
 `;
 
-const Poster = styled(Link)`
+const Poster = styled.div`
   width: 100%;
   height: 55px;
   display: flex;
@@ -31,7 +32,8 @@ const Poster = styled(Link)`
   }
 
   p {
-    line-height: 60px;
+    position: relative;
+    top: -1.5px;
   }
 `;
 
@@ -134,10 +136,16 @@ const CavePostVeiw = ({ data, inview }) => {
     classLists.toggle("like");
   };
 
+  const likeIcon = React.useCallback((element, index) => {
+    likeBtn.current[index] = element;
+  }, []);
 
- const likeIcon = React.useCallback((element,index)=>{
-       likeBtn.current[index] = element; 
- },[])
+  const onClick = React.useCallback(() => {
+    setProfile(false);
+  }, []);
+
+  const [member, setMember] = React.useState(0);
+  const [profile, setProfile] = React.useState({ show: false, top: 0 });
 
   return (
     <>
@@ -147,13 +155,20 @@ const CavePostVeiw = ({ data, inview }) => {
             key={v.b_id}
             {...(data.length - 1 === i ? { ref: inview } : {})}
           >
-            <Poster to="/profile">
+            <Poster
+              onClick={(e) => {
+                const getTop = document.body.scrollTop - 60;
+                console.log(getTop);
+                setMember(v.mId);
+                setProfile({ show: true, top: getTop });
+              }}
+            >
               <div>
                 <img src="http://placekitten.com/45/45" alt="" />
               </div>
               <p>{v.b_writer}</p>
             </Poster>
-            <Content to={`/cavelife/:${v.b_id}}`}>
+            <Content to={`/cavelife/${v.b_id}`}>
               <h2>{v.b_title}</h2>
               <div>{v.b_content}</div>
             </Content>
@@ -161,15 +176,14 @@ const CavePostVeiw = ({ data, inview }) => {
               {v.b_img ? <img src={v.b_img} alt="" /> : null}
             </ContentImg>
             <BtnLine className="likeBtn">
-              <button
-                ref={(element) => (likeIcon(element,i))}
-                onClick={doLike}
-              >
-                <AiOutlineLike/>&nbsp;
+              <button ref={(element) => likeIcon(element, i)} onClick={doLike}>
+                <AiOutlineLike />
+                &nbsp;
                 <span>좋아요</span>
               </button>
               <button>
-                <Link to={`/cavelife/:${v.b_id}}`}>
+                {console.log(v.b_id)}
+                <Link to={`/cavelife/${v.b_id}`}>
                   <AiOutlineMessage /> <span>답변하기</span>
                 </Link>
               </button>
@@ -178,6 +192,12 @@ const CavePostVeiw = ({ data, inview }) => {
           </PostVeiw>
         );
       })}
+      <ProfileView
+        show={profile.show}
+        top={profile.top}
+        onClick={onClick}
+        query={member}
+      />
     </>
   );
 };

@@ -51,7 +51,7 @@ const PostForm = React.forwardRef((props,ref) => {
     setShow(false);
     
     if(props.noticeType === 'notAMember'){
-      return navigate('/');
+      return navigate('/login');
     }
 
     if(props.noticeType === 'compelete'){

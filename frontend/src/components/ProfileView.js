@@ -2,10 +2,22 @@ import React from "react";
 import styles from "../asset/scss/ProfileView.module.scss";
 import { BsReceiptCutoff, BsCart2 } from "react-icons/bs";
 
-const ProfileView = () => {
-  return (
-    
-    <div className={styles.container} onClick={(e)=>{window.history.back()}}>
+const ProfileView = (props) => {
+  const container = React.useRef();
+
+  console.log(props.show);
+  React.useEffect(() => {
+    const style = container.current.style;
+      if(props.show){
+        style.display = 'flex';
+        style.top = `${props.top}px`;
+      } else {
+        style.display = 'none';
+      }
+  },[props.show,props.top])
+
+  return (  
+    <div ref={container} className={styles.container} onClick={props.onClick}>
       <div className={styles.view}>
         <div className={styles.image}>
           <img src="http://placekitten.com/110/110" alt="" />
