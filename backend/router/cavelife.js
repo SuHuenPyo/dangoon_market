@@ -359,7 +359,7 @@ caveLife.get('/details', async(req, res, next)=>{
 
         //글쓴이 기반으로 프로필 사진 가져오기 
         [result] = await dbcon.sendQuery(`SELECT m_name as sellerName, m_pic as sellerImg FROM dangoon.member WHERE m_id=?`, sellerId);
-        sellerImg   = S3URL+result[0].sellerId;
+        sellerImg   = S3URL+result[0].sellerImg;
         sellerName  = result[0].sellerName;
 
         
