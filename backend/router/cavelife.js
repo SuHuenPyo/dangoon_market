@@ -181,7 +181,145 @@ caveLife.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
 
 /**
  * @swagger
- * /details:
+ * /cavelife/comment:
+ *   post:
+ *     description: 동굴생활 단군마켓 커뮤니티에 댓글을 쓰는 기능입니다..
+ *     tags: [Post (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "content"
+ *       in: "body"
+ *       description: "multipart/form-data"
+ *       schema:
+ *          type: object
+ *          properties:
+ *              boardId:
+ *                  type: string
+ *              userId:
+ *                  type: string
+ *              content:
+ *                  type: string
+ *              board: 
+ *                  type: Img
+ *                  description: "이미지파일"
+ *         
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
+caveLife.post('/comment', uploadBoard.array('board', 10) ,async(req, res, next)=>{
+
+    //board
+    let mfileType = "C";
+
+    let {boardId, userId, content} = req.body;
+
+    //필요사항
+    /*
+        B_ID    : 보드 ID
+        userId  : 댓글 쓰는 유저 ID 
+    */
+    
+
+    //필요정보 저장
+    let writerName = null;
+
+    let dbcon = new DG_DB();
+    try {
+        
+        await dbcon.DbConnect();
+        //먼저 유저관련 정보 가져오기 
+        let [result] = await dbcon.sendQuery(`SELECT m_name AS writerName FROM dangoon.member WHERE (m_id = ?)`, userId);
+        writerName = result[0].writerName;
+
+        //댓글 생성
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.comment(b_id, m_id, c_writer, c_content) VALUES(?, ?, ?, ?)`, boardId, userId, writerName, content);
+        
+        let c_id = result.insertId
+
+
+        //이미지 등록
+        for(let idx in req.files){
+            await dbcon.sendQuery(`INSERT INTO dangoon.file(b_id, c_id, f_type, f_file) VALUES(?, ?, ?, ?)`, boardId, c_id, mfileType, req.files[idx].key);
+        }
+        
+
+    }catch(e){
+       console.error(e);
+       return res.status(400).json({text: '무언가 잘못됨.'});
+    }finally{
+        dbcon.end();
+    }
+
+
+    return res.status(200).json({text: '댓글 등록 성공'});
+    
+});
+/**
+ * @swagger
+ * /cavelife/comment:
+ *   get:
+ *     description: 동굴생활 글에 달린 댓글을 가져옵니다..
+ *     tags: [Get (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "boardId"
+ *       in: "query"
+ *       description: "댓글을 볼 해당 B_id를 입력합니다."
+ *     responses:
+ *       "200":
+ *         description: "writerName: 댓글 작성자 \n writerId: 작성자 userID \n content: 댓글 내용 \n rDate: 댓글 작성 일시\n writerPic: 글쓴이 프로필사진 \n commentPic: 댓글에 사용된 사진"
+ *     
+*/
+caveLife.get('/comment', async(req, res, next)=>{
+    let {boardId} = req.query
+
+    //FileType - B-판매게시판, C-동굴생활
+    let FileType = "C"
+
+    //return value
+    //let writerName, writerPic , writerId ,content, rDate, commentPic= null;
+    let returnJson = [];
+
+    let dbcon = new DG_DB();
+    try{
+        await dbcon.DbConnect();
+        //writer id 가져오기 
+        let [result] = await dbcon.sendQuery(`SELECT c_id, m_id as writerId, c_writer as writerName, c_content as content, date_format(c_rdate, '%Y-%m-%d %H:%i:%s')as rDate FROM dangoon.comment WHERE b_id`, boardId, boardId);
+
+        let tempResult1 = [];
+        let tempResult2 = [];
+
+        
+        for(let idx in result){ 
+            [tempResult1] = await dbcon.sendQuery(`SELECT m_pic as writerPic FROM dangoon.member WHERE m_id=?`, result[idx].writerId);
+            console.log(FileType, boardId, result[idx].c_id) ;
+            [tempResult2] = await dbcon.sendQuery(`SELECT F_FILE as commentPic FROM dangoon.file WHERE (f_type=? AND b_id=? AND c_id=?)`,FileType, boardId, result[idx].c_id);
+            console.log(tempResult2);
+            let jsonCommentPic = [];
+            for(let imgIdx in tempResult2){
+                jsonCommentPic.push( S3URL+tempResult2[imgIdx].commentPic)
+            }
+            returnJson.push({'writerName': result[idx].writerName, 'writerId': result[idx].writerId, 'content': result[idx].content, 'rDate': result[idx].rDate, 'writerPic': S3URL+tempResult1[0].writerPic, 'commentPic':jsonCommentPic});
+        }
+        
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+    return res.status(200).json({result: returnJson});
+
+});
+
+/**
+ * @swagger
+ * /cavelife/details:
  *   get:
  *     description: 동굴생활 글을 상세조회합니다.. 
  *     tags: [Get (Working)]
@@ -193,8 +331,8 @@ caveLife.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
  *       description: "상세보기 할 해당 게시글의 B_ID를 입력합니다."
  *     responses:
  *       "200":
- *         description: "sellerId: 판매자고유ID\n imageUrls: 판매전용 이미지\n sellerImg: 판매자프로필 사진\n sellerName: 판매자이름\n title: 판매글 제목\n content: 판매글 내용\n hits: 조회수\n rDate: 글 등록날짜"
- *     
+ *         description: "writerId: 글쓴이 고유 ID \n imageUrls: 해당 동굴생활 이미지\n writerImg: 글쓴이 사진\n writerName: 글쓴이 이름\n title: 동굴생활 게시글 제목\n content: 해당 게시물 내용\n hits: 조회수\n rDate: 글 등록날짜"
+ *  
 */
 caveLife.get('/details', async(req, res, next)=>{
     let {boardId} = req.query
@@ -219,15 +357,15 @@ caveLife.get('/details', async(req, res, next)=>{
         rDate       = result[0].rDate;
         hits        = result[0].hits;
 
-        //sellerId기반으로 프로필 사진 가져오기 
+        //글쓴이 기반으로 프로필 사진 가져오기 
         [result] = await dbcon.sendQuery(`SELECT m_name as sellerName, m_pic as sellerImg FROM dangoon.member WHERE m_id=?`, sellerId);
         sellerImg   = S3URL+result[0].sellerId;
         sellerName  = result[0].sellerName;
 
         
         console.log(boardId);
-        //판매상품 이미지들 가져오기 
-        [result] = await dbcon.sendQuery(`SELECT f_file as imageUrls from dangoon.file WHERE (B_ID=? and f_type=?)`, boardId, boardType);
+        //동굴생활 해당글 이미지들 가져오기 
+        [result] = await dbcon.sendQuery(`SELECT f_file as imageUrls from dangoon.file WHERE (B_ID=? AND c_id IS NULL AND f_type=? )`, boardId, boardType);
         
         let index = 0;
         for(let idx in result){ 
@@ -245,7 +383,7 @@ caveLife.get('/details', async(req, res, next)=>{
         dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
-    return res.status(200).json({sellerId: sellerId, imageUrls: imageUrls, sellerImg: sellerImg, sellerName: sellerName, title: title, content: content, hits: hits, rDate: rDate});
+    return res.status(200).json({writerId: sellerId, imageUrls: imageUrls, writerImg: sellerImg, writerName: sellerName, title: title, content: content, hits: hits, rDate: rDate});
 
 });
 
