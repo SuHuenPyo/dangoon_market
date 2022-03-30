@@ -40,6 +40,8 @@ productDetails.get('/', async(req, res, next)=>{
         await dbcon.DbConnect();
 
         //board 정보 가져오기 
+        
+        await dbcon.sendQuery(`UPDATE dangoon.board AS A, (SELECT b_hits FROM dangoon.board WHERE b_id=?) AS B SET A.b_hits = (B.b_hits + 1) WHERE A.b_id=?;`, boardId, boardId);
         let [result] = await dbcon.sendQuery(`SELECT m_id as sellerId, b_title as title, b_content as content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as rDate, b_hits as hits, b_category as category, b_price as price From dangoon.board WHERE b_id=?`, boardId);
         sellerId    = result[0].sellerId;
         title       = result[0].title;
