@@ -13,7 +13,7 @@ const productDetails = express.Router();
  * @swagger
  * /productdetails:
  *   get:
- *     description: 동굴생활 상세 글을 조회합니다.. 
+ *     description: 판매글 상세 글을 조회합니다.. 
  *     tags: [Get (Working)]
  *     produces:
  *     - "application/json"

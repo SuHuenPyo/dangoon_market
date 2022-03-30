@@ -7,6 +7,7 @@ import { DG_DB } from "../helper/dbHelper.js";
 
 
 import ImportManager from "../common/IM.js";
+import { S3URL, uploadBoard } from "../helper/awsHelper.js";
 
 
 const caveLife = express.Router();
@@ -93,6 +94,158 @@ caveLife.get('/', async(req, res, next)=>{
 
     //저장한 값 여기서 전송해주고 
     res.send({'item': json, 'pageEnd': pagenationResult.groupEnd});
+
+});
+/**
+ * @swagger
+ * /cavelife/write:
+ *   post:
+ *     description: 동굴생활 단군마켓 커뮤니티에 글을 쓰는 기능입니다.
+ *     tags: [Post (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "content"
+ *       in: "body"
+ *       description: "multipart/form-data"
+ *       schema:
+ *          type: object
+ *          properties:
+ *              memberId:
+ *                  type: string
+ *              title:
+ *                  type: string
+ *              content:
+ *                  type: string
+ *              board: 
+ *                  type: Img
+ *                  description: "이미지파일"
+ *         
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
+caveLife.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
+
+    //board
+    let mfileType = "C";
+    //Sell 게시판
+    let mboardType = "C";
+
+    let {memberId, title, content} = req.body;
+    let memberName  = null;
+    let boardId     = null;
+
+    //필요사항
+    /*
+        M_ID        = 맴버아이디  (추후엔 세션으로 맴버ID 가져오도록 할거임)
+        B_WRITER    = 작성자 (추후엔 이것도 세션으로 맴버ID 가져오도록 할거임)
+        B_TITLE     = 작성글 제목
+        B_CONTENT   = 작성글 내용
+        B_IMG       = 이것은 사실 썸네일 관련인데 . 일단은 패스 하도록 
+        B_CATEGORY  = 카테고리
+        B_PRICE     = default 0 
+    */
+    
+    let dbcon = new DG_DB();
+    try {
+        
+        await dbcon.DbConnect();
+        //먼저 유저관련 정보 가져오기 
+        let [result] = await dbcon.sendQuery(`SELECT m_name AS name FROM dangoon.member WHERE (m_id = ?)`, memberId);
+        memberName = result[0].name;
+
+        //게시판 생성
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT) VALUES(?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content);
+        boardId = result.insertId
+
+
+        //이미지 등록
+        for(let idx in req.files){
+            await dbcon.sendQuery(`INSERT INTO dangoon.file(b_id, f_type, f_file) VALUES(?, ?, ?)`, boardId, mfileType, req.files[idx].key);
+        }
+        
+
+    }catch(e){
+       console.error(e);
+       return res.status(400).json({text: '무언가 잘못됨.'});
+    }finally{
+        dbcon.end();
+    }
+
+
+    return res.status(200).json({text: '동굴생활 등록 성공'});
+    
+});
+
+/**
+ * @swagger
+ * /details:
+ *   get:
+ *     description: 동굴생활 글을 상세조회합니다.. 
+ *     tags: [Get (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "boardId"
+ *       in: "query"
+ *       description: "상세보기 할 해당 게시글의 B_ID를 입력합니다."
+ *     responses:
+ *       "200":
+ *         description: "sellerId: 판매자고유ID\n imageUrls: 판매전용 이미지\n sellerImg: 판매자프로필 사진\n sellerName: 판매자이름\n title: 판매글 제목\n content: 판매글 내용\n hits: 조회수\n rDate: 글 등록날짜"
+ *     
+*/
+caveLife.get('/details', async(req, res, next)=>{
+    let {boardId} = req.query
+
+    //FileType - B-판매게시판, C-동굴생활
+    let boardType = "C"
+    //return value
+    let sellerId, sellerImg, sellerName, title, content, hits, rDate= null;
+    let imageUrls = [];
+
+    let dbcon = new DG_DB();
+    try{
+        await dbcon.DbConnect();
+
+        //board 정보 가져오기 
+        
+        await dbcon.sendQuery(`UPDATE dangoon.board AS A, (SELECT b_hits FROM dangoon.board WHERE b_id=?) AS B SET A.b_hits = (B.b_hits + 1) WHERE A.b_id=?;`, boardId, boardId);
+        let [result] = await dbcon.sendQuery(`SELECT m_id as sellerId, b_title as title, b_content as content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as rDate, b_hits as hits From dangoon.board WHERE b_id=?`, boardId);
+        sellerId    = result[0].sellerId;
+        title       = result[0].title;
+        content     = result[0].content;
+        rDate       = result[0].rDate;
+        hits        = result[0].hits;
+
+        //sellerId기반으로 프로필 사진 가져오기 
+        [result] = await dbcon.sendQuery(`SELECT m_name as sellerName, m_pic as sellerImg FROM dangoon.member WHERE m_id=?`, sellerId);
+        sellerImg   = S3URL+result[0].sellerId;
+        sellerName  = result[0].sellerName;
+
+        
+        console.log(boardId);
+        //판매상품 이미지들 가져오기 
+        [result] = await dbcon.sendQuery(`SELECT f_file as imageUrls from dangoon.file WHERE (B_ID=? and f_type=?)`, boardId, boardType);
+        
+        let index = 0;
+        for(let idx in result){ 
+            imageUrls.push(S3URL+result[idx].imageUrls);
+        }
+        
+
+
+        
+        
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+    return res.status(200).json({sellerId: sellerId, imageUrls: imageUrls, sellerImg: sellerImg, sellerName: sellerName, title: title, content: content, hits: hits, rDate: rDate});
 
 });
 
