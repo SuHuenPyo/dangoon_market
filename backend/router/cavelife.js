@@ -73,24 +73,26 @@ caveLife.get('/', async(req, res, next)=>{
 
         const [result2] = await dbcon.query(sql, args);
 
+
+        for(let idx in result2){
+            let args = [];
+            sql = "SELECT m_pic FROM dangoon.member WHERE m_id=?";
+            args.push(result2[idx].m_id);
+            let [tempResult] = await dbcon.query(sql, args);
+            result2[idx].profilePic = S3URL+tempResult[0].m_pic;
+        }
+        console.log(result2);
         json = result2;
         
+
+
+
     }catch(e){
         return next(e);
     }finally{
         //dbEnd 반드시 마지막에 DB 핸들풀고 
         dbcon.end();
     }
-
-    /**
-     * 테스트
-     */
-
-    // let ddd = await new DG_DB();
-    // await ddd.connection();
-    // let result22 = ddd.sendQuery("select * from dangoon.board");
-    // console.log(result22);
-    //-----------------
 
     //저장한 값 여기서 전송해주고 
     res.send({'item': json, 'pageEnd': pagenationResult.groupEnd});
@@ -377,7 +379,7 @@ caveLife.get('/details', async(req, res, next)=>{
         
         
     }catch(e){
-        return next(e);
+        return res.status(400).json({'에러코드': e});
     }finally{
         //dbEnd 반드시 마지막에 DB 핸들풀고 
         dbcon.end();
