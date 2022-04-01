@@ -3,6 +3,7 @@ import HeaderLogo from "../components/HeaderLogo";
 import styles from "../asset/scss/Mygralic.module.scss";
 import { Link } from "react-router-dom";
 import Notice from "../components/Notice";
+import axios from 'axios';
 
 // icons
 import { RiKakaoTalkFill } from "react-icons/ri";
@@ -101,7 +102,15 @@ const Mygralic = () => {
             </Link>
           </li>
           <li className={styles.menuItem}>
-            <Link to='/' onClick={(e)=>{window.sessionStorage.clear()}}>
+            <Link to='/' onClick={async()=>{
+              let result = null;
+              try {
+                result = await axios.get('http://dg-market.iptime.org:28019/logout'); 
+              } catch (err) {
+                alert('error');
+              }
+              console.log(result);
+            }}>
               <AiOutlineExport />
               로그아웃
             </Link>

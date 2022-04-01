@@ -7,8 +7,8 @@ import NewProduct from './pages/NewProduct'
 import NewCavelife from './pages/NewCavelife';
 import CaveLife from './pages/CaveLife';
 import CaveComment from './pages/CaveComment';
-import Categori from "./pages/Categori";
-import CategoriList from "./pages/CategoriList";
+import Categori from "./pages/Category";
+import CategoriList from "./pages/CategoryList";
 import ProductDetail from './pages/ProductDetail';
 import SignUp from './pages/Signup';
 import Login from './pages/Login';

@@ -10,9 +10,12 @@ import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Report from "../components/Report";
 import { useSelector, useDispatch } from "react-redux";
-import { getCaveDetails } from "../Slices/CavelifeSlice";
+import { getCaveDetails } from "../Slices/CaveDetails";
+import onImgUpload from "../utils/ImgPreview";
+import dayjs  from "dayjs";
+import relativeTime   from "dayjs/plugin/relativeTime";
 
-import { AiOutlineLike, AiFillLike, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
 
 const BtnLine = styled.div`
   width: calc(100% - 10px);
@@ -54,7 +57,6 @@ const BtnLine = styled.div`
 const Content = styled.div`
   width: calc(100% - 10px);
   height: auto;
-  padding: 0 5px;
 
   h2 {
     font-size: 1.1rem;
@@ -75,6 +77,19 @@ const Content = styled.div`
     -webkit-line-clamp: 5; /* 표시하고자 하는 라인 수 */
     -webkit-box-orient: vertical;
   }
+
+  p {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    color: #b5b5b5;
+    margin: 0 0 10px 0;
+
+    svg {
+      position:relative;
+      top: 1.5px;
+    }
+  }
+
 `;
 
 const ContentImg = styled.div`
@@ -102,8 +117,30 @@ const Gap = styled.div`
   opacity: 0.1;
 `;
 
+const CommentImg = styled.div`
+  width: 100%;
+  height: auto;
+  max-height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(229, 229, 229, 0.3);
+  overflow-x: scroll;
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  img {
+    flex-basis:100px;
+    width: 100px;
+    height: 100px;
+    margin: 0 5px 0 0;
+  }
+`;
+
 const CaveComment = (props) => {
-  const { rt, rtmsg, item, loading } = useSelector((state) => state.cavelife);
+
+  const { rt, rtmsg, item, loading } = useSelector((state) => state.cavedetails);
   const dispatch = useDispatch();
   const input = React.useRef();
 
@@ -120,6 +157,9 @@ const CaveComment = (props) => {
   React.useEffect(() => {
     dispatch(getCaveDetails(id));
   }, [dispatch, id]);
+
+  dayjs.extend(relativeTime);
+  dayjs.locale('ko');
 
   return (
     <>
@@ -143,14 +183,12 @@ const CaveComment = (props) => {
             <div className={style.cavecomment}>
               <div className={style.cavecommentpost}>
                 <div className={style.cavepostprofile}>
-                  <img
-                    src={item.writerImg}
-                    alt={`${item.writerName}`}
-                  />
+                  <img src={item.writerImg} alt={`${item.writerName}`} />
                   <p>{item.writerName}</p>
                 </div>
                 <Content className={style.cavepostcont}>
                   <h2>{item.title}</h2>
+                  <p>{dayjs(item.rDate).fromNow()} &middot;&nbsp; <AiOutlineEye/> {item.hits}</p>
                   <div>{item.content}</div>
                 </Content>
                 <ContentImg>
@@ -161,7 +199,7 @@ const CaveComment = (props) => {
                     : null}
                 </ContentImg>
                 <button className={style.postreport} onClick={onToggleReport}>
-                  <img src={imgwarning} /> &nbsp; 부적절한 게시글이라면
+                  <img src={imgwarning} alt='신고아이콘'/> &nbsp; 부적절한 게시글이라면
                   단군마켓에 알려주세요.
                 </button>
               </div>
@@ -188,26 +226,32 @@ const CaveComment = (props) => {
             <CaveCommentDown onClick={onToggleReport} />
           </main>
           <Report show={show} onClick={onToggleReport} />
-          <form
-            className={style.cavecommentwrite}
-            encType="multipart/form-data"
-          >
-            <label htmlFor="comment-input-img" className={style.icons}>
-              <BsCardImage />
-            </label>
-            <input
-              type="file"
-              id="comment-input-img"
-              className={style.commentinputimg}
-            />
-            <input
-              type="text"
-              name="cavecomment-com"
-              placeholder="댓글을 입력해주세요."
-              className={style.commentwriteinput}
-              ref={input}
-            />
-          </form>
+          <div className={style.cavecommentWrite}>
+            <CommentImg id="commentImg"></CommentImg>
+            <form
+              className={style.cavecommentform}
+              encType="multipart/form-data"
+            >
+              <label htmlFor="comment-input-img" className={style.icons}>
+                <BsCardImage />
+              </label>
+              <input
+                type="file"
+                id="comment-input-img"
+                className={style.commentinputimg}
+                onChange={(event) => {
+                  onImgUpload(event, "#commentImg", item.b_id);
+                }}
+              />
+              <input
+                type="text"
+                name="cavecomment-com"
+                placeholder="댓글을 입력해주세요."
+                className={style.commentwriteinput}
+                ref={input}
+              />
+            </form>
+          </div>
         </>
       )}
     </>

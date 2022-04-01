@@ -19,7 +19,9 @@ const Home = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getHomeList({ page: page }));
+    if(!loading){
+      dispatch(getHomeList({ page: page }));
+    }
   }, [dispatch, page]);
 
   React.useEffect(() => {
@@ -39,7 +41,7 @@ const Home = () => {
           </div>
         )}
         {/* 에러발생 */}
-        {!loading && rt !== 200 && (
+        {rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>
@@ -55,6 +57,6 @@ const Home = () => {
       </main>
     </>
   );
-};
+};  
 
 export default Home;

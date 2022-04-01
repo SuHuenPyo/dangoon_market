@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const postNewCavelife = createAsyncThunk('POST/NEWCAVELIFE',async (payload,{rejectWithValue})=>{
+export const getCaveDetails = createAsyncThunk('GET/CAVEDETAILS',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('http://dg-market.iptime.org:28019/cavelife/write',payload,{
-            header: {'content-type': 'multipart/form-data'}
+        result = await axios.get('http://dg-market.iptime.org:28019/cavelife/details',{
+            params: {
+                boardId: payload,
+            }
         });
     } catch (err) {
         if(!err.response){
@@ -19,7 +21,7 @@ export const postNewCavelife = createAsyncThunk('POST/NEWCAVELIFE',async (payloa
 });
 
 const CavelifeSlice = createSlice({
-    name: 'cavelife',
+    name: 'cavedetails',
     initialState: {
         rt: null,
         rtmsg: null,
@@ -28,28 +30,30 @@ const CavelifeSlice = createSlice({
     },
     reducers: {},
     extraReducers: {
-        [postNewCavelife.pending]: (state,action)=>{
+        // getCaveDetails
+        [getCaveDetails.pending]: (state,action)=>{
             return {
                 ...state,
                 loading: true
             }
         },
-        [postNewCavelife.fulfilled]: (state,{meta,payload})=>{
+        [getCaveDetails.fulfilled]: (state,{meta,payload})=>{
             return {
                 ...state,
                 rt: payload.status,
                 rtmsg: payload.statusText,
+                item: payload.data,
                 loading:false
             }
         },
-        [postNewCavelife.rejected]: (state,{error,payload})=>{
+        [getCaveDetails.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
                 rt: payload?.status || error.name,
                 rtmsg: payload?.statusText || error.message,
                 loading: false
             }
-        },
+        }
     }
 });
 

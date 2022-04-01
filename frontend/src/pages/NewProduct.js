@@ -65,14 +65,14 @@ const NewProduct = () => {
       return;
     }
 
-    if(!loading && rt === 200){
+    if(rt === 200){
       setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
         type: 'compelete'
       });
     } 
-    if (!loading && rt !== 200 ){
+    if (rt !== 200 ){
       console.log(rt);
       setNotice({
         title: "등록에 실패하였습니다.",

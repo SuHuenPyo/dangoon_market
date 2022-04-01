@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import ProfileView from "./ProfileView";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
 
@@ -49,6 +51,13 @@ const Content = styled(Link)`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  p {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    color: #b5b5b5;
+    margin: 0 0 10px 0;
   }
 
   div {
@@ -147,12 +156,15 @@ const CavePostVeiw = ({ data, inview }) => {
   const [member, setMember] = React.useState(0);
   const [profile, setProfile] = React.useState({ show: false, top: 0 });
 
+  dayjs.extend(relativeTime);
+  dayjs.locale("ko");
+
   return (
     <>
       {data.map((v, i) => {
         return (
           <PostVeiw
-            key={v.b_id}
+            key={i}
             {...(data.length - 1 === i ? { ref: inview } : {})}
           >
             <Poster
@@ -164,12 +176,13 @@ const CavePostVeiw = ({ data, inview }) => {
               }}
             >
               <div>
-                <img src="http://placekitten.com/45/45" alt="" />
+                <img src={v.profilePic} alt="" />
               </div>
               <p>{v.b_writer}</p>
             </Poster>
             <Content to={`/cavelife/${v.b_id}`}>
-              <h2>{v.b_title}</h2>
+              <h2>{v.b_title}  </h2>
+              <p>{dayjs(v.b_rdate).fromNow()}</p>
               <div>{v.b_content}</div>
             </Content>
             <ContentImg>

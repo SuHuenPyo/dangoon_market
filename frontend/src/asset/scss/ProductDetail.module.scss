@@ -8,11 +8,17 @@ $mobile-breakpoint: 335px;
 $tablet-breakpoint: 500px;
 
 .imgView {
-  width: 100%;
+  min-width: 100%;
   min-height: 320px;
   height: 30%;
   padding: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  display: flex;
+  scroll-snap-type: x mandatory;
+
+  img:first-child {
+    scroll-snap-align: start;
+  }
 
   img {
     display: block;

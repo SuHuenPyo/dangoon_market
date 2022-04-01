@@ -1,13 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+
 export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejectWithValue})=>{
     let result = null;
 
     try {
         result = axios.get("http://dg-market.iptime.org:28019/home",{
         params : {page: payload.page,
-        rows: 10}
+        rows: 10},
+        withCredentials: true,
         })
 
     } catch (err){

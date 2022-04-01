@@ -7,6 +7,7 @@ import Login from './Slices/LoginSlice';
 import NewProductSlice from './Slices/ProductSlice'; 
 import NewCavelife from './Slices/CavelifeSlice'
 import ProductDetail from './Slices/ProductDetailSlice';
+import CaveDetails from './Slices/CaveDetails'
 
 const Store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ const Store = configureStore({
         newproduct: NewProductSlice,
         productdetails: ProductDetail,
         cavelife: NewCavelife,
+        cavedetails: CaveDetails
     },
     middleware: [...getDefaultMiddleware({serializableCheck:false}),createLogger()],
     devTools: true

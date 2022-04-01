@@ -12,11 +12,20 @@ import ReactLoading from "react-loading";
 import Report from "../components/Report";
 import Notice from "../components/Notice";
 
+import dayjs  from "dayjs";
+import relativeTime   from "dayjs/plugin/relativeTime"
+
+import config  from "../utils/_config.json"
+
 const ProductDetail = () => {
+  dayjs.extend(relativeTime);
+  dayjs.locale('ko');
+
+
   const [reportShow, setReportShow] = React.useState(false);
   const [noticeShow, setNoticeShow] = React.useState(false);
   const [clickStar, setClickStar] = React.useState(false);
-  const titleList = {gajun : '가전', life:'생활',sports: '스포츠',books:'도서',beauti: '뷰티', acc: '악세사리',cloth:'의류', plant:'식물',ect:'기타'}
+  const categoryList = config.categoryList;
 
   const { rt, rtmsg, item, loading } = useSelector(
     (state) => state.productdetails
@@ -24,11 +33,11 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
 
-  const { b_id } = useParams();
+  const { id } = useParams();
 
   React.useEffect(() => {
-    dispatch(getProductDetail(b_id));
-  }, [b_id]);
+    dispatch(getProductDetail(id));
+  }, [dispatch,id]);
 
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {
@@ -51,14 +60,14 @@ const ProductDetail = () => {
         </main>
       )}
 
-      {!loading && rt !== 200 && (
+      { rt !== 200 && (
           <main className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>
           </main>
         )}
 
-      {!loading && rt === 200 && (
+      { rt === 200 && (
         <>
           <HeaderLogo />
           <main>
@@ -86,9 +95,9 @@ const ProductDetail = () => {
             <div className={styles.postCont}>
               <h2 className={styles.title}>{item.title}</h2>
               <p className={styles.postInfo}>
-                <span className={styles.categori}>{titleList[item.category]}</span>
+                <span className={styles.categori}>{categoryList[item.category]}</span>
                 &nbsp;&middot;&nbsp;
-                <span className={styles.postTime}>{item.rDate}</span>
+                <span className={styles.postTime}>{dayjs(item.rDate).fromNow()}</span>
               </p>
               <button
                 type="button"

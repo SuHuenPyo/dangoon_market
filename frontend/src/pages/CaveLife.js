@@ -37,14 +37,14 @@ const CaveLife = () => {
           </div>
         )}
         
-        {!loading && rt !== 200 && (
+        {rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>
           </div>
         )}
 
-        {!loading && rt === 200 && (
+        {rt === 200 && (
           <>
           <CavePostVeiw data={item.item} inview={ref} />
           <WriteButton path='/newcavelife'/>

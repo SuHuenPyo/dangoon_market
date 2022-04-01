@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineStar, AiOutlineEye } from "react-icons/ai"
 import dayjs  from "dayjs";
 import relativeTime   from "dayjs/plugin/relativeTime";
+import config from '../utils/_config.json';
 
 import 'dayjs/locale/ko';
 
@@ -88,7 +89,8 @@ const SaleCont = styled.div`
 const SaleListItem = ({data,inview}) => {
   dayjs.extend(relativeTime);
   dayjs.locale('ko');
-
+  
+  const categoryList = config.categoryList;
 
   return (
     <ul>
@@ -102,8 +104,8 @@ const SaleListItem = ({data,inview}) => {
         <SaleCont className="sale-content">
           <h2 className="sale-title">{v.b_title}</h2>
           <p className="saleInfo">
-            <span className="postCategori">{v.b_category}</span> &middot;
-            <span className="postTime">{dayjs(v.b_rdate).fromNow(true)}전</span>
+            <span className="postCategori">{categoryList[v.b_category.toLowerCase()]}</span> &middot;&nbsp;
+            <span className="postTime">{dayjs(v.b_rdate).fromNow()}</span>
           </p>
           <p className="salePrice">
             {v.b_price}<span className="won">원</span>
@@ -125,4 +127,4 @@ SaleListItem.defaultProps = {
   data: []
 }
 
-export default SaleListItem;
+export default React.memo(SaleListItem);

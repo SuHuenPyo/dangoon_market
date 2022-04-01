@@ -126,7 +126,6 @@ const Login = () => {
       console.log(rt);
       window.sessionStorage.setItem("userId", loginForm.current.userId.value);
       window.sessionStorage.setItem("mId", 18);
-      window.history.back();
     }
   
     if (!loading && rt !== 200) {
