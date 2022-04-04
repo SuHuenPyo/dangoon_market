@@ -39,7 +39,8 @@ export const pagenation = (totalCount=0, nowPage=1, listCount=10, groupCount=5) 
     
         // 현재 그룹의 마지막 페이지 번호
         let groupEnd = Math.min(totalPage,nowGroup * groupCount);
-    
+
+
         // 이전 그룹의 마지막 페이지 번호
         let prevGroupLastPage = 0;
         if(groupEnd > groupCount){prevGroupLastPage = groupStart - 1;}

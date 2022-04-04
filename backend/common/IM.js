@@ -9,6 +9,8 @@ import express from 'express';
 import path from "path";
 import { fileURLToPath } from "url";
 import { compareMinutes } from "../helper/TimeHelper.js";
+import crypto from "crypto";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -25,7 +27,8 @@ const ImportManager = {
     "path"              : path,
     "__filename"        : __filename,
     "__dirname"         : __dirname,
-
+    "crypto"            : crypto,
+    
     //helper
     "compareMinutes"    : compareMinutes,
     //환경변수

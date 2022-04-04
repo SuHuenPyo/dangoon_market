@@ -13,6 +13,7 @@ import myGarlic         from './router/mygarlic.js';
 import registerForSale  from './router/registerforsale.js';
 import Notice           from './router/notice.js';
 import Login            from './router/login.js';
+import LogOut           from './router/logout.js';
 import signUp           from './router/signup.js';
 import saleHistory      from './router/salehistory.js';
 import purchasedItem    from './router/purchaseditem.js';
@@ -24,14 +25,18 @@ import Development      from './router/development.js';
 
 import * as url from "url";
 import path from "path";
-import session from "express-session"
-import MySQLStore from "express-mysql-session";
 
-const MySQLStorage = MySQLStore(session);
+
+
 
 //need to install 
 import express from 'express';
 const app = express();
+
+    //세션부분
+import session from "express-session"
+import MySQLStore from "express-mysql-session";
+
 import serveStatic from "serve-static"; //특정 폴더의 파일을 URL로 노출
 import serveFavicon from "serve-favicon";
 import morgan from "morgan"; 
@@ -39,6 +44,9 @@ import cors from 'cors';
 import bodyParser from "body-parser";
 import expressValidator from "express-validator";
 import * as multer from "multer";
+import ImportManager from "./common/IM.js";
+import cookieParser from "cookie-parser";
+import { NONAME } from "dns";
 
 
 
@@ -47,14 +55,37 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-let sessionOptions = {
+//session 미들웨어 등록 
+//세션 mysql 셋팅
+app.set('trust proxy',1)
+const secretKey = 'S2cre2t';
+app.use(cookieParser(secretKey));
+const MySQLStoreSession = MySQLStore(session);
+const connection = ImportManager.mysql.createPool({
     host: 'localhost',
-    port: 28019,
-    user: '',
-    password: '',
-    database:''
-};
-let sessionStore = new MySQLStorage(sessionOptions);
+    port: 3306,
+    user: 'root',
+    password: '1234',
+    database: 'dangoon',
+});
+const sessionStore = new MySQLStoreSession({}, connection);
+
+app.use(session({
+    //key: 'Login#SeSS1on',
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        maxAge: null,
+        // allow the cookie to be sent via HTTP ("true" means "HTTPS only)
+        secure: false, 
+        sameSite: 'none',
+        
+    },
+    store: sessionStore,
+}))
+
 
 /**
  * POST 파라미터 수신모듈 설정
@@ -63,20 +94,15 @@ let sessionStore = new MySQLStorage(sessionOptions);
  * extended: true --> 계속 사용 
  * extended: false --> 한번 사용 
  * */ 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials : true,
+    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+}));
 app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
 app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
 app.use(bodyParser.urlencoded({extended:true}));
-//parse form-data
-//app.use();
 
-//session 미들웨어 등록 
-// app.use(session({
-//     secret: "gekuahrgkleg153",
-//     resave: false,
-//     saveUninitialized: true,
-//     store: sessionStore
-// }));
 
 
 //swagger path 등록 
@@ -105,6 +131,7 @@ app.use("/registerforsale", registerForSale);
 app.use("/notice",          Notice);
 app.use("/cavelife",        caveLife);
 app.use("/login",           Login);
+app.use("/logout",          LogOut)
 app.use("/signup",          signUp);
 app.use("/salehistory",     saleHistory);
 app.use("/purchaseditem",   purchasedItem);

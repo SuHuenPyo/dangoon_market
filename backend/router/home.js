@@ -12,30 +12,37 @@ const Home = express.Router();
 let dbcon = null;
 let json = null;
 
-  /**
-     * @swagger
-     * /home:
-     *   get:
-     *     description: 단군마켓 판매글을 조회합니다. , item, 페이지의 마지막 번호를 리턴받습니다.
-     *     tags: [Get (Working)]
-     *     produces:
-     *     - "application/json"
-     *     parameters:
-     *     - name: "page"
-     *       in: "query"
-     *       description: "검색 할 페이지 번호를 설정합니다. default = 1"
-     *       type: "number"
-     *     - name: "rows"
-     *       in: "query"
-     *       description: "페이지당 표시 개수를 설정합니다. default = 10"
-     *       type: "number"
-     *     responses:
-     *       "200":
-     *         description: "successful operation"
-     *     
-    */
+/**
+ * @swagger
+ * /home:
+ *   get:
+ *     description: 단군마켓 판매글을 조회합니다. , item, 페이지의 마지막 번호를 리턴받습니다.
+ *     tags: [Get (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "page"
+ *       in: "query"
+ *       description: "검색 할 페이지 번호를 설정합니다. default = 1"
+ *       type: "number"
+ *     - name: "rows"
+ *       in: "query"
+ *       description: "페이지당 표시 개수를 설정합니다. default = 10"
+ *       type: "number"
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
 Home.get('/', async(req, res, next)=>{
 
+    console.log(req.session);
+    /*
+    if(!req.session.user){
+        console.log("로그인을 하세요");
+        return res.status(400).json({'text':'로그인을 하세요'});
+    }
+    */
     console.log("home");
     //현재 페이지 번호 받기 (default 1)
     const page = req.query.page || 1;
@@ -43,19 +50,19 @@ Home.get('/', async(req, res, next)=>{
     //페이지당 요청 글 개수 (default 10)
     const rows = req.query.rows || 10;
     let pagenationResult = null;
+
+    //DB Connection
+    let dbcon = new DG_DB();
+
     try{
-        //DB Connection
-        dbcon = await mysql.createConnection(_config.database_config);
-        await dbcon.connect();
+        await dbcon.DbConnect();
+
 
         //전체 데이터 수 조회
-        let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'";
-        
-        const [result1] = await dbcon.query(sql);
-        console.log(result1);
+        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'`);
+        console.log(result);
 
-        const totalCount = result1[0].cnt;
-
+        const totalCount = result[0].cnt;
         pagenationResult = pagenation(totalCount, page, rows);
 
         console.log(JSON.stringify(pagenationResult));
@@ -63,15 +70,8 @@ Home.get('/', async(req, res, next)=>{
         let args = [];
 
         //데이터 조회 
-        sql = "SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE b_type='S' LIMIT ?,?";
-
-
-        args.push(pagenationResult.offset);
-        args.push(pagenationResult.listCount);
-
-        const [result2] = await dbcon.query(sql, args);
-        json = result2;
-    
+        
+        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE b_type='S' LIMIT ?,?`, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -84,10 +84,10 @@ Home.get('/', async(req, res, next)=>{
         return next(e);
     }finally{
         //dbEnd 반드시 마지막에 DB 핸들풀고 
-        dbcon.end();
+        await dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
-    res.send({'item': json, 'pageEnd': pagenationResult.groupEnd});
+    res.send({'item': json, 'pageEnd': pagenationResult.totalPage});
 });
 /**
  * @swagger

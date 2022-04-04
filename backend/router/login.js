@@ -4,6 +4,8 @@ import  * as randomHelper from '../helper/RandomHelper.js';
 import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
 import { DG_DB } from "../helper/dbHelper.js";
+import IM from "../common/IM.js";
+
 
 const Login = express.Router();
 
@@ -36,20 +38,46 @@ Login.post('/', async(req, res, next)=>{
     
     let {user_id, user_pw} = req.body;
 
+    console.log(req.session);
+
+    console.log(user_id, user_pw, new Date());
+
+    //DB 객체 생성 
     let dbcon = new DG_DB();
-    //return res.status(400).json({text: '임시 에러'});
-
-    console.log(user_id, user_pw);
-
     try{
         await dbcon.DbConnect();
 
+        if(req.session.user){
+            return res.status(402).json({text: '이미 로그인 되어있습니다.'});
+        }
+
+
         //존재유무 체크
-        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.member WHERE (M_USER_ID=? AND M_PW=?)`, user_id, user_pw);
+        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.member WHERE (M_USER_ID=? AND M_PW=?)`, user_id, user_pw);
         
-        if(result[0].cnt < 1){
+        if(result[0] != undefined){
+            req.session.user = {
+                id: req.body.user_id, 
+                name : 'dg-cookie',
+                authorized: true
+            }
+
+        }
+        
+        if(result[0] == undefined){
             return res.status(400).json({text: '아이디와 패스워드를 다시 확인하세요'});
         }
+        
+        
+
+        // req.session.user_id = result[0].M_USER_ID;
+        // req.session.save((err)=> {
+        //     if(err) throw(err);
+        //     res.status(200).json({text: 'login OK!!!'});
+        //     //res.setHeader('Access-Control-Allow-Credentials', 'true');
+        // })
+
+        
 
     }catch(e){
         return next(e);
