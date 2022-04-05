@@ -92,6 +92,10 @@ const SaleListItem = ({data,inview}) => {
   
   const categoryList = config.categoryList;
 
+  if(data === null ){
+    data = []
+  }
+
   return (
     <ul>
       { data.map((v,i)=>{
@@ -124,7 +128,8 @@ const SaleListItem = ({data,inview}) => {
 };
 
 SaleListItem.defaultProps = {
-  data: []
+  data: [],
+  inview: false
 }
 
 export default React.memo(SaleListItem);

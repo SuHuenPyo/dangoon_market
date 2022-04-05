@@ -112,7 +112,7 @@ const PostForm = React.forwardRef((props,ref) => {
               <option value="beauti">뷰티</option>
               <option value="acc">잡화</option>
               <option value="cloth">의류</option>
-              <option value="plant">식품</option>
+              <option value="plant">식물</option>
               <option value="etc">기타</option>
             </select>
               </>

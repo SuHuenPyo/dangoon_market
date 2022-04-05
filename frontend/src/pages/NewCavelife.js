@@ -73,7 +73,7 @@ const NewCavelife = () => {
         type: "fail",
       });
     }
-  }, [dispatch, rt, loading,rtmsg]);
+  }, [dispatch]);
 
   return (
     <>

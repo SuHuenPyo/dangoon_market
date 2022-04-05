@@ -7,14 +7,14 @@ export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejec
     let result = null;
 
     try {
-        result = axios.get("http://dg-market.iptime.org:28019/home",{
+        result = await axios.get("https://dg-market.iptime.org/home",{
         params : {page: payload.page,
         rows: 10},
         withCredentials: true,
         })
 
-    } catch (err){
-     return rejectWithValue(err.response);
+    } catch (error){
+     return rejectWithValue(error.response);
     }
 
     return result;
@@ -53,8 +53,9 @@ const HomeSlice = createSlice({
         [getHomeList.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
-                rt: payload?.status || error.name,
-                rtmsg: payload?.statusText || error.message,
+                rt: payload.status || error,
+                rtmsg: payload.statusText || error.message,
+                item: payload.data.text,
                 loading: false
             }
         }

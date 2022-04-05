@@ -54,7 +54,7 @@ const StyledNotice = styled.div`
 const Notice = (props) => {
   // props.title은 제목, props.subTitle은 부제목
   return (
-    <StyledNotice bottom={props.bottom} show={props.show}>
+    <StyledNotice show={props.show}>
       <h2>{props.title}</h2>
       <p>{props.subTitle}</p>
       <button type="button" onClick={props.onClick}>
@@ -65,6 +65,8 @@ const Notice = (props) => {
 };
 
 Notice.defaultProps = {
+  show: false, 
+  onClick: null,
   title: "요청하신 부분이 정상적으로 처리되었습니다.",
   subTitle: null,
 };

@@ -125,7 +125,8 @@ const Login = () => {
     if ( !loading && rt === 200) {
       console.log(rt);
       window.sessionStorage.setItem("userId", loginForm.current.userId.value);
-      window.sessionStorage.setItem("mId", 18);
+      window.sessionStorage.setItem("mId", 1);
+      window.history.back();
     }
   
     if (!loading && rt !== 200) {
@@ -137,8 +138,6 @@ const Login = () => {
       setShow(true);
     }
   },[dispatch,rt,loading])
-
-
 
   return (
     <>

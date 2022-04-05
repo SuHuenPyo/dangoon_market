@@ -46,14 +46,13 @@ const NewProduct = () => {
     if(!regex.selected('productCategory','카테고리를 선택해주세요.')){return;};
     if(!regex.value('postContent','내용을 입력해주세요.')){return;};
     const postForm = new FormData();
-    const memberId = window.sessionStorage.getItem('mId')
+    const memberId = window.sessionStorage.getItem('mId');
     postForm.append('memberId', memberId);
     postForm.append('title', form.current.postTitle.value);
     postForm.append('price',  form.current.productPrice.value);
     postForm.append('category', form.current.category.value);
     postForm.append('content',form.current.postContent.value);
     postForm.append('board', form.current.postImg.files);
-
 
     dispatch(postNewProduct(postForm));
 

@@ -37,7 +37,7 @@ const CaveLife = () => {
           </div>
         )}
         
-        {rt !== 200 && (
+        {!loading && rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>

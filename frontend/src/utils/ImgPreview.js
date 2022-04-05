@@ -40,8 +40,6 @@ export const onImgView = (e, viewSelector, alt) => {
       };
 
       reader.onload = (event) => {
-        console.dir(event.target.result);
-
         imgView.innerHTML = `<img src=${event.target.result} alt=${alt}>`;
       };
 

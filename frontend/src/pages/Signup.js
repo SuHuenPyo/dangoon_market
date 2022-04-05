@@ -51,7 +51,6 @@ const Signup = () => {
 
   const onToggleShow = React.useCallback(() => {
     setValidShow(validShow ? false : true);
-    console.log(validShow);
   }, [validShow]);
 
   // 인증메일 발송하기
