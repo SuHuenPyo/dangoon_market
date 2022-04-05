@@ -8,7 +8,7 @@ const CategoriList = () => {
 
     console.log(categori);
 
-    const titleList = {gajun : '가전', life:'생활',sports: '스포츠',books:'도서',beauti: '뷰티', acc: '악세사리',cloth:'의류', plant:'식물',ect:'기타'}
+    const titleList = {gajun : '가전', life:'생활',sports: '스포츠',books:'도서',beauti: '뷰티', acc: '악세사리',cloth:'의류', plant:'식물',etc:'기타'}
 
     return (
         <>
