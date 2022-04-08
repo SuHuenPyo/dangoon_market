@@ -56,7 +56,9 @@ Login.post('/', async(req, res, next)=>{
         let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.member WHERE (M_USER_ID=? AND M_PW=?)`, user_id, user_pw);
         
         if(result[0] != undefined){
+
             req.session.user = {
+                
                 id: req.body.user_id, 
                 name : 'dg-cookie',
                 authorized: true

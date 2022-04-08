@@ -5,6 +5,7 @@ import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
 import { uploadBoard } from "../helper/awsHelper.js";
 import { DG_DB } from "../helper/dbHelper.js";
+import { authIsOwner } from "../middleware/session.js";
 
 const Home = express.Router();
 
@@ -34,16 +35,8 @@ let json = null;
  *         description: "successful operation"
  *     
 */
-Home.get('/', async(req, res, next)=>{
+Home.get('/', authIsOwner, async(req, res, next)=>{
 
-    console.log(req.session);
-    
-    if(!req.session.user){
-        console.log("로그인을 하세요");
-        return res.status(401).json({'text':'로그인을 하세요'});
-    }
-    
-    console.log("home");
     //현재 페이지 번호 받기 (default 1)
     const page = req.query.page || 1;
         
@@ -60,12 +53,12 @@ Home.get('/', async(req, res, next)=>{
 
         //전체 데이터 수 조회
         [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'`);
-        console.log(result);
+        //console.log(result);
 
         const totalCount = result[0].cnt;
         pagenationResult = pagenation(totalCount, page, rows);
 
-        console.log(JSON.stringify(pagenationResult));
+        //console.log(JSON.stringify(pagenationResult));
 
         let args = [];
 
@@ -75,7 +68,7 @@ Home.get('/', async(req, res, next)=>{
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
-        console.log(result)
+        //console.log(result)
 
         result.forEach(element => {
             element.b_price = element.b_price.toString().replace(regexp, ',');
@@ -88,7 +81,7 @@ Home.get('/', async(req, res, next)=>{
         await dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
-    res.send({'item': result, 'pageEnd': pagenationResult.totalPage, 'sessionID': req.session.user});
+    res.send({'item': result, 'pageEnd': pagenationResult.totalPage});
 });
 /**
  * @swagger
@@ -124,7 +117,7 @@ Home.get('/', async(req, res, next)=>{
  *         description: "successful operation"
  *     
 */
-Home.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
+Home.post('/write', authIsOwner, uploadBoard.array('board', 10) ,async(req, res, next)=>{
 
     //board
     let mfileType = "B";
@@ -145,7 +138,7 @@ Home.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
         B_CATEGORY  = 카테고리
         B_PRICE     = default 0 
     */
-    console.log(req.body)
+    //console.log(req.body)
     let dbcon = new DG_DB();
     try {
         

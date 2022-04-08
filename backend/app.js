@@ -96,7 +96,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         httpOnly: true,
-        maxAge: null,
+        //3 * 1000 * 60  * 60 = 3시간 유효
+        maxAge: 3 * 1000 * 60 * 60,
         // allow the cookie to be sent via HTTP ("true" means "HTTPS only)
         secure: true, 
         sameSite: 'none',

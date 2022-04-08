@@ -23,6 +23,10 @@ const s3 = new AWS.S3({
 
 //안전한 업로드를 위한 필터 구성
 const SignUpFilter = (req, file, cb) => {
+    if(!req.session.user){
+        console.log("로그인을 하세요");
+        return res.status(401).json({'text':'로그인을 하세요'});
+    }
     let typeArray = file.mimetype.split('/');
     let fileType = typeArray[1];
     console.log(typeArray);
@@ -69,6 +73,7 @@ export let uploadBoard = multer({
         },
         acl: 'public-read',
     }),
+    fileFilter: SignUpFilter,
     limits: {
         fileSize: maxSize,
         files: maxBoardFileCount
