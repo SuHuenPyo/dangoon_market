@@ -37,12 +37,12 @@ let json = null;
 Home.get('/', async(req, res, next)=>{
 
     console.log(req.session);
-    /*
+    
     if(!req.session.user){
         console.log("로그인을 하세요");
-        return res.status(400).json({'text':'로그인을 하세요'});
+        return res.status(401).json({'text':'로그인을 하세요'});
     }
-    */
+    
     console.log("home");
     //현재 페이지 번호 받기 (default 1)
     const page = req.query.page || 1;
@@ -53,13 +53,13 @@ Home.get('/', async(req, res, next)=>{
 
     //DB Connection
     let dbcon = new DG_DB();
-
+    let result = null;
     try{
         await dbcon.DbConnect();
 
 
         //전체 데이터 수 조회
-        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'`);
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'`);
         console.log(result);
 
         const totalCount = result[0].cnt;
@@ -75,8 +75,9 @@ Home.get('/', async(req, res, next)=>{
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
+        console.log(result)
 
-        result2.forEach(element => {
+        result.forEach(element => {
             element.b_price = element.b_price.toString().replace(regexp, ',');
         });
         
@@ -87,7 +88,7 @@ Home.get('/', async(req, res, next)=>{
         await dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
-    res.send({'item': json, 'pageEnd': pagenationResult.totalPage});
+    res.send({'item': result, 'pageEnd': pagenationResult.totalPage, 'sessionID': req.session.user});
 });
 /**
  * @swagger
@@ -144,13 +145,14 @@ Home.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
         B_CATEGORY  = 카테고리
         B_PRICE     = default 0 
     */
-    
+    console.log(req.body)
     let dbcon = new DG_DB();
     try {
         
         await dbcon.DbConnect();
         //먼저 유저관련 정보 가져오기 
         let [result] = await dbcon.sendQuery(`SELECT m_name AS name FROM dangoon.member WHERE (m_id = ?)`, memberId);
+        
         memberName = result[0].name;
 
         //게시판 생성

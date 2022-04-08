@@ -45,5 +45,8 @@
     "swagger-autogen": "^2.19.0",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0"
+  },
+  "dependencies": {
+    "letsencrypt": "^2.1.10"
   }
 }

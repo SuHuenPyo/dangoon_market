@@ -21,6 +21,7 @@ import watchList        from './router/watchlist.js';
 import productDetails   from './router/productdetails.js';
 import Mail             from './router/mail.js';
 import Development      from './router/development.js';
+import test from "./router/test.js";
 
 
 import * as url from "url";
@@ -55,6 +56,24 @@ const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
+//인증서
+import https from 'https';
+import fs from 'fs';
+
+
+const options = {
+    key: fs.readFileSync('./.certification/privkey1.pem'),
+    cert: fs.readFileSync('./.certification/cert1.pem')
+};
+
+const httpsPort = 443;
+
+https.createServer(options, app).listen(httpsPort, ()=>{
+    console.log("Https server listening on port " + httpsPort);
+});
+
+
+
 //session 미들웨어 등록 
 //세션 mysql 셋팅
 app.set('trust proxy',1)
@@ -79,7 +98,7 @@ app.use(session({
         httpOnly: true,
         maxAge: null,
         // allow the cookie to be sent via HTTP ("true" means "HTTPS only)
-        secure: false, 
+        secure: true, 
         sameSite: 'none',
         
     },
@@ -139,6 +158,7 @@ app.use("/watchlist",       watchList);
 app.use("/productdetails",  productDetails);
 app.use("/mail",            Mail);
 app.use("/development",     Development);
+app.use("/.well-known", test);
 
 //에러처리 
 app.use((err, req, res, next)=>{

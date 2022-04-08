@@ -6,7 +6,7 @@ const __dirname = path.dirname(__filename);
 export default {
     
     //Web Server Port 
-    SERVER_PORT : 28019,
+    SERVER_PORT : 80,
 
     //public dir 
     PUBLIC_PATH: path.join(__dirname, "../public"),

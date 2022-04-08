@@ -10,20 +10,24 @@ const Development = express.Router();
 let dbcon = null;
 let json = null;
 
-  /**
-     * @swagger
-     * /development/userlist:
-     *   get:
-     *     description: 테스트를 위한 유저테이블 정보를 가져옵니다.
-     *     tags: [Get (Development)]
-     *     produces:
-     *     - "application/json"
-     *     responses:
-     *       "200":
-     *         description: "successful operation"
-     *     
-    */
-Development.get('/userlist', async(req, res, next)=>{
+/**
+ * @swagger
+ * /development/test:
+ *   get:
+ *     description: 테스트를 위한 유저테이블 정보를 가져옵니다.
+ *     tags: [Get (Development)]
+*     parameters:
+*     - name: "sql"
+*       in: "query"
+*       description: "질의를 할 query문을 보냅니다."
+*     produces:
+*     - "application/json"
+*     responses:
+*       "200":
+*         description: "successful operation"
+*     
+*/
+Development.get('/test', async(req, res, next)=>{
     
     try{
         //DB Connection
@@ -31,10 +35,10 @@ Development.get('/userlist', async(req, res, next)=>{
         await dbcon.connect();
 
         //데이터 조회 
-        let sql = "SELECT * from member";
+        let sql = req.query.sql;
 
         const [result2] = await dbcon.query(sql);
-
+        console.log(result2);
         json = result2;
         
     }catch(e){
