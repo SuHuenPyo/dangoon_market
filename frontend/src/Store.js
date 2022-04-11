@@ -8,6 +8,8 @@ import NewProductSlice from './Slices/ProductSlice';
 import NewCavelife from './Slices/CavelifeSlice'
 import ProductDetail from './Slices/ProductDetailSlice';
 import CaveDetails from './Slices/CaveDetails'
+import CategorySlice from  './Slices/CategorySlice'
+import SearchSlice from  './Slices/SearchSlice'
 
 const Store = configureStore({
     reducer: {
@@ -18,7 +20,9 @@ const Store = configureStore({
         newproduct: NewProductSlice,
         productdetails: ProductDetail,
         cavelife: NewCavelife,
-        cavedetails: CaveDetails
+        cavedetails: CaveDetails,
+        category: CategorySlice,
+        search: SearchSlice
     },
     middleware: [...getDefaultMiddleware({serializableCheck:false}),createLogger()],
     devTools: true

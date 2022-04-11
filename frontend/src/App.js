@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes,useNavigate } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import "./asset/scss/common.scss";
 
 import Home from './pages/Home';
@@ -19,6 +19,7 @@ import Salelist from './pages/Salelist';
 import Buylist from './pages/Buylist';
 import Announce from './pages/Announce';
 import Announcepage from "./pages/Announcepage";
+import Search from "./pages/Search";
 
 
 function App() {
@@ -35,8 +36,8 @@ function App() {
         <Route path="/home" element={<Home/>} />
         <Route path="/newproduct" element={<NewProduct/>}/>
         <Route path="/newcavelife" element={<NewCavelife/>}/>
-        <Route path="/categori" element={<Categori/>} />
-        <Route path="/categori/:categori" element={<CategoriList/>} />
+        <Route path="/category" element={<Categori/>} />
+        <Route path="/category/:category" element={<CategoriList/>} />
         <Route path="/cavelife" element={<CaveLife/>} />
         <Route path="/cavelife/:id" element={<CaveComment/>} />
         <Route path="/mygralic" element={<Mygralic/>} />
@@ -49,6 +50,7 @@ function App() {
         <Route path='/buylist' element={<Buylist/>}/>
         <Route path='/notice' element={<Announce/>}/>
         <Route path='/notice/:id' element={<Announcepage/>}/>
+        <Route path='/search/:query' element={<Search/>}/>
       </Routes>
     </>
   );
