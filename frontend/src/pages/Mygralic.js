@@ -22,22 +22,10 @@ const Mygralic = () => {
   const [show, setShow] = React.useState(false);
   const onClick = () => {
     setShow(false);
-    window.location.href = "/login";
+    return window.history.back();
   };
 
   React.useEffect(() => {
-    const isLogin = window.sessionStorage.getItem("userId");
-
-    console.log(isLogin);
-
-    if (isLogin === null) {
-      setNotice({
-        title: "현재 로그인되어있지 않습니다.",
-        subTitle: "로그인해주세요.",
-      });
-
-      setShow(true);
-    }
   }, []);
 
   return (
@@ -102,14 +90,22 @@ const Mygralic = () => {
             </Link>
           </li>
           <li className={styles.menuItem}>
-            <Link to='/' onClick={async()=>{
+            <Link to='/' onClick={async(e)=>{
+              e.preventDefault();
               let result = null;
               try {
-                result = await axios.get('http://dg-market.iptime.org:28019/logout'); 
+                result = await axios.get('https://dangoon.duckdns.org/logout'); 
               } catch (err) {
                 alert('error');
               }
-              console.log(result);
+
+              if(result.status === 200){
+                setNotice({
+                  title: '로그아웃되었습니다.',
+                  subTitle: '감사합니다:)'
+                })
+                return setShow(true);
+              }
             }}>
               <AiOutlineExport />
               로그아웃

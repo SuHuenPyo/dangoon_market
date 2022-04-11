@@ -100,7 +100,7 @@ const SaleListItem = ({data,inview}) => {
     <ul>
       { data.map((v,i)=>{
         return (
-    <List key={i} {...(data.length-1 === i ? {ref: inview} : {})}>
+    <List key={v.b_id} {...(data.length-1 === i ? {ref: inview} : {})}>
       <Linked to={`/product/${v.b_id}`} className="post-link">
         <SaleImg className="sale-img">
           <img src="http://placekitten.com/85/85" alt=""/>

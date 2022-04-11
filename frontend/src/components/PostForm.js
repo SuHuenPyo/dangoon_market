@@ -48,19 +48,13 @@ const PostForm = React.forwardRef((props,ref) => {
 
   
   const onClick = () => {
-    setShow(false);
-    
-    if(props.noticeType === 'notAMember'){
-      return navigate('/login');
-    }
-
+     setShow(false);
     if(props.noticeType === 'compelete'){
       return navigate('/home');
     }
   }
   
   React.useEffect(() => {
-
     if(props.noticeType !== null){
       setShow(true);
     } else {

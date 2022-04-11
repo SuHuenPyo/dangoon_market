@@ -7,8 +7,9 @@ export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejec
     let result = null;
 
     try {
-        result = await axios.get("https://dg-market.iptime.org/home",{
-        params : {page: payload.page,
+        result = await axios.get("https://dangoon.duckdns.org/home",{
+        params : {
+        page: payload.page,
         rows: 10},
         withCredentials: true,
         })
@@ -17,7 +18,7 @@ export const getHomeList = createAsyncThunk('GET/HOMELIST',async (payload,{rejec
      return rejectWithValue(error.response);
     }
 
-    return result;
+    return await result;
 });
 
 const HomeSlice = createSlice({

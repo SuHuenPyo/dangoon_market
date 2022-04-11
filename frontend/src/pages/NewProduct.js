@@ -16,21 +16,6 @@ const NewProduct = () => {
   const dispatch = useDispatch();
 
 
-  React.useEffect(() => {
-    const isLogin = window.sessionStorage.getItem("userId");
-
-    console.log(isLogin);
-
-    if (isLogin === null) {
-      setNotice({
-        title: "현재 로그인되어있지 않습니다.",
-        subTitle: "로그인해주세요.",
-        type: 'notAMember'
-      });
-    } 
-
-  }, []);
-
   const doPost = async(e) => {
     e.preventDefault();
 
@@ -46,8 +31,7 @@ const NewProduct = () => {
     if(!regex.selected('productCategory','카테고리를 선택해주세요.')){return;};
     if(!regex.value('postContent','내용을 입력해주세요.')){return;};
     const postForm = new FormData();
-    const memberId = window.sessionStorage.getItem('mId');
-    postForm.append('memberId', memberId);
+    postForm.append('memberId', 1);
     postForm.append('title', form.current.postTitle.value);
     postForm.append('price',  form.current.productPrice.value);
     postForm.append('category', form.current.category.value);

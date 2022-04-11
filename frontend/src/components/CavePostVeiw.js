@@ -164,7 +164,7 @@ const CavePostVeiw = ({ data, inview }) => {
       {data.map((v, i) => {
         return (
           <PostVeiw
-            key={i}
+            key={v.b_id}
             {...(data.length - 1 === i ? { ref: inview } : {})}
           >
             <Poster

@@ -2,9 +2,6 @@ import React from "react";
 import style from "../asset/css/cavecommentdown.module.css";
 import imgwarning from "../asset/img/warning.png";
 
-
-import Report from "./Report";
-
 const CaveCommentDown = (props) => {
 
   return (
@@ -16,7 +13,7 @@ const CaveCommentDown = (props) => {
           <p className={style.commentername}>인간곰</p>
         </div>
           <button className={style.commentreport} onClick={()=>{props.onClick()}}>
-            <img src={imgwarning} />
+            <img src={imgwarning} alt='신고하기'/>
           </button> 
         <p className={style.commentcont}>댓글 예시입니다.</p>
       </div>

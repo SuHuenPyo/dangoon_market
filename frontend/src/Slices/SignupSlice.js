@@ -4,7 +4,7 @@ import axios from 'axios';
 export const signup = createAsyncThunk('POST/SIGNUP',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('http://dg-market.iptime.org:28019/signup',payload);
+        result = await axios.post('https://dangoon.duckdns.org/signup',payload);
     } catch (err) {
         return rejectWithValue(err.response);
     }  

@@ -7,7 +7,7 @@ export const getCaveList = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("http://dg-market.iptime.org:28019/cavelife", {
+      result = await axios.get("https://dangoon.duckdns.org/cavelife", {
         params: {page: payload.page, rows: 5 }
       });
     } catch (err) {

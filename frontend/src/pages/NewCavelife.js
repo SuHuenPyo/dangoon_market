@@ -8,30 +8,18 @@ import { postNewCavelife } from "../Slices/CavelifeSlice";
 
 /* 안내창 위치떄문에 여기 페이지는 main 제외 */
 const NewCavelife = () => {
-  const { rt, rtmsg, loading } = useSelector((state) => state.newcavelife);
+  const { rt, loading } = useSelector((state) => state.cavelife);
   const dispatch = useDispatch();
   const [notice, setNotice] = React.useState({
     title: null,
     subTitle: null,
     type: null,
   });
+
   const form = React.useRef();
 
-  React.useEffect(() => {
-    const isLogin = window.sessionStorage.getItem("userId");
 
-    console.log(isLogin);
-
-    if (isLogin === null) {
-      setNotice({
-        title: "현재 로그인되어있지 않습니다.",
-        subTitle: "로그인해주세요.",
-        type: "notAMember",
-      });
-    }
-  }, []);
-
-  const doCavePost = (e) => {
+  const doCavePost = async(e) => {
     e.preventDefault();
 
     const regex = new RegexHelper();
@@ -45,12 +33,12 @@ const NewCavelife = () => {
 
     const postCaveForm = new FormData();
 
-    postCaveForm.append("memberId", window.sessionStorage.getItem("mId"));
+    postCaveForm.append("memberId", 1);
     postCaveForm.append("title", form.current.postTitle.value);
     postCaveForm.append("content", form.current.postContent.value);
     postCaveForm.append("board", form.current.postImg.files);
 
-    dispatch(postNewCavelife(postCaveForm));
+    await dispatch(postNewCavelife(postCaveForm));
   };
 
   React.useEffect(() => {
@@ -58,7 +46,7 @@ const NewCavelife = () => {
       return;
     }
 
-    if (!loading && rt === 200) {
+    if (rt === 200) {
       setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
@@ -66,13 +54,14 @@ const NewCavelife = () => {
       });
     }
 
-    if (!loading && rt !== 200) {
+    if (rt !== 200) {
       setNotice({
         title: "등록을 실패하였습니다.",
         subTitle: "다시 한번 시도해주세요.",
         type: "fail",
       });
     }
+
   }, [dispatch]);
 
   return (

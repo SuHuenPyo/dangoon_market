@@ -2,7 +2,6 @@ import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
 import SaleListItem from "../components/SaleListItem";
 import ReactLoading from "react-loading";
-import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import WriteButton from "../components/WriteButton";
 import Notice from "../components/Notice";
@@ -12,9 +11,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getHomeList } from "../Slices/HomeSlice";
 
 const Home = () => {
+  // 페이징
   const [page, setPage] = React.useState(1);
+  const [show, setShow] = React.useState(false);
   const [notice, setNotice] = React.useState({
-    show: false,
     title: null,
     subTitle: null,
   });
@@ -24,30 +24,40 @@ const Home = () => {
   const [ref, inView] = useInView();
 
   const dispatch = useDispatch();
-  const navigator = useNavigate();
+  
 
-  const onClick = () => {
-    setNotice({ ...notice, show: false });
-    navigator("/login");
-  }
+  const onClick = React.useCallback(() => {
+    if(rt === 401 && rtmsg === 'Unauthorized'){
+      console.log(rt === 401)
+      window.location.href = '/login';
+    }
+
+    return setShow(false);
+  },[rt,navigator])
 
   React.useEffect(() => {
-    if(rt !== 200 && item === '로그인을 하세요'){
-      return setNotice({show: true, title: '로그인을 해주세요.', subTitle: '로그인창으로 이동합니다.'});
+    if (rt === 401) {
+      console.log(rt === 401)
+      setNotice({
+        title: "로그인되어 있지 않습니다.",
+        subTitle: "로그인 해주세요.",
+      });
+      setShow(true);
     }
-  },[rt,item])
+
+  }, [rt,loading]);
 
   React.useEffect(() => {
     if (!loading) {
       dispatch(getHomeList({ page: page }));
     }
-  }, [dispatch, page]);
+  }, [page]);
 
   React.useEffect(() => {
     if (inView && !loading && item.pageEnd > page) {
       setPage(page + 1);
     }
-  }, [inView]);
+  }, [inView,page]);
 
   return (
     <>
@@ -63,7 +73,9 @@ const Home = () => {
         {!loading && rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
-            <p>{rt}&nbsp;{rtmsg}</p>
+            <p>
+              {rt}&nbsp;{rtmsg}
+            </p>
           </div>
         )}
 
@@ -75,8 +87,9 @@ const Home = () => {
           </>
         )}
       </main>
+
       <Notice
-        show={notice.show}
+        show={show}
         onClick={onClick}
         title={notice.title}
         subTitle={notice.subTitle}

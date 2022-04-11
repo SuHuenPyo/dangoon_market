@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getProductDetail = createAsyncThunk('GET/PRODUCTDETAIL',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.get('http://dg-market.iptime.org:28019/productdetails',{ 
+        result = await axios.get('https://dangoon.duckdns.org/productdetails',{ 
             params: {boardId : payload}
         });
     } catch (err) {

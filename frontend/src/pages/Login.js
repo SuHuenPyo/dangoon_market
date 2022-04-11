@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import HeaderLogo from "../components/HeaderLogo";
 import Notice from "../components/Notice";
@@ -83,7 +83,7 @@ const SignupLink = styled.div`
 `;
 
 const Login = () => {
-  const { rt, loading } = useSelector((state) => state.login,shallowEqual);
+  const { rt, loading } = useSelector((state) => state.login, shallowEqual);
   const dispatch = useDispatch();
 
   const [show, setShow] = React.useState(false);
@@ -118,18 +118,30 @@ const Login = () => {
  
   };
 
+  const navigator = useNavigate();
+
   React.useEffect(() => {
     if(rt === null){
         return;
     }
+
     if ( !loading && rt === 200) {
       console.log(rt);
-      window.sessionStorage.setItem("userId", loginForm.current.userId.value);
-      window.sessionStorage.setItem("mId", 1);
-      window.history.back();
+      return navigator(-1);
+    }
+
+    if (!loading && rt === 402) {
+      console.log(rt);
+      setNotice({
+        title: "이미 로그인 되어있습니다.",
+        subTitle: null,
+      });
+      setShow(true);
+
+      return
     }
   
-    if (!loading && rt !== 200) {
+    if (!loading && rt !== 400) {
       console.log(rt);
       setNotice({
         title: "로그인에 실패했습니다.",
@@ -137,6 +149,8 @@ const Login = () => {
       });
       setShow(true);
     }
+
+    return
   },[dispatch,rt,loading])
 
   return (

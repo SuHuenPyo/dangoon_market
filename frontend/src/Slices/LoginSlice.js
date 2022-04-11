@@ -7,9 +7,12 @@ export const login = createAsyncThunk(
     let result = null;
     try {
       result = await axios.post(
-        "http://dg-market.iptime.org:28019/login",
+        "https://dangoon.duckdns.org/login",
         payload,
-        { withCredentials: true }
+        { headers: {
+          withCredentials: true,
+        }
+        }
       );
     } catch (err) {
       if (!err.response) {

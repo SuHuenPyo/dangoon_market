@@ -4,7 +4,7 @@ import axios from 'axios';
 export const postNewProduct = createAsyncThunk('POST/NEWPRODUCT',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('http://dg-market.iptime.org:28019/home/write',payload,{
+        result = await axios.post('https://dangoon.duckdns.org/home/write',payload,{
             header: {'content-type': 'multipart/form-data'}
         });
     } catch (err) {

@@ -57,7 +57,7 @@ const Notice = (props) => {
     <StyledNotice show={props.show}>
       <h2>{props.title}</h2>
       <p>{props.subTitle}</p>
-      <button type="button" onClick={props.onClick}>
+      <button type="button" onClick={()=>{props.onClick()}}>
         확인
       </button>
     </StyledNotice>
