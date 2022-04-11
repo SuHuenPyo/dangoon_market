@@ -141,7 +141,7 @@ app.use("/", serveStatic(_config.PUBLIC_PATH));
 app.use("/thumb", serveStatic(_config.THUMBNAIL.dir));      //썸네일 저장위치
 app.use(serveFavicon(_config.FAVICON_PATH));//favicon
 
-app.use(morgan('dev'))
+app.use(morgan(':remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms :date'))
 
 
 //Router
