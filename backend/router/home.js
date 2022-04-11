@@ -123,10 +123,10 @@ Home.get('/search', authIsOwner, async(req, res, next)=>{
     let pagenationResult = null;
 
     //키워드 
-    let keyword = req.query.keyword;
+    let keyword = req.query.keywords;
 
     //필터 
-    if (keyword.length() > 10) {
+    if (keyword.length > 10) {
         return res.status(400).json({text: '검색어가 너무 깁니다. 10자 이내로 해주세요'});
     }
 
