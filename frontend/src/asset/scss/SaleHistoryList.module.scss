@@ -10,6 +10,7 @@
     width: 100%;
     height: auto;
     display:block;
+  
 }
 
 .saleslink {
@@ -18,6 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
 }
 
 /* 구매요청한 글의 이미지 */
@@ -191,3 +193,42 @@
     display: block;
     height: 50px;
 }
+
+.seeMore {
+    position:absolute;
+    top: 1rem;
+    right: 0.5rem;
+
+    &:hover > .seeMoreList {
+        display: block;
+    }
+
+    .seeMoreIcon{
+        font-size: 1.2rem;
+        width: 1.2rem;
+        height: 1.2rem;   
+    }
+
+    .seeMoreList{
+        position: absolute;
+        width: 5rem;
+        top: 1.3rem;
+        right: 0.2rem;
+        border: 1px solid #e5e5e5;
+        text-align: center;
+        display: none;
+
+        li {
+            width: 100%;
+            height: auto;
+            padding: 5px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+
+        li:first-child {
+            border-bottom: 1px solid #e5e5e5;
+        }
+    }
+}
+

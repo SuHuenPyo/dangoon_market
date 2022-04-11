@@ -1,129 +1,93 @@
 @mixin flex-center {
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
-    display:flex;
-    justify-content:center;
-    align-items: center;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-/* 폰트 후보듷... */
-@font-face {
-    font-family: 'Eoe_Zno_L';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Eoe_Zno_L.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'NanumBarunGothic';
-    font-style: normal;
-    font-weight: 400;
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-   }
-   
-   @font-face {
-    font-family: 'NanumBarunGothic';
-    font-style: bold;
-    font-weight: 700;
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
-   }
-   
-   @font-face {
-    font-family: 'NanumBarunGothic';
-    font-style: lighter;
-    font-weight: 300;
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
-    src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
-   }
-
-   @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap");
 
 * {
-    margin: 0;
-    padding:0;
-    font-family: 'IBM Plex Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Sans KR", sans-serif;
 }
 
-
-html,body {
-    color: #333;
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
-    margin: 0;
-    padding:0;
-    overflow-y: auto;
+html,
+body {
+  color: #333;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
 }
 
-body::-webkit-scrollbar { display: none; }
+body::-webkit-scrollbar {
+  display: none;
+}
 
 a {
-    text-decoration: none;
-    color: #333;
+  text-decoration: none;
+  color: #333;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
-$mobile-breakpoint : 335px;
+$mobile-breakpoint: 335px;
 $tablet-breakpoint: 500px;
 
 body {
-    @media (min-width: $mobile-breakpoint) and (max-width:($tablet-breakpoint - 1px)){
-        width: 100%;
-        height: calc(var(--vh, 1vh) * 100);
-    }
-    
-    width: 375px;
+  @media (min-width: $mobile-breakpoint) and (max-width: ($tablet-breakpoint - 1px)) {
+    width: 100%;
     height: calc(var(--vh, 1vh) * 100);
-    margin: 0 auto;
+  }
+
+  width: 375px;
+  height: calc(var(--vh, 1vh) * 100);
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+  // for modile scroll
+  -webkit-overflow-scrolling: touch;
+
+  // scrollbar-width: 0px;
+  // &::-webkit-scrollbar { display: none; }
+
+  main {
     position: relative;
-    overflow-x:hidden;
-    // for modile scroll
+    top: 0px;
+    width: calc(100% - 40px);
+    height: calc(var(--vh, 1vh) * 100);
+    padding: 5px 20px;
+    padding-top: 65px;
     -webkit-overflow-scrolling: touch;
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+  }
 
-        // scrollbar-width: 0px;
-    // &::-webkit-scrollbar { display: none; }
-    
-    main {
-        position:relative;
-        top:0px;
-        width: calc(100% - 40px);
-        height: calc(var(--vh, 1vh) * 100);
-        padding: 5px 20px;
-        padding-top: 65px;
-        -webkit-overflow-scrolling: touch;
-        // &::-webkit-scrollbar {
-        //     display: none;
-        // }
+  .error {
+    @include flex-center();
+    flex-flow: column nowrap;
+
+    h2 {
+      color: #f99d1b;
+      font-size: 1.6rem;
+      line-height: 2rem;
     }
 
-    .error {
-        @include flex-center();
-        flex-flow: column nowrap;
-
-        h2 {
-            color: #f99d1b;
-            font-size: 1.6rem;
-            line-height:2rem;
-        }
-
-        p {
-            color: #724c16;
-            font-size: 1rem;
-            line-height:1.3rem;
-        }
+    p {
+      color: #724c16;
+      font-size: 1rem;
+      line-height: 1.3rem;
     }
+  }
 
-    .loading{
-        @include flex-center();
-    }
+  .loading {
+    @include flex-center();
+  }
 }
-

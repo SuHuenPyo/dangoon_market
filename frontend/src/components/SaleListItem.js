@@ -92,10 +92,6 @@ const SaleListItem = ({data,inview}) => {
   
   const categoryList = config.categoryList;
 
-  if(data === null ){
-    data = []
-  }
-
   return (
     <ul>
       { data.map((v,i)=>{

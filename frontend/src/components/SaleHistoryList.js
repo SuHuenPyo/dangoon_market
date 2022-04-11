@@ -1,17 +1,18 @@
 import React from "react";
-import style from "../asset/scss/salelistcomponent.module.scss";
+import style from "../asset/scss/SaleHistoryList.module.scss";
 import { Link } from "react-router-dom";
 import Notice from "./Notice";
+import { AiOutlineMore } from "react-icons/ai";
 
 const SalelistComponent = () => {
   const requestBtn = React.useRef([]);
   const completeBtn = React.useRef([]);
   const [show, setShow] = React.useState(false);
-  const [notice, setNotice] = React.useState({title: null,subTitle: null});
+  const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const [open, setOpen] = React.useState(false);
 
   const onOpenRequest = (number) => {
-    if(open){
+    if (open) {
       completeBtn.current.forEach((v, i) => {
         v.classList.remove(style.show);
       });
@@ -23,38 +24,41 @@ const SalelistComponent = () => {
         }
       });
     }
-      
+
     setOpen(requestBtn.current[number].classList.toggle(style.show));
   };
 
   const onOpenComplete = (number) => {
-    if(open){
-    completeBtn.current.forEach((v, i) => {
-      if (i === number) {
-        return;
-      } else {
+    if (open) {
+      completeBtn.current.forEach((v, i) => {
+        if (i === number) {
+          return;
+        } else {
+          v.classList.remove(style.show);
+        }
+      });
+      requestBtn.current.forEach((v, i) => {
         v.classList.remove(style.show);
-      }
-    });
-    requestBtn.current.forEach((v, i) => {
-        v.classList.remove(style.show);
-    });
-  }
+      });
+    }
 
-  setOpen(completeBtn.current[number].classList.toggle(style.show));
+    setOpen(completeBtn.current[number].classList.toggle(style.show));
   };
 
   const doComplete = () => {
-    setNotice({title: '거래가 완료되었습니다.',subTitle:null});
+    setNotice({ title: "거래가 완료되었습니다.", subTitle: null });
 
     setShow(true);
-  }
+  };
 
   const doRequest = () => {
-    setNotice({title: '거래요청이 완료되었습니다.',subTitle:'구매자에게 단군님의 연락처가 전달됩니다. '});
+    setNotice({
+      title: "거래요청이 완료되었습니다.",
+      subTitle: "구매자에게 단군님의 연락처가 전달됩니다. ",
+    });
 
     setShow(true);
-  }
+  };
 
   return (
     <>
@@ -73,6 +77,13 @@ const SalelistComponent = () => {
                   <span className={style.salestime}>올린시간</span>
                 </p>
                 <p className={style.salesPrice}>6,000원</p>
+              </div>
+              <div className={style.seeMore}>
+              <AiOutlineMore className={style.seeMoreIcon}/>
+              <ul className={style.seeMoreList}>
+                <li>수정하기</li>
+                <li>삭제하기</li>
+              </ul>
               </div>
             </Link>
             <button
@@ -123,7 +134,14 @@ const SalelistComponent = () => {
           </li>
         </ul>
       </main>
-      <Notice show={show} title={notice.title} subTitle={notice.subTitle} onClick={()=>{setShow(false)}}/>
+      <Notice
+        show={show}
+        title={notice.title}
+        subTitle={notice.subTitle}
+        onClick={() => {
+          setShow(false);
+        }}
+      />
     </>
   );
 };

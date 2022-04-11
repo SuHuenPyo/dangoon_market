@@ -136,3 +136,42 @@ img {
     border: 1px solid #ccc;
     text-indent: 10px;
 }
+
+.seeMore {
+    position:absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+
+    &:hover > .seeMoreList {
+        display: block;
+    }
+
+    .seeMoreIcon{
+        font-size: 1.2rem;
+        width: 1.2rem;
+        height: 1.2rem;   
+    }
+
+    .seeMoreList{
+        position: absolute;
+        width: 5rem;
+        top: 1.3rem;
+        right: 0.2rem;
+        border: 1px solid #e5e5e5;
+        text-align: center;
+        display: none;
+
+        li {
+            width: 100%;
+            height: auto;
+            padding: 5px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            background: #fff;
+        }
+
+        li:first-child {
+            border-bottom: 1px solid #e5e5e5;
+        }
+    }
+}

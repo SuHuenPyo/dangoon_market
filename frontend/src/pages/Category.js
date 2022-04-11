@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Link } from 'react-router-dom'
 import HeaderTitle from '../components/HeaderTitle';
 
+import { useNavigate } from 'react-router-dom';
+
 import { MdOutlineSportsHandball } from "react-icons/md";
 import {
   FaDesktop,
@@ -81,63 +83,68 @@ const Search = styled.input`
 `;
 
 const Categori = () => {
+
+  const navigator = useNavigate();
   return (
     <>
     <HeaderTitle title='카테고리' />
       <main>
-        <Form>
-          <Search type="search" placeholder='검색어를 입력해주세요' />
+        <Form  onSubmit={(e) => {
+            e.preventDefault();
+            navigator(`/search/${e.currentTarget.query.value}`)
+          }}>
+          <Search type="search" name='query' placeholder='검색어를 입력해주세요' />
         </Form>
         <List>
           <Item>
-            <Link to="/categori/gajun">
+            <Link to="/category/gajun">
               <FaDesktop /> 가전
             </Link>
           </Item>
           <Item icon="1.45rem">
-            <Link to="/categori/life">
+            <Link to="/category/life">
               <FaHome />
               생활
             </Link>
           </Item>
           <Item icon="1.45rem">
-            <Link to="/categori/sports">
+            <Link to="/category/sports">
               <MdOutlineSportsHandball />
               스포츠
             </Link>
           </Item>
           <Item>
-            <Link to="/categori/books">
+            <Link to="/category/book">
               <FaBook />
               도서
             </Link>
           </Item>
           <Item>
-            <Link to="/categori/beauti">
+            <Link to="/category/beauty">
               <FaAirFreshener />
               뷰티
             </Link>
           </Item>
           <Item>
-            <Link to="/categori/acc">
+            <Link to="/category/acc">
               <FaShoppingBag />
               잡화
             </Link>
           </Item>
           <Item>
-            <Link to="/categori/cloth">
+            <Link to="/category/cloth">
               <FaTshirt />
               의류
             </Link>
           </Item>
           <Item>
-            <Link to="/categori/plant">
+            <Link to="/category/plant">
               <FaSeedling />
               식물
             </Link>
           </Item>
           <Item>
-            <Link to="/categori/ect">
+            <Link to="/category/etc">
               <FaBox />
               기타
             </Link>

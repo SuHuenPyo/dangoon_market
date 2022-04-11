@@ -22,7 +22,7 @@ const Menu = React.forwardRef((props,ref) => {
               <NavLink to='/cavelife'>동굴생활</NavLink>
             </li>
           <li className={styles.menuItem}>
-              <NavLink to='/categori'>상품별 카테고리</NavLink>
+              <NavLink to='/category'>상품별 카테고리</NavLink>
             </li>
           <li className={styles.menuItem}>
               <NavLink to='/mygralic'>나의 마늘</NavLink>
