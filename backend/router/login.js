@@ -59,9 +59,11 @@ Login.post('/', async(req, res, next)=>{
 
             req.session.user = {
                 
-                id: req.body.user_id, 
+                id: req.body.user_id,
                 name : 'dg-cookie',
-                authorized: true
+                authorized: true,
+                ip : req.connection.remoteAddress,
+                userAgent : req.headers['user-agent']
             }
 
         }

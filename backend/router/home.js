@@ -37,6 +37,9 @@ let json = null;
 */
 Home.get('/', authIsOwner, async(req, res, next)=>{
 
+
+    console.log(req.connection.remoteAddress);
+    console.log(req.headers['user-agent']);
     //현재 페이지 번호 받기 (default 1)
     const page = req.query.page || 1;
         
@@ -123,10 +126,9 @@ Home.get('/search', authIsOwner, async(req, res, next)=>{
     let keyword = req.query.keyword;
 
     //필터 
-    if (keyword.length > 10) {
+    if (keyword.length() > 10) {
         return res.status(400).json({text: '검색어가 너무 깁니다. 10자 이내로 해주세요'});
     }
-
 
     keyword = '%'+keyword+'%';
 

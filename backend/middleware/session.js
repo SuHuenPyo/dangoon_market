@@ -9,8 +9,14 @@ export const authIsOwner = (req, res, next)=>{
     
     //console.log(req.session);
     
-    if( req.session && req.session.user && req.session.user.authorized){
-        console.log("인증유저 : " + req.session.user.id + " (이)가 접속했습니다.");
+    if( req.session && req.session.user && req.session.user.authorized &&
+        req.session.user.ip === req.connection.remoteAddress && 
+        req.session.user.userAgent === req.headers['user-agent']
+        ){
+        console.log("Auth ID : " + req.session.user.id + "(이)가 접속했습니다.");
+        console.log("IP : " + req.session.user.ip);
+        console.log("userAgent : " + req.session.user.userAgent);
+
         next();
     }else{
         console.log("미인증 유저의 접속 확인됨.")
