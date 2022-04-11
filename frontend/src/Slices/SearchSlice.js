@@ -44,11 +44,11 @@ const searchSlice = createSlice({
                 loading:false
             }
         },
-        [getSearch.rejected] : (state,{payload}) => {
+        [getSearch.rejected] : (state,{payload,error}) => {
             return {
                 ...state,
-                rt: payload.status,
-                rtmsg: payload.statusText,
+                rt: payload?.status || 500,
+                rtmsg: payload?.statusText || error.message,
                 item: payload.data,
                 loading:false
             }

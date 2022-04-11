@@ -44,11 +44,11 @@ const categorySlice = createSlice({
                 loading:false
             }
         },
-        [getCategory.rejected] : (state,{payload}) => {
+        [getCategory.rejected] : (state,{error,payload}) => {
             return {
                 ...state,
-                rt: payload.status,
-                rtmsg: payload.statusText,
+                rt: payload.status || 500,
+                rtmsg: payload.statusText || error.message,
                 item: payload.data,
                 loading:false
             }

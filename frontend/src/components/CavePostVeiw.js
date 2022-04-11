@@ -5,7 +5,7 @@ import ProfileView from "./ProfileView";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import { AiOutlineLike, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineLike, AiOutlineMessage, AiOutlineMore } from "react-icons/ai";
 
 const PostVeiw = styled.div`
   width: 100%;
@@ -21,6 +21,8 @@ const Poster = styled.div`
   align-items: center;
   font-size: 16px;
   margin: 0 0 3px 0;
+  position: relative;
+
   div {
     flex-basis: 60px;
     height: 40px;
@@ -36,6 +38,48 @@ const Poster = styled.div`
   p {
     position: relative;
     top: -1.5px;
+  }
+
+  .seeMore {
+    position: absolute;
+    top: 1rem;
+    right: 0.5rem;
+
+    &:hover > .seeMoreList {
+      display: block;
+    }
+
+    .seeMoreIcon {
+      font-size: 1.2rem;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .seeMoreList {
+      position: absolute;
+      width: 5rem;
+      top: 1.3rem;
+      right: 0.2rem;
+      border: 1px solid #e5e5e5;
+      text-align: center;
+      display: none;
+
+      li {
+        width: 100%;
+        height: auto;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 0.9rem;
+
+        &:hover {
+          background: #fefefe;
+        }
+      }
+
+      li:first-child {
+        border-bottom: 1px solid #e5e5e5;
+      }
+    }
   }
 `;
 
@@ -179,9 +223,16 @@ const CavePostVeiw = ({ data, inview }) => {
                 <img src={v.profilePic} alt="" />
               </div>
               <p>{v.b_writer}</p>
+              <div className="seeMore">
+                <AiOutlineMore className="seeMoreIcon" />
+                <ul className="seeMoreList">
+                  <li>수정하기</li>
+                  <li>삭제하기</li>
+                </ul>
+              </div>
             </Poster>
             <Content to={`/cavelife/${v.b_id}`}>
-              <h2>{v.b_title}  </h2>
+              <h2>{v.b_title} </h2>
               <p>{dayjs(v.b_rdate).fromNow()}</p>
               <div>{v.b_content}</div>
             </Content>

@@ -10,15 +10,17 @@ const CaveCommentDown = (props) => {
       <div className={style.comment}>
         <div className={style.commenterprofile}>
           <img src="http://placekitten.com/40/40" alt="댓글 작성자 프로필 이미지" />
+          <div>
           <p className={style.commentername}>인간곰</p>
+          <p className={style.time}>1시간전</p>
+          </div>
         </div>
           <button className={style.commentreport} onClick={()=>{props.onClick()}}>
             <img src={imgwarning} alt='신고하기'/>
           </button> 
         <p className={style.commentcont}>댓글 예시입니다.</p>
+       
       </div>
-
- 
     </div>
     </>
   );

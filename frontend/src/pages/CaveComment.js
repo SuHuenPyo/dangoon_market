@@ -3,7 +3,7 @@ import React from "react";
 import HeaderTitle from "../components/HeaderTitle";
 import CaveCommentDown from "../components/CaveCommentDown";
 import { BsCardImage } from "react-icons/bs";
-import style from "../asset/css/cavecommentup.module.css";
+import style from "../asset/scss/cavecommentup.module.scss";
 import imgwarning from "../asset/img/warning.png";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
@@ -12,10 +12,16 @@ import Report from "../components/Report";
 import { useSelector, useDispatch } from "react-redux";
 import { getCaveDetails } from "../Slices/CaveDetails";
 import onImgUpload from "../utils/ImgPreview";
-import dayjs  from "dayjs";
-import relativeTime   from "dayjs/plugin/relativeTime";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-import { AiOutlineLike, AiFillLike, AiOutlineMessage, AiOutlineEye } from "react-icons/ai";
+import {
+  AiOutlineLike,
+  AiFillLike,
+  AiOutlineMessage,
+  AiOutlineEye,
+  AiOutlineMore,
+} from "react-icons/ai";
 
 const BtnLine = styled.div`
   width: calc(100% - 10px);
@@ -85,11 +91,10 @@ const Content = styled.div`
     margin: 0 0 10px 0;
 
     svg {
-      position:relative;
+      position: relative;
       top: 1.5px;
     }
   }
-
 `;
 
 const ContentImg = styled.div`
@@ -100,7 +105,6 @@ const ContentImg = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid #eee;
 
   img {
     width: 80px;
@@ -131,7 +135,7 @@ const CommentImg = styled.div`
     display: none;
   }
   img {
-    flex-basis:100px;
+    flex-basis: 100px;
     width: 100px;
     height: 100px;
     margin: 0 5px 0 0;
@@ -139,8 +143,9 @@ const CommentImg = styled.div`
 `;
 
 const CaveComment = (props) => {
-
-  const { rt, rtmsg, item, loading } = useSelector((state) => state.cavedetails);
+  const { rt, rtmsg, item, loading } = useSelector(
+    (state) => state.cavedetails
+  );
   const dispatch = useDispatch();
   const input = React.useRef();
 
@@ -159,7 +164,7 @@ const CaveComment = (props) => {
   }, [dispatch, id]);
 
   dayjs.extend(relativeTime);
-  dayjs.locale('ko');
+  dayjs.locale("ko");
 
   return (
     <>
@@ -185,10 +190,20 @@ const CaveComment = (props) => {
                 <div className={style.cavepostprofile}>
                   <img src={item.writerImg} alt={`${item.writerName}`} />
                   <p>{item.writerName}</p>
+                  <div className={style.seeMore}>
+                    <AiOutlineMore className={style.seeMoreIcon} />
+                    <ul className={style.seeMoreList}>
+                      <li>수정하기</li>
+                      <li>삭제하기</li>
+                    </ul>
+                  </div>
                 </div>
                 <Content className={style.cavepostcont}>
                   <h2>{item.title}</h2>
-                  <p>{dayjs(item.rDate).fromNow()} &middot;&nbsp; <AiOutlineEye/> {item.hits}</p>
+                  <p>
+                    {dayjs(item.rDate).fromNow()} &middot;&nbsp;{" "}
+                    <AiOutlineEye /> {item.hits}
+                  </p>
                   <div>{item.content}</div>
                 </Content>
                 <ContentImg>
@@ -199,8 +214,8 @@ const CaveComment = (props) => {
                     : null}
                 </ContentImg>
                 <button className={style.postreport} onClick={onToggleReport}>
-                  <img src={imgwarning} alt='신고아이콘'/> &nbsp; 부적절한 게시글이라면
-                  단군마켓에 알려주세요.
+                  <img src={imgwarning} alt="신고아이콘" /> &nbsp; 부적절한
+                  게시글이라면 단군마켓에 알려주세요.
                 </button>
               </div>
 

@@ -75,6 +75,9 @@ const ProductDetail = () => {
               {item.imageUrls.map((v,i)=>{
                 return <img key={i} src={item.imageUrls[i]} alt={`${item.title}이미지${i}`} />
               })}
+              <img src="http://placekitten.com/g/360/320" alt="" />
+              <img src="http://placekitten.com/g/360/320" alt="" />
+              <img src="http://placekitten.com/g/360/320" alt="" />
             </div>
             <div className={styles.profile}>
               <Link to="/profile" className={styles.profileImg}>
