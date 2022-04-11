@@ -12,7 +12,7 @@ const Category = express.Router();
  * /category:
  *   get:
  *     description: 카테고리별 게시글 조회
- *     tags: [Post (Not Work)]
+ *     tags: [Get (Working)]
  *     produces:
  *     - "application/json"
  *     parameters:
@@ -20,14 +20,14 @@ const Category = express.Router();
  *       in: "query"
  *       description: "[gajun, life, sports, book, beauty, acc, cloth, plant, etc]"
  *       type: "string"
- *     - name: "category"
+ *     - name: "page"
  *       in: "query"
- *       description: "조회할 카테고리 id, 중첩 가능. ex) category=1&category=2&category=3"
- *       type: "string"
- *     - name: "query"
+ *       description: "검색 할 페이지 번호를 설정합니다. default = 1"
+ *       type: "number"
+ *     - name: "rows"
  *       in: "query"
- *       description: "검색어"
- *       type: "string"
+ *       description: "페이지당 표시 개수를 설정합니다. default = 10"
+ *       type: "number"
  *     responses:
  *       "200":
  *         description: "successful operation"

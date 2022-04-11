@@ -83,6 +83,92 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
     //저장한 값 여기서 전송해주고 
     res.send({'item': result, 'pageEnd': pagenationResult.totalPage});
 });
+
+/**
+ * @swagger
+ * /home/search:
+ *   get:
+ *     description: 단군마켓 판매글을 검색어로 조회합니다. , item, 페이지의 마지막 번호를 리턴받습니다.
+ *     tags: [Get (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "keywords"
+ *       in: "query"
+ *       description: "검색할 키워드를 입력합니다. (필수 입력 항목)"
+ *       type: "string"
+ *     - name: "page"
+ *       in: "query"
+ *       description: "검색 할 페이지 번호를 설정합니다. default = 1"
+ *       type: "number"
+ *     - name: "rows"
+ *       in: "query"
+ *       description: "페이지당 표시 개수를 설정합니다. default = 10"
+ *       type: "number"
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
+Home.get('/search', authIsOwner, async(req, res, next)=>{
+
+    //현재 페이지 번호 받기 (default 1)
+    const page = req.query.page || 1;
+        
+    //페이지당 요청 글 개수 (default 10)
+    const rows = req.query.rows || 10;
+    let pagenationResult = null;
+
+    //키워드 
+    let keyword = req.query.keyword;
+
+    //필터 
+    if (keyword.length > 10) {
+        return res.status(400).json({text: '검색어가 너무 깁니다. 10자 이내로 해주세요'});
+    }
+
+
+    keyword = '%'+keyword+'%';
+
+    //DB Connection
+    let dbcon = new DG_DB();
+    let result = null;
+    try{
+        await dbcon.DbConnect();
+
+
+        //전체 데이터 수 조회
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE (b_type='S' AND b_title LIKE ?)`, keyword);
+        //console.log(result);
+
+        const totalCount = result[0].cnt;
+        pagenationResult = pagenation(totalCount, page, rows);
+
+        //console.log(JSON.stringify(pagenationResult));
+
+        let args = [];
+
+        //데이터 조회 
+        
+        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE (b_type='S' AND b_title LIKE ?) LIMIT ?,?`, keyword, pagenationResult.offset, pagenationResult.listCount);
+
+        //console.log(result2);
+        let regexp = /\B(?=(\d{3})+(?!\d))/g;
+        //console.log(result)
+
+        result.forEach(element => {
+            element.b_price = element.b_price.toString().replace(regexp, ',');
+        });
+        
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        await dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+    res.send({'item': result, 'pageEnd': pagenationResult.totalPage});
+});
 /**
  * @swagger
  * /home/write:

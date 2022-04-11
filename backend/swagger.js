@@ -8,7 +8,7 @@ const options = {
             version: '1.0.1',
             description: 'REST API DOC For DG-Market',
         },
-        host: 'dg-market.iptime.org:28019',
+        host: 'dangoon.duckdns.org',
         basePath: '/'
     },
     apis: ['./router/*.js', './swagger/*'] 
