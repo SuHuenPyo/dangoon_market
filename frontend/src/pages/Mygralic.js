@@ -20,13 +20,12 @@ import { BsReceiptCutoff } from "react-icons/bs";
 const Mygralic = () => {
   const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const [show, setShow] = React.useState(false);
+
+  
   const onClick = () => {
     setShow(false);
     return window.history.back();
   };
-
-  React.useEffect(() => {
-  }, []);
 
   return (
     <>

@@ -30,6 +30,7 @@ const NewProduct = () => {
     if(!regex.value('productPrice','가격을 입력해주세요.')){return;};
     if(!regex.selected('productCategory','카테고리를 선택해주세요.')){return;};
     if(!regex.value('postContent','내용을 입력해주세요.')){return;};
+    
     const postForm = new FormData();
     postForm.append('memberId', 1);
     postForm.append('title', form.current.postTitle.value);

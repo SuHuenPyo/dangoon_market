@@ -7,37 +7,42 @@ import { Link, useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
+import { getLike } from "../Slices/LikeSlice";
 import ReactLoading from "react-loading";
 
 import Report from "../components/Report";
 import Notice from "../components/Notice";
 
-import dayjs  from "dayjs";
-import relativeTime   from "dayjs/plugin/relativeTime"
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-import config  from "../utils/_config.json"
+import config from "../utils/_config.json";
 
 const ProductDetail = () => {
   dayjs.extend(relativeTime);
-  dayjs.locale('ko');
-
+  dayjs.locale("ko");
 
   const [reportShow, setReportShow] = React.useState(false);
   const [noticeShow, setNoticeShow] = React.useState(false);
-  const [clickStar, setClickStar] = React.useState(false);
+  const [clickLike, setClickLike] = React.useState(false);
   const categoryList = config.categoryList;
 
   const { rt, rtmsg, item, loading } = useSelector(
     (state) => state.productdetails
   );
 
+  const { l_rt } = useSelector((state) => {
+    return state.like;
+  });
+
   const dispatch = useDispatch();
 
   const { id } = useParams();
+  const type = "S";
 
   React.useEffect(() => {
     dispatch(getProductDetail(id));
-  }, [dispatch,id]);
+  }, [dispatch, id]);
 
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {
@@ -48,9 +53,35 @@ const ProductDetail = () => {
     setNoticeShow(noticeShow ? false : true);
   }, [noticeShow]);
 
-  const onToggleStar = React.useCallback(() => {
-    setClickStar(clickStar ? false : true);
-  }, [clickStar]);
+  const onToggleLike = () => {
+    if (!clickLike) {
+      dispatch(
+        getLike({
+          boardId: id,
+          type: type,
+          flag: true,
+        })
+      );
+
+      if (l_rt === 200) {
+        setClickLike(true);
+      } 
+
+    } else {
+      dispatch(
+        getLike({
+          boardId: id,
+          type: type,
+          flag: false,
+        }));
+
+      if (l_rt === 200) {
+        setClickLike(false);
+      } 
+    }
+
+    //  setClickLike(clickLike ? false : true);
+  }
 
   return (
     <>
@@ -60,24 +91,30 @@ const ProductDetail = () => {
         </main>
       )}
 
-      { rt !== 200 && (
-          <main className="error">
-            <h2>Error!</h2>
-            <p>{rtmsg}</p>
-          </main>
-        )}
+      {rt !== 200 && (
+        <main className="error">
+          <h2>Error!</h2>
+          <p>{rtmsg}</p>
+        </main>
+      )}
 
-      { rt === 200 && (
+      {rt === 200 && (
         <>
           <HeaderLogo />
           <main>
             <div className={styles.imgView}>
-              {item.imageUrls.map((v,i)=>{
-                return <img key={i} src={item.imageUrls[i]} alt={`${item.title}이미지${i}`} />
+              {item.imageUrls.map((v, i) => {
+                return (
+                  <img
+                    key={i}
+                    src={item.imageUrls[i]}
+                    alt={`${item.title}이미지${i}`}
+                  />
+                );
               })}
-              <img src="http://placekitten.com/g/360/320" alt="" />
-              <img src="http://placekitten.com/g/360/320" alt="" />
-              <img src="http://placekitten.com/g/360/320" alt="" />
+              <img src="http://placekitten.com/g/360/320" alt="test" />
+              <img src="http://placekitten.com/g/360/320" alt="test" />
+              <img src="http://placekitten.com/g/360/320" alt="test" />
             </div>
             <div className={styles.profile}>
               <Link to="/profile" className={styles.profileImg}>
@@ -87,8 +124,8 @@ const ProductDetail = () => {
                 <p className={styles.name}>{item.sellerName}</p>
                 <p className={styles.desc}>{item.price}원</p>
               </div>
-              <div className={styles.likeBtn} onClick={onToggleStar}>
-                {clickStar ? (
+              <div className={styles.likeBtn} onClick={onToggleLike}>
+                {clickLike ? (
                   <AiFillStar className={styles.full} />
                 ) : (
                   <AiOutlineStar />
@@ -98,9 +135,13 @@ const ProductDetail = () => {
             <div className={styles.postCont}>
               <h2 className={styles.title}>{item.title}</h2>
               <p className={styles.postInfo}>
-                <span className={styles.categori}>{categoryList[item.category]}</span>
+                <span className={styles.categori}>
+                  {categoryList[item.category]}
+                </span>
                 &nbsp;&middot;&nbsp;
-                <span className={styles.postTime}>{dayjs(item.rDate).fromNow()}</span>
+                <span className={styles.postTime}>
+                  {dayjs(item.rDate).fromNow()}
+                </span>
               </p>
               <button
                 type="button"
@@ -111,12 +152,11 @@ const ProductDetail = () => {
               >
                 <img src={ReportIcon} alt="신고아이콘" />
               </button>
-              <div className={styles.text}>
-                {item.content}
-              </div>
+              <div className={styles.text}>{item.content}</div>
               <p className={styles.countView}>
                 <AiOutlineStar /> <span className={styles.count}>0</span>{" "}
-                <AiOutlineEye /> <span className={styles.count}>{item.hits}</span>
+                <AiOutlineEye />{" "}
+                <span className={styles.count}>{item.hits}</span>
               </p>
               <div className={styles.makeH}></div>
             </div>

@@ -5,7 +5,12 @@ import ProfileView from "./ProfileView";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
-import { AiOutlineLike, AiOutlineMessage, AiOutlineMore } from "react-icons/ai";
+import {
+  AiFillLike,
+  AiOutlineLike,
+  AiOutlineMessage,
+  AiOutlineMore,
+} from "react-icons/ai";
 
 const PostVeiw = styled.div`
   width: 100%;
@@ -133,6 +138,8 @@ const ContentImg = styled.div`
     margin: 0 7px 0 0;
   }
 `;
+
+
 const BtnLine = styled.div`
   width: calc(100% - 10px);
   height: 30px;
@@ -180,22 +187,22 @@ const Gap = styled.div`
 
 const CavePostVeiw = ({ data, inview }) => {
   const likeBtn = React.useRef([]);
+  const [like, setLike ] = React.useState([]);
 
-  const doLike = (event) => {
-    console.log(event.target);
-    const target = event.currentTarget;
-    const classLists = target.classList;
-
-    classLists.toggle("like");
+  // 좋아요
+  const doLike = (i) => {
+    const target = likeBtn.current[i];
+    const classList = target.classList;
+    classList.toggle('like');
   };
-
-  const likeIcon = React.useCallback((element, index) => {
-    likeBtn.current[index] = element;
-  }, []);
 
   const onClick = React.useCallback(() => {
     setProfile(false);
   }, []);
+
+  React.useEffect(()=>{
+    
+  },[])
 
   const [member, setMember] = React.useState(0);
   const [profile, setProfile] = React.useState({ show: false, top: 0 });
@@ -214,7 +221,6 @@ const CavePostVeiw = ({ data, inview }) => {
             <Poster
               onClick={(e) => {
                 const getTop = document.body.scrollTop - 60;
-                console.log(getTop);
                 setMember(v.mId);
                 setProfile({ show: true, top: getTop });
               }}
@@ -239,14 +245,12 @@ const CavePostVeiw = ({ data, inview }) => {
             <ContentImg>
               {v.b_img ? <img src={v.b_img} alt="" /> : null}
             </ContentImg>
-            <BtnLine className="likeBtn">
-              <button ref={(element) => likeIcon(element, i)} onClick={doLike}>
-                <AiOutlineLike />
+            <BtnLine>
+              <button ref={(el) => likeBtn.current[i] = el} onClick={() => doLike(i)}>
                 &nbsp;
-                <span>좋아요</span>
+                <span>좋아요</span> 
               </button>
               <button>
-                {console.log(v.b_id)}
                 <Link to={`/cavelife/${v.b_id}`}>
                   <AiOutlineMessage /> <span>답변하기</span>
                 </Link>

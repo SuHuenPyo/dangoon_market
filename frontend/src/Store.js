@@ -10,6 +10,7 @@ import ProductDetail from './Slices/ProductDetailSlice';
 import CaveDetails from './Slices/CaveDetails'
 import CategorySlice from  './Slices/CategorySlice'
 import SearchSlice from  './Slices/SearchSlice'
+import LikeSlice from './Slices/LikeSlice';
 
 const Store = configureStore({
     reducer: {
@@ -22,7 +23,8 @@ const Store = configureStore({
         cavelife: NewCavelife,
         cavedetails: CaveDetails,
         category: CategorySlice,
-        search: SearchSlice
+        search: SearchSlice,
+        like: LikeSlice
     },
     middleware: [...getDefaultMiddleware({serializableCheck:false}),createLogger()],
     devTools: true

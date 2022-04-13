@@ -22,7 +22,7 @@ const CavelifeSlice = createSlice({
     name: 'cavelife',
     initialState: {
         rt: null,
-        rtmsg: null,
+        rtmsg: null,    
         item: null,
         loading: false
     },

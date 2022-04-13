@@ -46,7 +46,7 @@ const NewCavelife = () => {
       return;
     }
 
-    if (rt === 200) {
+    if (!loading && rt === 200) {
       setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
@@ -54,7 +54,7 @@ const NewCavelife = () => {
       });
     }
 
-    if (rt !== 200) {
+    if (!loading && rt !== 200) {
       setNotice({
         title: "등록을 실패하였습니다.",
         subTitle: "다시 한번 시도해주세요.",

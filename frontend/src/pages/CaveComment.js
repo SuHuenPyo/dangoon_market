@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Report from "../components/Report";
 import { useSelector, useDispatch } from "react-redux";
+import { getLike } from "../Slices/LikeSlice";
 import { getCaveDetails } from "../Slices/CaveDetails";
 import onImgUpload from "../utils/ImgPreview";
 import dayjs from "dayjs";
@@ -146,6 +147,13 @@ const CaveComment = (props) => {
   const { rt, rtmsg, item, loading } = useSelector(
     (state) => state.cavedetails
   );
+
+  const { l_rt } = useSelector((state) => {
+    return state.like;
+  });
+
+  const type="C"
+
   const dispatch = useDispatch();
   const input = React.useRef();
 
@@ -156,6 +164,25 @@ const CaveComment = (props) => {
   const onToggleReport = React.useCallback(() => {
     setShow(show ? false : true);
   }, [show]);
+
+  const hanldeLike = React.useCallback(() => {
+    if(!click){
+      dispatch(getLike({ boardId: id, type: type, flag: true}));
+
+      if(l_rt === 200){
+        setClick(true);
+      }
+
+    } else {
+      dispatch(getLike({ boardId: id, type: type, flag: false}));
+
+
+      if(l_rt === 200){
+        setClick(false);
+      }
+    }
+    
+  }, [click,l_rt]);
 
   const { id } = useParams();
 
@@ -221,9 +248,7 @@ const CaveComment = (props) => {
 
               <BtnLine className="likeBtn" like={click ? "#f99d1b" : "inherit"}>
                 <button
-                  onClick={(e) => {
-                    click ? setClick(false) : setClick(true);
-                  }}
+                  onClick={hanldeLike}
                 >
                   {click ? <AiFillLike /> : <AiOutlineLike />}{" "}
                   <span>좋아요</span>
