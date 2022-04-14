@@ -100,7 +100,7 @@ caveLife.get('/', async(req, res, next)=>{
 });
 /**
  * @swagger
- * /cavelife/write:
+ * /cavelife:
  *   post:
  *     description: 동굴생활 단군마켓 커뮤니티에 글을 쓰는 기능입니다.
  *     tags: [Post (Working)]
@@ -128,11 +128,12 @@ caveLife.get('/', async(req, res, next)=>{
  *         description: "successful operation"
  *     
 */
-caveLife.post('/write', uploadBoard.array('board', 10) ,async(req, res, next)=>{
+caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
 
-    //board
-    let mfileType = "C";
-    //Sell 게시판
+    //file type Board
+    let mfileType = "B";
+    
+    //board CaveLife
     let mboardType = "C";
 
     let {memberId, title, content} = req.body;
@@ -279,7 +280,7 @@ caveLife.post('/comment', uploadBoard.array('board', 10) ,async(req, res, next)=
 caveLife.get('/comment', async(req, res, next)=>{
     let {boardId} = req.query
 
-    //FileType - B-판매게시판, C-동굴생활
+    //FileType - B-게시판, C-댓글
     let FileType = "C"
 
     //return value
@@ -339,8 +340,8 @@ caveLife.get('/comment', async(req, res, next)=>{
 caveLife.get('/details', async(req, res, next)=>{
     let {boardId} = req.query
 
-    //FileType - B-판매게시판, C-동굴생활
-    let boardType = "C"
+    //FileType - B-게시판, C-댓글
+    let boardType = "B"
     //return value
     let sellerId, sellerImg, sellerName, title, content, hits, rDate= null;
     let imageUrls = [];

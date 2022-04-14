@@ -22,7 +22,7 @@ import productDetails   from './router/productdetails.js';
 import Mail             from './router/mail.js';
 import Development      from './router/development.js';
 import Like             from "./router/like.js";
-import test from "./router/test.js";
+import test             from "./router/test.js";
 
 
 import * as url from "url";
@@ -60,6 +60,7 @@ const __dirname = path.dirname(__filename);
 //인증서
 import https from 'https';
 import fs from 'fs';
+
 
 
 
@@ -164,6 +165,7 @@ app.use("/development",     Development);
 app.use("/like",            Like);
 app.use("/.well-known", test);
 
+
 //에러처리 
 app.use((err, req, res, next)=>{
     console.error(err.stack);
@@ -173,7 +175,7 @@ app.use((err, req, res, next)=>{
 
 
 app.listen(_config.SERVER_PORT, ()=>{
-    console.log("Start Server");
+    console.log("---- 서버가 실행 되었어요 ----");
 });
 
 

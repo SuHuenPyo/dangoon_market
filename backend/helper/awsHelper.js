@@ -21,6 +21,8 @@ const s3 = new AWS.S3({
     },
 });
 
+
+
 //안전한 업로드를 위한 필터 구성
 const SignUpFilter = (req, file, cb) => {
     if(!req.session.user){
