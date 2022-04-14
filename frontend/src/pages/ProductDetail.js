@@ -7,7 +7,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
-import { getLike } from "../Slices/LikeSlice";
+import { getLike,doLike,doDislike } from "../Slices/LikeSlice";
 import ReactLoading from "react-loading";
 
 import Report from "../components/Report";
@@ -21,28 +21,43 @@ import config from "../utils/_config.json";
 const ProductDetail = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
+  
+  const { l_rt,l_item } = useSelector((state) => {
+    return state.like;
+  });
+
+  const { id } = useParams();
+  const type = "S";
 
   const [reportShow, setReportShow] = React.useState(false);
   const [noticeShow, setNoticeShow] = React.useState(false);
-  const [clickLike, setClickLike] = React.useState(false);
+  const [clickLike, setClickLike] = React.useState(l_item[id] || false);
   const categoryList = config.categoryList;
 
   const { rt, rtmsg, item, loading } = useSelector(
     (state) => state.productdetails
   );
 
-  const { l_rt } = useSelector((state) => {
-    return state.like;
-  });
 
   const dispatch = useDispatch();
 
-  const { id } = useParams();
-  const type = "S";
 
   React.useEffect(() => {
     dispatch(getProductDetail(id));
-  }, [dispatch, id]);
+  }, [id]);
+
+  React.useEffect(() => {
+    if(l_rt === null){
+      return;
+    }
+
+    if(l_rt === 200 && clickLike){
+      dispatch(doLike(id));
+    } else if(l_rt === 200 && !clickLike) {
+      dispatch(doDislike(id));
+    }
+
+  }, [clickLike]);
 
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {
@@ -53,35 +68,24 @@ const ProductDetail = () => {
     setNoticeShow(noticeShow ? false : true);
   }, [noticeShow]);
 
+
+
   const onToggleLike = () => {
-    if (!clickLike) {
-      dispatch(
+    setClickLike((prevLike)=> !prevLike);
+
+
+    console.log(clickLike);
+
+     dispatch(
         getLike({
           boardId: id,
           type: type,
-          flag: true,
+          flag: !clickLike,
         })
       );
-
-      if (l_rt === 200) {
-        setClickLike(true);
-      } 
-
-    } else {
-      dispatch(
-        getLike({
-          boardId: id,
-          type: type,
-          flag: false,
-        }));
-
-      if (l_rt === 200) {
-        setClickLike(false);
-      } 
-    }
-
-    //  setClickLike(clickLike ? false : true);
   }
+
+
 
   return (
     <>

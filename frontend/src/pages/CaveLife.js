@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCaveList } from "../Slices/CaveSlice";
+import { getLike, doLike, doDislike } from "../Slices/LikeSlice";
 import { useInView } from "react-intersection-observer";
 import ReactLoading from "react-loading";
 
@@ -10,6 +11,8 @@ import WriteButton from "../components/WriteButton";
 
 const CaveLife = () => {
   const { rt, rtmsg, item, loading } = useSelector((state) => state.cave);
+  const { l_rt, l_item } = useSelector((state) => state.like);
+
 
   const [page, setPage] = React.useState(1);
 
@@ -19,13 +22,19 @@ const CaveLife = () => {
 
   React.useEffect(() => {
     dispatch(getCaveList({ page: page }));
-  }, [dispatch, page]);
+  }, [page]);
 
   React.useEffect(() => {
     if (inView && !loading && item.pageEnd > page) {
       setPage(page + 1);
     }
   }, [inView]);
+
+  const onBtnClick = React.useCallback((e)=>{
+    console.log(e)
+  },[l_item])
+
+
 
   return (
     <>
@@ -46,7 +55,7 @@ const CaveLife = () => {
 
         {rt === 200 && (
           <>
-          <CavePostVeiw data={item.item} inview={ref} />
+          <CavePostVeiw data={item.item} inview={ref} likeList={l_item} onBtnClick={onBtnClick}/>
           <WriteButton path='/newcavelife'/>
           </>
         )}

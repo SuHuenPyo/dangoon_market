@@ -54,9 +54,8 @@ const HomeSlice = createSlice({
         [getHomeList.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
-                rt: payload.status || error,
-                rtmsg: payload.statusText || error.message,
-                item: payload.data.text,
+                rt: payload?.status || 500,
+                rtmsg: payload?.statusText || error.message,
                 loading: false
             }
         }

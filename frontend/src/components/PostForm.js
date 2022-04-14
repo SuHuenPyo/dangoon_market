@@ -84,7 +84,7 @@ const PostForm = React.forwardRef((props,ref) => {
           {props.title === "판매" ? (
             <>
              <input
-               type="text"
+               type="number"
                className={styles.productCommon}
                placeholder="가격을 입력해주세요."
                id='productPrice'
