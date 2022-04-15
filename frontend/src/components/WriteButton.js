@@ -13,4 +13,4 @@ const WriteButton = (props) => {
   );
 };
 
-export default WriteButton;
+export default React.memo(WriteButton);

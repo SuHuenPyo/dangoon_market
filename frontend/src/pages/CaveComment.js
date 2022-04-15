@@ -152,7 +152,7 @@ const CaveComment = (props) => {
     (state) => state.cavedetails
   );
 
-  const { c_rt, c_rtmsg, c_item, c_loading } = useSelector(
+  const { c_rt, c_rtmsg, c_item,} = useSelector(
     (state) => state.cavecomment
   );
 
@@ -167,15 +167,13 @@ const CaveComment = (props) => {
 
   const [like, setLike] = React.useState(l_item[id] || false);
 
-  console.log(like);
-
   const [show, setShow] = React.useState(false);
 
   const onToggleReport = React.useCallback(() => {
     setShow(show ? false : true);
   }, [show]);
 
-  const onSubmitComment = (e) => {
+  const onSubmitComment = async(e) => {
     e.preventDefault();
 
     const target = e.target;
@@ -194,7 +192,15 @@ const CaveComment = (props) => {
     commentForm.append('content',content);
     commentForm.append('board',images);
 
-   dispatch(postCaveComment(commentForm)); 
+   await dispatch(postCaveComment(commentForm)); 
+
+   target.commentCont.value = '';
+
+   await dispatch(getCaveComment(id));
+
+   
+
+
   }
 
   // 인피니티 스크롤
@@ -240,14 +246,14 @@ const CaveComment = (props) => {
         </main>
       )}
 
-      {!loading && rt !== 200 && (
+      {rt !== 200 && (
         <main className="error">
           <h2>Error!</h2>
           <p>{rtmsg}</p>
         </main>
       )}
 
-      {!loading && rt === 200 && (
+      {rt === 200 && (
         <>
           <main>
             <div className={style.cavecomment}>

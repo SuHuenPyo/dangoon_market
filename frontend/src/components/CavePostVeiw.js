@@ -213,7 +213,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
             <Poster
               onClick={(e) => {
                 const getTop = document.body.scrollTop - 60;
-                setMember(v.mId);
+                setMember(v.b_writer);
                 setProfile({ show: true, top: getTop });
               }}
             >
@@ -268,4 +268,4 @@ CavePostVeiw.defaultProps = {
   likeList: []
 };
 
-export default CavePostVeiw;
+export default React.memo(CavePostVeiw);

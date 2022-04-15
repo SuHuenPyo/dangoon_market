@@ -169,4 +169,4 @@ PostForm.defaultProps = {
   onSubmit: () => { alert('Give me Function') },
 }
 
-export default PostForm;
+export default React.memo(PostForm);

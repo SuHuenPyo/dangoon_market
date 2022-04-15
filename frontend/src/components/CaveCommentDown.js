@@ -36,6 +36,12 @@ const CaveCommentDown = ({ data, onClick, inview }) => {
         </div>
       );
     })}
+    {
+    data.length > 4 ? (
+      <div class={style.bottomHeight}>
+        
+      </div>
+    ) : null}
   </>);
 };
 

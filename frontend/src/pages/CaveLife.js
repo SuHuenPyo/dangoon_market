@@ -57,7 +57,7 @@ const CaveLife = () => {
   },[like]);
 
   React.useEffect(()=>{
-    if(l_rt || loading || boardId === 0){
+    if(!l_rt && loading){
       return;
     } else if(l_rt === 200 && like[boardId]){
       dispatch(doLike(boardId));
@@ -77,7 +77,7 @@ const CaveLife = () => {
           </div>
         )}
         
-        {!loading && rt !== 200 && (
+        {rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>{rtmsg}</p>

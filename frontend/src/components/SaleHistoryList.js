@@ -72,7 +72,7 @@ const SalelistComponent = () => {
               <div className={style.salescont}>
                 <h2>아이패드</h2>
                 <p className={style.salesInfo}>
-                  <span className={style.salesloc}>카테코리</span>
+                  <span className={style.salesloc}>카테고리</span>
                   &middot;
                   <span className={style.salestime}>올린시간</span>
                 </p>
@@ -102,35 +102,41 @@ const SalelistComponent = () => {
             >
               거래완료
             </button>
-            <div
+            <ul
               ref={(element) => (requestBtn.current[0] = element)}
               className={`${style.salescontact}`}
             >
+              <li className={style.item}>
+
               <p className={style.contacttype}>인간곰 님의 거래요청</p>
               <button
                 id="product-sales-btn"
                 type="button"
                 className={style.salesaccept}
                 onClick={doRequest}
-              >
+                >
                 거래수락
               </button>
-            </div>
-            <div
+                </li>
+            </ul>
+            <ul
               ref={(element) => (completeBtn.current[0] = element)}
               className={`${style.completecontact}
               }`}
             >
+              <li className={style.item}>
+
               <p className={style.contacttypes}>인간곰 님과</p>
               <button
                 id="product-complete-btn"
                 type="button"
                 className={style.completeaccept}
                 onClick={doComplete}
-              >
+                >
                 거래완료
               </button>
-            </div>
+                </li>
+            </ul>
           </li>
         </ul>
       </main>

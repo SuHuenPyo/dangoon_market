@@ -99,7 +99,7 @@ img {
         width: 375px;
         height: auto;
         position: fixed;
-        bottom: 20px;
+        bottom: 0px;
 }
 
 
@@ -116,6 +116,7 @@ img {
     display: flex;
     align-items: center;
     border-top: 1px solid #eee;
+    background-color:#fff;
 }
 
 .cavecommentform > label[for='comment-input-img'] {

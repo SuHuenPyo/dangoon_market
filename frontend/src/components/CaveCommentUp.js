@@ -91,4 +91,4 @@ const CaveCommentUp = () => {
   );
 };
 
-export default CaveCommentUp;
+export default React.memo(CaveCommentUp);
