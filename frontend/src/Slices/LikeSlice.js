@@ -5,10 +5,6 @@ import axios from "axios";
 export const getLike = createAsyncThunk(
   "GET/LIKE",
   async (payload, thunk) => {
-
-    console.dir(thunk);
-
-    
     let result = null;
 
     try {
@@ -45,10 +41,7 @@ const likeSlice = createSlice({
 
       return {
         ...state,
-        l_rt: payload.status,
-        l_rtmsg: payload.statusText,
         l_item: newItem,
-        l_loading: false,
       };
     },
     doDislike: (state, { payload }) => {

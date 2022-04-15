@@ -146,8 +146,10 @@ const BtnLine = styled.div`
   line-height: 30px;
   padding: 5px;
   font-size: 15px;
+  display: flex;
 
   button {
+    display: block;
     border: 0px;
     width: 80px;
     height: 30px;
@@ -157,9 +159,11 @@ const BtnLine = styled.div`
     color: #333;
 
     svg {
+      display: inline;
       font-size: 17px;
     }
     span {
+      display: inline;
       position: relative;
       top: -3px;
     }
@@ -234,7 +238,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
               {v.b_img ? <img src={v.b_img} alt="" /> : null}
             </ContentImg>
             <BtnLine>
-              <button onClick={onBtnClick}>
+              <button type="button" data-id={v.b_id} onClick={(event)=>{onBtnClick(event)}} className={likeList[v.b_id] ? 'like' : null }>
                 {likeList[v.b_id] ? <AiFillLike/> : <AiOutlineLike />}
                 &nbsp;
                 <span>좋아요</span> 
@@ -264,4 +268,4 @@ CavePostVeiw.defaultProps = {
   likeList: []
 };
 
-export default React.forwardRef(CavePostVeiw);
+export default CavePostVeiw;

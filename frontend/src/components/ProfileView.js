@@ -5,7 +5,6 @@ import { BsReceiptCutoff, BsCart2 } from "react-icons/bs";
 const ProfileView = (props) => {
   const container = React.useRef();
 
-  console.log(props.show);
   React.useEffect(() => {
     const style = container.current.style;
       if(props.show){
