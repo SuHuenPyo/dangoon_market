@@ -10,11 +10,13 @@ import { useParams } from "react-router-dom";
 import ReactLoading from "react-loading";
 import Report from "../components/Report";
 import { useSelector, useDispatch } from "react-redux";
-import { getLike } from "../Slices/LikeSlice";
+import { getLike, doLike, doDislike} from "../Slices/LikeSlice";
 import { getCaveDetails } from "../Slices/CaveDetails";
+import { getCaveComment,postCaveComment } from "../Slices/CaveCommentSlice";
 import onImgUpload from "../utils/ImgPreview";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { useInView } from "react-intersection-observer";
 
 import {
   AiOutlineLike,
@@ -144,20 +146,26 @@ const CommentImg = styled.div`
 `;
 
 const CaveComment = (props) => {
+  const { id } = useParams();
+
   const { rt, rtmsg, item, loading } = useSelector(
     (state) => state.cavedetails
   );
 
-  const { l_rt } = useSelector((state) => {
+  const { c_rt, c_rtmsg, c_item,} = useSelector(
+    (state) => state.cavecomment
+  );
+
+  const { l_rt, l_item } = useSelector((state) => {
     return state.like;
   });
 
-  const type="C"
+  const type = "C";
 
   const dispatch = useDispatch();
   const input = React.useRef();
 
-  const [click, setClick] = React.useState(false);
+  const [like, setLike] = React.useState(l_item[id] || false);
 
   const [show, setShow] = React.useState(false);
 
@@ -165,30 +173,66 @@ const CaveComment = (props) => {
     setShow(show ? false : true);
   }, [show]);
 
-  const hanldeLike = React.useCallback(() => {
-    if(!click){
-      dispatch(getLike({ boardId: id, type: type, flag: true}));
+  const onSubmitComment = async(e) => {
+    e.preventDefault();
 
-      if(l_rt === 200){
-        setClick(true);
-      }
+    const target = e.target;
+    const content = target.commentCont.value.trim();
+    const images = target.commentImgs.files;
 
-    } else {
-      dispatch(getLike({ boardId: id, type: type, flag: false}));
-
-
-      if(l_rt === 200){
-        setClick(false);
-      }
+    if(!content){
+      target.commentCont.focus();
+      return;
     }
-    
-  }, [click,l_rt]);
 
-  const { id } = useParams();
+    const commentForm = new FormData();
+
+    commentForm.append('boardId',id);
+    commentForm.append('userId',1);
+    commentForm.append('content',content);
+    commentForm.append('board',images);
+
+   await dispatch(postCaveComment(commentForm)); 
+
+   target.commentCont.value = '';
+
+   await dispatch(getCaveComment(id));
+
+   
+
+
+  }
+
+  // 인피니티 스크롤
+  const [page, setPage] = React.useState(1);
+  const [ref, inView] = useInView();
+
+  React.useEffect(() => {
+    if (inView && !loading && item.pageEnd > page) {
+      setPage(page + 1);
+    }
+  }, [inView, page]);
+
+  // 좋아요 기능구현..수정필요!!!
+  const hanldeLike = () => {
+    dispatch(getLike({boardId: id, type: type, flag: !like}));
+    setLike((prevLike)=> !prevLike);
+  }
+  
+
+  React.useEffect(() => {
+    if(like && l_rt===200){
+      dispatch(doLike(id))
+    } else if(l_rt === 200 && !like){
+      dispatch(doDislike(id))
+    }
+  },[like])
+
 
   React.useEffect(() => {
     dispatch(getCaveDetails(id));
-  }, [dispatch, id]);
+    dispatch(getCaveComment(id));
+  }, []);
 
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
@@ -202,14 +246,14 @@ const CaveComment = (props) => {
         </main>
       )}
 
-      {!loading && rt !== 200 && (
+      {rt !== 200 && (
         <main className="error">
           <h2>Error!</h2>
           <p>{rtmsg}</p>
         </main>
       )}
 
-      {!loading && rt === 200 && (
+      {rt === 200 && (
         <>
           <main>
             <div className={style.cavecomment}>
@@ -246,11 +290,9 @@ const CaveComment = (props) => {
                 </button>
               </div>
 
-              <BtnLine className="likeBtn" like={click ? "#f99d1b" : "inherit"}>
-                <button
-                  onClick={hanldeLike}
-                >
-                  {click ? <AiFillLike /> : <AiOutlineLike />}{" "}
+              <BtnLine className="likeBtn" like={like ? "#f99d1b" : "inherit"}>
+                <button onClick={hanldeLike}>
+                  {like ? <AiFillLike /> : <AiOutlineLike />}{" "}
                   <span>좋아요</span>
                 </button>
                 <button
@@ -263,7 +305,11 @@ const CaveComment = (props) => {
               </BtnLine>
             </div>
             <Gap />
-            <CaveCommentDown onClick={onToggleReport} />
+            <CaveCommentDown
+              onClick={onToggleReport}
+              data={c_item.result}
+              inview={ref}
+            />
           </main>
           <Report show={show} onClick={onToggleReport} />
           <div className={style.cavecommentWrite}>
@@ -271,6 +317,9 @@ const CaveComment = (props) => {
             <form
               className={style.cavecommentform}
               encType="multipart/form-data"
+              onSubmit={(e) => {
+                onSubmitComment(e);
+              }}
             >
               <label htmlFor="comment-input-img" className={style.icons}>
                 <BsCardImage />
@@ -278,6 +327,7 @@ const CaveComment = (props) => {
               <input
                 type="file"
                 id="comment-input-img"
+                name="commentImgs"
                 className={style.commentinputimg}
                 onChange={(event) => {
                   onImgUpload(event, "#commentImg", item.b_id);
@@ -285,7 +335,7 @@ const CaveComment = (props) => {
               />
               <input
                 type="text"
-                name="cavecomment-com"
+                name="commentCont"
                 placeholder="댓글을 입력해주세요."
                 className={style.commentwriteinput}
                 ref={input}

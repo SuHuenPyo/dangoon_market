@@ -43,7 +43,7 @@ const CategoriList = () => {
           </div>
         )}
         {/* 에러발생 */}
-        {!loading && rt !== 200 && (
+        {rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>

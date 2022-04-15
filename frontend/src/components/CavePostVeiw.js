@@ -146,8 +146,10 @@ const BtnLine = styled.div`
   line-height: 30px;
   padding: 5px;
   font-size: 15px;
+  display: flex;
 
   button {
+    display: block;
     border: 0px;
     width: 80px;
     height: 30px;
@@ -157,9 +159,11 @@ const BtnLine = styled.div`
     color: #333;
 
     svg {
+      display: inline;
       font-size: 17px;
     }
     span {
+      display: inline;
       position: relative;
       top: -3px;
     }
@@ -185,24 +189,12 @@ const Gap = styled.div`
   opacity: 0.1;
 `;
 
-const CavePostVeiw = ({ data, inview }) => {
-  const likeBtn = React.useRef([]);
-  const [like, setLike ] = React.useState([]);
-
-  // 좋아요
-  const doLike = (i) => {
-    const target = likeBtn.current[i];
-    const classList = target.classList;
-    classList.toggle('like');
-  };
+const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
 
   const onClick = React.useCallback(() => {
     setProfile(false);
   }, []);
 
-  React.useEffect(()=>{
-    
-  },[])
 
   const [member, setMember] = React.useState(0);
   const [profile, setProfile] = React.useState({ show: false, top: 0 });
@@ -221,7 +213,7 @@ const CavePostVeiw = ({ data, inview }) => {
             <Poster
               onClick={(e) => {
                 const getTop = document.body.scrollTop - 60;
-                setMember(v.mId);
+                setMember(v.b_writer);
                 setProfile({ show: true, top: getTop });
               }}
             >
@@ -246,7 +238,8 @@ const CavePostVeiw = ({ data, inview }) => {
               {v.b_img ? <img src={v.b_img} alt="" /> : null}
             </ContentImg>
             <BtnLine>
-              <button ref={(el) => likeBtn.current[i] = el} onClick={() => doLike(i)}>
+              <button type="button" data-id={v.b_id} onClick={(event)=>{onBtnClick(event)}} className={likeList[v.b_id] ? 'like' : null }>
+                {likeList[v.b_id] ? <AiFillLike/> : <AiOutlineLike />}
                 &nbsp;
                 <span>좋아요</span> 
               </button>
@@ -272,6 +265,7 @@ const CavePostVeiw = ({ data, inview }) => {
 
 CavePostVeiw.defaultProps = {
   data: [],
+  likeList: []
 };
 
-export default CavePostVeiw;
+export default React.memo(CavePostVeiw);

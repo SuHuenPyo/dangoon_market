@@ -71,7 +71,7 @@
     }
 }
 
-/* 구매요청 상황 */
+/* 판매상황 상황 */
 .salesstatus {
     display: inline-block;
     width: 50%;
@@ -117,32 +117,35 @@
     display: none;
 }
 
-.salescontact >.contacttype {
-    display: inline-block;
-    width: 150px;
-    height: 100%;
-    line-height: 50px;
-    margin-right: 80px;
-}
-
-.salescontact >.salesaccept {
-    display: inline-block;
-    width: 70px;
-    font-weight: 500;
-    color: white;
-    height: 35px;
-    background-color: #f99d1b;
-    line-height: 35px;
-}
-
-.salesaccept {
-    border: 1px solid #d5d5d5;
-    border-radius: 10px;
-}
-
 .salescontact.show {
     display: block;
-    height: 50px;
+    height: auto;
+    min-height: 50px;
+    .item {
+        display: block;
+        width: 100%;
+        height: 50px;
+
+        .contacttype {
+            display: inline-block;
+            width: 150px;
+            height: 100%;
+            line-height: 50px;
+            margin-right: 80px;
+        }
+
+        .salesaccept {
+            display: inline-block;
+            width: 70px;
+            font-weight: 500;
+            color: white;
+            height: 35px;
+            background-color: #f99d1b;
+            line-height: 35px;
+            border: 1px solid #d5d5d5;
+            border-radius: 10px;
+        }
+    }
 }
 
 /* 거래완료 */
@@ -165,34 +168,41 @@
     display: none;
 }
 
-.completecontact>.contacttypes {
-    display: inline-block;
-    width: 110px;
-    height: 100%;
-    line-height: 50px;
-    margin-right: 100px;
-}
-
-.completecontact>.completeaccept {
-    display: inline-block;
-    width: 70px;
-    font-weight: 500;
-    color: white;
-    height: 35px;
-    line-height: 35px;
-    background-color: #f99d1b;
-}
-
-.completeaccept {
-    border: 1px solid #d5d5d5;
-    margin-left: 20px;
-    border-radius: 10px;
-}
 
 .completecontact.show {
     display: block;
-    height: 50px;
+    height: auto;
+    min-height: 50px;
+
+    .item {
+        width: 100%;
+        height: 50px;
+
+        .contacttypes {
+            display: inline-block;
+            width: 110px;
+            height: 100%;
+            line-height: 50px;
+            margin-right: 100px;
+        }
+
+        .completeaccept {
+            display: inline-block;
+            width: 70px;
+            font-weight: 500;
+            color: white;
+            height: 35px;
+            line-height: 35px;
+            background-color: #f99d1b;
+            border: 1px solid #d5d5d5;
+            margin-left: 20px;
+            border-radius: 10px;
+        }
+        
+        
+    }
 }
+
 
 .seeMore {
     position:absolute;

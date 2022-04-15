@@ -63,5 +63,9 @@
 
 .time {
     font-size: 0.7rem;
-    color: #ddd;
+    color: #b5b5b5;
+}
+
+.bottomHeight {
+    height: 60px;
 }

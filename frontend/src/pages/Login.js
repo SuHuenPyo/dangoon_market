@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
+import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
+
 
 import HeaderLogo from "../components/HeaderLogo";
 import Notice from "../components/Notice";
@@ -46,7 +48,7 @@ const Form = styled.form`
     text-indent: 10px;
   }
 
-  button {
+  button.submit {
     width: 100%;
     height: 46px;
     border: 1px solid #e5e5e5;
@@ -58,6 +60,8 @@ const Form = styled.form`
     margin-top: 10px;
   }
 `;
+
+
 const SignupLink = styled.div`
   margin-top: 30px;
   text-align: center;
@@ -82,11 +86,33 @@ const SignupLink = styled.div`
   }
 `;
 
+const Password = styled.div`
+width: 100%;
+height: auto;
+position: relative;
+
+.eyes {
+  all: unset;
+  width: 18px;
+  height:18px;
+  position:absolute;
+  top: 16px;
+  right: 10px;
+  color: #b5b5b5;
+  display:none;
+}
+
+.show {
+  display: block;
+}
+`
+
 const Login = () => {
   const { rt, loading } = useSelector((state) => state.login, shallowEqual);
   const dispatch = useDispatch();
 
   const [show, setShow] = React.useState(false);
+  const [password, setPassword] = React.useState(true);
   const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const loginForm = React.useRef();
 
@@ -117,6 +143,10 @@ const Login = () => {
     await dispatch(login({ user_id: userId, user_pw: password }));
  
   };
+
+  const handPassword = () => {
+    setPassword((prevState) => !prevState);
+  }
 
   const navigator = useNavigate();
 
@@ -163,13 +193,21 @@ const Login = () => {
         </Title>
         <Form ref={loginForm} action="" method="post" onSubmit={doLogin}>
           <input id="userId" name="userId" type="text" placeholder="아이디" />
+          <Password>
           <input
             id="password"
             name="password"
-            type="password"
+            type={password ? 'password' : 'text'}
             placeholder="패스워드"
           />
-          <button type="submit">로그인하기</button>
+          <button onClick={handPassword} className={`eyes ${password ? 'show' : null }`} type='button'>
+             <AiOutlineEye />
+          </button>
+          <button onClick={handPassword} className={`eyes ${password ?  null : 'show' }`} type='button'>
+             <AiOutlineEyeInvisible />
+          </button>
+          </Password>
+          <button className='submit' type="submit">로그인하기</button>
         </Form>
         <SignupLink>
           <p>

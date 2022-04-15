@@ -8,6 +8,7 @@ import NewProductSlice from './Slices/ProductSlice';
 import NewCavelife from './Slices/CavelifeSlice'
 import ProductDetail from './Slices/ProductDetailSlice';
 import CaveDetails from './Slices/CaveDetails'
+import CaveComment from './Slices/CaveCommentSlice'
 import CategorySlice from  './Slices/CategorySlice'
 import SearchSlice from  './Slices/SearchSlice'
 import LikeSlice from './Slices/LikeSlice';
@@ -22,6 +23,7 @@ const Store = configureStore({
         productdetails: ProductDetail,
         cavelife: NewCavelife,
         cavedetails: CaveDetails,
+        cavecomment: CaveComment,
         category: CategorySlice,
         search: SearchSlice,
         like: LikeSlice

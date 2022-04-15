@@ -70,7 +70,7 @@ const Search = () => {
           </div>
         )}
         {/* 에러발생 */}
-        {!loading && rt !== 200 && (
+        {rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>
@@ -78,7 +78,6 @@ const Search = () => {
             </p>
           </div>
         )}
-
         {rt === 200 && <SaleListItem inview={ref} data={item.item} />}
       </main>
     </>
