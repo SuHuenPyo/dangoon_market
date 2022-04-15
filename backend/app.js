@@ -16,7 +16,6 @@ import Login            from './router/login.js';
 import LogOut           from './router/logout.js';
 import signUp           from './router/signup.js';
 import saleHistory      from './router/salehistory.js';
-import purchasedItem    from './router/purchaseditem.js';
 import watchList        from './router/watchlist.js';
 import productDetails   from './router/productdetails.js';
 import Mail             from './router/mail.js';
@@ -60,6 +59,7 @@ const __dirname = path.dirname(__filename);
 //인증서
 import https from 'https';
 import fs from 'fs';
+import requestPurchase from "./router/purchaseditem.js";
 
 
 
@@ -157,12 +157,12 @@ app.use("/login",           Login);
 app.use("/logout",          LogOut)
 app.use("/signup",          signUp);
 app.use("/salehistory",     saleHistory);
-app.use("/purchaseditem",   purchasedItem);
 app.use("/watchlist",       watchList);
 app.use("/productdetails",  productDetails);
 app.use("/mail",            Mail);
 app.use("/development",     Development);
 app.use("/like",            Like);
+app.use("/requestpurchase", requestPurchase);
 app.use("/.well-known", test);
 
 
