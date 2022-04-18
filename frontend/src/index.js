@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// meta
+import { HelmetProvider } from "react-helmet-async";
 // Route
 import { BrowserRouter } from "react-router-dom";
 // Redux
@@ -17,7 +19,9 @@ ReactDOM.render(
     <Provider store={Store}>
     <BrowserRouter>
       <ScrollToTop/>
+      <HelmetProvider>
       <App />
+      </HelmetProvider>
     </BrowserRouter>
     </Provider>
   </React.StrictMode>,

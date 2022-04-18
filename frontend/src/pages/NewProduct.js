@@ -8,6 +8,7 @@ import styles from '../asset/scss/SignupForm.module.scss';
 
    /* 안내창 위치떄문에 여기 페이지는 main 제외 */
 const NewProduct = () => {
+
   const [notice, setNotice] = React.useState({ title: null, subTitle: null, type:null });
   const form = React.useRef();
 
@@ -64,6 +65,8 @@ const NewProduct = () => {
         type: 'fail'
       });
     }
+
+    return setNotice({ title: null, subTitle: null, type:null });
 
   },[rt,loading,dispatch])
 

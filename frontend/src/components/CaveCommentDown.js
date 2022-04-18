@@ -38,7 +38,7 @@ const CaveCommentDown = ({ data, onClick, inview }) => {
     })}
     {
     data.length > 4 ? (
-      <div class={style.bottomHeight}>
+      <div className={style.bottomHeight}>
         
       </div>
     ) : null}

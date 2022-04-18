@@ -38,7 +38,6 @@ const HomeSlice = createSlice({
             }
         },
         [getHomeList.fulfilled]: (state,{meta,payload})=>{
-            console.log(payload.data.item);
             if(meta.arg.page > 1){
                 payload.data.item = state.item.item.concat(payload.data.item);
             }
@@ -47,7 +46,7 @@ const HomeSlice = createSlice({
                 ...state,
                 rt: payload.status,
                 rtmsg: payload.statusText,
-                item: payload.data,
+                item: payload.data.item.reverse(),
                 loading:false
             }
         },

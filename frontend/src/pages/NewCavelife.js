@@ -3,12 +3,12 @@ import HeaderLogo from "../components/HeaderLogo";
 import PostForm from "../components/PostForm";
 import RegexHelper from "../utils/RegexHelper";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { postNewCavelife } from "../Slices/CavelifeSlice";
 
 /* 안내창 위치떄문에 여기 페이지는 main 제외 */
 const NewCavelife = () => {
-  const { rt, loading } = useSelector((state) => state.cavelife);
+  const { rt, loading } = useSelector((state) => state.cavelife );
   const dispatch = useDispatch();
   const [notice, setNotice] = React.useState({
     title: null,
@@ -18,8 +18,7 @@ const NewCavelife = () => {
 
   const form = React.useRef();
 
-
-  const doCavePost = async(e) => {
+  const doCavePost = async (e) => {
     e.preventDefault();
 
     const regex = new RegexHelper();
@@ -38,31 +37,43 @@ const NewCavelife = () => {
     postCaveForm.append("content", form.current.postContent.value);
     postCaveForm.append("board", form.current.postImg.files);
 
-    await dispatch(postNewCavelife(postCaveForm));
+    dispatch(postNewCavelife(postCaveForm));
   };
 
   React.useEffect(() => {
-    if(rt === null){
+    console.log("rendering");
+
+    if (rt === null) {
+      console.log("if1");
       return;
     }
 
     if (!loading && rt === 200) {
-      setNotice({
+      console.log("if2");
+      return setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
         type: "compelete",
       });
     }
 
-    if (!loading && rt !== 200) {
-      setNotice({
+    if (!loading && rt > 200) {
+      console.log("if3");
+      return setNotice({
         title: "등록을 실패하였습니다.",
         subTitle: "다시 한번 시도해주세요.",
         type: "fail",
       });
     }
 
-  }, [dispatch]);
+    return () => {
+      setNotice({
+        title: null,
+        subTitle: null,
+        type: null,
+      });
+    };
+  }, [rt,loading]);
 
   return (
     <>
@@ -74,6 +85,7 @@ const NewCavelife = () => {
         noticeTitle={notice.title}
         noticeSubTitle={notice.subTitle}
         noticeType={notice.type}
+       loading={loading}
       />
     </>
   );

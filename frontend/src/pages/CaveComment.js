@@ -160,14 +160,22 @@ const CaveComment = (props) => {
     return state.like;
   });
 
+  const dispatch = useDispatch();
+
   const type = "C";
 
-  const dispatch = useDispatch();
+
   const input = React.useRef();
+
+  const main = React.useRef();
 
   const [like, setLike] = React.useState(l_item[id] || false);
 
   const [show, setShow] = React.useState(false);
+
+  const [page, setPage] = React.useState(1);
+
+  const [ref, inView] = useInView();
 
   const onToggleReport = React.useCallback(() => {
     setShow(show ? false : true);
@@ -198,27 +206,26 @@ const CaveComment = (props) => {
 
    await dispatch(getCaveComment(id));
 
-   
-
-
+   main.current.scrollIntoView({block: "end",behavior: 'smooth'});
+  
   }
 
-  // 인피니티 스크롤
-  const [page, setPage] = React.useState(1);
-  const [ref, inView] = useInView();
+  // 좋아요 기능구현
+  const hanldeLike = () => {
+    dispatch(getLike({boardId: id, type: type, flag: !like}));
+    setLike((prevLike)=> !prevLike);
+  }
+
+  React.useEffect(() => {
+    dispatch(getCaveDetails(id));
+    dispatch(getCaveComment(id));
+  }, []);
 
   React.useEffect(() => {
     if (inView && !loading && item.pageEnd > page) {
       setPage(page + 1);
     }
   }, [inView, page]);
-
-  // 좋아요 기능구현..수정필요!!!
-  const hanldeLike = () => {
-    dispatch(getLike({boardId: id, type: type, flag: !like}));
-    setLike((prevLike)=> !prevLike);
-  }
-  
 
   React.useEffect(() => {
     if(like && l_rt===200){
@@ -227,12 +234,6 @@ const CaveComment = (props) => {
       dispatch(doDislike(id))
     }
   },[like])
-
-
-  React.useEffect(() => {
-    dispatch(getCaveDetails(id));
-    dispatch(getCaveComment(id));
-  }, []);
 
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
@@ -255,7 +256,7 @@ const CaveComment = (props) => {
 
       {rt === 200 && (
         <>
-          <main>
+          <main ref={main}>
             <div className={style.cavecomment}>
               <div className={style.cavecommentpost}>
                 <div className={style.cavepostprofile}>
@@ -307,7 +308,7 @@ const CaveComment = (props) => {
             <Gap />
             <CaveCommentDown
               onClick={onToggleReport}
-              data={c_item.result}
+              data={c_item}
               inview={ref}
             />
           </main>

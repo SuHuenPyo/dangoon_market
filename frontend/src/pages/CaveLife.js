@@ -86,7 +86,7 @@ const CaveLife = () => {
 
         {rt === 200 && (
           <>
-          <CavePostVeiw data={item.item} inview={ref} likeList={l_item} onBtnClick={onBtnClick}/>
+          <CavePostVeiw data={item} inview={ref} likeList={l_item} onBtnClick={onBtnClick}/>
           <WriteButton path='/newcavelife'/>
           </>
         )}

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Meta from "../components/Meta";
 
 import HeaderLogo from "../components/HeaderLogo";
 import Notice from "../components/Notice";
@@ -61,7 +61,6 @@ const Form = styled.form`
   }
 `;
 
-
 const SignupLink = styled.div`
   margin-top: 30px;
   text-align: center;
@@ -87,25 +86,25 @@ const SignupLink = styled.div`
 `;
 
 const Password = styled.div`
-width: 100%;
-height: auto;
-position: relative;
+  width: 100%;
+  height: auto;
+  position: relative;
 
-.eyes {
-  all: unset;
-  width: 18px;
-  height:18px;
-  position:absolute;
-  top: 16px;
-  right: 10px;
-  color: #b5b5b5;
-  display:none;
-}
+  .eyes {
+    all: unset;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    color: #b5b5b5;
+    display: none;
+  }
 
-.show {
-  display: block;
-}
-`
+  .show {
+    display: block;
+  }
+`;
 
 const Login = () => {
   const { rt, loading } = useSelector((state) => state.login, shallowEqual);
@@ -116,18 +115,19 @@ const Login = () => {
   const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const loginForm = React.useRef();
 
-  const onClick = () => {setShow(false)};
+  const onClick = () => {
+    setShow(false);
+  };
 
-  
-  const doLogin = async(e) => {
+  const doLogin = async (e) => {
     e.preventDefault();
-    
+
     document.querySelectorAll(`.${styles.errMsg}`).forEach((v, i) => {
       v.remove();
     });
-    
+
     const regex = new RegexHelper();
-    
+
     // 아이디
     if (!regex.value("userId", "아이디를 입력해주세요.")) {
       return;
@@ -136,26 +136,25 @@ const Login = () => {
     if (!regex.value("password", "패스워드를 입력해주세요.")) {
       return;
     }
-    
+
     const userId = e.target.userId.value;
     const password = e.target.password.value;
 
     await dispatch(login({ user_id: userId, user_pw: password }));
- 
   };
 
   const handPassword = () => {
     setPassword((prevState) => !prevState);
-  }
+  };
 
   const navigator = useNavigate();
 
   React.useEffect(() => {
-    if(rt === null){
-        return;
+    if (rt === null) {
+      return;
     }
 
-    if ( !loading && rt === 200) {
+    if (!loading && rt === 200) {
       console.log(rt);
       return navigator(-1);
     }
@@ -168,9 +167,9 @@ const Login = () => {
       });
       setShow(true);
 
-      return
+      return;
     }
-  
+
     if (!loading && rt !== 400) {
       console.log(rt);
       setNotice({
@@ -180,11 +179,12 @@ const Login = () => {
       setShow(true);
     }
 
-    return
-  },[dispatch,rt,loading])
+    return;
+  }, [dispatch, rt, loading]);
 
   return (
     <>
+      <Meta title="단군마켓 로그인 페이지" description="단군마켓 로그인 페이지입니다." />
       <HeaderLogo />
       <main>
         <Title>
@@ -194,20 +194,30 @@ const Login = () => {
         <Form ref={loginForm} action="" method="post" onSubmit={doLogin}>
           <input id="userId" name="userId" type="text" placeholder="아이디" />
           <Password>
-          <input
-            id="password"
-            name="password"
-            type={password ? 'password' : 'text'}
-            placeholder="패스워드"
-          />
-          <button onClick={handPassword} className={`eyes ${password ? 'show' : null }`} type='button'>
-             <AiOutlineEye />
-          </button>
-          <button onClick={handPassword} className={`eyes ${password ?  null : 'show' }`} type='button'>
-             <AiOutlineEyeInvisible />
-          </button>
+            <input
+              id="password"
+              name="password"
+              type={password ? "password" : "text"}
+              placeholder="패스워드"
+            />
+            <button
+              onClick={handPassword}
+              className={`eyes ${password ? "show" : null}`}
+              type="button"
+            >
+              <AiOutlineEye />
+            </button>
+            <button
+              onClick={handPassword}
+              className={`eyes ${password ? null : "show"}`}
+              type="button"
+            >
+              <AiOutlineEyeInvisible />
+            </button>
           </Password>
-          <button className='submit' type="submit">로그인하기</button>
+          <button className="submit" type="submit">
+            로그인하기
+          </button>
         </Form>
         <SignupLink>
           <p>

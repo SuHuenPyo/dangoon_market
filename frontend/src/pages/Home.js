@@ -5,7 +5,7 @@ import ReactLoading from "react-loading";
 import { useInView } from "react-intersection-observer";
 import WriteButton from "../components/WriteButton";
 import Notice from "../components/Notice";
-
+import Meta from '../components/Meta';
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { getHomeList } from "../Slices/HomeSlice";
@@ -61,6 +61,7 @@ const Home = () => {
 
   return (
     <>
+      <Meta title='단군마켓 홈' description='단군마켓 홈입니다.' />
       <HeaderLogo />
       <main>
         {/* 로딩 */}
@@ -82,7 +83,7 @@ const Home = () => {
         {/* 정상작동 */}
         {rt === 200 && (
           <>
-            <SaleListItem data={item.item} inview={ref} />
+            <SaleListItem data={item} inview={ref} />
             <WriteButton path="/newproduct" />
           </>
         )}

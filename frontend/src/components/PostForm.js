@@ -48,20 +48,18 @@ const PostForm = React.forwardRef((props,ref) => {
 
   
   const onClick = () => {
-     setShow(false);
+   setShow(false);
     if(props.noticeType === 'compelete'){
       return navigate('/home');
     }
   }
   
   React.useEffect(() => {
+    console.log('postform rendering')
     if(props.noticeType !== null){
       setShow(true);
-    } else {
-      return;
     }
-
-  },[props.noticeType])
+  },[props.loading])
 
   return (
     <>
@@ -167,6 +165,7 @@ PostForm.defaultProps = {
   noticeSubTitle: null,
   noticeType: null,
   onSubmit: () => { alert('Give me Function') },
+  loading: null,
 }
 
-export default React.memo(PostForm);
+export default PostForm;

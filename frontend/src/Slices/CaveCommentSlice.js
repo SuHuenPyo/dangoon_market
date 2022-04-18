@@ -62,11 +62,12 @@ const CaveCommentSlice = createSlice({
       };
     },
     [getCaveComment.fulfilled]: (state, { meta, payload }) => {
+      const item = payload.data.result.reverse();
       return {
         ...state,
         c_rt: payload.status,
         c_rtmsg: payload.statusText,
-        c_item: payload.data,
+        c_item: item,
         c_loading: false,
       };
     },
