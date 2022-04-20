@@ -3,15 +3,12 @@ import _config from "../config/_config.js";
 import  * as randomHelper from '../helper/RandomHelper.js';
 import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
-import { uploadBoard } from "../helper/awsHelper.js";
+import { S3URL, uploadBoard } from "../helper/awsHelper.js";
 import { DG_DB } from "../helper/dbHelper.js";
 import { authIsOwner } from "../middleware/session.js";
 
 const Profile = express.Router();
 
-
-let dbcon = null;
-let json = null;
 
 /**
  * @swagger
@@ -22,24 +19,27 @@ let json = null;
  *     produces:
  *     - "application/json"
  *     parameters:
- *     - name: "b_id"
- *       in: "query"
- *       description: ""
- *       type: "number"
  *     responses:
  *       "200":
  *         description: "successful operation"
+ *       "403":
+ *         description: "접근제한됨"
  *     
 */
 Profile.get('/', authIsOwner, async(req, res, next)=>{
 
 
     /**
-     * 필요사항 
-     * B_ID : 
+     * 필요정보 
+     * b_id
+     * user_m_id = 세션에서 가져올것임
+     * 
      */
-    let b_id = req.query.b_id;
-    let m_id = null;
+    let user_id = req.session.user.id; //세션상 user id(NickName)
+    let user_m_id = null; //DB m_id
+
+    //return result value
+    let return_info = {};
 
     //DB Connection
     let dbcon = new DG_DB();
@@ -47,12 +47,16 @@ Profile.get('/', authIsOwner, async(req, res, next)=>{
     try{
         await dbcon.DbConnect();
 
+        //해당 접속자 세션정보로 m_id를 가져온다 
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.member WHERE m_user_id=?`, user_id);
+        user_m_id = result[0].m_id;
+
+        console.log(user_m_id);
 
         //전체 데이터 수 조회
-        [result] = await dbcon.sendQuery(`SELECT DISTINCT m_id FROM dangoon.board WHERE b_id=?`, b_id);
-        m_id = result[0].m_id;
+        [result] = await dbcon.sendQuery(`SELECT DISTINCT m_user_id, m_name, m_email, m_pic, m_kakao_id FROM dangoon.member WHERE m_id=?`, user_m_id);
+        return_info = {'m_user_id': result[0].m_user_id, 'm_name': result[0].m_name, 'm_email': result[0].m_email, 'm_pic':S3URL+result[0].m_pic, 'm_kakao_id': result[0].m_kakao_id }
 
-        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE b_type='S' LIMIT ?,?`, pagenationResult.offset, pagenationResult.listCount);
 
         
     }catch(e){
@@ -62,7 +66,7 @@ Profile.get('/', authIsOwner, async(req, res, next)=>{
         await dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
-    res.send({'item': result, 'pageEnd': pagenationResult.totalPage});
+    return res.status(200).json(return_info);
 });
 
 export default Profile;

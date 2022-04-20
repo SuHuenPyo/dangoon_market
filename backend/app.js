@@ -21,6 +21,8 @@ import productDetails   from './router/productdetails.js';
 import Mail             from './router/mail.js';
 import Development      from './router/development.js';
 import Like             from "./router/like.js";
+import requestPurchase  from "./router/purchaseditem.js";
+import Profile          from "./router/profile.js";
 import test             from "./router/test.js";
 
 
@@ -59,7 +61,7 @@ const __dirname = path.dirname(__filename);
 //인증서
 import https from 'https';
 import fs from 'fs';
-import requestPurchase from "./router/purchaseditem.js";
+
 
 
 
@@ -163,6 +165,7 @@ app.use("/mail",            Mail);
 app.use("/development",     Development);
 app.use("/like",            Like);
 app.use("/requestpurchase", requestPurchase);
+app.use("/profile",         Profile);
 app.use("/.well-known", test);
 
 

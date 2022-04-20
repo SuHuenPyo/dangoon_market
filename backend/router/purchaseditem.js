@@ -88,7 +88,7 @@ requestPurchase.get('/sellhistory', authIsOwner, async(req, res, next)=>{
  *         description: "이미 신청된 요청"
  *     
 */
-requestPurchase.post('/', async(req,res,next) =>{
+requestPurchase.post('/', authIsOwner, async(req,res,next) =>{
 
     /**
      * 필요정보 
