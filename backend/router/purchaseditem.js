@@ -144,7 +144,7 @@ requestPurchase.get('/approve', authIsOwner, async(req, res, next)=>{
 
 /**
  * @swagger
- * /requestpurchase/cancle:
+ * /requestpurchase/cancel:
  *   delete:
  *     description: 단군마켓 거래글 요청상태를 취소합니다. (해당 요청 삭제처리 됨)
  *     tags: [Delete (Working)]
@@ -162,7 +162,7 @@ requestPurchase.get('/approve', authIsOwner, async(req, res, next)=>{
  *         description: "취소요청 정상처리 됨"
  *     
 */
-requestPurchase.delete('/cancle', authIsOwner, async(req, res, next)=>{
+requestPurchase.delete('/cancel', authIsOwner, async(req, res, next)=>{
 
 
     /**필요정보
@@ -228,11 +228,13 @@ requestPurchase.delete('/cancle', authIsOwner, async(req, res, next)=>{
  *     - "application/json"
  *     parameters:
  *     - name: "b_id"
- *       in: "query"
- *       description: "거래완료 처리할 게시물의 b_id"
- *     responses:
- *       "200":
- *         description: "거래 완료 정상처리 됨"
+ *       in: "body"
+ *       description: "x-www-form-urlencoded"
+ *       schema:
+ *          type: object
+ *          properties:
+ *              b_id:
+ *                  type: number
  *     
 */
 requestPurchase.put('/complete', authIsOwner, async(req, res, next)=>{
@@ -242,13 +244,13 @@ requestPurchase.put('/complete', authIsOwner, async(req, res, next)=>{
      * m_id = 세션에서 뽑아옴 
      * b_id = 게시글 id
      */
-    
-    if(req.query.b_id == undefined){
+     let {b_id} = req.body;
+    if(b_id == undefined){
         return res.status(400).json("파라미터가 잘못 된거같은데요?");
     }
 
     let user_id = req.session.user.id; //세션상 user id(NickName)
-    let target_b_id = req.query.b_id;
+    let target_b_id = b_id;
     let target_r_id = null // 검색해서 가져올 r_id (해당 레코드는 거래요청수락 상태여야 한다.)
     let user_m_id = null; //DB m_id
 

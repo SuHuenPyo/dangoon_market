@@ -122,7 +122,7 @@ app.use(session({
 app.use(cors({
     origin: true,
     credentials : true,
-    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE'],
 }));
 app.use(bodyParser.text()); //TEXT형식의 파라미터 수신가능
 app.use(bodyParser.json()); //JSON형식의 파라미터 수신가능
