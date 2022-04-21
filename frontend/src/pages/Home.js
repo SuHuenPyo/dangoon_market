@@ -70,8 +70,9 @@ const Home = () => {
             <ReactLoading type="bubbles" color="#f99d1b" />
           </div>
         )}
+        
         {/* 에러발생 */}
-        {rt !== 200 && (
+        {!loading && rt !== 200 && (
           <div className="error">
             <h2>Error!</h2>
             <p>

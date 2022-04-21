@@ -247,7 +247,7 @@ const CaveComment = (props) => {
         </main>
       )}
 
-      {rt !== 200 && (
+      {!loading && rt !== 200 && (
         <main className="error">
           <h2>Error!</h2>
           <p>{rtmsg}</p>

@@ -3,19 +3,25 @@ import style from "../asset/scss/SaleHistoryList.module.scss";
 import { Link } from "react-router-dom";
 import Notice from "./Notice";
 import { AiOutlineMore } from "react-icons/ai";
+import config from "../utils/_config.json";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
-const SalelistComponent = () => {
+const SalelistComponent = ({ inview, data }) => {
   const requestBtn = React.useRef([]);
   const completeBtn = React.useRef([]);
   const [show, setShow] = React.useState(false);
   const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const [open, setOpen] = React.useState(false);
 
+  const categoryList = config.categoryList;
+
   const onOpenRequest = (number) => {
     if (open) {
       completeBtn.current.forEach((v, i) => {
         v.classList.remove(style.show);
       });
+
       requestBtn.current.forEach((v, i) => {
         if (i === number) {
           return;
@@ -25,7 +31,13 @@ const SalelistComponent = () => {
       });
     }
 
-    setOpen(requestBtn.current[number].classList.toggle(style.show));
+    try {
+      setOpen(requestBtn.current[number].classList.toggle(style.show));
+    } catch (err) {
+      if (err) {
+        return;
+      }
+    }
   };
 
   const onOpenComplete = (number) => {
@@ -42,7 +54,13 @@ const SalelistComponent = () => {
       });
     }
 
-    setOpen(completeBtn.current[number].classList.toggle(style.show));
+    try {
+      setOpen(completeBtn.current[number].classList.toggle(style.show));
+    } catch (err) {
+      if (err) {
+        return;
+      }
+    }
   };
 
   const doComplete = () => {
@@ -60,84 +78,121 @@ const SalelistComponent = () => {
     setShow(true);
   };
 
+  dayjs.extend(relativeTime);
+  dayjs.locale("ko");
+
   return (
     <>
       <main>
         <ul>
-          <li className={style.salesitem}>
-            <Link to="/home" className={style.saleslink}>
-              <div className={style.salesimg}>
-                <img src="http://placekitten.com/95/95" alt="게시물사진" />
-              </div>
-              <div className={style.salescont}>
-                <h2>아이패드</h2>
-                <p className={style.salesInfo}>
-                  <span className={style.salesloc}>카테고리</span>
-                  &middot;
-                  <span className={style.salestime}>올린시간</span>
-                </p>
-                <p className={style.salesPrice}>6,000원</p>
-              </div>
-              <div className={style.seeMore}>
-              <AiOutlineMore className={style.seeMoreIcon}/>
-              <ul className={style.seeMoreList}>
-                <li>수정하기</li>
-                <li>삭제하기</li>
-              </ul>
-              </div>
-            </Link>
-            <button
-              className={`${style.salesstatus}`}
-              onClick={() => {
-                onOpenRequest(0);
-              }}
-            >
-              거래요청
-            </button>
-            <button
-              className={`${style.completestatus}`}
-              onClick={() => {
-                onOpenComplete(0);
-              }}
-            >
-              거래완료
-            </button>
-            <ul
-              ref={(element) => (requestBtn.current[0] = element)}
-              className={`${style.salescontact}`}
-            >
-              <li className={style.item}>
+          {data.map((item, index) => {
+            return (
+              <li
+                key={item.saleItem[0].b_id}
+                className={style.salesitem}
+                {...(data.length - 1 === index ? { ref: inview } : {})}
+              >
+                <Link to={`/product/${item.saleItem[0].b_id}`} className={style.saleslink}>
+                  <div className={style.salesimg}>
+                    <img src="http://placekitten.com/95/95" alt="게시물사진" />
+                  </div>
+                  <div className={style.salescont}>
+                    <h2>{item.saleItem[0].b_title}</h2>
+                    <p className={style.salesInfo}>
+                      <span className={style.salesloc}>
+                        {categoryList[item.saleItem[0].b_category]}
+                      </span>{" "}
+                      &middot;{" "}
+                      <span className={style.salestime}>
+                        {dayjs(item.saleItem[0].b_rdate).from()}
+                      </span>
+                    </p>
+                    <p className={style.salesPrice}>
+                      {item.saleItem[0].b_price}
+                    </p>
+                  </div>
+                  <div className={style.seeMore}>
+                    <AiOutlineMore className={style.seeMoreIcon} />
+                    <ul className={style.seeMoreList}>
+                      <li>수정하기</li>
+                      <li>삭제하기</li>
+                    </ul>
+                  </div>
+                </Link>
 
-              <p className={style.contacttype}>인간곰 님의 거래요청</p>
-              <button
-                id="product-sales-btn"
-                type="button"
-                className={style.salesaccept}
-                onClick={doRequest}
+                <button
+                  className={`${style.salesstatus} ${
+                    item.requestItem.length > 0 ? style.accepted : null
+                  }`}
+                  onClick={() => {
+                    onOpenRequest(index);
+                  }}
                 >
-                거래수락
-              </button>
-                </li>
-            </ul>
-            <ul
-              ref={(element) => (completeBtn.current[0] = element)}
-              className={`${style.completecontact}
-              }`}
-            >
-              <li className={style.item}>
+                  거래요청
+                </button>
+                <button
+                  className={`${style.completestatus} ${
+                    item.acceptedItem.length > 0 ? style.accepted : null
+                  } `}
+                  onClick={() => {
+                    onOpenComplete(index);
+                  }}
+                >
+                  거래완료
+                </button>
 
-              <p className={style.contacttypes}>인간곰 님과</p>
-              <button
-                id="product-complete-btn"
-                type="button"
-                className={style.completeaccept}
-                onClick={doComplete}
-                >
-                거래완료
-              </button>
-                </li>
-            </ul>
-          </li>
+                {item.requestItem.length > 0 && (
+                  <ul
+                    ref={(element) => (requestBtn.current[index] = element)}
+                    className={`${style.salescontact}`}
+                  >
+                    {item.requestItem.map((v, i) => {
+                      return (
+                        <li key={v.r_id} className={style.item}>
+                          <p className={style.contacttype}>
+                            {v.m_name} 님의 거래요청  
+                          </p>
+                          <button
+                            id="product-sales-btn"
+                            type="button"
+                            className={style.salesaccept}
+                            onClick={doRequest}
+                          >
+                            {v.r_flag === 0 ? "거래수락" : "거래취소"}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+
+                {item.acceptedItem.length > 0 && (
+                  <ul
+                    ref={(element) => (completeBtn.current[index] = element)}
+                    className={`${style.completecontact}`}
+                  >
+                    {item.acceptedItem.map((v, i) => {
+                      return (
+                        <li className={style.item}>
+                          <p className={style.contacttypes}>{v.m_name} 님과</p>
+                          <button
+                            id="product-complete-btn"
+                            type="button"
+                            className={style.completeaccept}
+                            onClick={doComplete}
+                            {...(v.r_done === 1 ? {disabled: true} : null)}
+                          >
+                            거래완료
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+          
         </ul>
       </main>
       <Notice
@@ -150,6 +205,11 @@ const SalelistComponent = () => {
       />
     </>
   );
+};
+
+SalelistComponent.defaultProps = {
+  data: [],
+  inview: false,
 };
 
 export default SalelistComponent;

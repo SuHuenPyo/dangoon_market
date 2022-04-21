@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
 import { getLike,doLike,doDislike } from "../Slices/LikeSlice";
+import { postRequest } from "../Slices/RequestSaleSlice";
 import ReactLoading from "react-loading";
 
 import Report from "../components/Report";
@@ -31,6 +32,7 @@ const ProductDetail = () => {
 
   const [reportShow, setReportShow] = React.useState(false);
   const [noticeShow, setNoticeShow] = React.useState(false);
+  const [notice, setNotice] = React.useState({ title: null, subTitle: null});
   const [clickLike, setClickLike] = React.useState(l_item[id] || false);
   const categoryList = config.categoryList;
 
@@ -38,6 +40,9 @@ const ProductDetail = () => {
     (state) => state.productdetails
   );
 
+  const { r_rt, r_loading } = useSelector(
+    (state) => state.requestSale
+  );
 
   const dispatch = useDispatch();
 
@@ -59,6 +64,30 @@ const ProductDetail = () => {
 
   }, [clickLike]);
 
+  React.useEffect(() => {
+    console.log("render");
+
+    if(r_rt === null || r_loading){
+      console.log("if1");
+      return
+    }
+    if(r_rt === 200) {
+      console.log("if3");
+      setNotice({title:'거래요청이 완료되었습니다.',subTitle: '거래상황은 구매내역에서 확인 가능합니다.'});
+      return
+    }
+    
+    if(r_rt !== 200){
+      console.log("if2");
+      setNotice({title:'거래요청을 실패하였습니다.',subTitle: '다시 시도해주세요.'});
+      return
+    }
+
+
+    return () => {setNoticeShow(false)}
+
+  }, [r_rt,r_loading]);
+
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {
     setReportShow(reportShow ? false : true);
@@ -68,13 +97,13 @@ const ProductDetail = () => {
     setNoticeShow(noticeShow ? false : true);
   }, [noticeShow]);
 
-
+  const doRequestForSale = () => {
+     dispatch(postRequest(id));
+     setNoticeShow(true);
+  }
 
   const onToggleLike = () => {
     setClickLike((prevLike)=> !prevLike);
-
-
-    console.log(clickLike);
 
      dispatch(
         getLike({
@@ -95,7 +124,7 @@ const ProductDetail = () => {
         </main>
       )}
 
-      {rt !== 200 && (
+      {!loading && rt !== 200 && (
         <main className="error">
           <h2>Error!</h2>
           <p>{rtmsg}</p>
@@ -168,7 +197,7 @@ const ProductDetail = () => {
           <button
             type="button"
             className={styles.requestBtn}
-            onClick={() => setNoticeShow(true)}
+            onClick={doRequestForSale}
           >
             거래요청
           </button>
@@ -182,8 +211,8 @@ const ProductDetail = () => {
             bottom={"-70px"}
             show={noticeShow}
             onClick={onToggleNotice}
-            title="정상적으로 거래요청이 완료되었습니다."
-            subTitle="거래진행 상황은 나의 마늘 > 구매목록 에서 확인 가능합니다."
+            title={notice.title}
+            subTitle={notice.subTitle}
           />
         </>
       )}

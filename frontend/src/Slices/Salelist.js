@@ -45,10 +45,13 @@ const CaveLife = () => {
           }
           
         })
-        setRdata(requestData)
-    }
 
-  },[r_rt,r_item,item])
+        setRdata(requestData)
+      } else {
+        return
+      }
+
+  },[r_rt])
 
   const [ref, inView] = useInView();
 
