@@ -46,7 +46,7 @@ requestPurchase.get('/sellhistory', authIsOwner, async(req, res, next)=>{
         user_m_id = result[0].m_id;
 
         //해당 m_id에 해당하는 포스팅 글을 가져온다. 이때 board type은 "S"(판매게시판)이고 B_EXPIRED가 false인 것만 가져온다.
-        [result] = await dbcon.sendQuery(`SELECT b_id FROM dangoon.board WHERE (m_id=? AND b_expired=false)`, user_m_id);
+        [result] = await dbcon.sendQuery(`SELECT b_id FROM dangoon.board WHERE (m_id=? AND b_expired=false AND b_type='S')`, user_m_id);
 
         //가져온 list(판매글)을 기준으로 반복문을 돌며 거래요청이 있는지 가져온다.
         return_value = result;
@@ -141,6 +141,83 @@ requestPurchase.get('/approve', authIsOwner, async(req, res, next)=>{
     //저장한 값 여기서 전송해주고 
     return res.status(200).json("거래요청이 수락됨");
 });
+
+/**
+ * @swagger
+ * /requestpurchase/cancle:
+ *   delete:
+ *     description: 단군마켓 거래글 요청상태를 취소합니다. (해당 요청 삭제처리 됨)
+ *     tags: [Delete (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     - name: "b_id"
+ *       in: "query"
+ *       description: "취소처리 게시물의 b_id"
+ *     - name: "r_id"
+ *       in: "query"
+ *       description: "취소처리 request id"
+ *     responses:
+ *       "204":
+ *         description: "취소요청 정상처리 됨"
+ *     
+*/
+requestPurchase.delete('/cancle', authIsOwner, async(req, res, next)=>{
+
+
+    /**필요정보
+     * m_id = 세션에서 뽑아옴 
+     * b_id = 게시글 id
+     * r_id = 요청 id
+     */
+    
+    if((req.query.b_id == undefined) || (req.query.r_id == undefined)){
+        return res.status(400).json("파라미터가 잘못 된거같은데요?");
+    }
+
+    let user_id = req.session.user.id; //세션상 user id(NickName)
+    let target_b_id = req.query.b_id;
+    let target_r_id = req.query.r_id;
+    let user_m_id = null; //DB m_id
+
+    //DB Connection
+    let dbcon = new DG_DB();
+    let result = null;
+    try{
+        await dbcon.DbConnect();
+        //해당 접속자 세션정보로 m_id를 가져온다 
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.member WHERE m_user_id=?`, user_id);
+        user_m_id = result[0].m_id;
+
+        //해당 접속자 세션이 해당 게시글을 쓴 사람이 맞는지 확인 한다. 
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE (b_id=? AND m_id=?)`, target_b_id ,user_m_id);
+
+        //취소 쿼리를 날리기 전에 수락한 거래가 있는지 확인한다. 
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.request_purchased WHERE (r_id=? AND r_flag=1 AND b_id=?) `,target_r_id,target_b_id );
+        if(result[0].cnt < 1){
+            return res.status(400).json("취소 할 거래가 확인되지 않습니다.");
+        }
+        //삭제 쿼리 
+        [result] = await dbcon.sendQuery(`DELETE FROM dangoon.request_purchased WHERE r_id=?`, target_r_id);
+        
+        //삭제가 정상 처리 되었는지 한번더 확인한다.
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.request_purchased WHERE (r_id=? AND r_flag=1 AND b_id=?) `,target_r_id,target_b_id );
+        if(result[0].cnt > 0){
+            return res.status(400).json("거래 취소에 실패 했습니다.");
+        }
+
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        await dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+    //클라이언트 요청 정상수행 (응답에 대한 메시지 미포함, 보통 삭제요청에 사용 )
+    return res.status(204);
+});
+
+
 /**
  * @swagger
  * /requestpurchase:
