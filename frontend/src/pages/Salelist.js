@@ -15,41 +15,58 @@ const CaveLife = () => {
     (state) => state.requestSale
   );
 
-  const [rData ,setRdata ] = React.useState([])
-   
-  
-  React.useEffect(() => {
-    if(r_rt !== 200 || r_loading){
-      return;
-    }
+  const { a_loading, c_loading } = useSelector((state) => state.doContract);
 
-    
-    if(r_rt === 200 && r_item){
-      const requestData = r_item.map((v, i) => {
-          const saleItem = item.filter((item)=>{
-                return v.b_id === item.b_id
+  const [rData, setRdata] = React.useState([]);
+
+  React.useEffect(() => {
+    try {
+      if (r_rt !== 200 || r_loading || c_loading || a_loading) {
+        return;
+      }
+
+      if (r_rt === 200 && r_item) {
+        const requestData = r_item.map((v, i) => {
+          const saleItem = item.filter((item) => {
+            return v.b_id === item.b_id;
           });
 
-          const acceptedItem = v.request_info.filter((request)=>{
-               return request.r_flag === 1
-          })
+          let isAccepted = false;
+          let isDone = false;
 
-          const requestItem = v.request_info.filter((request)=>{
-            return request.r_flag === 0
-       })
+          const acceptedItem = v.request_info.filter((request) => {
+            return request.r_flag === 1;
+          });
 
+          const requestItem = v.request_info;
+
+          requestItem.forEach((value, index, array) => {
+            if (value.r_flag === 1) {
+              isAccepted = true;
+            }
+            if (value.r_done) {
+              isDone = true;
+            }
+
+            return isAccepted, isDone;
+          });
+            
           return {
             saleItem: saleItem,
             acceptedItem: acceptedItem,
-            requestItem: requestItem
-          }
-          
-        })
-        setRdata(requestData)
+            requestItem: requestItem,
+            isAccepted: isAccepted,
+            isDone: isDone,
+          };
+        });
+        setRdata(requestData);
+      }
+    } catch (err) {
+      if (err) {
+        window.location.reload();
+      }
     }
-
-  },[r_rt,r_item,item])
-
+  }, [r_rt, r_item, item, a_loading, c_loading, r_loading]);
   const [ref, inView] = useInView();
 
   const dispatch = useDispatch();

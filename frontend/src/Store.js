@@ -13,6 +13,7 @@ import CategorySlice from  './Slices/CategorySlice'
 import SearchSlice from  './Slices/SearchSlice'
 import LikeSlice from './Slices/LikeSlice';
 import RequestSale from './Slices/RequestSaleSlice';
+import doContract from './Slices/DoContract'
 
 const Store = configureStore({
     reducer: {
@@ -29,6 +30,7 @@ const Store = configureStore({
         search: SearchSlice,
         like: LikeSlice,
         requestSale: RequestSale,
+        doContract: doContract,
     },
     middleware: [...getDefaultMiddleware({serializableCheck:false}),createLogger()],
     devTools: true

@@ -33,7 +33,6 @@ export const getRequest = createAsyncThunk(
   }
 );  
 
-
 const requestSale = createSlice({
   name: "requestSale",
   initialState: {
