@@ -48,7 +48,7 @@ requestPurchase.get('/buyhistory', authIsOwner, async(req, res, next)=>{
         
 
         //해당 M_ID로 거래요청이 있었던 것이나 있는것을 찾는다 (거래요청이 있었거나 있다는 것은 구매완료 처리되거나, 구매요청중인 것이다.)
-        [result] = await dbcon.sendQuery(`SELECT b_id, r_done FROM dangoon.request_purchased WHERE m_id=?`, user_m_id);
+        [result] = await dbcon.sendQuery(`SELECT b_id, r_done, r_flag FROM dangoon.request_purchased WHERE m_id=?`, user_m_id);
         return_value = JSON.parse(JSON.stringify(result))
 
 

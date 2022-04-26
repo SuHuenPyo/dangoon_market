@@ -67,15 +67,18 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE b_type='S' LIMIT ?,?`, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price, b_hits FROM dangoon.board WHERE b_type='S' LIMIT ?,?`, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
         //console.log(result)
 
-        result.forEach(element => {
-            element.b_price = element.b_price.toString().replace(regexp, ',');
-        });
+        for(let id in result){
+            result[id].b_price = result[id].b_price.toString().replace(regexp, ',');
+            let [temp] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.like WHERE (b_id=? AND l_flag='1' AND l_type='S')`, result[id].b_id);
+            result[id].b_like = temp[0].cnt;
+        }
+
         
     }catch(e){
         return next(e);
