@@ -145,9 +145,6 @@ const ProductDetail = () => {
                   />
                 );
               })}
-              <img src="http://placekitten.com/g/360/320" alt="test" />
-              <img src="http://placekitten.com/g/360/320" alt="test" />
-              <img src="http://placekitten.com/g/360/320" alt="test" />
             </div>
             <div className={styles.profile}>
               <Link to="/profile" className={styles.profileImg}>

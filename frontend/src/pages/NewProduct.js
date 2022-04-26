@@ -51,7 +51,7 @@ const NewProduct = () => {
     }
 
     if(rt === 200){
-      setNotice({
+      return setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
         type: 'compelete'
@@ -59,7 +59,7 @@ const NewProduct = () => {
     } 
     if (rt !== 200 ){
       console.log(rt);
-      setNotice({
+      return setNotice({
         title: "등록에 실패하였습니다.",
         subTitle: null,
         type: 'fail'

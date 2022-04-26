@@ -196,7 +196,6 @@ const CaveComment = (props) => {
     const commentForm = new FormData();
 
     commentForm.append('boardId',id);
-    commentForm.append('userId',1);
     commentForm.append('content',content);
     commentForm.append('board',images);
 
@@ -206,9 +205,10 @@ const CaveComment = (props) => {
 
    await dispatch(getCaveComment(id));
 
-   main.current.scrollIntoView({block: "end",behavior: 'smooth'});
   
   }
+
+  
 
   // 좋아요 기능구현
   const hanldeLike = () => {
@@ -234,6 +234,17 @@ const CaveComment = (props) => {
       dispatch(doDislike(id))
     }
   },[like])
+
+  React.useEffect(() => {
+    if( c_rt === 200){
+      return main.current.scrollIntoView({block: "end",behavior: 'smooth'});
+    } else if(c_rt > 200){
+      return alert('에러가 발생했습니다. 다시 시도해주세요.')
+    }
+
+    return;
+
+  },[c_rt])
 
   dayjs.extend(relativeTime);
   dayjs.locale("ko");

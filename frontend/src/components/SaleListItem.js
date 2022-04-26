@@ -6,6 +6,7 @@ import dayjs  from "dayjs";
 import relativeTime   from "dayjs/plugin/relativeTime";
 import config from '../utils/_config.json';
 
+
 import 'dayjs/locale/ko';
 
 // styled Component
@@ -70,7 +71,7 @@ const SaleCont = styled.div`
     }
 
     .likeView {
-      width: 60px;
+      width: 80px;
       color: #bcbcbc;
       position:absolute;
       bottom: 9px;
@@ -80,7 +81,8 @@ const SaleCont = styled.div`
         top: 2px;
       }
       span {
-        margin: 0 3px;
+        margin: 0 4px;
+        font-size: 0.8rem;
       }
     }
 `
@@ -91,6 +93,8 @@ const SaleListItem = ({data,inview}) => {
   dayjs.locale('ko');
   
   const categoryList = config.categoryList;
+
+  
 
   return (
     <ul>
@@ -111,8 +115,8 @@ const SaleListItem = ({data,inview}) => {
             {v.b_price}<span className="won">원</span>
           </p>
           <p className="likeView">
-            <AiOutlineStar/><span>0</span>
-            <AiOutlineEye/><span>0</span>
+            <AiOutlineStar/><span>{v.b_like}</span>
+            <AiOutlineEye/><span>{v.b_hits}</span>
           </p>
         </SaleCont>
       </Linked>

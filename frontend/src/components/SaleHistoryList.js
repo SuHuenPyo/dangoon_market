@@ -31,8 +31,8 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle: "구매자에게 단군님의 연락처가 전달됩니다. ",
       });
   
-      setShow(true);
-      window.location.reload()
+      return setShow(true);
+      
     }
 
     if(a_rt > 200){
@@ -43,7 +43,7 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle: "다시 한번 시도해주세요. ",
       });
   
-      setShow(true);
+      return setShow(true);
     }
    
     return setShow(false)
@@ -59,7 +59,7 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle: "감사합니다. ",
       });
   
-      setShow(true);
+      return setShow(true);
 
     }
 
@@ -71,7 +71,7 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle: "다시 한번 시도해주세요. ",
       });
   
-      setShow(true);
+      return setShow(true);
 
     }
    
@@ -89,7 +89,7 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle: "감사합니다. ",
       });
   
-      setShow(true);
+      return setShow(true);
 
     }
 
@@ -100,7 +100,7 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle: "다시 한번 시도해주세요. ",
       });
   
-      setShow(true);
+      return setShow(true);
 
     }
    
@@ -182,17 +182,13 @@ const SalelistComponent = ({ inview, data }) => {
       <main>
         <ul>
           {data.map((item, index) => {
-            if(!item.saleItem[0]){
-              return null
-            }
             return (
               <li
-                key={item.saleItem[0].b_id}
+                key={item.b_id}
                 className={style.salesitem}
-                {...(data.length - 1 === index ? { ref: inview } : {})}
               >
                 <Link
-                  to={`/product/${1}`}
+                  to={`/product/${item.b_id}`}
                   className={style.saleslink}
                 >
                   <div className={style.salesimg}>
@@ -260,9 +256,9 @@ const SalelistComponent = ({ inview, data }) => {
                             className={style.salesaccept}
                             onClick={()=>{
                               if(item.isAccepted){
-                                makeCancel(item.saleItem[0].b_id,v.r_id)
+                                makeCancel(item.b_id,v.r_id)
                               } else {
-                                makeApprove(item.saleItem[0].b_id,v.r_id)}
+                                makeApprove(item.b_id,v.r_id)}
                               }
                             }
                             {...((v.r_flag === 0 && item.isAccepted) || item.isDone ? { disabled: true } : null)}
@@ -288,7 +284,7 @@ const SalelistComponent = ({ inview, data }) => {
                             id="product-complete-btn"
                             type="button"
                             className={style.completeaccept}
-                            onClick={()=>{makeComplete(item.saleItem[0].b_id,v.r_id)}}
+                            onClick={()=>{makeComplete(item.b_id,v.r_id)}}
                             {...(v.r_done === 1 ? { disabled: true } : null)}
                           >
                            거래완료
@@ -309,6 +305,8 @@ const SalelistComponent = ({ inview, data }) => {
         subTitle={notice.subTitle}
         onClick={() => {
           setShow(false);
+
+          window.location.reload();
         }}
       />
     </>
@@ -318,7 +316,6 @@ const SalelistComponent = ({ inview, data }) => {
 SalelistComponent.defaultProps = {
   data: [
   ],
-  inview: false,
 };
 
 export default SalelistComponent;

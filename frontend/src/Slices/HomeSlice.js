@@ -51,7 +51,7 @@ const HomeSlice = createSlice({
         rt: payload.status,
         rtmsg: payload.statusText,
         item: {
-          data: payload.data.item.reverse(),
+          data: payload.data.item,
           pageEnd: payload.data.pageEnd,
         },
         loading: false,

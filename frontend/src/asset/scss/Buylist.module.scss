@@ -2,13 +2,13 @@
 /* 구매목록 아이템 */
 .buyitem {
     width: 100%;
-    height: 110px;
+    height: auto;
 }
 
 /* 구매목록 중 구매요청한 글 */
 .buyitem> .postlink {
     width: 100%;
-    height: 100%;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

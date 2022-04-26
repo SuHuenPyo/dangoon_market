@@ -191,14 +191,11 @@ const Gap = styled.div`
 `;
 
 const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
-
   const onClick = React.useCallback(() => {
     setProfile(false);
   }, []);
 
-
-  const [member, setMember] = React.useState(0);
-  const [profile, setProfile] = React.useState({ show: false, top: 0 });
+  const [profile, setProfile] = React.useState({ show: false, top: 0, id: 0 });
 
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
@@ -214,8 +211,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
             <Poster
               onClick={(e) => {
                 const getTop = document.body.scrollTop - 60;
-                setMember(v.b_writer);
-                setProfile({ show: true, top: getTop });
+                setProfile({ show: true, top: getTop, id:v.b_id });
               }}
             >
               <div>
@@ -258,7 +254,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
         show={profile.show}
         top={profile.top}
         onClick={onClick}
-        query={member}
+        query={profile.id}
       />
     </>
   );

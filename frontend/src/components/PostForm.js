@@ -59,6 +59,7 @@ const PostForm = React.forwardRef((props,ref) => {
     if(props.noticeType !== null){
       setShow(true);
     }
+    
   },[props.loading])
 
   return (

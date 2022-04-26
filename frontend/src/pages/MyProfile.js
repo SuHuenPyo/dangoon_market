@@ -5,6 +5,9 @@ import styles from "../asset/scss/SignupForm.module.scss";
 import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
 import { onImgView } from '../utils/ImgPreview';
+import { useDispatch, useSelector } from "react-redux";
+import { getMyProfile } from "../Slices/ProfileSlice";
+
 
 // styled-components
 const Input = styled.input`
@@ -32,6 +35,8 @@ const Button = styled.button`
 const Signup = () => {
   const userEmail = React.useRef();
   const imgInput = React.useRef();
+  const { rt, rtmsg, m_item, loading } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
@@ -39,6 +44,12 @@ const Signup = () => {
   const onToggleShow = React.useCallback(() => {
     setValidShow(validShow ? false : true);
   }, [validShow]);
+
+  React.useEffect(() => {
+      if(!m_item.m_name){
+        dispatch(getMyProfile())
+      }
+  },[])
 
   return (
     <>
@@ -54,18 +65,19 @@ const Signup = () => {
             <div id='myprofile_img'className={styles.imgView}>
               {/* 업로드된 이미지 영역 */}
               {/* 이미지 업로드 전 표시될 아이콘 */}
+              <img src={m_item.m_pic} alt={`${m_item.m_name}의 프로필 이미지`} />
               <AiOutlineUser />
             </div>
           </div>
           <div className={styles.inputArea}>
-            <Input type="text" placeholder="이름" name="userName" />
+            <Input type="text" placeholder="이름" name="userName" defaultValue={m_item.m_name}/>
             <ErrText>이름은 30자 이하로 작성해주세요.</ErrText>
           </div>
           <div className={styles.inputArea}>
-            <Input type="text" placeholder="아이디" name="userId" readOnly />
+            <Input type="text" placeholder="아이디" name="userId" defaultValue={m_item.m_user_id} readOnly />
           </div>
           <div className={styles.inputArea}>
-            <Input type="email" placeholder="이메일" ref={userEmail}/>
+            <Input type="email" placeholder="이메일" defaultValue={m_item.m_email} ref={userEmail}/>
             <ErrText></ErrText>
           </div>
           <div className={`${styles.inputArea} ${styles.validation}`}>
@@ -78,7 +90,7 @@ const Signup = () => {
             </Button>
           </div>
           <div className={styles.inputArea}>
-            <Input type="text" placeholder="kakao ID" />
+            <Input type="text" placeholder="kakao ID" defaultValue={m_item.m_kakao_id} />
           </div>
           <Button type="submit" className={styles.saveBtn}>
             저장하기
