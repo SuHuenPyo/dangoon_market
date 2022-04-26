@@ -24,13 +24,8 @@ const SalelistComponent = ({ inview, data }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if(a_rt === null || a_loading){
-      console.log("if1");
-        return;
-    }
 
     if(a_rt === 200){
-      console.log("if2");
       setNotice({
         title: "거래요청이 완료되었습니다.",
         subTitle: "구매자에게 단군님의 연락처가 전달됩니다. ",
@@ -49,8 +44,6 @@ const SalelistComponent = ({ inview, data }) => {
       });
   
       setShow(true);
-
-      return
     }
    
     return setShow(false)
@@ -58,10 +51,6 @@ const SalelistComponent = ({ inview, data }) => {
   },[a_rt,a_loading])
 
   React.useEffect(() => {
-    if(c_rt === null || c_loading){
-      console.log("if1");
-        return;
-    }
 
     if(c_rt === 200){
       console.log("if2");
@@ -72,10 +61,6 @@ const SalelistComponent = ({ inview, data }) => {
   
       setShow(true);
 
-
-      window.location.reload()
-
-      return;
     }
 
     if(c_rt > 200){
@@ -88,55 +73,17 @@ const SalelistComponent = ({ inview, data }) => {
   
       setShow(true);
 
-      return
     }
    
     return setShow(false)
 
   },[c_rt,c_loading])
 
-  React.useEffect(() => {
-    if(a_rt === null || a_loading){
-      console.log("if1");
-        return;
-    }
-
-    if(a_rt === 200){
-      console.log("if2");
-      setNotice({
-        title: "거래요청이 완료되었습니다.",
-        subTitle: "구매자에게 단군님의 연락처가 전달됩니다. ",
-      });
-  
-      setShow(true);
-      window.location.reload()
-    }
-
-    if(a_rt > 200){
-      console.log("if3");
-
-      setNotice({
-        title: "거래요청을 실패하였습니다..",
-        subTitle: "다시 한번 시도해주세요. ",
-      });
-  
-      setShow(true);
-
-      return
-    }
-   
-    return setShow(false)
-
-  },[a_rt,a_loading])
 
   React.useEffect(() => {
-    if(d_rt === null || d_loading){
-      console.log("if1");
-        return;
-    }
 
     if(d_rt === 200){
-      console.log("if2");
+
       setNotice({
         title: "거래가 완료되었습니다.",
         subTitle: "감사합니다. ",
@@ -144,14 +91,9 @@ const SalelistComponent = ({ inview, data }) => {
   
       setShow(true);
 
-
-      window.location.reload()
-
-      return;
     }
 
     if(d_rt > 200){
-      console.log("if3");
 
       setNotice({
         title: "거래완료에 실패하였습니다..",
@@ -160,7 +102,6 @@ const SalelistComponent = ({ inview, data }) => {
   
       setShow(true);
 
-      return
     }
    
     return setShow(false)
@@ -234,15 +175,16 @@ const SalelistComponent = ({ inview, data }) => {
       r_id: r_id
     }))
 };
-
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
-
   return (
     <>
       <main>
         <ul>
           {data.map((item, index) => {
+            if(!item.saleItem[0]){
+              return null
+            }
             return (
               <li
                 key={item.saleItem[0].b_id}
@@ -250,7 +192,7 @@ const SalelistComponent = ({ inview, data }) => {
                 {...(data.length - 1 === index ? { ref: inview } : {})}
               >
                 <Link
-                  to={`/product/${item.saleItem[0].b_id}`}
+                  to={`/product/${1}`}
                   className={style.saleslink}
                 >
                   <div className={style.salesimg}>
@@ -282,7 +224,7 @@ const SalelistComponent = ({ inview, data }) => {
 
                 <button
                   className={`${style.salesstatus} ${
-                    item.requestItem.length > 0 ? style.accepted : null
+                    item.requestItem.length > 0 && !item.isAccepted ? style.accepted : null
                   }`}
                   onClick={() => {
                     onOpenRequest(index);
@@ -292,7 +234,7 @@ const SalelistComponent = ({ inview, data }) => {
                 </button>
                 <button
                   className={`${style.completestatus} ${
-                    item.acceptedItem.length > 0 ? style.accepted : null
+                    item.acceptedItem.length > 0 && !item.isDone ? style.accepted : null
                   } `}
                   onClick={() => {
                     onOpenComplete(index);
@@ -374,7 +316,8 @@ const SalelistComponent = ({ inview, data }) => {
 };
 
 SalelistComponent.defaultProps = {
-  data: [],
+  data: [
+  ],
   inview: false,
 };
 

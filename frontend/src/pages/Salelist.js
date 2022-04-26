@@ -8,9 +8,8 @@ import { getRequest } from "../Slices/RequestSaleSlice";
 import { getHomeList } from "../Slices/HomeSlice";
 import Meta from "../components/Meta";
 
-const CaveLife = () => {
-  const [page, setPage] = React.useState(1);
-  const { item } = useSelector((state) => state.home);
+const Salelist = () => {
+  const { rt, item, loading } = useSelector((state) => state.home);
   const { r_rt, r_rtmsg, r_item, r_loading } = useSelector(
     (state) => state.requestSale
   );
@@ -20,16 +19,19 @@ const CaveLife = () => {
   const [rData, setRdata] = React.useState([]);
 
   React.useEffect(() => {
-    try {
-      if (r_rt !== 200 || r_loading || c_loading || a_loading) {
+
+      if (r_rt !== 200) {
+
         return;
       }
 
-      if (r_rt === 200 && r_item) {
+      if (r_rt === 200) {
         const requestData = r_item.map((v, i) => {
-          const saleItem = item.filter((item) => {
+
+          const saleItem = item.data.filter((item) => {
             return v.b_id === item.b_id;
           });
+
 
           let isAccepted = false;
           let isDone = false;
@@ -37,6 +39,7 @@ const CaveLife = () => {
           const acceptedItem = v.request_info.filter((request) => {
             return request.r_flag === 1;
           });
+
 
           const requestItem = v.request_info;
 
@@ -48,9 +51,9 @@ const CaveLife = () => {
               isDone = true;
             }
 
-            return isAccepted, isDone;
+            return isAccepted,isDone;
           });
-            
+
           return {
             saleItem: saleItem,
             acceptedItem: acceptedItem,
@@ -59,39 +62,36 @@ const CaveLife = () => {
             isDone: isDone,
           };
         });
+
+
         setRdata(requestData);
       }
-    } catch (err) {
-      if (err) {
-        window.location.reload();
-      }
-    }
+
   }, [r_rt, r_item, item, a_loading, c_loading, r_loading]);
+
   const [ref, inView] = useInView();
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    if(!r_item){
+      dispatch(getRequest())
+    }
+
     if (!item) {
-      dispatch(getHomeList({ page: page }));
-    }
+      dispatch(getHomeList({ rows: 20}));
+    } 
 
-    dispatch(getRequest());
-  }, []);
 
-  React.useEffect(() => {
-    if (inView && item.pageEnd > page) {
-      setPage(page + 1);
-    }
-  }, [inView, page]);
+  }, [item,r_item]);
 
   return (
-    <>
+    <>  
       <Meta title="단군마켓 홈" description="단군마켓 홈입니다." />
       <HeaderTitle title="판매내역" />
 
       {/* 로딩 */}
-      {r_loading && (
+      {r_loading && loading && (
         <main>
           <div className="loading">
             <ReactLoading type="bubbles" color="#f99d1b" />
@@ -115,4 +115,4 @@ const CaveLife = () => {
   );
 };
 
-export default CaveLife;
+export default Salelist;

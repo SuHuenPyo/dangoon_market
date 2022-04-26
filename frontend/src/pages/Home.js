@@ -84,7 +84,7 @@ const Home = () => {
         {/* 정상작동 */}
         {rt === 200 && (
           <>
-            <SaleListItem data={item} inview={ref} />
+            <SaleListItem data={item.data} inview={ref} />
             <WriteButton path="/newproduct" />
           </>
         )}
