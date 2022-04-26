@@ -11,6 +11,69 @@ const requestPurchase = express.Router();
 
 /**
  * @swagger
+ * /requestpurchase/buyhistory:
+ *   get:
+ *     description: 단군마켓 거래글 요청상태, 구매내역를 조회합니다.
+ *     tags: [Get (Working)]
+ *     produces:
+ *     - "application/json"
+ *     parameters:
+ *     responses:
+ *       "200":
+ *         description: "successful operation"
+ *     
+*/
+requestPurchase.get('/buyhistory', authIsOwner, async(req, res, next)=>{
+
+
+    /**필요정보
+     * m_id = 세션에서 뽑아옴 
+     */
+    
+    let user_id = req.session.user.id; //세션상 user id(NickName)
+    let user_m_id = null; //DB m_id
+
+
+    //return value
+    let return_value = {}
+
+    //DB Connection
+    let dbcon = new DG_DB();
+    let result = null;
+    try{
+        await dbcon.DbConnect();
+        //해당 접속자 세션정보로 m_id를 가져온다 
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.member WHERE m_user_id=?`, user_id);
+        user_m_id = result[0].m_id;
+        
+
+        //해당 M_ID로 거래요청이 있었던 것이나 있는것을 찾는다 (거래요청이 있었거나 있다는 것은 구매완료 처리되거나, 구매요청중인 것이다.)
+        [result] = await dbcon.sendQuery(`SELECT b_id, r_done FROM dangoon.request_purchased WHERE m_id=?`, user_m_id);
+        return_value = JSON.parse(JSON.stringify(result))
+
+
+        for(let id in return_value){
+            let [temp] = await dbcon.sendQuery(`SELECT b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE (b_type='S' AND b_id=?)`,return_value[id].b_id );
+            return_value[id].board_info = JSON.parse(JSON.stringify(temp));
+        }
+
+        
+        
+    }catch(e){
+        return next(e);
+    }finally{
+        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        await dbcon.end();
+    }
+    //저장한 값 여기서 전송해주고 
+
+    console.log(return_value)
+    return res.status(200).json(return_value);
+});
+
+
+/**
+ * @swagger
  * /requestpurchase/sellhistory:
  *   get:
  *     description: 단군마켓 거래글 요청상태를 조회합니다.
@@ -51,9 +114,14 @@ requestPurchase.get('/sellhistory', authIsOwner, async(req, res, next)=>{
         //가져온 list(판매글)을 기준으로 반복문을 돌며 거래요청이 있는지 가져온다.
         return_value = result;
         for(let id in return_value){
+            //게시글 정보도 함께 저장해준다. 
+            [result] = await dbcon.sendQuery(`SELECT b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE (b_type='S' AND b_id=?)`,return_value[id].b_id );
+            return_value[id].board_info = JSON.parse(JSON.stringify(result));
+
+            //거래요청을 저장할 임시 변수
             let temp = [];
-            [temp] = await dbcon.sendQuery(`SELECT r_id, r_flag, m_name, r_done FROM dangoon.request_purchased as dr, dangoon.member as dm WHERE (dr.b_id=? AND dr.m_id = dm.m_id )`, return_value[id].b_id);            
-            return_value[id].request_info = (temp != undefined) ? JSON.parse(JSON.stringify(temp)) : return_value[id].request_info = ''
+            [temp] = await dbcon.sendQuery(`SELECT r_id, r_flag, m_name, r_done FROM dangoon.request_purchased as dr, dangoon.member as dm WHERE (dr.b_id=? AND dr.m_id = dm.m_id )`, return_value[id].b_id);
+            return_value[id].request_info = (temp != undefined) ? JSON.parse(JSON.stringify(temp)) : '';
         }
 
         console.log(return_value);
