@@ -67,6 +67,7 @@ Like.get('/', authIsOwner, async(req, res, next)=>{
     let result = null;
     try{
         await dbcon.DbConnect();
+
         //해당 기능을 수행할 해당유저의 M_id 가져오기
         //좋아요
         [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.member WHERE m_user_id=?`, user_id);
@@ -86,6 +87,7 @@ Like.get('/', authIsOwner, async(req, res, next)=>{
         //조회해서 있다면 Update, 없다면 Insert .   단, 좋아요가 되어있는지 안되어있는지는 확인하지 않는다. 중요하지 않기때문  
         [result] = await dbcon.sendQuery(`SELECT l_flag FROM dangoon.like WHERE (m_id=? AND b_id=? AND l_type=?)`, user_m_id, b_id, l_type);
 
+
         //이미 테이블이 존재하고 1일때
         if(result[0] && result[0].l_flag == 1){
             //플래그 0 요청할 경우
@@ -100,8 +102,14 @@ Like.get('/', authIsOwner, async(req, res, next)=>{
             }
 
         }else if(!result[0]){//여기는 테이블이 존재하지 않음 
-            if(l_flag == 1){
-                await dbcon.sendQuery(`INSERT INTO dangoon.like(m_id, b_id, l_flag, l_type) VALUES(?, ?, ?, ?)`,user_m_id, b_id, l_flag ,l_type);
+            
+            // if(l_flag == 1){
+            //     await dbcon.sendQuery(`INSERT INTO dangoon.like(m_id, b_id, l_flag, l_type) VALUES(?, ?, ?, ?)`,user_m_id, b_id, l_flag ,l_type);
+            // }
+            console.log(l_flag);
+            if(l_flag == 'true'){
+                console.log("만들어진다");
+                 await dbcon.sendQuery(`INSERT INTO dangoon.like(m_id, b_id, l_type) VALUES(?, ?, ?)`,user_m_id, b_id ,l_type);
             }
         }
 

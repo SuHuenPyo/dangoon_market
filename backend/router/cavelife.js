@@ -7,7 +7,8 @@ import { DG_DB } from "../helper/dbHelper.js";
 
 
 import ImportManager from "../common/IM.js";
-import { S3URL, uploadBoard } from "../helper/awsHelper.js";
+import { getObj, put_from_url, S3URL, uploadBoard, uploadComment } from "../helper/awsHelper.js";
+import { authIsOwner } from "../middleware/session.js";
 
 
 const caveLife = express.Router();
@@ -130,6 +131,24 @@ caveLife.get('/', async(req, res, next)=>{
 */
 caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
 
+    //console.log(req.files);
+    
+    //썸네일 키를 저장할 변수
+    let thumbnail_key = null;
+
+    if(req.files[0].fieldname == 'thumbnail'){
+        // put_from_url(S3URL+req.files[0].fieldname , req.files[0].key, (err, res)=>{
+        //     if(err){
+        //         console.log("무언가 잘못되었음");
+        //     }
+        //     console.log("정상적으로 썸네일이 업로드 되었습니다. ");
+        // }) 
+        //test(S3URL+req.files[0].fieldname , req.files[0].key);
+        //console.log(req)
+        thumbnail_key = await getObj(req.files[0].key);
+    }
+    //
+    
     //file type Board
     let mfileType = "B";
     
@@ -160,7 +179,7 @@ caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
         memberName = result[0].name;
 
         //게시판 생성
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT) VALUES(?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content);
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, b_img ) VALUES(?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, thumbnail_key);
         boardId = result.insertId
 
 
@@ -199,11 +218,9 @@ caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
  *          properties:
  *              boardId:
  *                  type: string
- *              userId:
- *                  type: string
  *              content:
  *                  type: string
- *              board: 
+ *              comment: 
  *                  type: Img
  *                  description: "이미지파일"
  *         
@@ -212,18 +229,25 @@ caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
  *         description: "successful operation"
  *     
 */
-caveLife.post('/comment', uploadBoard.array('board', 10) ,async(req, res, next)=>{
+caveLife.post('/comment', authIsOwner ,uploadComment.array('comment', 10) ,async(req, res, next)=>{
 
     //board
     let mfileType = "C";
 
-    let {boardId, userId, content} = req.body;
+    let {boardId, content} = req.body;
+
+
+    console.log(req.files);
 
     //필요사항
     /*
         B_ID    : 보드 ID
-        userId  : 댓글 쓰는 유저 ID 
+        userId  : 세션에서 직접 가져올것임 
+        m_id = 세션에서 뽑아옴 
     */
+    
+     let user_id = req.session.user.id; //세션상 user id(NickName)
+     let userId = null; //DB m_id
     
 
     //필요정보 저장
@@ -233,8 +257,15 @@ caveLife.post('/comment', uploadBoard.array('board', 10) ,async(req, res, next)=
     try {
         
         await dbcon.DbConnect();
+
+        //세션유저 m_id 가져오기
+        //해당 접속자 세션정보로 m_id를 가져온다
+        let [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.member WHERE m_user_id=?`, user_id);
+        userId = result[0].m_id;
+
+
         //먼저 유저관련 정보 가져오기 
-        let [result] = await dbcon.sendQuery(`SELECT m_name AS writerName FROM dangoon.member WHERE (m_id = ?)`, userId);
+        [result] = await dbcon.sendQuery(`SELECT m_name AS writerName FROM dangoon.member WHERE (m_id = ?)`, userId);
         writerName = result[0].writerName;
 
         //댓글 생성
@@ -277,7 +308,7 @@ caveLife.post('/comment', uploadBoard.array('board', 10) ,async(req, res, next)=
  *         description: "writerName: 댓글 작성자 \n writerId: 작성자 userID \n content: 댓글 내용 \n rDate: 댓글 작성 일시\n writerPic: 글쓴이 프로필사진 \n commentPic: 댓글에 사용된 사진"
  *     
 */
-caveLife.get('/comment', async(req, res, next)=>{
+caveLife.get('/comment', authIsOwner, async(req, res, next)=>{
     let {boardId} = req.query
 
     //FileType - B-게시판, C-댓글
@@ -299,9 +330,9 @@ caveLife.get('/comment', async(req, res, next)=>{
         
         for(let idx in result){ 
             [tempResult1] = await dbcon.sendQuery(`SELECT m_pic as writerPic FROM dangoon.member WHERE m_id=?`, result[idx].writerId);
-            console.log(FileType, boardId, result[idx].c_id) ;
+            //console.log(FileType, boardId, result[idx].c_id) ;
             [tempResult2] = await dbcon.sendQuery(`SELECT F_FILE as commentPic FROM dangoon.file WHERE (f_type=? AND b_id=? AND c_id=?)`,FileType, boardId, result[idx].c_id);
-            console.log(tempResult2);
+            //console.log(tempResult2);
             let jsonCommentPic = [];
             for(let imgIdx in tempResult2){
                 jsonCommentPic.push( S3URL+tempResult2[imgIdx].commentPic)
