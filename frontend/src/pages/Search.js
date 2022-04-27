@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import ReactLoading from "react-loading";
 import styled from "styled-components";
+import Meta from '../components/Meta';
 
 const Form = styled.form`
   width: 100%;
@@ -49,7 +50,8 @@ const Search = () => {
 
   return (
     <>
-      <HeaderTitle title={query}/>
+      <Meta title={`단군마켓 ${query} 검색결과`} description={`단군마켓 ${query} 검색결과 페이지`}/>
+      <HeaderTitle title={query} link="/category" />
       <main>
         <Form
           onSubmit={(e) => {

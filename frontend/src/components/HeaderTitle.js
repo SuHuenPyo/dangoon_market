@@ -24,7 +24,7 @@ const HeaderTitle = (props) => {
     <>
     <header className={styles.header}>
      <RiMenuLine id="menu-btn" className={styles.headIcon} onClick={()=>{isMenuLeft()}}/>
-     <NavLink to='/home' className={styles.link}>
+     <NavLink to={props.link} className={styles.link}>
        <h1 className={styles.headTitle}>{props.title}</h1>     
     </NavLink> 
     </header>
@@ -33,5 +33,9 @@ const HeaderTitle = (props) => {
     </>
   );
 };
+
+HeaderTitle.defaultProps = {
+  link: '/home'
+}
 
 export default HeaderTitle;

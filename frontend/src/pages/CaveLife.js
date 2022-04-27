@@ -8,6 +8,7 @@ import ReactLoading from "react-loading";
 import HeaderTitle from "../components/HeaderTitle";
 import CavePostVeiw from "../components/CavePostVeiw";
 import WriteButton from "../components/WriteButton";
+import Meta from '../components/Meta';
 
 const CaveLife = () => {
   const type = 'C';
@@ -69,7 +70,8 @@ const CaveLife = () => {
 
   return (
     <>
-      <HeaderTitle title="동굴생활" />
+      <Meta title="단군마켓 동굴생활" description="단군마켓 동굴생활 페이지 "  />
+      <HeaderTitle title="동굴생활" link="/cavelife" />
       <main>
         {loading && (
           <div className="loading">

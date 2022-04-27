@@ -7,6 +7,7 @@ import axios from "axios";
 import { getMyProfile } from "../Slices/ProfileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ReactLoading from "react-loading";
+import Meta from '../components/Meta';
 
 // icons
 import { RiKakaoTalkFill } from "react-icons/ri";
@@ -19,6 +20,7 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { BsReceiptCutoff } from "react-icons/bs";
+
 
 const Mygralic = () => {
   const [notice, setNotice] = React.useState({ title: null, subTitle: null });
@@ -35,12 +37,11 @@ const Mygralic = () => {
     if (rt === null) {
       dispatch(getMyProfile());
     }
-
-    console.log(m_item);
   }, []);
 
   return (
     <>
+      <Meta title="단군마켓 나의 마늘" description="단군마켓 나의 마늘 페이지"  />
       <HeaderLogo />
       <main>
         {/* 로딩 */}
@@ -83,7 +84,7 @@ const Mygralic = () => {
                   <BsReceiptCutoff />
                   <br />
                   판매내역
-                </div>
+               </div>
               </Link>
               <Link to="/buylist" className={styles.usagesItem}>
                 <div className={styles.purchase}>

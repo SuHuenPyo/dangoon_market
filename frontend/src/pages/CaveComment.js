@@ -17,6 +17,9 @@ import onImgUpload from "../utils/ImgPreview";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useInView } from "react-intersection-observer";
+import Meta from '../components/Meta';
+
+
 
 import {
   AiOutlineLike,
@@ -197,7 +200,7 @@ const CaveComment = (props) => {
 
     commentForm.append('boardId',id);
     commentForm.append('content',content);
-    commentForm.append('board',images);
+    commentForm.append('comment',images);
 
    await dispatch(postCaveComment(commentForm)); 
 
@@ -251,7 +254,8 @@ const CaveComment = (props) => {
 
   return (
     <>
-      <HeaderTitle title="동굴생활" />
+      <Meta title="단군마켓 동굴생활" description="단군마켓 동굴생활 페이지 입니다."  />
+      <HeaderTitle title="동굴생활" link="/cavelife" />
       {loading && (
         <main className="loading">
           <ReactLoading type="bubbles" color="#f99d1b" />

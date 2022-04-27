@@ -9,9 +9,9 @@ import Notice from "../components/Notice";
 
 import RegexHelper from "../utils/RegexHelper";
 import styles from "../asset/scss/SignupForm.module.scss";
-
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { login } from "../Slices/LoginSlice";
+
 
 const Title = styled("div")`
   width: 84%;
@@ -184,7 +184,7 @@ const Login = () => {
 
   return (
     <>
-      <Meta title="단군마켓 로그인 페이지" description="단군마켓 로그인 페이지입니다." />
+      <Meta title="단군마켓 로그인 페이지" description="단군마켓 로그인 페이지" />
       <HeaderLogo />
       <main>
         <Title>

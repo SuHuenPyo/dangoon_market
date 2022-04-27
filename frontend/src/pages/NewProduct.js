@@ -5,6 +5,7 @@ import {postNewProduct} from "../Slices/ProductSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import RegexHelper from "../utils/RegexHelper";
 import styles from '../asset/scss/SignupForm.module.scss';
+import Meta from '../components/Meta';
 
    /* 안내창 위치떄문에 여기 페이지는 main 제외 */
 const NewProduct = () => {
@@ -72,6 +73,7 @@ const NewProduct = () => {
 
   return (
     <>
+      <Meta title="단군마켓 판매글쓰기" description="단군마켓 판매글쓰기 페이지"  />
       <HeaderLogo />
         <PostForm ref={form} onSubmit={doPost} title="판매" noticeTitle={notice.title} noticeSubTitle={notice.subTitle} noticeType={notice.type}/>
     </>

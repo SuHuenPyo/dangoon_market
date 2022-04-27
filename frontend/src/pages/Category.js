@@ -17,6 +17,7 @@ import {
   FaSeedling,
   FaBox,
 } from "react-icons/fa";
+import Meta from '../components/Meta';
 
 const List = styled.ul`
   width: 100%;
@@ -87,7 +88,8 @@ const Categori = () => {
   const navigator = useNavigate();
   return (
     <>
-    <HeaderTitle title='카테고리' />
+    <Meta title='단군마켓 카테고리' description='단군마켓 카테고리 페이지' />
+    <HeaderTitle title='카테고리' link="/category"/>
       <main>
         <Form  onSubmit={(e) => {
             e.preventDefault();

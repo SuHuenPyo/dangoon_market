@@ -7,12 +7,13 @@ import { Link, useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
-import { getLike,doLike,doDislike } from "../Slices/LikeSlice";
+import { getLike, doLike, doDislike } from "../Slices/LikeSlice";
 import { postRequest } from "../Slices/RequestSaleSlice";
 import ReactLoading from "react-loading";
 
 import Report from "../components/Report";
 import Notice from "../components/Notice";
+import Meta from "../components/Meta";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -22,8 +23,8 @@ import config from "../utils/_config.json";
 const ProductDetail = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
-  
-  const { l_rt,l_item } = useSelector((state) => {
+
+  const { l_rt, l_item } = useSelector((state) => {
     return state.like;
   });
 
@@ -32,7 +33,7 @@ const ProductDetail = () => {
 
   const [reportShow, setReportShow] = React.useState(false);
   const [noticeShow, setNoticeShow] = React.useState(false);
-  const [notice, setNotice] = React.useState({ title: null, subTitle: null});
+  const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const [clickLike, setClickLike] = React.useState(l_item[id] || false);
   const categoryList = config.categoryList;
 
@@ -40,53 +41,55 @@ const ProductDetail = () => {
     (state) => state.productdetails
   );
 
-  const { r_rt, r_loading } = useSelector(
-    (state) => state.requestSale
-  );
+  const { r_rt, r_loading } = useSelector((state) => state.requestSale);
 
   const dispatch = useDispatch();
-
 
   React.useEffect(() => {
     dispatch(getProductDetail(id));
   }, [id]);
 
   React.useEffect(() => {
-    if(l_rt === null){
+    if (l_rt === null) {
       return;
     }
 
-    if(l_rt === 200 && clickLike){
+    if (l_rt === 200 && clickLike) {
       dispatch(doLike(id));
-    } else if(l_rt === 200 && !clickLike) {
+    } else if (l_rt === 200 && !clickLike) {
       dispatch(doDislike(id));
     }
-
   }, [clickLike]);
 
   React.useEffect(() => {
     console.log("render");
 
-    if(r_rt === null || r_loading){
+    if (r_rt === null || r_loading) {
       console.log("if1");
-      return
+      return;
     }
-    if(r_rt === 200) {
+    if (r_rt === 200) {
       console.log("if3");
-      setNotice({title:'거래요청이 완료되었습니다.',subTitle: '거래상황은 구매내역에서 확인 가능합니다.'});
-      return
+      setNotice({
+        title: "거래요청이 완료되었습니다.",
+        subTitle: "거래상황은 구매내역에서 확인 가능합니다.",
+      });
+      return;
     }
-    
-    if(r_rt !== 200){
+
+    if (r_rt !== 200) {
       console.log("if2");
-      setNotice({title:'거래요청을 실패하였습니다.',subTitle: '다시 시도해주세요.'});
-      return
+      setNotice({
+        title: "거래요청을 실패하였습니다.",
+        subTitle: "다시 시도해주세요.",
+      });
+      return;
     }
 
-
-    return () => {setNoticeShow(false)}
-
-  }, [r_rt,r_loading]);
+    return () => {
+      setNoticeShow(false);
+    };
+  }, [r_rt, r_loading]);
 
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {
@@ -98,26 +101,26 @@ const ProductDetail = () => {
   }, [noticeShow]);
 
   const doRequestForSale = () => {
-     dispatch(postRequest(id));
-     setNoticeShow(true);
-  }
+    dispatch(postRequest(id));
+    setNoticeShow(true);
+  };
 
   const onToggleLike = () => {
-    setClickLike((prevLike)=> !prevLike);
+    setClickLike((prevLike) => !prevLike);
 
-     dispatch(
-        getLike({
-          boardId: id,
-          type: type,
-          flag: !clickLike,
-        })
-      );
-  }
-
-
+    dispatch(
+      getLike({
+        boardId: id,
+        type: type,
+        flag: !clickLike,
+      })
+    );
+  };
 
   return (
     <>
+      <Meta title={item?.title || "단군마켓 동굴생활" } description={item?.content.slice(0,14)}  />
+      <HeaderLogo />
       {loading && (
         <main className="loading">
           <ReactLoading type="bubbles" color="#f99d1b" />
@@ -133,7 +136,6 @@ const ProductDetail = () => {
 
       {rt === 200 && (
         <>
-          <HeaderLogo />
           <main>
             <div className={styles.imgView}>
               {item.imageUrls.map((v, i) => {

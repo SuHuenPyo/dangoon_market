@@ -11,19 +11,19 @@ const ProfileView = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if(props.show && !item){
+    if(props.show){
       dispatch(getProfile(props.id))
     }
 
     if(rt > 200){
-      alert('에러가 발생했습니다. 다시 시도해주세요.')
+      return alert(` [${rt}] 에러가 발생했습니다.`)
     }
-  },[props.id])
+  },[props.show])
 
 
   React.useEffect(() => {
     const style = container.current.style;
-      if(props.show && props.rt === 200){
+      if(props.show && rt === 200){
         style.display = 'flex';
         style.top = `${props.top}px`;
       } else {
@@ -31,13 +31,13 @@ const ProfileView = (props) => {
       }
   },[props.show,props.top])
 
-  return (  
+  return (
     <div ref={container} className={styles.container} onClick={props.onClick}>
       <div className={styles.view}>
         <div className={styles.image}>
           <img src={props.data.m_pic ? item.m_pic : "http://placekitten.com/85/85" } alt={`${item.m_name} 의 프로필`} />
         </div>
-        <h3 className={styles.name}>{item.m_name}</h3>
+        <h3 className={styles.name}>{item.m_name || "test"}</h3>
         <p className={styles.desc}>단군단군! 빰빠라~</p>
         <div className={styles.totalCnt}>
           <div className={styles.counter}>
@@ -58,7 +58,7 @@ const ProfileView = (props) => {
 
 ProfileView.defaultProps = {
   data: {
-    m_name: null,
+    m_name: "test",
     m_pic: null,
     sellBuyCnt: [0,0]
   }

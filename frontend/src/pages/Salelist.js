@@ -14,10 +14,11 @@ const Salelist = () => {
   const { a_loading, c_loading } = useSelector((state) => state.doContract);
 
   const [rData, setRdata] = React.useState([]);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (r_rt !== 200) {
-      return;
+    if (r_rt !== 200 || !r_item) {
+      return dispatch(getRequest());
     }
 
     if (r_rt === 200) {
@@ -61,17 +62,14 @@ const Salelist = () => {
     }
   }, [r_rt, r_item, a_loading, c_loading, r_loading]);
 
-  const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    if (!r_item) {
-      dispatch(getRequest());
-    }
-  }, [r_item]);
+
+
+
 
   return (
     <>
-      <Meta title="단군마켓 홈" description="단군마켓 홈입니다." />
+      <Meta title="단군마켓 판매내역" description="단군마켓 판매내역 페이지" />
       <HeaderTitle title="판매내역" />
 
       {/* 로딩 */}

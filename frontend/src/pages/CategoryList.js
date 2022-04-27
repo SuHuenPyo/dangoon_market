@@ -7,7 +7,7 @@ import { getCategory } from '../Slices/CategorySlice'
 import { useSelector, useDispatch } from 'react-redux'
 import {useInView} from 'react-intersection-observer';
 import ReactLoading from 'react-loading';
-
+import Meta from '../components/Meta';
 
 const CategoriList = () => {
     const { category } = useParams();
@@ -34,7 +34,8 @@ const CategoriList = () => {
 
     return (
         <>
-        <HeaderTitle title={categoryList[category]}/>
+        <Meta title={`단군마켓 ${categoryList[category]} 카테고리`} description={`단군마켓 ${categoryList[category]} 카테고리`}  />
+        <HeaderTitle title={categoryList[category]} link="/category"/>
         <main>
            {/* 로딩 */}
         {loading && (

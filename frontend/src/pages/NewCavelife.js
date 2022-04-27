@@ -5,6 +5,7 @@ import RegexHelper from "../utils/RegexHelper";
 
 import { useSelector, useDispatch} from "react-redux";
 import { postNewCavelife } from "../Slices/CavelifeSlice";
+import Meta from '../components/Meta';
 
 /* 안내창 위치떄문에 여기 페이지는 main 제외 */
 const NewCavelife = () => {
@@ -77,6 +78,7 @@ const NewCavelife = () => {
 
   return (
     <>
+      <Meta title="단군마켓 동굴생활 글쓰기" description="단군마켓 동굴생활 글쓰기 페이지"  />
       <HeaderLogo />
       <PostForm
         title="동굴생활"

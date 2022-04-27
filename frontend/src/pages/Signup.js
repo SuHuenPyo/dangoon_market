@@ -9,6 +9,7 @@ import RegexHelper from "../utils/RegexHelper";
 import { onImgView } from '../utils/ImgPreview';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../Slices/SignupSlice';
+import Meta from '../components/Meta';
 
 const Input = styled.input`
   display: block;
@@ -182,6 +183,7 @@ const Signup = () => {
 
   return (
     <>
+      <Meta title="단군마켓 회원가입" description="단군마켓 회원가입 페이지" />
       <HeaderLogo />
       <main>
         <form action="" method="post" encType="multipart/form-data" onSubmit={validation}>

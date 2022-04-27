@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <>
-      <Meta title='단군마켓 홈' description='단군마켓 홈입니다.' />
+      <Meta title='단군마켓 홈' description='단군마켓 홈 페이지' />
       <HeaderLogo />
       <main>
         {/* 로딩 */}
@@ -82,7 +82,7 @@ const Home = () => {
         )}
 
         {/* 정상작동 */}
-        {rt === 200 && (
+        {!loading && rt === 200 && (
           <>
             <SaleListItem data={item.data} inview={ref} />
             <WriteButton path="/newproduct" />

@@ -6,8 +6,10 @@ import BuylistComponent from "../components/BuylistComponent";
 import ReactLoading from "react-loading";
 import { useSelector, useDispatch } from "react-redux";
 import { getBuyHistory } from "../Slices/BuyHistorySlice";
+import Meta from '../components/Meta';
 
 const Buylist = () => {
+
   const { rt, rtmsg, item, loading } = useSelector((state) => state.buyhistory);
 
   const dispatch = useDispatch();
@@ -22,7 +24,8 @@ const Buylist = () => {
 
   return (
     <>
-      <HeaderTitle title="구매내역" />
+      <Meta title='단군마켓 구매내역' description='단군마켓 구매내역 페이지' />
+      <HeaderTitle title="구매내역" link="/mygralic"/>
       <main>
         {/* 로딩 */}
         {loading && (

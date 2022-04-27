@@ -53,7 +53,6 @@ const requestSale = createSlice({
       return {
         r_rt: payload.status,
         r_rtmsg: payload.statusText,
-        r_item: payload.data,
         r_loading: false,
       };
     },

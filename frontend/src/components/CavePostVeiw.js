@@ -208,6 +208,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
             key={v.b_id}
             {...(data.length - 1 === i ? { ref: inview } : {})}
           >
+            
             <Poster
               onClick={(e) => {
                 const getTop = document.body.scrollTop - 60;
@@ -250,6 +251,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
           </PostVeiw>
         );
       })}
+
       <ProfileView
         show={profile.show}
         top={profile.top}
