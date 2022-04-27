@@ -24,7 +24,7 @@ const ProductDetail = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
 
-  const { l_rt, l_item } = useSelector((state) => {
+  const { l_rt, l_item, l_loading } = useSelector((state) => {
     return state.like;
   });
 
@@ -50,24 +50,24 @@ const ProductDetail = () => {
   }, [id]);
 
   React.useEffect(() => {
-    if (l_rt === null) {
-      return;
+    try {
+      if (l_rt === null) {
+        return;
+      }
+      if (l_rt === 200 && clickLike) {
+  
+        dispatch(doLike(id));
+      } else if (l_rt === 200 && !clickLike) {
+        dispatch(doDislike(id));
+      }
+    } catch(err){
+        alert('다시 시도해주세요.')
     }
-
-    if (l_rt === 200 && clickLike) {
-      dispatch(doLike(id));
-    } else if (l_rt === 200 && !clickLike) {
-      dispatch(doDislike(id));
-    }
-  }, [clickLike]);
+  }, [l_loading]);
 
   React.useEffect(() => {
     console.log("render");
 
-    if (r_rt === null || r_loading) {
-      console.log("if1");
-      return;
-    }
     if (r_rt === 200) {
       console.log("if3");
       setNotice({
@@ -98,7 +98,7 @@ const ProductDetail = () => {
 
   const onToggleNotice = React.useCallback(() => {
     setNoticeShow(noticeShow ? false : true);
-  }, [noticeShow]);
+  }, [noticeShow]); 
 
   const doRequestForSale = () => {
     dispatch(postRequest(id));
@@ -122,15 +122,19 @@ const ProductDetail = () => {
       <Meta title={item?.title || "단군마켓 동굴생활" } description={item?.content.slice(0,14)}  />
       <HeaderLogo />
       {loading && (
-        <main className="loading">
+        <main>
+        <div className="loading">
           <ReactLoading type="bubbles" color="#f99d1b" />
+        </div>
         </main>
       )}
 
       {!loading && rt !== 200 && (
-        <main className="error">
+        <main>
+        <div className="error">
           <h2>Error!</h2>
           <p>{rtmsg}</p>
+        </div>
         </main>
       )}
 
@@ -154,7 +158,7 @@ const ProductDetail = () => {
               </Link>
               <div className={styles.posterInfo}>
                 <p className={styles.name}>{item.sellerName}</p>
-                <p className={styles.desc}>{item.price}원</p>
+                <p className={styles.desc}>{item.price.toLocaleString('ko-KR')}원</p>
               </div>
               <div className={styles.likeBtn} onClick={onToggleLike}>
                 {clickLike ? (

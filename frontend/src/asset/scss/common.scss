@@ -1,6 +1,6 @@
 @mixin flex-center {
   width: 100%;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ html,
 body {
   color: #333;
   width: 100%;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -56,38 +56,42 @@ body {
 
   // scrollbar-width: 0px;
   // &::-webkit-scrollbar { display: none; }
+  #root {
+    width: 100%;
+    height: 100%;
 
-  main {
-    position: relative;
-    top: 0px;
-    width: calc(100% - 40px);
-    height: calc(var(--vh, 1vh) * 100);
-    padding: 5px 20px;
-    padding-top: 65px;
-    -webkit-overflow-scrolling: touch;
-    // &::-webkit-scrollbar {
-    //     display: none;
-    // }
-  }
-
-  .error {
-    @include flex-center();
-    flex-flow: column nowrap;
-
-    h2 {
-      color: #f99d1b;
-      font-size: 1.6rem;
-      line-height: 2rem;
+    main {
+      position: relative;
+      top: 0px;
+      width: calc(100% - 40px);
+      height: calc((var(--vh, 1vh) * 100) - 70px);
+      padding: 5px 20px;
+      padding-top: 65px;
+      -webkit-overflow-scrolling: touch;
+      // &::-webkit-scrollbar {
+      //     display: none;
+      // }
     }
 
-    p {
-      color: #724c16;
-      font-size: 1rem;
-      line-height: 1.3rem;
-    }
-  }
+    .error {
+      @include flex-center();
+      flex-flow: column nowrap;
 
-  .loading {
-    @include flex-center();
+      h2 {
+        color: #f99d1b;
+        font-size: 1.6rem;
+        line-height: 2rem;
+      }
+
+      p {
+        color: #724c16;
+        font-size: 1rem;
+        line-height: 1.3rem;
+      }
+    }
+
+    .loading {
+      @include flex-center();
+    }
   }
 }

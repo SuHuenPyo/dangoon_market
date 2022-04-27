@@ -31,12 +31,14 @@ const Poster = styled.div`
 
   div {
     flex-basis: 60px;
+    width:40px;
     height: 40px;
     line-height: 40px;
     text-align: center;
     img {
       width: 40px;
       height: 40px;
+      object-fit:cover;
       border-radius: 30px;
     }
   }

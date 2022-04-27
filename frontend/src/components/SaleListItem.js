@@ -94,8 +94,6 @@ const SaleListItem = ({data,inview}) => {
   
   const categoryList = config.categoryList;
 
-  
-
   return (
     <ul>
       { data.map((v,i)=>{

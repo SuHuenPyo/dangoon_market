@@ -67,13 +67,13 @@ const Search = () => {
         </Form>
         {/* 로딩 */}
         {loading && (
-          <div className="loading" >
+          <div className="loading" style={{height:"calc(100% - 90px)"}} >
             <ReactLoading type="bubbles" color="#f99d1b" />
           </div>
         )}
         {/* 에러발생 */}
         {!loading && rt !== 200 && (
-          <div className="error">
+          <div className="error" style={{height:"calc(100% - 90px)"}} >
             <h2>Error!</h2>
             <p>
               {rt}&nbsp;{rtmsg}

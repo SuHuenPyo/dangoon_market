@@ -257,19 +257,19 @@ const CaveComment = (props) => {
       <Meta title="단군마켓 동굴생활" description="단군마켓 동굴생활 페이지 입니다."  />
       <HeaderTitle title="동굴생활" link="/cavelife" />
       {loading && (
-        <main className="loading">
+        <main className="loading" ref={main}>
           <ReactLoading type="bubbles" color="#f99d1b" />
         </main>
       )}
 
       {!loading && rt !== 200 && (
-        <main className="error">
+        <main className="error" ref={main}>
           <h2>Error!</h2>
           <p>{rtmsg}</p>
         </main>
       )}
 
-      {rt === 200 && (
+      {!loading && rt === 200 && (
         <>
           <main ref={main}>
             <div className={style.cavecomment}>
