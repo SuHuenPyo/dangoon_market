@@ -55,6 +55,13 @@ requestPurchase.get('/buyhistory', authIsOwner, async(req, res, next)=>{
         for(let id in return_value){
             let [temp] = await dbcon.sendQuery(`SELECT b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE (b_type='S' AND b_id=?)`,return_value[id].b_id );
             return_value[id].board_info = JSON.parse(JSON.stringify(temp));
+
+            if(return_value[id].r_flag == 1){
+                let [kakao_id] = await dbcon.sendQuery(`select m_kakao_id from dangoon.member WHERE m_id=(select m_id from dangoon.board where b_id=?);`,return_value[id].b_id );
+                return_value[id].kakao_id = JSON.parse(JSON.stringify(kakao_id[0]))
+
+            }
+            //if(return_value[id].)
         }
 
         
