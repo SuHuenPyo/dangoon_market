@@ -1,6 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "../asset/scss/Likelist.module.scss";
+import styled from "styled-components";
+
+
+const Gap = styled.div`
+  width: 100%;
+  height: 10px;
+  background-color: #ccc;
+  opacity: 0.1;
+`;
+
 
 const LikeComment = () => {
 
@@ -22,6 +32,7 @@ const LikeComment = () => {
                         <span className={style.won}>원</span></p>
                     </div>
                 </Link>
+                <Gap />
             </li>
     );
 };
