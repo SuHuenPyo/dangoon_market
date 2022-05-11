@@ -7,7 +7,8 @@
 </p>
 
 ## 기능 소개
-![단군마켓 나의마늘 페이지](https://user-images.githubusercontent.com/91578165/167800091-cec83abc-1304-42af-961b-7a343bb574ea.png)
+<img src="https://user-images.githubusercontent.com/91578165/167800091-cec83abc-1304-42af-961b-7a343bb574ea.png" width="300px">
+
 
 - [x] 간편하게 필요 없는 물건을 거래해 보세요. 🤝🏻
 - [x] 다른 사람들과 다양한 정보이나 소식을 공유하세요. 🗣
