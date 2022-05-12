@@ -75,7 +75,7 @@ const NewProduct = () => {
     <>
       <Meta title="단군마켓 판매글쓰기" description="단군마켓 판매글쓰기 페이지"  />
       <HeaderLogo />
-        <PostForm ref={form} onSubmit={doPost} title="판매" noticeTitle={notice.title} noticeSubTitle={notice.subTitle} noticeType={notice.type}/>
+        <PostForm ref={form} loading={loading} onSubmit={doPost} title="판매" noticeTitle={notice.title} noticeSubTitle={notice.subTitle} noticeType={notice.type}/>
     </>
   );
 };

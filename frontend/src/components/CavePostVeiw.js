@@ -254,12 +254,12 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
         );
       })}
 
-      <ProfileView
+      {profile.show && <ProfileView
         show={profile.show}
         top={profile.top}
         onClick={onClick}
         query={profile.id}
-      />
+      />}
     </>
   );
 };
