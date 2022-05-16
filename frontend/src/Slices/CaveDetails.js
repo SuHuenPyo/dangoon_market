@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getCaveDetails = createAsyncThunk('GET/CAVEDETAILS',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.get('https://dangoon.duckdns.org/cavelife/details',{
+        result = await axios.get('https://localhost:7799/cavelife/details',{
             params: {
                 boardId: payload,
             }

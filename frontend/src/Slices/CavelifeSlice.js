@@ -4,7 +4,7 @@ import axios from 'axios';
 export const postNewCavelife = createAsyncThunk('POST/NEWCAVELIFE',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('https://dangoon.duckdns.org/cavelife/write',payload,{
+        result = await axios.post('https://localhost:7799/cavelife/write',payload,{
             header: {'content-type': 'multipart/form-data'}
         });
     } catch (err) {

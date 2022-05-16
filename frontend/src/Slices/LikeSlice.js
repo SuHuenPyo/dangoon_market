@@ -8,7 +8,7 @@ export const getLike = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://dangoon.duckdns.org/like", {
+      result = await axios.get("https://localhost:7799/like", {
         params: {
           b_id: payload.boardId,
           l_type: payload.type,

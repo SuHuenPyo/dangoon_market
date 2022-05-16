@@ -7,7 +7,7 @@ export const postRequest = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.post("https://dangoon.duckdns.org/requestpurchase", {
+      result = await axios.post("https://localhost:7799/requestpurchase", {
         b_id: payload,
       });
     } catch (err) {
@@ -24,7 +24,7 @@ export const getRequest = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://dangoon.duckdns.org/requestpurchase/sellhistory");
+      result = await axios.get("https://localhost:7799/requestpurchase/sellhistory");
     } catch (err) {
       return rejectWithValue(err.response);
     }

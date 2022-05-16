@@ -9,7 +9,7 @@ export const getHomeList = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://dangoon.duckdns.org/home", {
+      result = await axios.get("https://localhost:7799/home", {
         params: {
           page: payload.page || 1,
           rows: payload.rows || 10,

@@ -7,7 +7,7 @@ export const getProfile = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://dangoon.duckdns.org/profile", {
+      result = await axios.get("https://localhost:7799/profile", {
         params: {
           b_id: payload,
         },
@@ -26,7 +26,7 @@ export const getMyProfile = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://dangoon.duckdns.org/profile/myprofile");
+      result = await axios.get("https://localhost:7799/profile/myprofile");
     } catch (err) {
       return rejectWithValue(err.response);
     }
