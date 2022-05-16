@@ -5,6 +5,7 @@ import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
 import { DG_DB } from "../helper/dbHelper.js";
 import IM from "../common/IM.js";
+import { verifyUserPassword } from "../helper/cryptoHelper.js";
 
 
 const Login = express.Router();
@@ -53,10 +54,15 @@ Login.post('/', async(req, res, next)=>{
 
 
         //존재유무 체크
-        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.member WHERE (M_USER_ID=? AND M_PW=?)`, user_id, user_pw);
+        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.member WHERE (M_USER_ID=?)`, user_id);
         
         if(result[0] != undefined){
 
+            [result] = await dbcon.sendQuery(`SELECT m_pw, m_salt FROM dangoon.member WHERE (M_USER_ID=?)`, user_id);
+
+            if(!await verifyUserPassword(user_pw, result[0].m_salt, result[0].m_pw)){
+                return res.status(400).json({text: '아이디와 패스워드를 다시 확인하세요'});
+            }
             req.session.user = {
                 
                 id: req.body.user_id,

@@ -13,6 +13,7 @@ import { uploadSignUp } from "../helper/awsHelper.js";
 import { validator } from "../middleware/validator.js";
 import { body, param, query, validationResult } from "express-validator";
 import { DG_DB } from "../helper/dbHelper.js";
+import { createHashPassword } from "../helper/cryptoHelper.js";
 
 const signUp = express.Router();
 
@@ -113,7 +114,12 @@ uploadSignUp.single('profile'),
         }else{
             return res.status(400).json({text: '미인증 유저입니다. 인증먼저 진행세요'});
         }
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_PIC, M_KAKAO_ID) VALUES(?, ?, ?, ?, ?, ?)`, userId, userName, userPassword, userEmail, file.key, kakaoId);
+
+        let hashed_value = await createHashPassword(userPassword);
+
+        console.log( hashed_value.hashedPassword.length);
+
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_PIC, M_KAKAO_ID, M_SALT) VALUES(?, ?, ?, ?, ?, ?, ?)`, userId, userName, hashed_value.hashedPassword, userEmail, file.key, kakaoId, hashed_value.salt);
 
         console.log(result);
 

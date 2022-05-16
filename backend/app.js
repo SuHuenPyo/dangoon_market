@@ -65,7 +65,6 @@ import fs from 'fs';
 
 
 
-
 const options = {
     key: fs.readFileSync('./.certification/privkey1.pem'),
     cert: fs.readFileSync('./.certification/cert1.pem')
