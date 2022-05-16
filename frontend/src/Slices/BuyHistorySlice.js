@@ -8,7 +8,7 @@ export const getBuyHistory = createAsyncThunk(
 
     try {
       result = await axios.get(
-        "https://dangoon.duckdns.org/requestpurchase/buyhistory"
+        "https://localhost:7799/requestpurchase/buyhistory"
       );
     } catch (err) {
       return rejectWithValue(err.response);
