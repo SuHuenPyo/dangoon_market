@@ -7,7 +7,7 @@ export const login = createAsyncThunk(
     let result = null;
     try {
       result = await axios.post(
-        "https://localhost/api/login",
+        "https://dangoon.duckdns.org/api/login",
         payload,
         { headers: {
           withCredentials: true,

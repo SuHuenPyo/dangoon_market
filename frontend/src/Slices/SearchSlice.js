@@ -5,7 +5,7 @@ export const getSearch = createAsyncThunk('GET/SEARCH',async(payload,{rejectWith
     let result = null;
 
     try{
-        result = await axios.get('http://localhost/api/home/search',{
+        result = await axios.get('http://dangoon.duckdns.org/api/home/search',{
             params: {   
                 keywords: payload.keywords,
                 page: payload.page,
