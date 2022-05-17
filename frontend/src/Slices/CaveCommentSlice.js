@@ -6,7 +6,7 @@ export const getCaveComment = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     let result = null;
     try {
-      result = await axios.get("https://13.209.89.208:7799/cavelife/comment", {
+      result = await axios.get("http://13.209.89.208:7799/cavelife/comment", {
         params: {
           boardId: payload,
         },
