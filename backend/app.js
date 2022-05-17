@@ -149,23 +149,23 @@ app.use(morgan(':remote-addr :remote-user :method :url HTTP/:http-version :statu
 
 
 //Router
-app.use("/home",            Home);
-app.use("/category",        Category);
-app.use("/registerforsale", registerForSale);
-app.use("/notice",          Notice);
-app.use("/cavelife",        caveLife);
-app.use("/login",           Login);
-app.use("/logout",          LogOut)
-app.use("/signup",          signUp);
-app.use("/salehistory",     saleHistory);
-app.use("/watchlist",       watchList);
-app.use("/productdetails",  productDetails);
-app.use("/mail",            Mail);
-app.use("/development",     Development);
-app.use("/like",            Like);
-app.use("/requestpurchase", requestPurchase);
-app.use("/profile",         Profile);
-app.use("/.well-known", test);
+app.use("/api/home",            Home);
+app.use("/api/category",        Category);
+app.use("/api/registerforsale", registerForSale);
+app.use("/api/notice",          Notice);
+app.use("/api/cavelife",        caveLife);
+app.use("/api/login",           Login);
+app.use("/api/logout",          LogOut)
+app.use("/api/signup",          signUp);
+app.use("/api/salehistory",     saleHistory);
+app.use("/api/watchlist",       watchList);
+app.use("/api/productdetails",  productDetails);
+app.use("/api/mail",            Mail);
+app.use("/api/development",     Development);
+app.use("/api/like",            Like);
+app.use("/api/requestpurchase", requestPurchase);
+app.use("/api/profile",         Profile);
+app.use("/api/.well-known", test);
 
 
 //에러처리 
