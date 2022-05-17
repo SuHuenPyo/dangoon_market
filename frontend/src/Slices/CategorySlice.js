@@ -5,7 +5,7 @@ export const getCategory = createAsyncThunk('GET/CATEGORY',async(payload,{reject
     let result = null;
 
     try{
-        result = await axios.get('https://localhost:7799/category',{
+        result = await axios.get('https://127.0.0.1:7799/category',{
             params: {   
                 category: payload.category,
                 page: payload.page,
