@@ -4,7 +4,7 @@ import axios from 'axios';
 export const signup = createAsyncThunk('POST/SIGNUP',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('https://13.209.89.208:7799/signup',payload);
+        result = await axios.post('http://13.209.89.208:7799/signup',payload);
     } catch (err) {
         return rejectWithValue(err.response);
     }  

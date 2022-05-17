@@ -5,7 +5,7 @@ export const getSearch = createAsyncThunk('GET/SEARCH',async(payload,{rejectWith
     let result = null;
 
     try{
-        result = await axios.get('https://13.209.89.208:7799/home/search',{
+        result = await axios.get('http://13.209.89.208:7799/home/search',{
             params: {   
                 keywords: payload.keywords,
                 page: payload.page,
