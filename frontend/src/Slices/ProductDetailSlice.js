@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getProductDetail = createAsyncThunk('GET/PRODUCTDETAIL',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.get('http://13.209.89.208:7799/productdetails',{ 
+        result = await axios.get('http://localhost/api/productdetails',{ 
             params: {boardId : payload}
         });
     } catch (err) {

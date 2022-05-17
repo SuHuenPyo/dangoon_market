@@ -5,7 +5,7 @@ export const doApprove = createAsyncThunk('GET/APRROVE',async(payload,{rejectWit
     let result = null;
     
     try {
-        result = await axios.get("https://13.209.89.208:7799/requestpurchase/approve", {
+        result = await axios.get("https://localhost/api/requestpurchase/approve", {
           params: {
              b_id: payload.b_id,
              r_id:payload.r_id,
@@ -22,7 +22,7 @@ export const doCancel = createAsyncThunk('DELETE/CANCEL',async(payload,{rejectWi
     let result = null;
     
     try {
-        result = await axios.delete("https://13.209.89.208:7799/requestpurchase/cancel",{
+        result = await axios.delete("https://localhost/api/requestpurchase/cancel",{
         params:{
              b_id: payload.b_id,
              r_id:payload.r_id,
@@ -39,7 +39,7 @@ export const doComplete = createAsyncThunk('GET/COMPELETE',async(payload,{reject
     let result = null;
     
     try {
-        result = await axios.put("https://13.209.89.208:7799/requestpurchase/complete", {
+        result = await axios.put("https://localhost/api/requestpurchase/complete", {
                b_id: payload.b_id,
                r_id:payload.r_id,
         });

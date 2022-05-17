@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getCaveDetails = createAsyncThunk('GET/CAVEDETAILS',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.get('https://13.209.89.208:7799/cavelife/details',{
+        result = await axios.get('https://localhost/api/cavelife/details',{
             params: {
                 boardId: payload,
             }

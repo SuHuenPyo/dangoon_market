@@ -7,7 +7,7 @@ export const postRequest = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.post("https://13.209.89.208:7799/requestpurchase", {
+      result = await axios.post("https://localhost/api/requestpurchase", {
         b_id: payload,
       });
     } catch (err) {
@@ -24,7 +24,7 @@ export const getRequest = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://13.209.89.208:7799/requestpurchase/sellhistory");
+      result = await axios.get("https://localhost/api/requestpurchase/sellhistory");
     } catch (err) {
       return rejectWithValue(err.response);
     }

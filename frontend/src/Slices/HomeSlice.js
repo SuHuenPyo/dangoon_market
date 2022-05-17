@@ -9,7 +9,7 @@ export const getHomeList = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("http://13.209.89.208:7799/home", {
+      result = await axios.get("http://localhost/api/home", {
         params: {
           page: payload.page || 1,
           rows: payload.rows || 10,

@@ -7,7 +7,7 @@ export const getProfile = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("http://13.209.89.208:7799/profile", {
+      result = await axios.get("http://localhost/api/profile", {
         params: {
           b_id: payload,
         },
@@ -26,7 +26,7 @@ export const getMyProfile = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://13.209.89.208:7799/profile/myprofile");
+      result = await axios.get("https://localhost/api/profile/myprofile");
     } catch (err) {
       return rejectWithValue(err.response);
     }

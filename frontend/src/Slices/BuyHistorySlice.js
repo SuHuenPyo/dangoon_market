@@ -8,7 +8,7 @@ export const getBuyHistory = createAsyncThunk(
 
     try {
       result = await axios.get(
-        "https://13.209.89.208:7799/requestpurchase/buyhistory"
+        "https://localhost/api/requestpurchase/buyhistory"
       );
     } catch (err) {
       return rejectWithValue(err.response);

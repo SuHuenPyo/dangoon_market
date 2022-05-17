@@ -7,7 +7,7 @@ export const getCaveList = createAsyncThunk(
     let result = null;
 
     try {
-      result = await axios.get("https://13.209.89.208:7799/cavelife", {
+      result = await axios.get("https://localhost/api/cavelife", {
         params: {page: payload.page, rows: 5 }
       });
     } catch (err) {
