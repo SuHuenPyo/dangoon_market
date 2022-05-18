@@ -18,7 +18,7 @@ class Authentication {
   sendValidCode = async () => {
     let result = null;
     const email = this._email;
-    let url = "http://dg-market.iptime.org:28019/mail";
+    let url = "http://dangoon.duckdns.org/api//mail";
 
     try {
       const response = await axios.post(url, {
@@ -47,7 +47,7 @@ class Authentication {
 
     try {
       const response = await axios.get(
-        "http://dg-market.iptime.org:28019/signup/auth",
+        "http://dangoon.duckdns.org/api/signup/auth",
         {
           params: { user_email: email, auth_code: vaildCode },
         }
