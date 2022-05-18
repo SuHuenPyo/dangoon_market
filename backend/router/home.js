@@ -55,7 +55,7 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
 
 
         //전체 데이터 수 조회
-        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S'`);
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE B_TYPE='S'`);
         //console.log(result);
 
         const totalCount = result[0].cnt;
@@ -67,7 +67,7 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price, b_hits FROM dangoon.board WHERE b_type='S' ORDER BY b_id DESC LIMIT ?,? `, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT B_ID, B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY, B_PRICE, B_HITS FROM dangoon.BOARD WHERE B_TYPE='S' ORDER BY B_ID DESC LIMIT ?,? `, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -75,7 +75,7 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
 
         for(let id in result){
             result[id].b_price = result[id].b_price.toString().replace(regexp, ',');
-            let [temp] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.like WHERE (b_id=? AND l_flag='1' AND l_type='S')`, result[id].b_id);
+            let [temp] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.LIKE WHERE (B_ID=? AND L_FLAG='1' AND L_TYPE='S')`, result[id].b_id);
             result[id].b_like = temp[0].cnt;
         }
 
@@ -143,7 +143,7 @@ Home.get('/search', authIsOwner, async(req, res, next)=>{
 
 
         //전체 데이터 수 조회
-        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE (b_type='S' AND b_title LIKE ?)`, keyword);
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_TITLE LIKE ?)`, keyword);
         //console.log(result);
 
         const totalCount = result[0].cnt;
@@ -155,7 +155,7 @@ Home.get('/search', authIsOwner, async(req, res, next)=>{
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE (b_type='S' AND b_title LIKE ?) LIMIT ?,?`, keyword, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT B_ID, B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY, B_PRICE FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_TITLE LIKE ?) LIMIT ?,?`, keyword, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -235,18 +235,18 @@ Home.post('/write', authIsOwner, uploadBoard.array('board', 10) ,async(req, res,
         
         await dbcon.DbConnect();
         //먼저 유저관련 정보 가져오기 
-        let [result] = await dbcon.sendQuery(`SELECT m_name AS name FROM dangoon.member WHERE (m_id = ?)`, memberId);
+        let [result] = await dbcon.sendQuery(`SELECT M_NAME AS name FROM dangoon.MEMBER WHERE (M_ID = ?)`, memberId);
         
         memberName = result[0].name;
 
         //게시판 생성
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(?, ?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, category, price);
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.BOARD(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(?, ?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, category, price);
         boardId = result.insertId
 
 
         //이미지 등록
         for(let idx in req.files){
-            await dbcon.sendQuery(`INSERT INTO dangoon.file(b_id, f_type, f_file) VALUES(?, ?, ?)`, boardId, mfileType, req.files[idx].key);
+            await dbcon.sendQuery(`INSERT INTO dangoon.FILE(B_ID, F_TYPE, F_FILE) VALUES(?, ?, ?)`, boardId, mfileType, req.files[idx].key);
         }
         
 

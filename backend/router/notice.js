@@ -60,7 +60,7 @@ Notice.get('/', async(req, res, next)=>{
         let args = [];
 
         //데이터 조회 
-        sql = "SELECT aa_id, aa_writer, aa_title, aa_content, aa_rdate, aa_hits FROM dangoon.announcement LIMIT ?,?";
+        sql = "SELECT AA_ID, AA_WRITER, AA_TITLE, AA_CONTENT, AA_RDATE, AA_HITS FROM dangoon.ANNOUNCEMENT LIMIT ?,?";
 
 
         args.push(pagenation.offset);

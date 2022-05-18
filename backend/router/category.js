@@ -65,7 +65,7 @@ Category.get('/', async(req, res, next) => {
 
 
         //전체 데이터 수 조회
-        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='S' and B_CATEGORY=?`, category);
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE B_TYPE='S' and B_CATEGORY=?`, category);
         //console.log(result);
 
         const totalCount = result[0].cnt;
@@ -77,7 +77,7 @@ Category.get('/', async(req, res, next) => {
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.board WHERE (b_type='S' AND b_category=?)LIMIT ?,?`, category, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT B_ID, B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as B_RDATE, B_CATEGORY, B_PRICE FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_CATEGORY=?)LIMIT ?,?`, category, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;

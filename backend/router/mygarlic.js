@@ -45,7 +45,7 @@ myGarlic.get('/', async(req, res, next)=>{
         await dbcon.connect();
 
         //전체 데이터 수 조회
-        let sql = "SELECT COUNT(*) as cnt FROM dangoon.board WHERE B_TYPE='C'";
+        let sql = "SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE B_TYPE='C'";
         
         const [result1] = await dbcon.query(sql);
         console.log(result1);
@@ -59,7 +59,7 @@ myGarlic.get('/', async(req, res, next)=>{
         let args = [];
 
         //데이터 조회 
-        sql = "SELECT b_id, m_id , b_writer, b_title, b_content, b_img, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.board WHERE b_type='C' LIMIT ?,?";
+        sql = "SELECT B_ID, M_ID , B_WRITER, B_TITLE, B_CONTENT, B_IMG, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.BOARD WHERE B_TYPE='C' LIMIT ?,?";
 
         args.push(pagenation.offset);
         args.push(pagenation.listCount);

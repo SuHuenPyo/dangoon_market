@@ -103,14 +103,14 @@ uploadSignUp.single('profile'),
         console.log(userName, userPassword, userEmail, userId, kakaoId);
         //먼저있는지 체크
 
-        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.member WHERE (M_EMAIL=? OR M_KAKAO_ID=? OR M_USER_ID=?)`, userEmail, kakaoId, userId);
+        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.MEMBER WHERE (M_EMAIL=? OR M_KAKAO_ID=? OR M_USER_ID=?)`, userEmail, kakaoId, userId);
         console.log(result[0].cnt);
         if(result[0].cnt >= 1){
             return res.status(400).json({text: '이미 존재하는 정보입니다. 다시확인해주세요.'});
         }
-        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt from dangoon.auth WHERE (AUTH_EMAIL=? AND AUTH_DONE=1)`, userEmail);
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt from dangoon.AUTH WHERE (AUTH_EMAIL=? AND AUTH_DONE=1)`, userEmail);
         if(result[0].cnt >= 1){
-            await dbcon.sendQuery(`DELETE FROM dangoon.auth WHERE (AUTH_EMAIL=?)`, userEmail);
+            await dbcon.sendQuery(`DELETE FROM dangoon.AUTH WHERE (AUTH_EMAIL=?)`, userEmail);
         }else{
             return res.status(400).json({text: '미인증 유저입니다. 인증먼저 진행세요'});
         }
@@ -119,7 +119,7 @@ uploadSignUp.single('profile'),
 
         console.log( hashed_value.hashedPassword.length);
 
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.member(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_PIC, M_KAKAO_ID, M_SALT) VALUES(?, ?, ?, ?, ?, ?, ?)`, userId, userName, hashed_value.hashedPassword, userEmail, file.key, kakaoId, hashed_value.salt);
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.MEMBER(M_USER_ID, M_NAME, M_PW, M_EMAIL, M_PIC, M_KAKAO_ID, M_SALT) VALUES(?, ?, ?, ?, ?, ?, ?)`, userId, userName, hashed_value.hashedPassword, userEmail, file.key, kakaoId, hashed_value.salt);
 
         console.log(result);
 
@@ -169,9 +169,9 @@ signUp.get('/auth', [
         await dbcon.DbConnect();
 
         //먼저있는지 체크
-        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.auth where AUTH_EMAIL=?`, user_email);
+        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.AUTH WHERE AUTH_EMAIL=?`, user_email);
         if (result[0].AUTH_PASS === auth_code){
-            [result] = await dbcon.sendQuery(`SELECT date_format(auth_rdate, '%Y-%m-%d %H:%i:%s')as date FROM dangoon.auth where AUTH_EMAIL=?`, user_email);
+            [result] = await dbcon.sendQuery(`SELECT date_format(AUTH_RDATE, '%Y-%m-%d %H:%i:%s')as date FROM dangoon.AUTH WHERE AUTH_EMAIL=?`, user_email);
             if(dbcon.checkElapsedTime(result[0].date) > -10){
                 console.log(dbcon.checkElapsedTime(result[0].date));
                 await dbcon.sendQuery(`UPDATE dangoon.auth SET auth_done=? WHERE AUTH_EMAIL=?`, true, user_email);

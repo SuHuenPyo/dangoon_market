@@ -41,8 +41,8 @@ productDetails.get('/', async(req, res, next)=>{
 
         //board 정보 가져오기 
         
-        await dbcon.sendQuery(`UPDATE dangoon.board AS A, (SELECT b_hits FROM dangoon.board WHERE b_id=?) AS B SET A.b_hits = (B.b_hits + 1) WHERE A.b_id=?;`, boardId, boardId);
-        let [result] = await dbcon.sendQuery(`SELECT m_id as sellerId, b_title as title, b_content as content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as rDate, b_hits as hits, b_category as category, b_price as price From dangoon.board WHERE b_id=?`, boardId);
+        await dbcon.sendQuery(`UPDATE dangoon.BOARD AS A, (SELECT B_HITS FROM dangoon.BOARD WHERE B_ID=?) AS B SET A.B_HITS = (B.B_HITS + 1) WHERE A.B_ID=?;`, boardId, boardId);
+        let [result] = await dbcon.sendQuery(`SELECT M_ID as sellerId, B_TITLE as title, B_CONTENT as content, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as rDate, B_HITS as hits, B_CATEGORY as category, B_PRICE as price From dangoon.BOARD WHERE B_ID=?`, boardId);
 
         sellerId    = result[0].sellerId;
         title       = result[0].title;
@@ -53,14 +53,14 @@ productDetails.get('/', async(req, res, next)=>{
         price       = result[0].price;
 
         //sellerId기반으로 프로필 사진 가져오기 
-        [result] = await dbcon.sendQuery(`SELECT m_name as sellerName, m_pic as sellerImg FROM dangoon.member WHERE m_id=?`, sellerId);
+        [result] = await dbcon.sendQuery(`SELECT M_NAME as sellerName, M_PIC as sellerImg FROM dangoon.MEMBER WHERE M_ID=?`, sellerId);
         sellerImg   = S3URL+result[0].sellerImg;
         sellerName  = result[0].sellerName;
 
         
         console.log(boardId);
         //판매상품 이미지들 가져오기 
-        [result] = await dbcon.sendQuery(`SELECT f_file as imageUrls from dangoon.file WHERE (B_ID=? and f_type=?)`, boardId, boardType);
+        [result] = await dbcon.sendQuery(`SELECT F_FILE as imageUrls from dangoon.FILE WHERE (B_ID=? AND F_TYPE=?)`, boardId, boardType);
         
         let index = 0;
         for(let idx in result){ 

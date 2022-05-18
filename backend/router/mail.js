@@ -43,7 +43,7 @@ const Mail = express.Router();
 */
 Mail.post('/', async(req,res,next) =>{
     req.connection.setTimeout(100000);
-    
+
     let {user_email} = req.body;
     let data = null;
 
@@ -73,9 +73,9 @@ Mail.post('/', async(req,res,next) =>{
         console.log("0");
         await dbcon.DbConnect();
         console.log("1");
-        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.auth WHERE auth_email=?`, user_email);
+        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.AUTH WHERE AUTH_EMAIL=?`, user_email);
         if(result[0].cnt > 0){
-            await dbcon.sendQuery(`DELETE FROM dangoon.auth WHERE auth_email=?`, user_email);
+            await dbcon.sendQuery(`DELETE FROM dangoon.AUTH WHERE AUTH_EMAIL=?`, user_email);
         }
         
         transporter.sendMail(mailOptions, (error,info)=>{
@@ -86,7 +86,7 @@ Mail.post('/', async(req,res,next) =>{
             }
         });
 
-        await dbcon.sendQuery(`INSERT INTO dangoon.auth(auth_email, auth_pass) VALUES(?, ?)`, user_email, authCode);
+        await dbcon.sendQuery(`INSERT INTO dangoon.AUTH(AUTH_EMAIL, AUTH_PASS) VALUES(?, ?)`, user_email, authCode);
     }catch(e){
         return next(e);
     }finally{

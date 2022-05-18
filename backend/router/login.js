@@ -54,11 +54,11 @@ Login.post('/', async(req, res, next)=>{
 
 
         //존재유무 체크
-        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.member WHERE (M_USER_ID=?)`, user_id);
+        let [result] = await dbcon.sendQuery(`SELECT * FROM dangoon.MEMBER WHERE (M_USER_ID=?)`, user_id);
         
         if(result[0] != undefined){
 
-            [result] = await dbcon.sendQuery(`SELECT m_pw, m_salt FROM dangoon.member WHERE (M_USER_ID=?)`, user_id);
+            [result] = await dbcon.sendQuery(`SELECT M_PW, M_SALT FROM dangoon.MEMBER WHERE (M_USER_ID=?)`, user_id);
 
             if(!await verifyUserPassword(user_pw, result[0].m_salt, result[0].m_pw)){
                 return res.status(400).json({text: '아이디와 패스워드를 다시 확인하세요'});
