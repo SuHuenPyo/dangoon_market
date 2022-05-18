@@ -57,10 +57,6 @@ const Signup = () => {
   // 인증메일 발송하기
   const reqValidNum = async (event) => {
 
-    document.querySelectoAll(`.${styles.errMsg}`).forEach((v, i) => {
-      v.remove();
-    });
-
     const regex = new RegexHelper();
 
     if (!regex.value("userEmail", "이메일을 입력해주세요.")) {
