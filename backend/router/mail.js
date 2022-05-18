@@ -42,7 +42,8 @@ const Mail = express.Router();
  *     
 */
 Mail.post('/', async(req,res,next) =>{
-
+    req.connection.setTimeout(100000);
+    
     let {user_email} = req.body;
     let data = null;
 
