@@ -18,7 +18,7 @@ class Authentication {
   sendValidCode = async () => {
     let result = null;
     const email = this._email;
-    let url = "http://dangoon.duckdns.org/api//mail";
+    let url = "http://dangoon.duckdns.org/api/mail";
 
     try {
       const response = await axios.post(url, {
