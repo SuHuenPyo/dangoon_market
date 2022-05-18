@@ -6,10 +6,10 @@ import { AiOutlineCamera, AiOutlineUser } from "react-icons/ai";
 import Notice from "../components/Notice";
 import Authentication from "../utils/Authentication";
 import RegexHelper from "../utils/RegexHelper";
-import { onImgView } from '../utils/ImgPreview';
-import { useDispatch, useSelector } from 'react-redux';
-import { signup } from '../Slices/SignupSlice';
-import Meta from '../components/Meta';
+import { onImgView } from "../utils/ImgPreview";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../Slices/SignupSlice";
+import Meta from "../components/Meta";
 
 const Input = styled.input`
   display: block;
@@ -41,7 +41,7 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
-  const { rt } = useSelector((state)=>state.signup)
+  const { rt } = useSelector((state) => state.signup);
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
@@ -56,10 +56,19 @@ const Signup = () => {
 
   // 인증메일 발송하기
   const reqValidNum = async (event) => {
+
+    document.querySelectoAll(`.${styles.errMsg}`).forEach((v, i) => {
+      v.remove();
+    });
+
     const regex = new RegexHelper();
-    
-    if(!regex.value("userEmail", "이름을 입력해주세요.")){return;}
-    if(!regex.email('userEmail','이메일 형식으로 입력해주세요.')){return;}
+
+    if (!regex.value("userEmail", "이메일을 입력해주세요.")) {
+      return;
+    }
+    if (!regex.email("userEmail", "이메일 형식으로 입력해주세요.")) {
+      return;
+    }
 
     const auth = new Authentication(
       userEmail.current.value,
@@ -74,7 +83,7 @@ const Signup = () => {
         title: "인증메일 발송이 완료되었습니다.",
         subTitle: `5분내로 인증해주세요.`,
       });
-      
+
       return onToggleShow();
     }
   };
@@ -108,75 +117,120 @@ const Signup = () => {
   };
 
   // 인증번호 발송하기 인증하기
-  const AuthFunc = React.useCallback(
-    (event) => {
-      return isAct === "받기" ? reqValidNum(event) : postValidNum(event);
-    },
-    [isAct]
-  );
+  const AuthFunc = (event) => {
+    return isAct === "받기" ? reqValidNum(event) : postValidNum(event);
+  };
 
-  const validation = async(e) => {
+  const validation = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
 
     const regex = new RegexHelper();
 
-    document.querySelectorAll(`.${styles.errMsg}`).forEach((v,i)=>{
+    document.querySelectorAll(`.${styles.errMsg}`).forEach((v, i) => {
       v.remove();
-    })
-
+    });
 
     //이름
-    if(!regex.value("name", "이름을 입력해주세요.")){return;}
-    if(!regex.maxLen("name",20,"20글자 이내로 입력가능합니다.")){return;}
+    if (!regex.value("name", "이름을 입력해주세요.")) {
+      return;
+    }
+    if (!regex.maxLen("name", 20, "20글자 이내로 입력가능합니다.")) {
+      return;
+    }
 
     // 아이디
-    if(!regex.value("userId", "아이디를 입력해주세요.")){return;}
-    if(!regex.minLen("userId",6,"6글자 이상 입력해주세요.")){return;}
-    if(!regex.maxLen("userId",20,"6~20글자 이내로 입력가능합니다.")){return;}
-    if(!regex.engNum("userId","영어와 숫자를 포함하여 입력해주세요.")){return;}
+    if (!regex.value("userId", "아이디를 입력해주세요.")) {
+      return;
+    }
+    if (!regex.minLen("userId", 6, "6글자 이상 입력해주세요.")) {
+      return;
+    }
+    if (!regex.maxLen("userId", 20, "6~20글자 이내로 입력가능합니다.")) {
+      return;
+    }
+    if (!regex.engNum("userId", "영어와 숫자를 포함하여 입력해주세요.")) {
+      return;
+    }
     // 패스워드
-    if(!regex.value("password", "패스워드를 입력해주세요.")){return;}
-    if(!regex.minLen("password",8,"8글자 이상 입력해주세요.")){return;}
-    if(!regex.maxLen("password",30,"8~30글자 이내로 입력가능합니다.")){return;}
-    if(!regex.engNumSp("password","영어와 숫자,특수문자를 포함하여 입력해주세요.")){return;}
+    if (!regex.value("password", "패스워드를 입력해주세요.")) {
+      return;
+    }
+    if (!regex.minLen("password", 8, "8글자 이상 입력해주세요.")) {
+      return;
+    }
+    if (!regex.maxLen("password", 30, "8~30글자 이내로 입력가능합니다.")) {
+      return;
+    }
+    if (
+      !regex.engNumSp(
+        "password",
+        "영어와 숫자,특수문자를 포함하여 입력해주세요."
+      )
+    ) {
+      return;
+    }
     // 패스워드 체크
-    if(!regex.value("password_check", "비밀번호를 다시 입력해주세요.")){return;}
-    if(!regex.compare_to("password","password_check","비밀번호가 일치하지않습니다.")){return;}
+    if (!regex.value("password_check", "비밀번호를 다시 입력해주세요.")) {
+      return;
+    }
+    if (
+      !regex.compare_to(
+        "password",
+        "password_check",
+        "비밀번호가 일치하지않습니다."
+      )
+    ) {
+      return;
+    }
 
     // 이메일
-    if(!regex.value("userEmail", "이메일을 입력해주세요.")){return;}
-    if(!regex.email('userEmail','이메일 형식으로 입력해주세요.')){return;}
+    if (!regex.value("userEmail", "이메일을 입력해주세요.")) {
+      return;
+    }
+    if (!regex.email("userEmail", "이메일 형식으로 입력해주세요.")) {
+      return;
+    }
 
     // 카카오아이디
-    if(!regex.value("kakaoId", "카카오 아이디를 입력해주세요.")){return;}
-    if(!regex.maxLen("kakaoId",45,"45글자 이내로 입력가능합니다.")){return;}
+    if (!regex.value("kakaoId", "카카오 아이디를 입력해주세요.")) {
+      return;
+    }
+    if (!regex.maxLen("kakaoId", 45, "45글자 이내로 입력가능합니다.")) {
+      return;
+    }
 
-    if(!vaildCode.current.readOnly){regex.throwErr(vaildCode.current.parentElement,'이메일 인증을 진행해주세요.'); return;}
+    if (!vaildCode.current.readOnly) {
+      regex.throwErr(
+        vaildCode.current.parentElement,
+        "이메일 인증을 진행해주세요."
+      );
+      return;
+    }
     const memberInfo = new FormData();
 
-    memberInfo.append('userName', form.userName.value);
-    memberInfo.append('userPassword',form.password.value);
-    memberInfo.append('userEmail', userEmail.current.value);
-    memberInfo.append('userId', form.userId.value);
-    memberInfo.append('kakaoId', form.kakaoId.value);
-    memberInfo.append('profile', form.userImg.files[0]);
+    memberInfo.append("userName", form.userName.value);
+    memberInfo.append("userPassword", form.password.value);
+    memberInfo.append("userEmail", userEmail.current.value);
+    memberInfo.append("userId", form.userId.value);
+    memberInfo.append("kakaoId", form.kakaoId.value);
+    memberInfo.append("profile", form.userImg.files[0]);
 
     await dispatch(signup(memberInfo));
 
-    if(rt === 200){
+    if (rt === 200) {
       setNoticeTitle({
         title: "단군마켓 가입이 완료되었습니다.",
         subTitle: `감사합니다.`,
       });
-  
+
       onToggleShow();
-    } else if (rt !== 200){
+    } else if (rt !== 200) {
       setNoticeTitle({
         title: "단군마켓 가입이 실패했습니다.",
         subTitle: `다시 시도해주세요.`,
       });
-  
+
       onToggleShow();
     }
   };
@@ -186,7 +240,12 @@ const Signup = () => {
       <Meta title="단군마켓 회원가입" description="단군마켓 회원가입 페이지" />
       <HeaderLogo />
       <main>
-        <form action="" method="get" encType="multipart/form-data" onSubmit={validation}>
+        <form
+          action=""
+          method="get"
+          encType="multipart/form-data"
+          onSubmit={validation}
+        >
           {/* 이미지 업로드 영역 */}
           <div className={styles.UploadImg}>
             <input
@@ -195,12 +254,14 @@ const Signup = () => {
               type="file"
               name="userImg"
               accept="image/*"
-              onChange={(event)=>{onImgView(event,'#profile',"profileImg")}}
+              onChange={(event) => {
+                onImgView(event, "#profile", "profileImg");
+              }}
             />
             <label className={styles.uploader} htmlFor="update_img">
               <AiOutlineCamera />
             </label>
-            <div id='profile' className={styles.imgView}>
+            <div id="profile" className={styles.imgView}>
               <AiOutlineUser />
             </div>
           </div>
@@ -245,21 +306,26 @@ const Signup = () => {
               }}
             />
           </div>
-          <div id='validCode' className={styles.inputArea}>
+          <div id="validCode" className={styles.inputArea}>
             <div className={styles.validation}>
-            <Input
-              ref={vaildCode}
-              type="text"
-              placeholder="인증번호"
-              name="validationNum"
-            />
-            <Button type="button" onClick={AuthFunc}>
-              인증번호 {isAct}
-            </Button>
+              <Input
+                ref={vaildCode}
+                type="text"
+                placeholder="인증번호"
+                name="validationNum"
+              />
+              <Button type="button" onClick={AuthFunc}>
+                인증번호 {isAct}
+              </Button>
             </div>
           </div>
           <div className={styles.inputArea}>
-            <Input id="kakaoId" type="text" placeholder="kakao ID" name='kakaoId'/>
+            <Input
+              id="kakaoId"
+              type="text"
+              placeholder="kakao ID"
+              name="kakaoId"
+            />
           </div>
           <Button type="submit" className={styles.signupBtn}>
             가입하기

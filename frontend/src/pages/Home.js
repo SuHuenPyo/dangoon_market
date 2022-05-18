@@ -26,14 +26,14 @@ const Home = () => {
   const dispatch = useDispatch();
   
 
-  const onClick = React.useCallback(() => {
+  const onClick = () => {
     if(rt === 401){
       console.log(rt === 401);
       window.location.href = '/login';
     }
 
     return setShow(false);
-  },[rt,navigator])
+  }
 
   React.useEffect(() => {
     if (rt === 401) {
