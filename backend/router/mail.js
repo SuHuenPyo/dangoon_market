@@ -70,7 +70,9 @@ Mail.post('/', async(req,res,next) =>{
         html: '<h1>단군마켓 인증번호입니다. </h1> <h1>타인에게 절대 알리면 안됩니다.</h1>  <h1>'+authCode+'</h1>' 
     };
     try{
+        console.log("0");
         await dbcon.DbConnect();
+        console.log("1");
         let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.auth WHERE auth_email=?`, user_email);
         if(result[0].cnt > 0){
             await dbcon.sendQuery(`DELETE FROM dangoon.auth WHERE auth_email=?`, user_email);

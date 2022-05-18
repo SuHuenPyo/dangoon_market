@@ -10,6 +10,10 @@ export class DG_DB{
     }
 
     async DbConnect(){
+    
+        console.log(ImportManager.privateInfo.DB_USER)
+        console.log(ImportManager.privateInfo.DB_PASSWORD)
+        console.log(ImportManager.privateInfo.DB_DATABASE)
         try{
             this.db = await ImportManager.mysql.createConnection({
                 host        : ImportManager.privateInfo.DB_HOST,
@@ -22,6 +26,8 @@ export class DG_DB{
             await this.db.connect();
             console.log("연동성공");
         }catch(e){
+            console.error(e);
+            console.error("DB 연동 실패");
             throw new Error("단군마켓 DB 연동 실패");
         }
     

@@ -6,7 +6,7 @@ const __dirname = path.dirname(__filename);
 export default {
     
     //Web Server Port 
-    SERVER_PORT : 80,
+    SERVER_PORT : 7798,
 
     //public dir 
     PUBLIC_PATH: path.join(__dirname, "../public"),
@@ -28,7 +28,7 @@ export default {
         host: '127.0.0.1', //mysql 서버 주소(다른 PC인 경우 IP주소)
         port: 3306 ,//MySQL 설치시 기본값 3306
         user: 'root', //접근 권한 아이디(root=관리자)
-        password: '1234', //설치시 입력한 비밀번호
+        password: 'eksrns', //설치시 입력한 비밀번호
         database: 'dangoon', //사용할 데이터베이스 이름
     },
 
