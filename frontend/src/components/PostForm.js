@@ -68,7 +68,7 @@ const PostForm = React.forwardRef((props,ref) => {
         <h2 className={styles.pageTitle}>{props.title}글 등록</h2>
         <form
           className={styles.productPost}
-          action="post"
+          action="get"
           encType="multipart/form-data"
           ref={ref}
           onSubmit={props.onSubmit}

@@ -191,7 +191,7 @@ const Login = () => {
           <h2>LOGIN</h2>
           <p>안녕하세요. 단군마켓을 통해 중고거래를 시작해보세요.</p>
         </Title>
-        <Form ref={loginForm} action="" method="post" onSubmit={doLogin}>
+        <Form ref={loginForm} action="" method="get" onSubmit={doLogin}>
           <input id="userId" name="userId" type="text" placeholder="아이디" />
           <Password>
             <input

@@ -186,7 +186,7 @@ const Signup = () => {
       <Meta title="단군마켓 회원가입" description="단군마켓 회원가입 페이지" />
       <HeaderLogo />
       <main>
-        <form action="" method="post" encType="multipart/form-data" onSubmit={validation}>
+        <form action="" method="get" encType="multipart/form-data" onSubmit={validation}>
           {/* 이미지 업로드 영역 */}
           <div className={styles.UploadImg}>
             <input
