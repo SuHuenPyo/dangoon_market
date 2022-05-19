@@ -41,7 +41,7 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
-  const { rt } = useSelector((state) => state.signup);
+  const { rt,data } = useSelector((state) => state.signup);
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
@@ -56,6 +56,14 @@ const Signup = () => {
 
   // 인증메일 발송하기
   const reqValidNum = async (event) => {
+    try{
+
+      document.querySelectoAll(`.${styles.errMsg}`).forEach((v, i) => {
+        v.remove();
+      });
+    } catch (err){
+      return;
+    }
 
     const regex = new RegexHelper();
 
@@ -100,10 +108,11 @@ const Signup = () => {
       vaildCode.current.readOnly = true;
       userEmail.current.readOnly = true;
       return (event.target.disabled = true);
-    } else if (result.status !== 200) {
+      
+    } else if (result.status !== 400) {
       setNoticeTitle({
         title: "인증에 실패했습니다.",
-        subTitle: `인증번호를 다시 확인해주세요.`,
+        subTitle: `${data}`,
       });
 
       onToggleShow();

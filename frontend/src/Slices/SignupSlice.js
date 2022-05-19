@@ -40,6 +40,7 @@ const SignupSlice = createSlice({
         [signup.rejected]: (state,{error,payload})=>{
             return {
                 ...state,
+                item: payload.data.text,
                 rt: payload?.status || error.name,
                 rtmsg: payload?.statusText || error.message,
                 loading: false

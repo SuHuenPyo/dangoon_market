@@ -52,6 +52,7 @@ const LoginSlice = createSlice({
     [login.rejected]: (state, { error, payload }) => {
       return {
         ...state,
+        item: payload?.data.text || "로그인에 실패했습니다",
         rt: payload?.status || error.name,
         rtmsg: payload?.statusText || error.message,
         loading: false,

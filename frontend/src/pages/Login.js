@@ -107,7 +107,7 @@ const Password = styled.div`
 `;
 
 const Login = () => {
-  const { rt, loading } = useSelector((state) => state.login, shallowEqual);
+  const { rt, item, loading } = useSelector((state) => state.login, shallowEqual);
   const dispatch = useDispatch();
 
   const [show, setShow] = React.useState(false);
@@ -155,14 +155,14 @@ const Login = () => {
     }
 
     if (!loading && rt === 200) {
-      console.log(rt);
+
       return navigator(-1);
     }
 
-    if (!loading && rt === 402) {
-      console.log(rt);
+    if (!loading && rt > 200) {
+
       setNotice({
-        title: "이미 로그인 되어있습니다.",
+        title: item,
         subTitle: null,
       });
       setShow(true);

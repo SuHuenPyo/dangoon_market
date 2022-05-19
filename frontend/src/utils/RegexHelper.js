@@ -11,6 +11,16 @@ class RegexHelper {
     return true;
   }
 
+  image(selector, msg) {
+    const field = document.getElementById(selector);
+    const value = field.value.trim();
+
+    if (!value) {
+      return this.throwErr(field, msg);
+    }
+    return true;
+  }
+
   selected(selector, msg) {
     const field = document.getElementById(selector);
     const value = field.value.trim();
