@@ -66,10 +66,7 @@ const ProductDetail = () => {
   }, [l_loading]);
 
   React.useEffect(() => {
-    console.log("render");
-
     if (r_rt === 200) {
-      console.log("if3");
       setNotice({
         title: "거래요청이 완료되었습니다.",
         subTitle: "거래상황은 구매내역에서 확인 가능합니다.",
@@ -89,7 +86,7 @@ const ProductDetail = () => {
     return () => {
       setNoticeShow(false);
     };
-  }, [r_rt, r_loading]);
+  }, [r_rt,r_loading]);
 
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {

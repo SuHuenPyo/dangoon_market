@@ -69,7 +69,7 @@ const NewProduct = () => {
 
     return setNotice({ title: null, subTitle: null, type:null });
 
-  },[rt,loading,dispatch])
+  },[rt,loading])
 
   return (
     <>
