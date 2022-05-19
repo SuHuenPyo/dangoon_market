@@ -46,6 +46,11 @@ const Form = styled.form`
     border: 1px solid #ccc;
     border-radius: 10px;
     text-indent: 10px;
+
+    & + p {
+      text-indent: 8px;
+      font-size: 0.8rem;
+    }
   }
 
   button.submit {

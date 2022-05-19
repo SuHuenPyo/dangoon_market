@@ -128,6 +128,11 @@ const Signup = () => {
       v.remove();
     });
 
+    // 이미지
+    if(!regex.image('update_img',"프로필 이미지를 추가해주세요.","img_field")){
+      return;
+    }
+
     //이름
     if (!regex.value("name", "이름을 입력해주세요.")) {
       return;
@@ -244,7 +249,7 @@ const Signup = () => {
           onSubmit={validation}
         >
           {/* 이미지 업로드 영역 */}
-          <div className={styles.UploadImg}>
+          <div id='img_field'className={styles.UploadImg}>
             <input
               ref={imgInput}
               id="update_img"

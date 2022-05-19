@@ -51,11 +51,17 @@ form {
       }
     }
 
+    
     input {
       display: none;
     }
-  }
 
+    & + p{
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  }
+  
   .inputArea {
     width: 84%;
     height: auto;
@@ -122,6 +128,6 @@ form {
   .errMsg {
     color: red;
     width: 100%;
-    font-size: 0.9em;
+    font-size: 0.9rem;
   }
 }

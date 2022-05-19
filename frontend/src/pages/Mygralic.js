@@ -37,7 +37,13 @@ const Mygralic = () => {
     if (rt === null) {
       dispatch(getMyProfile());
     }
-  }, []);
+
+    if(rt === 401){
+      setNotice({title: '로그인되어 있지 않습니다.',subTitle: "로그인 해주세요."});
+      setShow(true);
+    }
+
+  }, [rt,loading]);
 
   return (
     <>

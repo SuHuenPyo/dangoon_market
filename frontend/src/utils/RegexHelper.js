@@ -11,12 +11,17 @@ class RegexHelper {
     return true;
   }
 
-  image(selector, msg) {
+  image(selector, msg, errSelector) {
     const field = document.getElementById(selector);
-    const value = field.value.trim();
+    const errField = document.getElementById(errSelector);
+    let check = false;
 
-    if (!value) {
-      return this.throwErr(field, msg);
+    if(field.files[0]){
+      check = true;
+    }
+
+    if (!check) {
+      return this.throwErr(errField, msg);
     }
     return true;
   }
