@@ -56,14 +56,6 @@ const Signup = () => {
 
   // 인증메일 발송하기
   const reqValidNum = async (event) => {
-    try{
-
-      document.querySelectoAll(`.${styles.errMsg}`).forEach((v, i) => {
-        v.remove();
-      });
-    } catch (err){
-      return;
-    }
 
     const regex = new RegexHelper();
 
