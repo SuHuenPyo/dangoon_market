@@ -20,11 +20,10 @@ const Buylist = () => {
     }
   }, [rt, loading]);
 
-  console.log(item);
 
   return (
     <>
-      <Meta title='단군마켓 구매내역' description='단군마켓 구매내역 페이지' />
+      <Meta title='구매내역' description='단군마켓 구매내역 페이지' />
       <HeaderTitle title="구매내역" link="/mygralic"/>
       <main>
         {/* 로딩 */}

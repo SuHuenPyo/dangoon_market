@@ -254,7 +254,7 @@ const CaveComment = (props) => {
 
   return (
     <>
-      <Meta title="단군마켓 동굴생활" description="단군마켓 동굴생활 페이지 입니다."  />
+      <Meta title="동굴생활" description="단군마켓 동굴생활 페이지 입니다."  />
       <HeaderTitle title="동굴생활" link="/cavelife" />
       {loading && (
         <main className="loading" ref={main}>

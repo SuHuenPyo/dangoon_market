@@ -57,7 +57,7 @@ const Signup = () => {
  
   return (
     <>
-      <Meta title="단군마켓 나의 마늘" description="단군마켓 나의 마늘 페이지"  />
+      <Meta title="나의 마늘" description="단군마켓 나의 마늘 페이지"  />
       <HeaderLogo />
       <main>
         <form action="" method="post" encType="multipart/form-data">

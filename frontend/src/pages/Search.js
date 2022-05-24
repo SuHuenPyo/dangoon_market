@@ -50,7 +50,7 @@ const Search = () => {
 
   return (
     <>
-      <Meta title={`단군마켓 ${query} 검색결과`} description={`단군마켓 ${query} 검색결과 페이지`}/>
+      <Meta title={`${query} 검색결과`} description={`단군마켓 ${query} 검색결과 페이지`}/>
       <HeaderTitle title={query} link="/category" />
       <main>
         <Form

@@ -189,7 +189,7 @@ const Login = () => {
 
   return (
     <>
-      <Meta title="단군마켓 로그인 페이지" description="단군마켓 로그인 페이지" />
+      <Meta title="단군마켓 로그인" description="단군마켓 로그인 페이지" />
       <HeaderLogo />
       <main>
         <Title>

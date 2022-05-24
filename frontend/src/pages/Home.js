@@ -44,6 +44,8 @@ const Home = () => {
       setShow(true);
     }
 
+    return setShow(false);
+
   }, [rt,loading]);
 
   React.useEffect(() => {
@@ -60,7 +62,7 @@ const Home = () => {
 
   return (
     <>
-      <Meta title='단군마켓 홈' description='단군마켓 홈 페이지' />
+      <Meta title='단군마켓' description='단군마켓 홈 페이지' />
       <HeaderLogo />
       <main>
         {/* 로딩 */}

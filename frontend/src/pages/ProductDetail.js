@@ -116,7 +116,7 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Meta title={item?.title || "단군마켓 동굴생활" } description={item?.content.slice(0,14)}  />
+      <Meta title={item?.title.slice(0,5) || "단군마켓" } description={item?.content.slice(0,14)}  />
       <HeaderLogo />
       {loading && (
         <main>
@@ -141,11 +141,13 @@ const ProductDetail = () => {
             <div className={styles.imgView}>
               {item.imageUrls.map((v, i) => {
                 return (
+                  <div className={styles.image}>
                   <img
                     key={i}
                     src={item.imageUrls[i]}
                     alt={`${item.title}이미지${i}`}
-                  />
+                    />
+                    </div>
                 );
               })}
             </div>

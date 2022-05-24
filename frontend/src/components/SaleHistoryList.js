@@ -181,7 +181,7 @@ const SalelistComponent = ({ inview, data }) => {
     <>
       <main>
         <ul>
-          {data.map((item, index) => {
+          {data && data.map((item, index) => {
             return (
               <li
                 key={item.b_id}

@@ -70,8 +70,8 @@ const CaveLife = () => {
 
   return (
     <>
-      <Meta title="단군마켓 동굴생활" description="단군마켓 동굴생활 페이지 "  />
-      <HeaderTitle title="동굴생활" link="/cavelife" />
+      <Meta title="동굴생활" description="단군마켓 동굴생활 페이지 "  />
+      <HeaderTitle title="동굴생활" link="/" />
       <main>
         {loading && (
           <div className="loading">

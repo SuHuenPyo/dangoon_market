@@ -38,7 +38,10 @@ const NewProduct = () => {
     postForm.append('price',  form.current.productPrice.value);
     postForm.append('category', form.current.category.value);
     postForm.append('content',form.current.postContent.value);
-    postForm.append('board', form.current.postImg.files);
+    [...form.current.postImg.files].forEach((img,index)=>{
+      postForm.append('board', form.current.postImg.files[index]);
+    });
+
 
     dispatch(postNewProduct(postForm));
 
@@ -72,7 +75,7 @@ const NewProduct = () => {
 
   return (
     <>
-      <Meta title="단군마켓 판매글쓰기" description="단군마켓 판매글쓰기 페이지"  />
+      <Meta title="판매글쓰기" description="단군마켓 판매글쓰기 페이지"  />
       <HeaderLogo />
         <PostForm ref={form} loading={loading} onSubmit={doPost} title="판매" noticeTitle={notice.title} noticeSubTitle={notice.subTitle} noticeType={notice.type}/>
     </>

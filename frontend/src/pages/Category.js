@@ -89,7 +89,7 @@ const Categori = () => {
   return (
     <>
     <Meta title='단군마켓 카테고리' description='단군마켓 카테고리 페이지' />
-    <HeaderTitle title='카테고리' link="/category"/>
+    <HeaderTitle title='카테고리' link="/"/>
       <main>
         <Form  onSubmit={(e) => {
             e.preventDefault();

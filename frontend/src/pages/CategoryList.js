@@ -34,7 +34,7 @@ const CategoriList = () => {
 
     return (
         <>
-        <Meta title={`단군마켓 ${categoryList[category]} 카테고리`} description={`단군마켓 ${categoryList[category]} 카테고리`}  />
+        <Meta title={`${categoryList[category]} 카테고리`} description={`단군마켓 ${categoryList[category]} 카테고리`}  />
         <HeaderTitle title={categoryList[category]} link="/category"/>
         <main>
            {/* 로딩 */}

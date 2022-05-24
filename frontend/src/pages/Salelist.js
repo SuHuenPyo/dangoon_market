@@ -11,7 +11,7 @@ const Salelist = () => {
     (state) => state.requestSale
   );
 
-  const { a_loading, c_loading } = useSelector((state) => state.doContract);
+  const { a_loading, c_loading, a_rt, c_rt } = useSelector((state) => state.doContract);
 
   const [rData, setRdata] = React.useState([]);
   const dispatch = useDispatch();
@@ -62,11 +62,6 @@ const Salelist = () => {
     }
 
   }, [r_rt, r_item, a_loading, c_loading, r_loading]);
-
-
-
-
-
 
   return (
     <>
