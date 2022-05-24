@@ -3,7 +3,7 @@ import HeaderLogo from "../components/HeaderLogo";
 import styles from "../asset/scss/ProductDetail.module.scss";
 import { AiOutlineStar, AiOutlineEye, AiFillStar } from "react-icons/ai";
 import ReportIcon from "../asset/img/warning.png";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useLocation} from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
@@ -116,20 +116,22 @@ const ProductDetail = () => {
 
   const { hash } = useLocation();
 
+
   const onClickImgIndex = (event) => {
-    if(hash === event.currentTarget.hash){
-      const index = hash.replace('#img_','');
+
+      const index = event.currentTarget.dataset.index;
       const newActive = []
       newActive[index] = true;
-
+      
+      console.log(index, newActive);
       setActive(newActive);
-    }
+    
   }
 
   return (
     <>
       <Meta
-        title={item?.title.slice(0, 5) || "단군마켓"}
+        title={"단군마켓"}
         description={item?.content.slice(0, 14)}
       />
       <HeaderLogo />
@@ -158,9 +160,11 @@ const ProductDetail = () => {
                   {item.imageUrls.length
                     ? item.imageUrls.map((v, i) => {
                         return (
-                          <a key={i} href={`#img_${i}`} className={ active[i] ? styles.active : null } onClick={onClickImgIndex}>
+                          <span key={i} data-index={i} className={ active[i] ? styles.active : null } onClick={onClickImgIndex}>
+                          <Link to={`#img_${i}`}  >
                             {i + 1}
-                          </a>
+                          </Link> 
+                          </span>
                         );
                       })
                     : null}

@@ -45,8 +45,6 @@ const Home = () => {
       setShow(true);
     }
 
-    return setShow(false);
-
   }, [rt,loading]);
 
   React.useEffect(() => {
