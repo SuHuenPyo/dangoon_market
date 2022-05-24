@@ -60,6 +60,7 @@ const Salelist = () => {
 
       setRdata(requestData);
     }
+    
   }, [r_rt, r_item, a_loading, c_loading, r_loading]);
 
 

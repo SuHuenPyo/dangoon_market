@@ -93,41 +93,37 @@ const SaleListItem = ({data,inview}) => {
   dayjs.locale('ko');
   
   const categoryList = config.categoryList;
-
-  return (
+  console.log(data);
+  return (  
     <ul>
-      { data.map((v,i)=>{
-        return (
-    <List key={v.b_id} {...(data.length-1 === i ? {ref: inview} : {})}>
-      <Linked to={`/product/${v.b_id}`} className="post-link">
-        <SaleImg className="sale-img">
-          <img src="http://placekitten.com/85/85" alt=""/>
-        </SaleImg>
-        <SaleCont className="sale-content">
-          <h2 className="sale-title">{v.b_title}</h2>
-          <p className="saleInfo">
+      { data && data.map((v,i)=>{
+          return (
+            <List key={v.b_id} {...(data.length-1 === i ? {ref: inview} : {})}>
+            <Linked to={`/product/${v.b_id}`} className="post-link">
+            <SaleImg className="sale-img">
+            <img src="http://placekitten.com/85/85" alt=""/>
+            </SaleImg>
+            <SaleCont className="sale-content">
+            <h2 className="sale-title">{v.b_title}</h2>
+            <p className="saleInfo">
             <span className="postCategori">{categoryList[v.b_category.toLowerCase()]}</span> &middot;&nbsp;
             <span className="postTime">{dayjs(v.b_rdate).fromNow()}</span>
-          </p>
-          <p className="salePrice">
+            </p>
+            <p className="salePrice">
             {v.b_price}<span className="won">원</span>
-          </p>
-          <p className="likeView">
+            </p>
+            <p className="likeView">
             <AiOutlineStar/><span>{v.b_like}</span>
             <AiOutlineEye/><span>{v.b_hits}</span>
-          </p>
-        </SaleCont>
-      </Linked>
-    </List>
-        )
-      })}
+            </p>
+            </SaleCont>
+            </Linked>
+            </List>
+            )
+          })
+      }
     </ul>
   );
 };
-
-SaleListItem.defaultProps = {
-  data: [],
-  inview: false
-}
 
 export default React.memo(SaleListItem);

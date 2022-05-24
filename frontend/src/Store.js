@@ -36,7 +36,7 @@ const Store = configureStore({
         buyhistory: BuyHistorySlice,
         profile: ProfileSlice,
     },
-    middleware: [...getDefaultMiddleware({serializableCheck:false})],
+    middleware: [...getDefaultMiddleware({serializableCheck:false}),createLogger()],
     devTools: false
 })
 

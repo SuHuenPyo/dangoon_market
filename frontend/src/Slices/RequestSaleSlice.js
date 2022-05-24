@@ -51,6 +51,7 @@ const requestSale = createSlice({
     },
     [postRequest.fulfilled]: (state, { payload }) => {
       return {
+        ...state,
         r_rt: payload.status,
         r_rtmsg: payload.statusText,
         r_loading: false,
