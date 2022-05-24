@@ -137,7 +137,7 @@ const Mygralic = () => {
                     let result = null;
                     try {
                       result = await axios.get(
-                        "https://dangoon.duckdns.org/logout"
+                        "https://dangoon.duckdns.org/api/logout"
                       );
                     } catch (err) {
                       alert("error");
