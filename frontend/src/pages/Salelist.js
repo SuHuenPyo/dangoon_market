@@ -17,7 +17,7 @@ const Salelist = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (r_rt !== 200 || !r_item) {
+    if (r_rt === null) {
       return dispatch(getRequest());
     }
 
@@ -69,7 +69,7 @@ const Salelist = () => {
 
   return (
     <>
-      <Meta title="단군마켓 판매내역" description="단군마켓 판매내역 페이지" />
+      <Meta title="단군마켓" description="단군마켓 판매내역 페이지" />
       <HeaderTitle title="판매내역" link="/mygralic" />
 
       {/* 로딩 */}
