@@ -81,7 +81,7 @@ const Home = () => {
         )}
 
         {/* 정상작동 */}
-        {!loading && rt === 200 && (
+        {rt === 200 && (
           <>
             <SaleListItem data={item.data} inview={ref} />
             <WriteButton path="/newproduct" />
