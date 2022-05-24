@@ -3,7 +3,7 @@ import HeaderLogo from "../components/HeaderLogo";
 import styles from "../asset/scss/ProductDetail.module.scss";
 import { AiOutlineStar, AiOutlineEye, AiFillStar } from "react-icons/ai";
 import ReportIcon from "../asset/img/warning.png";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
@@ -17,7 +17,7 @@ import Meta from "../components/Meta";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
+import noImg from "../asset/img/noImg.png";
 import config from "../utils/_config.json";
 
 const ProductDetail = () => {
@@ -35,6 +35,7 @@ const ProductDetail = () => {
   const [noticeShow, setNoticeShow] = React.useState(false);
   const [notice, setNotice] = React.useState({ title: null, subTitle: null });
   const [clickLike, setClickLike] = React.useState(l_item[id] || false);
+  const [active, setActive ] = React.useState([]);
   const categoryList = config.categoryList;
 
   const { rt, rtmsg, item, loading } = useSelector(
@@ -55,13 +56,12 @@ const ProductDetail = () => {
         return;
       }
       if (l_rt === 200 && clickLike) {
-  
         dispatch(doLike(id));
       } else if (l_rt === 200 && !clickLike) {
         dispatch(doDislike(id));
       }
-    } catch(err){
-        alert('다시 시도해주세요.')
+    } catch (err) {
+      alert("다시 시도해주세요.");
     }
   }, [l_loading]);
 
@@ -86,7 +86,7 @@ const ProductDetail = () => {
     return () => {
       setNoticeShow(false);
     };
-  }, [r_rt,r_loading]);
+  }, [r_rt, r_loading]);
 
   // 클릭이벤트를 위한 콜백함수
   const onToggleReport = React.useCallback(() => {
@@ -95,7 +95,7 @@ const ProductDetail = () => {
 
   const onToggleNotice = React.useCallback(() => {
     setNoticeShow(noticeShow ? false : true);
-  }, [noticeShow]); 
+  }, [noticeShow]);
 
   const doRequestForSale = () => {
     dispatch(postRequest(id));
@@ -114,42 +114,73 @@ const ProductDetail = () => {
     );
   };
 
+  const { hash } = useLocation();
+
+  const onClickImgIndex = (event) => {
+    if(hash === event.currentTarget.hash){
+      const index = hash.replace('#img_','');
+      const newActive = []
+      newActive[index] = true;
+
+      setActive(newActive);
+    }
+  }
+
   return (
     <>
-      <Meta title={item?.title.slice(0,5) || "단군마켓" } description={item?.content.slice(0,14)}  />
+      <Meta
+        title={item?.title.slice(0, 5) || "단군마켓"}
+        description={item?.content.slice(0, 14)}
+      />
       <HeaderLogo />
       {loading && (
         <main>
-        <div className="loading">
-          <ReactLoading type="bubbles" color="#f99d1b" />
-        </div>
+          <div className="loading">
+            <ReactLoading type="bubbles" color="#f99d1b" />
+          </div>
         </main>
       )}
 
       {!loading && rt !== 200 && (
         <main>
-        <div className="error">
-          <h2>Error!</h2>
-          <p>{rtmsg}</p>
-        </div>
-        </main>
+          <div className="error">
+            <h2>Error!</h2>
+            <p>{rtmsg}</p>
+          </div>
+        </main> 
       )}
 
       {rt === 200 && (
         <>
           <main>
-            <div className={styles.imgView}>
-              {item.imageUrls.map((v, i) => {
-                return (
-                  <div className={styles.image}>
-                  <img
-                    key={i}
-                    src={item.imageUrls[i]}
-                    alt={`${item.title}이미지${i}`}
-                    />
-                    </div>
-                );
-              })}
+            <div className={styles.slider}>
+                <div className={styles.imgIndex}>
+                  {item.imageUrls.length
+                    ? item.imageUrls.map((v, i) => {
+                        return (
+                          <a key={i} href={`#img_${i}`} className={ active[i] ? styles.active : null } onClick={onClickImgIndex}>
+                            {i + 1}
+                          </a>
+                        );
+                      })
+                    : null}
+                </div>
+              <div className={styles.imgView}>
+                {item.imageUrls.length > 0 ? (
+                  item.imageUrls.map((v, i) => {
+                    return (
+                      <div key={i} id={`img_${i}`} className={styles.image}>
+                        <img
+                          src={item.imageUrls[i]}
+                          alt={`${item.title}이미지${i}`}
+                        />
+                      </div>
+                    );
+                  })
+                ) : (
+                  <img src={noImg} alt="이미지가 없습니다." />
+                )}
+              </div>
             </div>
             <div className={styles.profile}>
               <Link to="/profile" className={styles.profileImg}>
@@ -157,7 +188,9 @@ const ProductDetail = () => {
               </Link>
               <div className={styles.posterInfo}>
                 <p className={styles.name}>{item.sellerName}</p>
-                <p className={styles.desc}>{item.price.toLocaleString('ko-KR')}원</p>
+                <p className={styles.desc}>
+                  {item.price.toLocaleString("ko-KR")}원
+                </p>
               </div>
               <div className={styles.likeBtn} onClick={onToggleLike}>
                 {clickLike ? (

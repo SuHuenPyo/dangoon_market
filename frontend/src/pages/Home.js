@@ -10,6 +10,7 @@ import Meta from '../components/Meta';
 import { useSelector, useDispatch } from "react-redux";
 import { getHomeList } from "../Slices/HomeSlice";
 
+
 const Home = () => {
   // 페이징
   const [page, setPage] = React.useState(1);

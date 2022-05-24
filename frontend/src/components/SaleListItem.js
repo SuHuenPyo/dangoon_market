@@ -5,7 +5,7 @@ import { AiOutlineStar, AiOutlineEye } from "react-icons/ai"
 import dayjs  from "dayjs";
 import relativeTime   from "dayjs/plugin/relativeTime";
 import config from '../utils/_config.json';
-
+import noImg from '../asset/img/noImg.png'
 
 import 'dayjs/locale/ko';
 
@@ -101,7 +101,7 @@ const SaleListItem = ({data,inview}) => {
             <List key={v.b_id} {...(data.length-1 === i ? {ref: inview} : {})}>
             <Linked to={`/product/${v.b_id}`} className="post-link">
             <SaleImg className="sale-img">
-            <img src="http://placekitten.com/85/85" alt=""/>
+            <img src={ v.b_img || noImg} alt=""/>
             </SaleImg>
             <SaleCont className="sale-content">
             <h2 className="sale-title">{v.b_title}</h2>

@@ -7,37 +7,77 @@
 $mobile-breakpoint: 335px;
 $tablet-breakpoint: 500px;
 
-.imgView {
+.slider {
   width: 100%;
   min-height: 320px;
   height: 30%;
-  padding: 0;
-  display: flex;
-  flex-flow: row nowrap;
-  // scroll-snap-type: x mandatory;
+  position: relative;
+  
+  .imgIndex {
+    position: absolute;
+    width: auto;
+    bottom:20px;
+    left: 50%;
+    z-index: 60;
+    transform: translate(-50%,0);
+    display: flex;
+    justify-content:center;
+    gap: 10px;
 
-  // &::-webkit-scrollbar {
-  //   display: none;
-  // }
+    a {
+      display:inline-block;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height:20px;
+      border-radius: 50%;
+      font-size:0.5rem;
+      background-color:rgba(237, 237, 237,0.5);
+    }
 
-  .image {
-    flex: 1 1 content;
-    width: 100%;
-    height: 100%;
-    overflow-x: scroll;
+    a.active {
+      background-color:rgba(237, 237, 237,1);
+    }
+  }
+  
+  .imgView {
+    width:100%;
+    height:100%;
+    overflow-x:auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    background-color:#f99d1b;
     scroll-snap-type: x mandatory;
     
-    img {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .image {
+      min-width: 360px;
       width: 100%;
-      height: auto;
-      object-fit: contain;
-      scroll-snap-stop: always;
-      scroll-behavior: smooth;
-      scroll-snap-align: center;
+      height: 100%;
+      flex-shrink: 0;
+      transform-origin: center center;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      position: relative;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+      }
     }
   }
 }
-
+  
 .profile {
   width: 100%;
   height: 90px;
