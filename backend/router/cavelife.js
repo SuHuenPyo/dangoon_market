@@ -36,7 +36,7 @@ const caveLife = express.Router();
  *     
 */
 caveLife.get('/', async(req, res, next)=>{
-    let dbcon = null;
+    let dbcon = new DG_DB();
     let json = null;
 
 
@@ -47,11 +47,12 @@ caveLife.get('/', async(req, res, next)=>{
     const rows = req.query.rows || 5;
 
     let pagenationResult = null;
+    
     try{
         //DB Connection
-        dbcon = await mysql.createConnection(_config.database_config);
-        await dbcon.connect();
-
+        dbcon
+        await dbcon.DbConnect();
+        
         //전체 데이터 수 조회
         let sql = "SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE B_TYPE='C'";
         
