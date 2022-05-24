@@ -67,7 +67,7 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT B_ID, B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY, B_PRICE, B_HITS FROM dangoon.BOARD WHERE B_TYPE='S' ORDER BY B_ID DESC LIMIT ?,? `, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT B_ID as b_id, B_WRITER as b_writer, B_TITLE as b_title, B_CONTENT as b_content, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY as b_category, B_PRICE as b_price, B_HITS b_hits FROM dangoon.BOARD WHERE B_TYPE='S' ORDER BY B_ID DESC LIMIT ?,? `, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -87,6 +87,7 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
         await dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
+    console.log(result, pagenationResult.totalPage);
     res.send({'item': result, 'pageEnd': pagenationResult.totalPage});
 });
 

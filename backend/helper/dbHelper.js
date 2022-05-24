@@ -16,12 +16,14 @@ export class DG_DB{
         console.log(ImportManager.privateInfo.DB_DATABASE)
         try{
             this.db = await ImportManager.mysql.createConnection({
+            
                 host        : ImportManager.privateInfo.DB_HOST,
                 port        : parseInt(ImportManager.privateInfo.DB_PORT),
                 user        : ImportManager.privateInfo.DB_USER,
                 password    : ImportManager.privateInfo.DB_PASSWORD,
                 database    : ImportManager.privateInfo.DB_DATABASE,
-                
+            
+            
             });
             await this.db.connect();
             console.log("연동성공");

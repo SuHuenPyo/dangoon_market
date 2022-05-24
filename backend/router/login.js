@@ -60,7 +60,7 @@ Login.post('/', async(req, res, next)=>{
 
             [result] = await dbcon.sendQuery(`SELECT M_PW, M_SALT FROM dangoon.MEMBER WHERE (M_USER_ID=?)`, user_id);
 
-            if(!await verifyUserPassword(user_pw, result[0].m_salt, result[0].m_pw)){
+            if(!await verifyUserPassword(user_pw, result[0].M_SALT, result[0].M_PW)){
                 return res.status(400).json({text: '아이디와 패스워드를 다시 확인하세요'});
             }
             req.session.user = {

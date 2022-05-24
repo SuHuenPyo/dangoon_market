@@ -174,7 +174,7 @@ signUp.get('/auth', [
             [result] = await dbcon.sendQuery(`SELECT date_format(AUTH_RDATE, '%Y-%m-%d %H:%i:%s')as date FROM dangoon.AUTH WHERE AUTH_EMAIL=?`, user_email);
             if(dbcon.checkElapsedTime(result[0].date) > -10){
                 console.log(dbcon.checkElapsedTime(result[0].date));
-                await dbcon.sendQuery(`UPDATE dangoon.auth SET auth_done=? WHERE AUTH_EMAIL=?`, true, user_email);
+                await dbcon.sendQuery(`UPDATE dangoon.AUTH SET AUTH_DONE=? WHERE AUTH_EMAIL=?`, true, user_email);
                 return res.status(200).json({text: 'Auth OK!'});
             }
             
