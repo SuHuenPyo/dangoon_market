@@ -17,7 +17,7 @@ const Salelist = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (r_rt === null) {
+    if (r_rt === null || r_item === null) {
       return dispatch(getRequest());
     }
 
@@ -60,7 +60,7 @@ const Salelist = () => {
 
       setRdata(requestData);
     }
-    
+
   }, [r_rt, r_item, a_loading, c_loading, r_loading]);
 
 
