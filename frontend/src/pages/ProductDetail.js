@@ -179,7 +179,9 @@ const ProductDetail = () => {
                     );
                   })
                 ) : (
-                  <img src={noImg} alt="이미지가 없습니다." />
+                  <div className={styles.image}>
+                    <img src={noImg} alt="이미지가 없습니다." />
+                  </div>
                 )}
               </div>
             </div>
