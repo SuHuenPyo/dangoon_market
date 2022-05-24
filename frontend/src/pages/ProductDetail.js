@@ -3,7 +3,8 @@ import HeaderLogo from "../components/HeaderLogo";
 import styles from "../asset/scss/ProductDetail.module.scss";
 import { AiOutlineStar, AiOutlineEye, AiFillStar } from "react-icons/ai";
 import ReportIcon from "../asset/img/warning.png";
-import { Link, useParams, useLocation} from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
+import { NavHashLink } from 'react-router-hash-link';
 
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../Slices/ProductDetailSlice";
@@ -114,8 +115,6 @@ const ProductDetail = () => {
     );
   };
 
-  const { hash } = useLocation();
-
 
   const onClickImgIndex = (event) => {
 
@@ -123,9 +122,7 @@ const ProductDetail = () => {
       const newActive = []
       newActive[index] = true;
       
-      console.log(index, newActive);
       setActive(newActive);
-    
   }
 
   return (
@@ -161,9 +158,9 @@ const ProductDetail = () => {
                     ? item.imageUrls.map((v, i) => {
                         return (
                           <span key={i} data-index={i} className={ active[i] ? styles.active : null } onClick={onClickImgIndex}>
-                          <Link to={`#img_${i}`}  >
+                          <NavHashLink smooth to={`#img_${i}`}>
                             {i + 1}
-                          </Link> 
+                          </NavHashLink> 
                           </span>
                         );
                       })
