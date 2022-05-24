@@ -34,7 +34,6 @@ const NewProduct = () => {
     if(!regex.value('postContent','내용을 입력해주세요.')){return;};
     
     const postForm = new FormData();
-    postForm.append('memberId', 1);
     postForm.append('title', form.current.postTitle.value);
     postForm.append('price',  form.current.productPrice.value);
     postForm.append('category', form.current.category.value);
