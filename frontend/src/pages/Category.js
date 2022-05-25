@@ -121,8 +121,8 @@ const Categori = () => {
               도서
             </Link>
           </Item>
-          <Item>
-            <Link to="/category/beauti">
+          <Item></Item>
+            <Link to="/category/beauty">
               <FaAirFreshener />
               뷰티
             </Link>
