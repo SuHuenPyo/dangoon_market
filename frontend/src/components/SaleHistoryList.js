@@ -6,7 +6,7 @@ import { AiOutlineMore } from "react-icons/ai";
 import config from "../utils/_config.json";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
+import noImg from '../asset/img/noImg.png'
 import { useSelector, useDispatch } from "react-redux";
 import { doApprove,doCancel,doComplete } from "../Slices/DoContract"
 
@@ -182,6 +182,7 @@ const SalelistComponent = ({ inview, data }) => {
       <main>
         <ul>
           {data && data.map((item, index) => {
+            console.log(item);
             return (
               <li
                 key={item.b_id}
@@ -192,7 +193,7 @@ const SalelistComponent = ({ inview, data }) => {
                   className={style.saleslink}
                 >
                   <div className={style.salesimg}>
-                    <img src="http://placekitten.com/95/95" alt="게시물사진" />
+                    <img src={item.saleItem[0].b_img ? item.saleItem[0].b_img : noImg} alt="게시물사진" />
                   </div>
                   <div className={style.salescont}>
                     <h2>{item.saleItem[0].b_title}</h2>

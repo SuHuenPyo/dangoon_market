@@ -3,6 +3,7 @@ import style from "../asset/scss/Buylist.module.scss";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import noImg from '../asset/img/noImg.png'
 
 const BuylistComponent = ({ data }) => {
   const contact = React.useRef([]);
@@ -27,7 +28,7 @@ const BuylistComponent = ({ data }) => {
           <li key={i} className={style.buyitem}>
             <Link to={`/product/${v.b_id}`} className={style.postlink}>
               <div className={style.postimg}>
-                <img src="http://placekitten.com/95/95" alt="게시물사진" />
+                <img src={v.board_info[0].b_img ? v.board_info[0].b_img : noImg} alt="게시물사진" />
               </div>
               <div className={style.postcont}>
                 <h2>{v.board_info[0].b_title}</h2>
