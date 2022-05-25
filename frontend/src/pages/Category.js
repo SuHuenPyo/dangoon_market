@@ -122,7 +122,7 @@ const Categori = () => {
             </Link>
           </Item>
           <Item>
-            <Link to="/category/beauty">
+            <Link to="/category/beauti">
               <FaAirFreshener />
               뷰티
             </Link>
