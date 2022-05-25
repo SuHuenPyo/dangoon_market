@@ -54,6 +54,7 @@ const myProfile = createSlice({
     },
     [getProfile.fulfilled]: (state, { payload }) => {
       return {
+        ...state,
         rt: payload.status,
         rtmsg: payload.statusText,
         item: payload.data,
@@ -76,6 +77,7 @@ const myProfile = createSlice({
     },
     [getMyProfile.fulfilled]: (state, { payload }) => {
       return {
+        ...state,
         rt: payload.status,
         rtmsg: payload.statusText,
         m_item: payload.data,
