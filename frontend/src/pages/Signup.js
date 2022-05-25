@@ -41,7 +41,7 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
-  const { rt,data } = useSelector((state) => state.signup);
+  const { rt,data,loading } = useSelector((state) => state.signup);
 
   // 안내창 관련 이벤트 정의
   const [validShow, setValidShow] = React.useState(false);
@@ -220,6 +220,14 @@ const Signup = () => {
 
     await dispatch(signup(memberInfo));
 
+
+  };
+
+  React.useEffect(()=>{
+    if(rt === null || loading){
+      return;
+    }
+
     if (rt === 200) {
       setNoticeTitle({
         title: "단군마켓 가입이 완료되었습니다.",
@@ -227,15 +235,18 @@ const Signup = () => {
       });
 
       onToggleShow();
-    } else if (rt !== 200) {
+    } 
+
+    if(rt > 200) {
       setNoticeTitle({
         title: "단군마켓 가입이 실패했습니다.",
         subTitle: `다시 시도해주세요.`,
-      });
+    });
 
-      onToggleShow();
+    onToggleShow();
     }
-  };
+
+  },[rt,loading])
 
   return (
     <>
