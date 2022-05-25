@@ -31,7 +31,7 @@ const Mygralic = () => {
   const onClick = () => {
     setShow(false);
     if(rt === 401){
-        return window.location.href = '/signup';
+        return window.location.href = '/login';
     }
     return window.history.back();
   };

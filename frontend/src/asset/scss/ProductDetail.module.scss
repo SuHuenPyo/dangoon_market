@@ -56,7 +56,6 @@ $tablet-breakpoint: 500px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
-    background-color:#f99d1b;
     scroll-snap-type: x mandatory;
     
     &::-webkit-scrollbar {

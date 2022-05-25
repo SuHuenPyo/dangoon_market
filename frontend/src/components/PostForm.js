@@ -50,7 +50,7 @@ const PostForm = React.forwardRef((props,ref) => {
   const onClick = () => {
    setShow(false);
     if(props.noticeType === 'compelete'){
-      return navigate('/home');
+      return navigate('/');
     }
   }
   

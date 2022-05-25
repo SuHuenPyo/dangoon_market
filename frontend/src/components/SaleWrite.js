@@ -7,9 +7,9 @@ import Notice from './Notice';
 const SaleWrite = () => {
     const [show, setShow] = React.useState(false);
 
-    const onCheck = React.useCallback(()=>{
+    const onCheck = () =>{
     window.location.href = '/home';
-    },[])
+    }
 
     return (
       <>
