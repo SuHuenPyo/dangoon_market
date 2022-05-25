@@ -121,7 +121,7 @@ const Categori = () => {
               도서
             </Link>
           </Item>
-          <Item></Item>
+          <Item>
             <Link to="/category/beauty">
               <FaAirFreshener />
               뷰티
