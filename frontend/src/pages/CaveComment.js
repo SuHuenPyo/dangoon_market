@@ -68,7 +68,7 @@ const BtnLine = styled.div`
 
 const Content = styled.div`
   width: calc(100% - 10px);
-  height: auto;
+  height: fit-content;
 
   h2 {
     font-size: 1.1rem;
@@ -82,12 +82,7 @@ const Content = styled.div`
     display: -webkit-box;
     font-size: 0.9rem;
     line-height: 1.15rem;
-    max-height: 120px;
-    overflow: hidden;
-    white-space: break-spaces;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 5; /* 표시하고자 하는 라인 수 */
-    -webkit-box-orient: vertical;
+    min-height: 120px;
   }
 
   p {
@@ -105,8 +100,7 @@ const Content = styled.div`
 
 const ContentImg = styled.div`
   width: calc(100% - 10px);
-  height: auto;
-  max-height: 80px;
+  height: 100px;
   padding: 5px 5px 10px 5px;
   display: flex;
   justify-content: flex-start;
@@ -116,6 +110,7 @@ const ContentImg = styled.div`
     width: 80px;
     height: 80px;
     margin: 0 7px 0 0;
+    object-fit: cover;
   }
 `;
 
