@@ -193,9 +193,9 @@ const Gap = styled.div`
 `;
 
 const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
-  const onClick = React.useCallback(() => {
+  const onClick = () => {
     setProfile(false);
-  }, []);
+  }
 
   const [profile, setProfile] = React.useState({ show: false, top: 0, id: 0 });
 

@@ -12,15 +12,13 @@ const ProfileView = (props) => {
 
   React.useEffect(() => {
     if (props.show) {
-      dispatch(getProfile(props.id));
+      dispatch(getProfile(props.query));
     }
 
     if (rt > 200) {
       return alert(` [${rt}] 에러가 발생했습니다.`);
     }
-  }, [props.show]);
 
-  React.useEffect(() => {
     if(rt === 200){
       const style = container.current.style;
       if (props.show) {
@@ -30,13 +28,23 @@ const ProfileView = (props) => {
         style.display = "none";
       }
     }
+
+  }, [rt]);
+
+  React.useEffect(() => {
+
   }, [props.show, props.top]);
+
+  const show = {display:'flex',top:`${props.top}px`};
+  const hide = {display: 'none'};
+
 
   return (
     <>
       {!loading && rt === 200 && (
         <div
           ref={container}
+          style={props.show ? show : hide}
           className={styles.container}
           onClick={props.onClick}
         >
@@ -44,7 +52,7 @@ const ProfileView = (props) => {
             <div className={styles.image}>
               <img
                 src={
-                  props.data.m_pic ? item.m_pic : "http://placekitten.com/85/85"
+                  item.m_pic ? item.m_pic : "http://placekitten.com/85/85"
                 }
                 alt={`${item.m_name} 의 프로필`}
               />
