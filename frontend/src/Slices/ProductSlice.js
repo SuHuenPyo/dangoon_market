@@ -25,7 +25,14 @@ const NewProductSlice = createSlice({
         rtmsg: null,
         loading: false
     },
-    reducers: {},
+    reducers: {
+        setInital(state, action){
+            return {
+                ...state,
+                rt: null,
+            }
+        }
+    },
     extraReducers: {
         [postNewProduct.pending]: (state,action)=>{
             return {
@@ -52,4 +59,5 @@ const NewProductSlice = createSlice({
     }
 });
 
+export const { setInital } = NewProductSlice.actions;
 export default NewProductSlice.reducer;

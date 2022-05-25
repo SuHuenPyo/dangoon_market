@@ -54,13 +54,14 @@ const PostForm = React.forwardRef((props,ref) => {
     }
   }
   
+
   React.useEffect(() => {
     console.log('postform rendering')
-    if(props.noticeType !== null){
+    if(props.noticeType === 'compelete' || props.noticeType === 'fail'){
       setShow(true);
     }
     
-  },[props.loading])
+  },[props.loading,props.noticeType])
 
   return (
     <>

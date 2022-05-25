@@ -17,7 +17,7 @@ const Salelist = () => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (r_rt === null || r_item === null) {
+    if (r_rt === null && r_item === null) {
       return dispatch(getRequest());
     }
 

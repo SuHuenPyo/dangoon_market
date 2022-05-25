@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
 import PostForm from "../components/PostForm";
-import {postNewProduct} from "../Slices/ProductSlice";
+import { postNewProduct, setInital } from "../Slices/ProductSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import RegexHelper from "../utils/RegexHelper";
 import styles from '../asset/scss/SignupForm.module.scss';
@@ -50,18 +50,24 @@ const NewProduct = () => {
   React.useEffect(() => {
 
     if(rt === null){
+      console.log('if1');
       return;
     }
 
     if(rt === 200){
+      
+      dispatch(setInital())
+
       return setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
         type: 'compelete'
       });
     } 
+
     if (rt !== 200 ){
-      console.log(rt);
+      dispatch(setInital())
+
       return setNotice({
         title: "등록에 실패하였습니다.",
         subTitle: null,
@@ -69,7 +75,7 @@ const NewProduct = () => {
       });
     }
 
-    return setNotice({ title: null, subTitle: null, type:null });
+    return dispatch(setInital()), setNotice({ title: null, subTitle: null, type:null });
 
   },[rt,loading])
 
