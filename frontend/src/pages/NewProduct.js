@@ -55,7 +55,7 @@ const NewProduct = () => {
     }
 
     if(rt === 200){
-      
+
       dispatch(setInital())
 
       return setNotice({
@@ -75,7 +75,7 @@ const NewProduct = () => {
       });
     }
 
-    return dispatch(setInital()), setNotice({ title: null, subTitle: null, type:null });
+    return setNotice({ title: null, subTitle: null, type:null });
 
   },[rt,loading])
 

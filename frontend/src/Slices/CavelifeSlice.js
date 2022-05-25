@@ -4,7 +4,7 @@ import axios from 'axios';
 export const postNewCavelife = createAsyncThunk('POST/NEWCAVELIFE',async (payload,{rejectWithValue})=>{
     let result = null;
     try {  
-        result = await axios.post('https://dangoon.duckdns.org/api/cavelife/write',payload,{
+        result = await axios.post('https://dangoon.duckdns.org/api/cavelife',payload,{
             header: {'content-type': 'multipart/form-data'}
         });
     } catch (err) {
@@ -26,7 +26,14 @@ const CavelifeSlice = createSlice({
         item: null,
         loading: false
     },
-    reducers: {},
+    reducers: {   
+     setInital(state, action){
+        return {
+            ...state,
+            rt: null,
+        }
+    }
+    },
     extraReducers: {
         [postNewCavelife.pending]: (state,action)=>{
             return {
@@ -53,4 +60,5 @@ const CavelifeSlice = createSlice({
     }
 });
 
+export const { setInital } = CavelifeSlice.actions;
 export default CavelifeSlice.reducer;

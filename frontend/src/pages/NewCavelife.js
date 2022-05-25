@@ -4,7 +4,7 @@ import PostForm from "../components/PostForm";
 import RegexHelper from "../utils/RegexHelper";
 
 import { useSelector, useDispatch} from "react-redux";
-import { postNewCavelife } from "../Slices/CavelifeSlice";
+import { postNewCavelife,setInital } from "../Slices/CavelifeSlice";
 import Meta from '../components/Meta';
 
 /* 안내창 위치떄문에 여기 페이지는 main 제외 */
@@ -33,10 +33,11 @@ const NewCavelife = () => {
 
     const postCaveForm = new FormData();
 
-    postCaveForm.append("memberId", 1);
     postCaveForm.append("title", form.current.postTitle.value);
     postCaveForm.append("content", form.current.postContent.value);
-    postCaveForm.append("board", form.current.postImg.files);
+    [...form.current.postImg.files].forEach((img,index)=>{
+      postCaveForm.append('board', form.current.postImg.files[index]);
+    });
 
     dispatch(postNewCavelife(postCaveForm));
   };
@@ -51,20 +52,24 @@ const NewCavelife = () => {
 
     if (!loading && rt === 200) {
       console.log("if2");
-      return setNotice({
+      setNotice({
         title: "등록이 완료되었습니다.",
         subTitle: null,
         type: "compelete",
       });
+
+      return dispatch(setInital());
     }
 
     if (!loading && rt > 200) {
       console.log("if3");
-      return setNotice({
+      setNotice({
         title: "등록을 실패하였습니다.",
         subTitle: "다시 한번 시도해주세요.",
         type: "fail",
       });
+
+      return dispatch(setInital());
     }
 
     return () => {

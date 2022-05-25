@@ -144,6 +144,7 @@ const CommentImg = styled.div`
     flex-basis: 100px;
     width: 100px;
     height: 100px;
+    object-fit: cover;
     margin: 0 5px 0 0;
   }
 `;
