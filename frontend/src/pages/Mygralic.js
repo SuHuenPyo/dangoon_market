@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderLogo from "../components/HeaderLogo";
 import styles from "../asset/scss/Mygralic.module.scss";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Notice from "../components/Notice";
 import axios from "axios";
 import { getMyProfile } from "../Slices/ProfileSlice";
@@ -27,13 +27,14 @@ const Mygralic = () => {
   const [show, setShow] = React.useState(false);
   const { rt, rtmsg, m_item, loading } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
+  const navigator = useNavigate();
 
   const onClick = () => {
     setShow(false);
     if(rt === 401){
         return window.location.href = '/login';
     }
-    return window.history.back();
+    return navigator(-1);
   };
 
   React.useEffect(() => {
