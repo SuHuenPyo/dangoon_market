@@ -82,7 +82,7 @@ const Content = styled.div`
     display: -webkit-box;
     font-size: 0.9rem;
     line-height: 1.15rem;
-    min-height: 120px;
+    height: fit-content;
   }
 
   p {
@@ -107,8 +107,9 @@ const ContentImg = styled.div`
   align-items: center;
 
   img {
-    width: 80px;
-    height: 80px;
+    flex-basis: auto;
+    width: 90px;
+    height: 90px;
     margin: 0 7px 0 0;
     object-fit: cover;
   }
