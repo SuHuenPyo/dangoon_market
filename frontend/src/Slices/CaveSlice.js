@@ -43,7 +43,7 @@ const CaveSlice = createSlice({
         ...state,
         rt: payload.status,
         rtmsg: payload.statusText,
-        item: payload.data.item.reverse(),
+        item: payload.data,
         loading: false,
       };
     },

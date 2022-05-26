@@ -231,7 +231,7 @@ const CavePostVeiw = ({ data, inview, likeList,onBtnClick}) => {
             </Poster>
             <Content to={`/cavelife/${v.b_id}`}>
               <h2>{v.b_title} </h2>
-              <p>{dayjs(v.b_rdate).fromNow()}</p>
+              <p>{dayjs(v.b_rdate).from()}</p>
               <div>{v.b_content}</div>
             </Content>
             <ContentImg>
