@@ -57,6 +57,9 @@ const BoardThumbnailFilter = (req, file, cb) => {
     // 이걸 이용해서 file이 한개만 있을경우 최초실행이라 판단하고 썸네일로 제작함 
     
     //맨처음 이미지를 썸네일로 만들것임 . 
+
+    console.log("1111111111")
+
     if(req.files.length == 1){
         req.files[0].fieldname = 'thumbnail';
         file.fieldname = 'thumbnail';

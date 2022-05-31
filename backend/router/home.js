@@ -3,7 +3,7 @@ import _config from "../config/_config.js";
 import  * as randomHelper from '../helper/RandomHelper.js';
 import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
-import { uploadBoard } from "../helper/awsHelper.js";
+import { uploadBoard, getObj, S3URL } from "../helper/awsHelper.js";
 import { DG_DB } from "../helper/dbHelper.js";
 import { authIsOwner } from "../middleware/session.js";
 
@@ -67,7 +67,7 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT B_ID as b_id, B_WRITER as b_writer, B_TITLE as b_title, B_CONTENT as b_content, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY as b_category, B_PRICE as b_price, B_HITS b_hits FROM dangoon.BOARD WHERE B_TYPE='S' ORDER BY B_ID DESC LIMIT ?,? `, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT B_ID as b_id, B_WRITER as b_writer, B_TITLE as b_title, B_CONTENT as b_content, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY as b_category, B_PRICE as b_price, B_HITS b_hits, b_img FROM dangoon.BOARD WHERE B_TYPE='S' ORDER BY B_ID DESC LIMIT ?,? `, pagenationResult.offset, pagenationResult.listCount);
 
         //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
@@ -77,6 +77,9 @@ Home.get('/', authIsOwner, async(req, res, next)=>{
             result[id].b_price = result[id].b_price.toString().replace(regexp, ',');
             let [temp] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.LIKE WHERE (B_ID=? AND L_FLAG='1' AND L_TYPE='S')`, result[id].b_id);
             result[id].b_like = temp[0].cnt;
+            if(result[id].b_img != null){
+                result[id].b_img = S3URL+result[id].b_img
+            }
         }
 
         
@@ -156,11 +159,9 @@ Home.get('/search', authIsOwner, async(req, res, next)=>{
 
         //데이터 조회 
         
-        [result] = await dbcon.sendQuery(`SELECT B_ID, B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY, B_PRICE FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_TITLE LIKE ?) LIMIT ?,?`, keyword, pagenationResult.offset, pagenationResult.listCount);
+        [result] = await dbcon.sendQuery(`SELECT b_id, b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_TITLE LIKE ?) LIMIT ?,?`, keyword, pagenationResult.offset, pagenationResult.listCount);
 
-        //console.log(result2);
         let regexp = /\B(?=(\d{3})+(?!\d))/g;
-        //console.log(result)
 
         result.forEach(element => {
             element.b_price = element.b_price.toString().replace(regexp, ',');
@@ -211,14 +212,19 @@ Home.get('/search', authIsOwner, async(req, res, next)=>{
 */
 Home.post('/write', authIsOwner, uploadBoard.array('board', 10) ,async(req, res, next)=>{
 
+    console.log(req.file);
+    console.log(req.files);
     //board
     let mfileType = "B";
     //Sell 게시판
     let mboardType = "S";
 
-    let {memberId, category, title, content, price} = req.body;
+    let user_id = req.session.user.id; //세션상 user id(NickName)
+
+    let {category, title, content, price} = req.body;
     let memberName  = null;
     let boardId     = null;
+    let memberId    = null;
 
     //필요사항
     /*
@@ -232,18 +238,41 @@ Home.post('/write', authIsOwner, uploadBoard.array('board', 10) ,async(req, res,
     */
     //console.log(req.body)
     let dbcon = new DG_DB();
+
+    let thumbnail_key = null;
+
+    if(req.files[0].fieldname == 'thumbnail'){
+        // put_from_url(S3URL+req.files[0].fieldname , req.files[0].key, (err, res)=>{
+        //     if(err){
+        //         console.log("무언가 잘못되었음");
+        //     }
+        //     console.log("정상적으로 썸네일이 업로드 되었습니다. ");
+        // }) 
+        //test(S3URL+req.files[0].fieldname , req.files[0].key);
+        //console.log(req)
+        thumbnail_key = await getObj(req.files[0].key);
+    }
+
     try {
         
         await dbcon.DbConnect();
+
+        //해당 접속자 세션정보로 m_id를 가져온다 
+        
+        let [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
+        memberId = result[0].m_id;
+
         //먼저 유저관련 정보 가져오기 
-        let [result] = await dbcon.sendQuery(`SELECT M_NAME AS name FROM dangoon.MEMBER WHERE (M_ID = ?)`, memberId);
+        [result] = await dbcon.sendQuery(`SELECT m_name AS name FROM dangoon.MEMBER WHERE (m_id = ?)`, memberId);
         
         memberName = result[0].name;
 
         //게시판 생성
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.BOARD(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE) VALUES(?, ?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, category, price);
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.BOARD(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, B_CATEGORY, B_PRICE, b_img) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, category, price, thumbnail_key);
         boardId = result.insertId
 
+
+        console.log("------------------------------"+req.files);
 
         //이미지 등록
         for(let idx in req.files){

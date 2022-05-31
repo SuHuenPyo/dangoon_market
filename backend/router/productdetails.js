@@ -78,6 +78,8 @@ productDetails.get('/', async(req, res, next)=>{
         dbcon.end();
     }
     //저장한 값 여기서 전송해주고 
+
+    console.log({sellerId: sellerId, imageUrls: imageUrls, sellerImg: sellerImg, sellerName: sellerName, price: price, title: title, content: content, hits: hits, category: category, rDate: rDate});
     return res.status(200).json({sellerId: sellerId, imageUrls: imageUrls, sellerImg: sellerImg, sellerName: sellerName, price: price, title: title, content: content, hits: hits, category: category, rDate: rDate});
 
 });

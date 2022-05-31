@@ -11,9 +11,6 @@ export class DG_DB{
 
     async DbConnect(){
     
-        console.log(ImportManager.privateInfo.DB_USER)
-        console.log(ImportManager.privateInfo.DB_PASSWORD)
-        console.log(ImportManager.privateInfo.DB_DATABASE)
         try{
             this.db = await ImportManager.mysql.createConnection({
             

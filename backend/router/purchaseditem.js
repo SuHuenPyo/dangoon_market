@@ -5,9 +5,9 @@ import { pagenation } from "../helper/PagenationHelper.js";
 import mysql from "mysql2/promise";
 import { authIsOwner } from "../middleware/session.js";
 import { DG_DB } from "../helper/dbHelper.js";
-
+import { S3URL } from "../helper/awsHelper.js";
 const requestPurchase = express.Router();
-
+let regexp = /\B(?=(\d{3})+(?!\d))/g;
 
 /**
  * @swagger
@@ -43,21 +43,28 @@ requestPurchase.get('/buyhistory', authIsOwner, async(req, res, next)=>{
     try{
         await dbcon.DbConnect();
         //해당 접속자 세션정보로 m_id를 가져온다 
-        [result] = await dbcon.sendQuery(`SELECT M_ID FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
         user_m_id = result[0].m_id;
         
 
         //해당 M_ID로 거래요청이 있었던 것이나 있는것을 찾는다 (거래요청이 있었거나 있다는 것은 구매완료 처리되거나, 구매요청중인 것이다.)
-        [result] = await dbcon.sendQuery(`SELECT B_ID, R_DONE, R_FLAG FROM dangoon.REQUEST_PURCHASED WHERE M_ID=?`, user_m_id);
+        [result] = await dbcon.sendQuery(`SELECT b_id, r_done, r_flag FROM dangoon.REQUEST_PURCHASED WHERE m_id=?`, user_m_id);
         return_value = JSON.parse(JSON.stringify(result))
 
 
         for(let id in return_value){
-            let [temp] = await dbcon.sendQuery(`SELECT B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY, B_PRICE FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_ID=?)`,return_value[id].b_id );
+            let [temp] = await dbcon.sendQuery(`SELECT b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price, b_img FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_ID=?)`,return_value[id].b_id );
+
+            console.log(temp);
+            
+            temp[0].b_price = temp[0].b_price.toString().replace(regexp, ',');
+            if(temp[0].b_img != null){
+                temp[0].b_img = S3URL+temp[0].b_img
+            }
             return_value[id].board_info = JSON.parse(JSON.stringify(temp));
 
             if(return_value[id].r_flag == 1){
-                let [kakao_id] = await dbcon.sendQuery(`SELECT M_KAKAO_ID FROM dangoon.MEMBER WHERE M_ID=(SELECT M_ID FROM DANGOON.BOARD WHERE B_ID=?);`,return_value[id].b_id );
+                let [kakao_id] = await dbcon.sendQuery(`SELECT m_kakao_id FROM dangoon.MEMBER WHERE M_ID=(SELECT M_ID FROM dangoon.BOARD WHERE B_ID=?);`,return_value[id].b_id );
                 return_value[id].kakao_id = JSON.parse(JSON.stringify(kakao_id[0]))
 
             }
@@ -72,7 +79,7 @@ requestPurchase.get('/buyhistory', authIsOwner, async(req, res, next)=>{
         //dbEnd 반드시 마지막에 DB 핸들풀고 
         await dbcon.end();
     }
-    //저장한 값 여기서 전송해주고 
+    //저장한 값 여기서 전송해주고 . 
 
     console.log(return_value)
     return res.status(200).json(return_value);
@@ -100,7 +107,7 @@ requestPurchase.get('/sellhistory', authIsOwner, async(req, res, next)=>{
      * m_id = 세션에서 뽑아옴 
      */
     
-    let user_id = req.session.user.id; //세션상 user id(NickName)
+    let user_id = req.session.user.id; //세션상 user id(NickName) 
     let user_m_id = null; //DB m_id
 
     //return value
@@ -112,32 +119,35 @@ requestPurchase.get('/sellhistory', authIsOwner, async(req, res, next)=>{
     try{
         await dbcon.DbConnect();
         //해당 접속자 세션정보로 m_id를 가져온다 
-        [result] = await dbcon.sendQuery(`SELECT M_ID FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
-        user_m_id = result[0].M_ID;
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE m_user_id=?`, user_id);
+        user_m_id = result[0].m_id;
 
         //해당 m_id에 해당하는 포스팅 글을 가져온다. 이때 board type은 "S"(판매게시판)이고 B_EXPIRED가 false인 것만 가져온다.
-        [result] = await dbcon.sendQuery(`SELECT B_ID FROM dangoon.BOARD WHERE (M_ID=? AND B_TYPE='S')`, user_m_id);
+        [result] = await dbcon.sendQuery(`SELECT b_id FROM dangoon.BOARD WHERE (m_id=? AND b_type='S')`, user_m_id);
+        console.log(result);
 
-        //가져온 list(판매글)을 기준으로 반복문을 돌며 거래요청이 있는지 가져온다.
-        return_value = result;
-        for(let id in return_value){
-            //게시글 정보도 함께 저장해준다. 
-            [result] = await dbcon.sendQuery(`SELECT B_WRITER, B_TITLE, B_CONTENT, DATE_FORMAT(B_RDATE, '%Y-%m-%d %H:%i:%s')as b_rdate, B_CATEGORY, B_PRICE FROM dangoon.BOARD WHERE (B_TYPE='S' AND B_ID=?)`,return_value[id].B_ID );
-            return_value[id].board_info = JSON.parse(JSON.stringify(result));
+        if (result != undefined){
+            //가져온 list(판매글)을 기준으로 반복문을 돌며 거래요청이 있는지 가져온다.
 
-            //거래요청을 저장할 임시 변수
-            let temp = [];
-            [temp] = await dbcon.sendQuery(`SELECT R_ID, R_FLAG, M_NAME, R_DONE FROM dangoon.REQUEST_PURCHASED as dr, dangoon.MEMBER as dm WHERE (dr.B_ID=? AND dr.M_ID = dm.M_ID )`, return_value[id].B_ID);
-            return_value[id].request_info = (temp != undefined) ? JSON.parse(JSON.stringify(temp)) : '';
-        }
+            return_value = result;
 
-        console.log(return_value);
+            for(let id in return_value){
+                //게시글 정보도 함께 저장해준다. 
+                [result] = await dbcon.sendQuery(`SELECT b_writer, b_title, b_content, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate, b_category, b_price, b_img FROM dangoon.BOARD WHERE (b_type='S' AND b_id=?)`,return_value[id].b_id );
+                result[0].b_price = result[0].b_price.toString().replace(regexp, ',');
+                if(result[0].b_img != null){
+                    result[0].b_img = S3URL+result[0].b_img
+                }
 
-        //(프론트 쪽) 가져온 list들중 거래요청을 수락한게 있다면 다른 요청은 버튼이 비활성화 된다. 
+                return_value[id].board_info = JSON.parse(JSON.stringify(result));
 
-        // (backend 쪽 ) 비활성화 인데도 만약 backend에 거래수락 요청이 온다면 리스트들 중에 거래중인게 있는지 확인후 수락해준다. 
-
-        
+                //거래요청을 저장할 임시 변수
+                let temp = [];
+                [temp] = await dbcon.sendQuery(`SELECT r_id, r_flag, m_name, r_done FROM dangoon.REQUEST_PURCHASED as dr, dangoon.MEMBER as dm WHERE (dr.b_id=? AND dr.m_id = dm.m_id )`, return_value[id].b_id);
+                return_value[id].request_info = (temp != undefined) ? JSON.parse(JSON.stringify(temp)) : '';
+            }
+            console.log(return_value);
+        }        
         
     }catch(e){
         return next(e);
@@ -184,23 +194,33 @@ requestPurchase.get('/approve', authIsOwner, async(req, res, next)=>{
     let user_id = req.session.user.id; //세션상 user id(NickName)
     let target_b_id = req.query.b_id;
     let target_r_id = req.query.r_id;
-    let user_m_id = null; //DB m_id
+    let user_m_id = ""; //DB m_id
 
     //DB Connection
     let dbcon = new DG_DB();
     let result = null;
     try{
         await dbcon.DbConnect();
+
+
         //해당 접속자 세션정보로 m_id를 가져온다 
-        [result] = await dbcon.sendQuery(`SELECT M_ID FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
-        user_m_id = result[0].M_ID;
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE m_user_id=?`, user_id);
+
+        user_m_id = result[0].m_id;
+
+
 
         //해당 접속자 세션이 해당 게시글을 쓴 사람이 맞는지 확인 한다. 
         [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE (B_ID=? AND M_ID=?)`, target_b_id ,user_m_id);
+        
 
-        //수락 query를 날리기 전에 혹여나 이미 수락한 요청이 있는지 확인한다. 단군마켓은 중복 수락을 허용하지 않는다. 
-        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.REQUEST_PURCHASED WHERE (B_ID=? AND R_FLAG=1) `, target_b_id);
+
+        //수락 query를 날리기 전에 혹여나 이미 수락한 요청이 있는지 확인한다. 단군마켓은 중복 수락을 허용하지 않는다.
+
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.REQUEST_PURCHASED WHERE (B_ID=? AND R_FLAG=1)`, target_b_id);
+
         if(result[0].cnt > 0){
+
             return res.status(400).json("이미 거래 요청이 수락된 상태입니다. 다른 거래를 취소하고 수락 해주세요.");
         }
 
@@ -210,7 +230,7 @@ requestPurchase.get('/approve', authIsOwner, async(req, res, next)=>{
     }catch(e){
         return next(e);
     }finally{
-        //dbEnd 반드시 마지막에 DB 핸들풀고 
+        //dbEnd 반드시 마지막에 DB 핸들풀고
         await dbcon.end();
     }
     //저장한 값 여기서 전송해주고 

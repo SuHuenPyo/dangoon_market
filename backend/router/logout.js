@@ -25,6 +25,7 @@ const Logout = express.Router();
     */
 Logout.get('/', async(req, res, next)=>{
     
+    console.log("로그아웃")
     if(req.session.user){
         console.log('로그아웃');
         

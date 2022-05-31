@@ -52,16 +52,17 @@ Profile.get('/', authIsOwner, async(req, res, next)=>{
         await dbcon.DbConnect();
 
         //해당 b_id의 소유자를 가져온다. 
-        [result] = await dbcon.sendQuery(`SELECT M_ID FROM dangoon.BOARD WHERE B_ID=?`, b_id);
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.BOARD WHERE B_ID=?`, b_id);
+        console.log(b_id)
         user_m_id = result[0].m_id;
 
         //소유자의 이름과, 사진을 가져온다. 
-        [result] = await dbcon.sendQuery(`SELECT DISTINCT M_USER_ID, M_NAME, M_EMAIL, M_PIC, M_KAKAO_ID FROM dangoon.MEMBER WHERE M_ID=?`, user_m_id);
+        [result] = await dbcon.sendQuery(`SELECT DISTINCT m_user_id, m_name, m_email, m_pic, m_kakao_id FROM dangoon.MEMBER WHERE M_ID=?`, user_m_id);
         return_info.m_name = JSON.parse(JSON.stringify(result[0].m_name));
         return_info.m_pic  = JSON.parse(JSON.stringify(S3URL+result[0].m_pic));
 
         //소유자의 판매내역(판매중인것, 판매완료한것), 구매내역(완료된 것만) 을 가져온다.
-        [result] = await dbcon.sendQuery(`SELECT COUNT(*) AS cnt FROM dangoon.BOARD as db WHERE (M_ID=? AND B_TYPE='S') UNION SELECT COUNT(*) FROM dangoon.REQUEST_PURCHASED WHERE (M_ID=? AND R_DONE=1)`, user_m_id, user_m_id);        
+        [result] = await dbcon.sendQuery(`SELECT COUNT(*) AS cnt FROM dangoon.BOARD as db WHERE (m_id=? AND b_type='S') UNION SELECT COUNT(*) FROM dangoon.REQUEST_PURCHASED WHERE (m_id=? AND r_done=1)`, user_m_id, user_m_id);        
 
         return_info.sellBuyCnt = [];
         for(let idx in result){
@@ -117,14 +118,14 @@ Profile.get('/myprofile', authIsOwner, async(req, res, next)=>{
         await dbcon.DbConnect();
 
         //해당 접속자 세션정보로 m_id를 가져온다 
-        [result] = await dbcon.sendQuery(`SELECT M_ID FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
+        [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE m_user_id=?`, user_id);
         user_m_id = result[0].m_id;
 
         console.log(user_m_id);
 
         //전체 데이터 수 조회
-        [result] = await dbcon.sendQuery(`SELECT DISTINCT M_USER_ID, M_NAME, M_EMAIL, M_PIC, M_KAKAO_ID FROM dangoon.MEMBER WHERE M_ID=?`, user_m_id);
-        return_info = {'m_user_id': result[0].M_USER_ID, 'm_name': result[0].M_NAME, 'm_email': result[0].M_EMAIL, 'm_pic':S3URL+result[0].M_PIC, 'm_kakao_id': result[0].M_KAKAO_ID }
+        [result] = await dbcon.sendQuery(`SELECT DISTINCT m_user_id, m_name, m_email, m_pic, m_kakao_id FROM dangoon.MEMBER WHERE m_id=?`, user_m_id);
+        return_info = {'m_user_id': result[0].m_user_id, 'm_name': result[0].m_name, 'm_email': result[0].m_email, 'm_pic':S3URL+result[0].m_pic, 'm_kakao_id': result[0].m_kakao_id }
 
 
         

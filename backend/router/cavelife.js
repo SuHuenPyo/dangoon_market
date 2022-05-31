@@ -43,23 +43,20 @@ caveLife.get('/', async(req, res, next)=>{
     //현재 페이지 번호 받기 (default 1)
     const page = req.query.page || 1;
     
-    //페이지당 요청 글 개수 (default 10)
+    //페이지당 요청 글 개수 (default 5)
     const rows = req.query.rows || 5;
 
     let pagenationResult = null;
     
     try{
         //DB Connection
-        dbcon
+        
         await dbcon.DbConnect();
         
         //전체 데이터 수 조회
-        let sql = "SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE B_TYPE='C'";
-        
-        const [result1] = await dbcon.query(sql);
-        //console.log(result1);
+        let [result] = await dbcon.sendQuery(`SELECT COUNT(*) as cnt FROM dangoon.BOARD WHERE b_type='C'`);
 
-        const totalCount = result1[0].cnt;
+        const totalCount = result[0].cnt;
 
         pagenationResult = pagenation(totalCount, page, rows);
 
@@ -68,25 +65,19 @@ caveLife.get('/', async(req, res, next)=>{
         let args = [];
 
         //데이터 조회 
-        sql = "SELECT b_id, m_id , b_writer, b_title, b_content, b_img, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.BOARD WHERE b_type='C' LIMIT ?,?";
+        [result] = await dbcon.sendQuery(`SELECT b_id, m_id , b_writer, b_title, b_content, b_img, date_format(b_rdate, '%Y-%m-%d %H:%i:%s')as b_rdate FROM dangoon.BOARD WHERE b_type='C' ORDER BY B_ID DESC LIMIT ?,?`, pagenationResult.offset, pagenationResult.listCount);
 
-        args.push(pagenationResult.offset);
-        args.push(pagenationResult.listCount);
-
-        const [result2] = await dbcon.query(sql, args);
-
-
-        for(let idx in result2){
-            let args = [];
-            sql = "SELECT m_pic FROM dangoon.member WHERE m_id=?";
-            args.push(result2[idx].m_id);
-            let [tempResult] = await dbcon.query(sql, args);
-            result2[idx].profilePic = S3URL+tempResult[0].m_pic;
+        for(let idx in result){
+            let [tempResult] = await dbcon.sendQuery(`SELECT m_pic FROM dangoon.MEMBER WHERE m_id=?`,result[idx].m_id);
+            result[idx].profilePic = S3URL+tempResult[0].m_pic;
+            if(result[idx].b_img != null){
+                result[idx].b_img = S3URL+result[idx].b_img
+            }
         }
-        console.log(result2);
-        json = result2;
+        console.log(result);
+        json = result;
         
-
+        
 
 
     }catch(e){
@@ -156,7 +147,9 @@ caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
     //board CaveLife
     let mboardType = "C";
 
-    let {memberId, title, content} = req.body;
+    let {title, content} = req.body;
+    let user_id = req.session.user.id; //세션상 user id(NickName)
+    let memberId = null;
     let memberName  = null;
     let boardId     = null;
 
@@ -175,18 +168,22 @@ caveLife.post('/', uploadBoard.array('board', 10) ,async(req, res, next)=>{
     try {
         
         await dbcon.DbConnect();
+        //해당 접속자 세션정보로 m_id를 가져온다 
+        let [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE M_USER_ID=?`, user_id);
+        memberId = result[0].m_id;
+
         //먼저 유저관련 정보 가져오기 
-        let [result] = await dbcon.sendQuery(`SELECT m_name AS name FROM dangoon.member WHERE (m_id = ?)`, memberId);
+        [result] = await dbcon.sendQuery(`SELECT m_name AS name FROM dangoon.MEMBER WHERE (m_id = ?)`, memberId);
         memberName = result[0].name;
 
         //게시판 생성
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.board(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, b_img ) VALUES(?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, thumbnail_key);
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.BOARD(M_ID, B_TYPE, B_WRITER, B_TITLE, B_CONTENT, b_img ) VALUES(?, ?, ?, ?, ?, ?)`, memberId, mboardType, memberName, title, content, thumbnail_key);
         boardId = result.insertId
 
 
         //이미지 등록
         for(let idx in req.files){
-            await dbcon.sendQuery(`INSERT INTO dangoon.file(b_id, f_type, f_file) VALUES(?, ?, ?)`, boardId, mfileType, req.files[idx].key);
+            await dbcon.sendQuery(`INSERT INTO dangoon.FILE(b_id, f_type, f_file) VALUES(?, ?, ?)`, boardId, mfileType, req.files[idx].key);
         }
         
 
@@ -261,23 +258,23 @@ caveLife.post('/comment', authIsOwner ,uploadComment.array('comment', 10) ,async
 
         //세션유저 m_id 가져오기
         //해당 접속자 세션정보로 m_id를 가져온다
-        let [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.member WHERE m_user_id=?`, user_id);
+        let [result] = await dbcon.sendQuery(`SELECT m_id FROM dangoon.MEMBER WHERE m_user_id=?`, user_id);
         userId = result[0].m_id;
 
 
         //먼저 유저관련 정보 가져오기 
-        [result] = await dbcon.sendQuery(`SELECT m_name AS writerName FROM dangoon.member WHERE (m_id = ?)`, userId);
+        [result] = await dbcon.sendQuery(`SELECT m_name AS writerName FROM dangoon.MEMBER WHERE (m_id = ?)`, userId);
         writerName = result[0].writerName;
 
         //댓글 생성
-        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.comment(b_id, m_id, c_writer, c_content) VALUES(?, ?, ?, ?)`, boardId, userId, writerName, content);
+        [result] = await dbcon.sendQuery(`INSERT INTO dangoon.COMMENT(b_id, m_id, c_writer, c_content) VALUES(?, ?, ?, ?)`, boardId, userId, writerName, content);
         
         let c_id = result.insertId
 
 
         //이미지 등록
         for(let idx in req.files){
-            await dbcon.sendQuery(`INSERT INTO dangoon.file(b_id, c_id, f_type, f_file) VALUES(?, ?, ?, ?)`, boardId, c_id, mfileType, req.files[idx].key);
+            await dbcon.sendQuery(`INSERT INTO dangoon.FILE(b_id, c_id, f_type, f_file) VALUES(?, ?, ?, ?)`, boardId, c_id, mfileType, req.files[idx].key);
         }
         
 
@@ -323,16 +320,16 @@ caveLife.get('/comment', authIsOwner, async(req, res, next)=>{
     try{
         await dbcon.DbConnect();
         //writer id 가져오기 
-        let [result] = await dbcon.sendQuery(`SELECT c_id, m_id as writerId, c_writer as writerName, c_content as content, date_format(c_rdate, '%Y-%m-%d %H:%i:%s')as rDate FROM dangoon.comment WHERE b_id`, boardId, boardId);
+        let [result] = await dbcon.sendQuery(`SELECT c_id, m_id as writerId, c_writer as writerName, c_content as content, date_format(c_rdate, '%Y-%m-%d %H:%i:%s')as rDate FROM dangoon.COMMENT WHERE b_id`, boardId, boardId);
 
         let tempResult1 = [];
         let tempResult2 = [];
 
         
         for(let idx in result){ 
-            [tempResult1] = await dbcon.sendQuery(`SELECT m_pic as writerPic FROM dangoon.member WHERE m_id=?`, result[idx].writerId);
+            [tempResult1] = await dbcon.sendQuery(`SELECT m_pic as writerPic FROM dangoon.MEMBER WHERE m_id=?`, result[idx].writerId);
             //console.log(FileType, boardId, result[idx].c_id) ;
-            [tempResult2] = await dbcon.sendQuery(`SELECT F_FILE as commentPic FROM dangoon.file WHERE (f_type=? AND b_id=? AND c_id=?)`,FileType, boardId, result[idx].c_id);
+            [tempResult2] = await dbcon.sendQuery(`SELECT F_FILE as commentPic FROM dangoon.FILE WHERE (f_type=? AND b_id=? AND c_id=?)`,FileType, boardId, result[idx].c_id);
             //console.log(tempResult2);
             let jsonCommentPic = [];
             for(let imgIdx in tempResult2){
