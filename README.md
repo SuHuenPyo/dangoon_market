@@ -47,10 +47,10 @@
 
 
 ## 파일 설명
-  
-    <p> ✔️ Backend </p>
-   <p> ✔️ Database</p>
-     <p>✔️ Frontend : 리액트 버전</p>
-     <p>✔️ HTML : HTML버전(프로토타입)</p>
+
+   <p>✔️ Backend </p>
+   <p>✔️ Database </p>
+   <p>✔️ Frontend : 리액트 버전</p>
+   <p>✔️ HTML : HTML버전(프로토타입)</p>
   
 </div>
