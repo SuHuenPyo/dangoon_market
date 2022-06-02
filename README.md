@@ -47,13 +47,10 @@
 
 
 ## 파일 설명
-
-<div width="30%" style="margin:0 auto;">
-  <ul>
-    <li>Backend: Node.js 파일</li>
-   <li> Database</li>
-     <li>Frontend : 리액트 버전</li>
-     <li>HTML : HTML버전(프로토타입)</li>
-  </ul>
-</div>
+  
+    <p> ✔️ Backend </p>
+   <p> ✔️ Database</p>
+     <p>✔️ Frontend : 리액트 버전</p>
+     <p>✔️ HTML : HTML버전(프로토타입)</p>
+  
 </div>
