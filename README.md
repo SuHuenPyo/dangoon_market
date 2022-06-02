@@ -46,13 +46,14 @@
 
 
 
-
+## 파일 설명
 
 <div width="30%" style="margin:0 auto;">
-## 파일 설명
-* Backend
-* Database
-* Frontend : 리액트 버전
-* HTML : HTML버전(프로토타입)
-  </div>
+  <ul>
+    <li>Backend: Node.js 파일</li>
+   <li> Database</li>
+     <li>Frontend : 리액트 버전</li>
+     <li>HTML : HTML버전(프로토타입)</li>
+  </ul>
+</div>
 </div>
