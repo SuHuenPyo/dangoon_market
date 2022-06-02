@@ -48,11 +48,11 @@
 
 
 
-
+<div width="30%" style="margin:0 auto;">
 ## 파일 설명
 * Backend
 * Database
 * Frontend : 리액트 버전
 * HTML : HTML버전(프로토타입)
-
+  </div>
 </div>
