@@ -27,9 +27,7 @@
   <br>
 <div style='display:flex;align-items:center;'>
   
-    <p>
 <img width="150" alt="스크린샷 2022-06-02 오후 2 18 30" src="https://user-images.githubusercontent.com/91578165/171558026-ae6c4d40-92da-4b15-a111-67220f21608d.png">
-    </p>
    </div>
   <br>
 2. 마음에 드는 상품을 클릭하고 거래요청합니다. 
