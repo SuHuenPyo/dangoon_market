@@ -9,6 +9,9 @@
     <img src="https://img.shields.io/badge/node-16.14.2-blue?style=flat-square">
 </p>
 
+<p> 접속주소 : https://dangoon.duckdns.org/ </p>
+<p> 임시접속 Id Pw : shun2015  456456as!@</p>
+
 ## 기능 소개
 <img src="https://user-images.githubusercontent.com/91578165/167800091-cec83abc-1304-42af-961b-7a343bb574ea.png" width="300px">
 
